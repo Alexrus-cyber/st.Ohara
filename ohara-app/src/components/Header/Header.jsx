@@ -5,10 +5,11 @@ import {useEffect, useState} from "react";
 export const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     useEffect(() => {
+        console.log("hello")
         const onScroll = () => {
             if (window.scrollY > 800) {
                 setScrolled(true);
-                if (window.scrollY > 2400){
+                if (window.scrollY > 2700){
                     setScrolled(false);
                 }
             }

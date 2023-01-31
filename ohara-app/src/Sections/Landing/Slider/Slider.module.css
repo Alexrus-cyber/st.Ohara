@@ -1,0 +1,10 @@
+.slider{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    height: 100vh;
+    max-height: 100vh;
+    color: white;
+    text-align: left;
+    background: black;
+}
