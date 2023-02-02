@@ -1,4 +1,4 @@
-.slider{
+.sliderMain{
     width: 100%;
     justify-content: center;
     display: flex;
@@ -7,4 +7,22 @@
     color: white;
     text-align: left;
     background: black;
+}
+
+.slider{
+
+}
+.slides{
+
+}
+
+.slide{
+
+}
+
+.navigation{
+
+}
+.bar{
+
 }
