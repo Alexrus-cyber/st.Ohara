@@ -41,6 +41,10 @@ export const Content = (props) => {
                             man beherrscht das Handwerk, man pflegt die Konventionen und den Stil – und stellt sich
                             selbst dabei nicht in den Vordergrund.
                         </p>
+                        <div className={styles.buttonContainer}>
+                            <div className={styles.backButton}></div>
+                            <button className={styles.button}>Меню</button>
+                        </div>
                     </div>
                     <div className={styles.backContainer}>
                         <img className={styles.img} src={props.img} alt={"barman"}/>
