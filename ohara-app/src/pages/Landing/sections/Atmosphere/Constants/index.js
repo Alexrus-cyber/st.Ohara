@@ -1,5 +1,5 @@
-import barman from "../../../../assets/barman.png";
-import singer from "../../../../assets/singer.png";
+import barman from "../../../../../assets/barman.png";
+import singer from "../../../../../assets/singer.png";
 
 export const ContentArr = [
     {
@@ -11,7 +11,7 @@ export const ContentArr = [
         left: 0
     },
     {
-        id: 1,
+        id: 2,
         img: singer,
         title: "Exklusive Atmosphäre",
         text1: "Genießen Sie unser Ambiente und die exzellente Küche von Peter Hagen-Wiest – ausgezeichnet mit zwei Michelin-Sternen und 18 Gault-Millau Punkte sowie 2020 von der Zeitschrift Feinschmecker“ zum Restaurant des Jahres gewählt.",

@@ -7,8 +7,7 @@
     height: 100%;
     font-size: 32px;
     color: white;
-    position: fixed;
-    z-index: 10000;
+    position: absolute;
 }
 .headerActive{
     width: 100%;

@@ -1,6 +1,6 @@
-import food1 from "../../../../assets/bludo.png";
-import food2 from "../../../../assets/food2.png";
-import food3 from "../../../../assets/food3.png";
+import food1 from "../../../../../assets/bludo.png";
+import food2 from "../../../../../assets/food2.png";
+import food3 from "../../../../../assets/food3.png";
 
 export const DescritionFoodArr = [
     {

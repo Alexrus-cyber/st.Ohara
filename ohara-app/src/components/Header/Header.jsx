@@ -1,30 +1,9 @@
 import styles from "./Header.module.css"
 import logo from "../../assets/logo.png"
-import {useEffect, useState} from "react";
 
 export const Header = () => {
-    const [scrolled, setScrolled] = useState(false);
-    useEffect(() => {
-        console.log("hello")
-        const onScroll = () => {
-            if (window.scrollY > 800) {
-                setScrolled(true);
-                if (window.scrollY > 2700){
-                    setScrolled(false);
-                }
-            }
-            else {
-                setScrolled(false);
-            }
-        }
-
-        window.addEventListener("scroll", onScroll);
-
-        return () => window.removeEventListener("scroll", onScroll);
-    }, [])
-
     return (
-        <header className={scrolled ? styles.headerActive : styles.header}>
+        <header className={styles.header}>
             <div className={styles.container}>
                 <img src={logo} alt={"stOhara"}/>
                 <div className={styles.middle}>

@@ -1,5 +1,5 @@
 import styles from "./Hero.module.css"
-import arrows from "../../../assets/down-arrow 1.png"
+import arrows from "../../../../assets/down-arrow 1.png"
 
 export const Hero = () => {
     return (
