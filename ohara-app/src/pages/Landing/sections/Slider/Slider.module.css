@@ -1,28 +1,20 @@
 .sliderMain{
+    position: relative;
     width: 100%;
-    justify-content: center;
-    display: flex;
-    height: 100vh;
     max-height: 100vh;
+    background-color: #222223;
+}
+.text{
+    position: absolute;
+    top: 30%;
+    left: 23%;
     color: white;
-    text-align: left;
-    background: black;
+    max-width: 1000px;
+    width: 100%;
+    font-size: 96px;
+    font-weight: 500;
 }
-
-.slider{
-
-}
-.slides{
-
-}
-
-.slide{
-
-}
-
-.navigation{
-
-}
-.bar{
-
+.img{
+    position: relative;
+    width: 100%;
 }

@@ -8,20 +8,10 @@
     font-size: 32px;
     color: white;
     position: absolute;
+    z-index: 10000;
 }
-.headerActive{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-height: 250px;
-    height: 100%;
-    font-size: 32px;
-    color: black;
-    position: fixed;
-}
+
 .container{
-    position: absolute;
     max-width: 1600px;
     width: 100%;
     display: flex;
@@ -31,5 +21,19 @@
 .middle{
     display: flex;
     padding-bottom: 50px;
+    column-count: auto;
     column-gap: 93px;
+}
+.link{
+    text-decoration: none;
+    color: white;
+    transition-duration: 0.5s;
+}
+.active{
+    text-decoration: none;
+    color: #7D4A7D;
+}
+
+.link:hover{
+    color: #7D4A7D;
 }

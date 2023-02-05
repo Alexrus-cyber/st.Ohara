@@ -3,7 +3,7 @@
     max-width: 100%;
     justify-content: center;
     display: flex;
-    max-height: 200vh;
+    height: 100%;
     color: white;
     text-align: left;
     background: #222223;
@@ -13,14 +13,14 @@
     max-width: 1500px;
     width: 100%;
     line-height: 32px;
-    padding: 257px 0;
+    padding: 200px 50px 0 50px;
 }
 
 .itemContainer {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 120px;
+    padding-bottom: 200px;
 }
 .back{
     border: 1px solid #7D4A7D;

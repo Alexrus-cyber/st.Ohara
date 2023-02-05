@@ -1,25 +1,40 @@
+import React from 'react';
+import { Fade } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
 import styles from './Slider.module.css'
+import photo1 from '../../../../assets/slider3.png'
+import photo3 from '../../../../assets/slider1.png'
+import photo2 from '../../../../assets/slider2.png'
+
+
+const fadeImages = [
+    {
+        url: photo1,
+        caption: 'Атмосфера в нашем ресторане'
+    },
+    {
+        url: photo2,
+        caption: 'Вкусное мясо, отличный виски!'
+    },
+    {
+        url: photo3,
+        caption: 'Мы реально крутые'
+    },
+];
 
 export const Slider = () => {
-    const arr = [
-        {id: "r1"},
-        {id: "r2"},
-        {id: "r3"},
-        {id: "r4"},
-    ]
     return (
-        <section className={styles.sliderMain}>
-            <div className={styles.slider}>
-                <div className={styles.slides}>
-                    {arr.map(a => <input id={a.id} key={a.id} type={"radio"} name={"r"}/>)}
-
-                    <div>
-
+        <div>
+            <Fade cssClass={styles.sliderMain}>
+                {fadeImages.map((fadeImage, index) => (
+                    <div key={index}>
+                        <img className={styles.img} src={fadeImage.url}  alt={"fdsfds"}/>
+                        <div className={styles.text}>
+                            <p>{fadeImage.caption}</p>
+                        </div>
                     </div>
-
-                </div>
-            </div>
-
-        </section>
+                ))}
+            </Fade>
+        </div>
     )
 }
