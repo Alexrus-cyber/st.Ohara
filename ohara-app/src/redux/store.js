@@ -1,10 +1,12 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import menuReducer from '../pages/Menu/slice'
-import galleryReducer from '../pages/Gallery/slice'
+import menuReducer from '../slices/menu'
+import galleryReducer from '../slices/gallery'
+import newsReducer from '../slices/news'
 
 const rootReducer = combineReducers({
     menuReducer,
-    galleryReducer
+    galleryReducer,
+    newsReducer
 })
 
 export const store = configureStore({

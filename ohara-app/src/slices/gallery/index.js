@@ -1,6 +1,6 @@
-import slider1 from "../../../assets/slider1.png";
-import slider2 from "../../../assets/slider2.png";
-import slider3 from "../../../assets/slider3.png";
+import slider1 from "../../assets/slider1.png";
+import slider2 from "../../assets/slider2.png";
+import slider3 from "../../assets/slider3.png";
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
@@ -17,10 +17,16 @@ const initialState = {
 
 }
 export const gallerySlice = createSlice({
-        name: 'news',
+        name: 'gallery',
         initialState,
         reducers: {
             activatorImages(state, action){
+                const findItem = state.images.find((obj) => obj.id === action.payload.id);
+                if (findItem){
+                    (findItem).activate = action.payload.activator;
+                }
+            },
+            NextImage(state, action){
                 const findItem = state.images.find((obj) => obj.id === action.payload.id);
                 if (findItem){
                     (findItem).activate = action.payload.activator;
