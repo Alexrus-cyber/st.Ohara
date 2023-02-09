@@ -6,31 +6,17 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     images: [
-        {id: 1 , src: drinks1, activate: false},
-        {id: 2 , src: drinks2, activate: false},
-        {id: 3 , src: drinks3, activate: false},
-        {id: 4 , src: food1, activate: false},
+        {id: 0 , src: drinks1},
+        {id: 1 , src: drinks2},
+        {id: 2 , src: drinks3},
+        {id: 3 , src: food1},
     ],
 }
 export const menuSlice = createSlice({
     name: 'menu',
     initialState,
     reducers:{
-        activatorImages(state, action){
-            const findItem = state.images.find((obj) => obj.id === action.payload.id);
-            if (findItem){
-                (findItem).activate = action.payload.activator;
-            }
-        },
-        NextImage(state, action){
-            const findItem = state.images.find((obj) => obj.id === action.payload.id);
-            if (findItem){
-                (findItem).activate = action.payload.activator;
-            }
-        },
-        ChangeFood(state, action){
-            state.isFood = action.payload
-        }
+
     }
 })
 
