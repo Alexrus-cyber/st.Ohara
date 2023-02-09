@@ -25,7 +25,7 @@ export const Gallery = () => {
         <section className={styles.Gallery}>
             <div className={styles.container}>
                 <h1 className={styles.title}>Наши фотографии</h1>
-                <div>
+                <div className={styles.content}>
                     {images.map( i => (
                         <img
                             className={styles.img}
