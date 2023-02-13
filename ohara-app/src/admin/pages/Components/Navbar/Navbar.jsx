@@ -1,5 +1,6 @@
 import styles from './Navbar.module.css';
 import admin from '../../../../assets/admin.png'
+import {NavLink} from "react-router-dom";
 
 export const Navbar = () => {
     return (
@@ -9,9 +10,9 @@ export const Navbar = () => {
             <p className={styles.name}>Анастасия Михайлова</p>
             <p className={styles.position}>Официант</p>
             <div className={styles.links}>
-                <p className={styles.link}>Меню</p>
-                <p className={styles.link}>Новости</p>
-                <p className={styles.link}>Бронирование</p>
+                <NavLink to={"/menuAdmin"} className={styles.link}>Меню</NavLink>
+                <NavLink to={"/NewsAdmin"} className={styles.link}>Новости</NavLink>
+                <NavLink to={"/ReservationAdmin"} className={styles.link}>Бронирование</NavLink>
             </div>
         </div>
     )
