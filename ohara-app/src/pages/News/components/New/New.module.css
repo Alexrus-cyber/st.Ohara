@@ -17,13 +17,14 @@
     justify-content: space-around;
 }
 .img{
+    padding-top: 90px;
     max-width: 550px;
     width: 100%;
 }
 .rightContainer{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 .itemContainer{
     display: flex;

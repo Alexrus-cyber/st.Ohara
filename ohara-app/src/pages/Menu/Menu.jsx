@@ -1,85 +1,54 @@
+import React, {useState, useCallback} from 'react';
+import ImageViewer from 'react-simple-image-viewer';
 import styles from './Menu.module.css'
-import {menuSlice} from "../../slices/menu";
-import {useDispatch, useSelector} from "react-redux";
-import {useState} from "react";
+import {useSelector} from "react-redux";
 
 export const Menu = () => {
+    const [currentImage, setCurrentImage] = useState(0);
+    const [isViewerOpen, setIsViewerOpen] = useState(false);
+    const {images} = useSelector(state => state.menuReducer)
 
-    const {images} = useSelector(state => state.menuReducer);
-    const dispatch = useDispatch();
-    const [active, setActive] = useState(true);
-    const [number, setNumber] = useState(1);
 
-    const Activator = (id) => {
-        setActive(!active);
-        setNumber(id);
-        const image = {
-            id: id,
-            activator: active,
-        }
-        console.log(number)
-        dispatch(menuSlice.actions.activatorImages(image))
-    }
+    const openImageViewer = useCallback((index) => {
+        console.log(index)
+        setCurrentImage(index);
+        setIsViewerOpen(true);
+    }, []);
 
-    const Next = () => {
-        if (number < images.length) {
-            const image = {
-                id: number + 1,
-                activator: true,
-            }
-            const pastPicture = {
-                id: number,
-                activator: false
-            }
-
-            dispatch(menuSlice.actions.activatorImages(pastPicture))
-            dispatch(menuSlice.actions.NextImage(image))
-            setNumber(number + 1)
-            console.log(number)
-        }
-    }
-
-    const Back = () => {
-        if (number > 1) {
-            const image = {
-                id: number - 1,
-                activator: true,
-            }
-            const pastPicture = {
-                id: number,
-                activator: false
-            }
-            dispatch(menuSlice.actions.activatorImages(pastPicture))
-            dispatch(menuSlice.actions.NextImage(image))
-            setNumber(number - 1)
-            console.log(number)
-        }
-    }
+    const closeImageViewer = () => {
+        setCurrentImage(0);
+        setIsViewerOpen(false);
+        console.log(currentImage)
+    };
 
     return (
         <section className={styles.menu}>
             <div className={styles.container}>
                 <h1 className={styles.title}>Меню</h1>
-                <div className={styles.gallery}>
-                    <div className={styles.content}>
-                        {active === false
-                            ?
-                            images.map(a => <div key={a.id} className={styles.xxx}>
-                                <img onClick={() => Activator(a.id, active)}
-                                     className={a.activate ? styles.active : styles.img} src={a.src}
-                                     alt={"random"}/>
-                                <button onClick={() => Back(a.id)} className={styles.leftBars}></button>
-                                <button onClick={() => Next(a.id)} className={styles.rightBars}></button>
-                            </div>)
-                            :
-                            images.map(a => <img key={a.id}
-                                                 onClick={() => Activator(a.id, active)}
-                                                 className={a.activate ? styles.active : styles.img} src={a.src}
-                                                 alt={"random"}/>)
-                        }
-                    </div>
+                <div>
+                    {images.map( i => (
+                        <img
+                            className={styles.img}
+                            src={i.src}
+                            onClick={() => openImageViewer(i.id)}
+                            width="300"
+                            key={i.id}
+                            style={{margin: '50px'}}
+                            alt=""
+                        />
+                    ))}
+                    {isViewerOpen && (
+                        <ImageViewer
+                            src={images.map(e => e.src)}
+                            currentIndex={currentImage}
+                            disableScroll={true}
+                            closeOnClickOutside={true}
+                            onClose={closeImageViewer}
+                        />
+                    )}
                 </div>
             </div>
         </section>
-    )
+
+    );
 }

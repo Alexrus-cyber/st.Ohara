@@ -34,9 +34,10 @@
 }
 
 .mainImg{
-    max-width: 1120px;
+    max-width: 900px;
     width: 100%;
-    border-radius: 20px;
+    max-height: 600px;
+
 }
 .mainImg:hover{
     opacity: 0.6;
@@ -67,7 +68,6 @@
     position: relative;
     max-width: 250px;
     width: 100%;
-    border-radius: 10px;
     padding: 20px;
 }
 .text{
@@ -93,7 +93,6 @@
     max-height: 280px;
     cursor: pointer;
     position: unset;
-    border-radius: 10px;
 }
 .img:hover{
     opacity: 0.6;
