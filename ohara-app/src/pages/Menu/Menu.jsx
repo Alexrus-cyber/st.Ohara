@@ -1,16 +1,23 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import ImageViewer from 'react-simple-image-viewer';
 import styles from './Menu.module.css'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {clearData, getMenuData, listImagesSelector} from "../../slices/menu";
 
 export const Menu = () => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
-    const {images} = useSelector(state => state.menuReducer)
 
+    const dispatch = useDispatch();
+
+    //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
+    useEffect(() => {
+        dispatch(getMenuData());
+    }, [dispatch])
+
+    const images = useSelector(listImagesSelector);
 
     const openImageViewer = useCallback((index) => {
-        console.log(index)
         setCurrentImage(index);
         setIsViewerOpen(true);
     }, []);
@@ -18,8 +25,12 @@ export const Menu = () => {
     const closeImageViewer = () => {
         setCurrentImage(0);
         setIsViewerOpen(false);
-        console.log(currentImage)
     };
+
+    //пример как юзать экшены
+    const handleClickClearImages = () => {
+        dispatch(clearData())
+    }
 
     return (
         <section className={styles.menu}>
@@ -47,6 +58,7 @@ export const Menu = () => {
                         />
                     )}
                 </div>
+                {images.length ? <button onClick={handleClickClearImages}>Удалить меню</button> : null}
             </div>
         </section>
 
