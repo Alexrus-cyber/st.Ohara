@@ -1,5 +1,5 @@
 import styles from "./Search.module.css";
-import lope from "../../assets/search.png";
+import lope from "../../../assets/search.png";
 
 export const Search = () => {
     return (

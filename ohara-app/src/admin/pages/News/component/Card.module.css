@@ -1,8 +1,54 @@
 .card{
     max-width: 230px;
     width: 100%;
-    background-color: white;
-    height: 250px;
+    height: 270px;
     margin: 30px;
+    max-height: 270px;
     border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-position: center;
+    background-size: 600px;
+    background-repeat: no-repeat;
+}
+
+.img{
+    cursor: pointer;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 200px;
+}
+.closeContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.textContainer{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.title{
+    font-size: 24px;
+}
+
+.text{
+    font-size: 14px;
+    color: #A9A9A9;
+}
+.button{
+    border: none;
+    background-color: #1C675A;
+    height: 40px;
+    width: 100%;
+    border-radius: 0 0 30px 30px;
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
 }

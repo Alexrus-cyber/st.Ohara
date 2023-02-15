@@ -48,3 +48,11 @@
 .link:hover{
     background-color: #D8BBD8;
 }
+
+.active{
+    width: 95%;
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    background-color: #D8BBD8;
+}

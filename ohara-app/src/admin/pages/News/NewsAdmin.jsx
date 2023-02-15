@@ -1,6 +1,6 @@
 import styles from './News.module.css'
 import {Card} from "./component/Card";
-import {Search} from "../../components/Search";
+import {Search} from "../../components/Search/Search";
 export const NewsAdmin = () => {
     return (
             <div className={styles.container}>
