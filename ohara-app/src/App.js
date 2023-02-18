@@ -9,10 +9,11 @@ import {News} from "./pages/News/News";
 import {Reservation} from "./pages/Reservation/Reservation";
 import {New} from "./pages/News/components/New/New";
 import {NewsAdmin} from "./admin/pages/News/NewsAdmin";
-import {Navbar} from "./admin/pages/Components/Navbar/Navbar";
+import {Navbar} from "./admin/pages/components/Navbar/Navbar";
 import styles from  './main.module.css'
 import {MenuAdmin} from "./admin/pages/Menu/MenuAdmin";
 import {ReservationAdmin} from "./admin/pages/Reservation/ReservationAdmin";
+import {GalleryAdmin} from "./admin/pages/Gallery/GalleryAdmin";
 
 function App() {
     const admin = true;
@@ -24,6 +25,7 @@ function App() {
                     <div className={styles.main}>
                         <Navbar/>
                         <Routes>
+                            <Route path={'/galleryAdmin'} element={<GalleryAdmin/>}/>
                             <Route path={'/newsAdmin'} element={<NewsAdmin/>}/>
                             <Route path={'/menuAdmin'} element={<MenuAdmin/>}/>
                             <Route path={'/reservationAdmin'} element={<ReservationAdmin/>}/>
