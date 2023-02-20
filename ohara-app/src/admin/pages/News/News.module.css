@@ -1,0 +1,69 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+.cardContainer{
+    display: flex;
+    justify-content: center;
+    max-width: 1000px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.middle{
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    align-items: center;
+    width: 100%;
+    padding-top: 40px;
+}
+.inputContainer{
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    padding-top: 50px;
+}
+
+.date{
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: #fff;
+    transition-duration: 0.5s;
+    border-radius: 20px;
+    padding: 5px;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.date:hover{
+    border-radius: 20px;
+    background-color: #7D4A7D;
+    padding: 5px;
+}
+.title{
+    font-size: 48px;
+}
+.newsDate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button{
+    padding: 10px 30px;
+    background-color: #7D4A7D;
+    font-size: 16px;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: #563356;
+}
