@@ -1,23 +1,55 @@
-import drinks1 from "../../assets/MenuDrinks1.jpg";
-import drinks2 from "../../assets/Drinks2.jpg";
-import drinks3 from "../../assets/Drinks3.jpg";
-import food1 from "../../assets/Menu.jpg";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, createSelector, createEntityAdapter, createAsyncThunk} from "@reduxjs/toolkit";
+import {mockListMenu} from "./mocks/menu";
 
 const initialState = {
-    images: [
-        {id: 0 , src: drinks1},
-        {id: 1 , src: drinks2},
-        {id: 2 , src: drinks3},
-        {id: 3 , src: food1},
-    ],
+    images: [],
 }
+export const getMenuData = createAsyncThunk(
+    'getMenuData',
+    async (data, {rejectedWithValue}) => {
+        try {
+            return mockListMenu //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+
+        } catch (e) {
+            return rejectedWithValue(e)
+        }
+    }
+)
+
+const menuAdapter = createEntityAdapter();
+
 export const menuSlice = createSlice({
     name: 'menu',
     initialState,
     reducers:{
-
+        clearData: state => {
+            state.images = [];
+        },
+    },
+    extraReducers: builder => {
+        builder
+            //здесь имитируем закгрузку
+            .addCase(getMenuData.pending, state => {
+                state.loading = true;
+            })
+            //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
+            .addCase(getMenuData.fulfilled, (state, { payload }) => {
+                state.loading = false;
+                state.images = payload;
+            })
+            //здесь можно обрабатывать ошибки. так же прерываем загрузку
+            .addCase(getMenuData.rejected, state => {
+                state.loading = false;
+            })
     }
 })
+const { reducer, actions } = menuSlice;
 
-export default menuSlice.reducer;
+//Пример как юзать экшены
+export const { clearData } = actions;
+
+const stateSelector = state => state?.menu;
+
+export const listImagesSelector = createSelector(stateSelector, state => state.images);
+
+export default reducer;
