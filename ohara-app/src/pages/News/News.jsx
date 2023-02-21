@@ -10,7 +10,7 @@ export const News = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getNewsData())
-    },[dispatch]);
+    }, [dispatch]);
 
 
     return (
@@ -19,20 +19,20 @@ export const News = () => {
                 <h1 className={styles.title}>Новости</h1>
                 {
                     news.filter(e => e.main === true).map(e =>
-                    <NavLink key={e.id} className={styles.mainNew} to={"/new/" + e.id}>
-                        <h1 className={styles.textImg}>Главная новость</h1>
-                        <img className={styles.mainImg} src={xxx} alt={"xxx"}/>
-                        <p className={styles.data}>22.22.2022</p>
-                    </NavLink>)
+                        <NavLink key={e.id} className={styles.mainNew} to={"/new/" + e.id}>
+                            <h1 className={styles.textImg}>Главная новость</h1>
+                            <img className={styles.mainImg} src={xxx} alt={"xxx"}/>
+                            <p className={styles.data}>22.22.2022</p>
+                        </NavLink>)
                 }
                 <div className={styles.gallery}>
                     <div className={styles.content}>
                         {
                             news.filter(e => e.main !== true).map(e =>
-                            <NavLink to={`/new/` + e.id} key={e.id} className={styles.secondNews}>
-                                <p className={styles.text}>Новость</p>
-                                <img className={styles.img} src={xxx} alt={"xxx"}/>
-                            </NavLink>)
+                                <NavLink to={`/new/` + e.id} key={e.id} className={styles.secondNews}>
+                                    <p className={styles.text}>Новость</p>
+                                    <img className={styles.img} src={xxx} alt={"xxx"}/>
+                                </NavLink>)
                         }
                     </div>
                 </div>
