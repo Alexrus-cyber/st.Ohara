@@ -93,6 +93,7 @@
     max-height: 280px;
     cursor: pointer;
     position: unset;
+    transition-duration: 0.5s;
 }
 .img:hover{
     opacity: 0.6;

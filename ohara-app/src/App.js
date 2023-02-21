@@ -31,7 +31,6 @@ function App() {
                     </div>
                     :
                     <div>
-                        <Header></Header>
                         <Header/>
                         <Routes>
                             <Route path={'/'} element={<Landing/>}/>

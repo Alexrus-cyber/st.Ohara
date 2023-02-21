@@ -1,0 +1,86 @@
+.container{
+    display: flex;
+    color: black;
+    text-align: left;
+}
+.textContainer{
+    max-width: 500px;
+}
+
+.title{
+    font-size: 32px;
+    color: #7D4A7D;
+}
+
+.subtitle{
+
+}
+.text{
+    padding: 10px 0;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.save{
+    padding: 10px;
+    color: white;
+    background-color: #1C675A;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    width: 150px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.save:hover{
+    background-color: #14463c;
+}
+.imgContainer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    padding-left: 80px;
+}
+
+
+.delete{
+    padding: 5px 20px;
+    color: white;
+    background-color: #1C675A;
+    border-radius: 10px;
+    border: none;
+    font-size: 12px;
+    margin-top: 150px;
+    cursor: pointer;
+}
+.delete:hover{
+    background-color: #14463c;
+}
+.imgChanger{
+    border-radius: 20px;
+    max-width: 350px;
+    width: 250px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 500px;
+}
+
+.load{
+    width: 100%;
+    height: 40px;
+    border-radius: 0 0 10px 10px;
+    border: #1C675A solid 1px;
+    background-color: #1C675A;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+.load:hover{
+    background-color: #14463c;
+    border: #14463c solid 1px;
+}

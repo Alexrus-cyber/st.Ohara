@@ -1,7 +1,7 @@
 import styles from './Card.module.css'
-import slider from '../../../../assets/slider1.png'
-import close from '../../../../assets/close.png'
-import redact from '../../../../assets/redact.png'
+import slider from '../../../../../assets/slider1.png'
+import close from '../../../../../assets/close.png'
+import redact from '../../../../../assets/redact.png'
 export const Card = (props) => {
     return (
         <div style={{backgroundImage: `url("${slider}")`}} className={styles.card}>
@@ -16,7 +16,7 @@ export const Card = (props) => {
                         und die exzellente Küche von Peter Hagen-Wies. ...</p>
                 </div>
             </div>
-            <button className={styles.button}>Посмотреть</button>
+            <button onClick={() => props.setActive(true)} className={styles.button}>Посмотреть</button>
         </div>
     )
 }
