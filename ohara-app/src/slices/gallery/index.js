@@ -1,28 +1,48 @@
-import slider1 from "../../assets/slider1.png";
-import slider2 from "../../assets/slider2.png";
-import slider3 from "../../assets/slider3.png";
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {galleryData} from "./mocks/gallery";
 
 const initialState = {
-    images: [
-        {id: 0, src: slider1},
-        {id: 1, src: slider3},
-        {id: 2, src: slider2},
-        {id: 3, src: slider1},
-        {id: 4, src: slider3},
-        {id: 5, src: slider1},
-        {id: 6, src: slider2},
-        {id: 7, src: slider3},
-    ],
-
+    images: [],
+    loading: true,
 }
-export const gallerySlice = createSlice({
-        name: 'gallery',
-        initialState,
-        reducers: {
+export const getGalleryData = createAsyncThunk(
+    'getGalleryData',
+    async (data, {rejectedWithValue}) => {
+        try {
+            return galleryData //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
 
+        } catch (e) {
+            return rejectedWithValue(e)
         }
     }
 )
+
+
+export const gallerySlice = createSlice({
+        name: 'gallery',
+        initialState,
+    reducers:{
+        clearData: state => {
+            state.images = [];
+        },
+    },
+    extraReducers: builder => {
+        builder
+            //здесь имитируем закгрузку
+            .addCase(getGalleryData.pending, state => {
+                state.loading = true;
+            })
+            //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
+            .addCase(getGalleryData.fulfilled, (state, { payload }) => {
+                state.loading = false;
+                state.images = payload;
+                console.log("Получил")
+            })
+            //здесь можно обрабатывать ошибки. так же прерываем загрузку
+            .addCase(getGalleryData.rejected, state => {
+                state.loading = false;
+            })
+    }
+})
 
 export default gallerySlice.reducer;

@@ -1,21 +1,23 @@
 import styles from './New.module.css'
-import window from  '../../../../assets/slider1.png'
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getNew} from "../../../../slices/news";
 
 export const New = () => {
+    const {oneNew} = useSelector(state => state.news);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getNew())
+    },[dispatch]);
     return (
         <section className={styles.new}>
             <div className={styles.container}>
                 <div className={styles.itemContainer}>
-                    <p className={styles.title}>Главная новость</p>
-                    <p className={styles.text}>Genießen Sie unser Ambiente und die exzellente Küche von Peter Hagen-Wiest – ausgezeichnet mit zwei
-                        Michelin-Sternen und 18 Gault-Millau Punkte sowie 2020 von
-                        der Zeitschrift Feinschmecker“ zum Restaurant des Jahres gewählt.</p>
-                    <p className={styles.text}>Entspannung, Persönlichkeit, Spontaneität – das „Ammolite“ ist frei von elitärer Attitüde,
-                        man beherrscht das Handwerk, man pflegt die Konventionen und
-                        den Stil – und stellt sich selbst dabei nicht in den Vordergrund.</p>
+                    <p className={styles.title}>{oneNew.title}</p>
+                    <p className={styles.text}>{oneNew.text}</p>
                 </div>
                 <div className={styles.rightContainer}>
-                    <img className={styles.img} src={window} alt={"xxx"}/>
+                    <img className={styles.img} src={oneNew.src} alt={"xxx"}/>
                 </div>
             </div>
         </section>

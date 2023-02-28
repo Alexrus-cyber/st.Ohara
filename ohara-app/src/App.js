@@ -16,7 +16,7 @@ import {ReservationAdmin} from "./admin/pages/Reservation/ReservationAdmin";
 import {GalleryAdmin} from "./admin/pages/Gallery/GalleryAdmin";
 
 function App() {
-    const admin = true;
+    const admin = false;
     return (
         <BrowserRouter>
             <div className="App">
@@ -40,7 +40,10 @@ function App() {
                             <Route path={'/Gallery'} element={<Gallery/>}/>
                             <Route path={'/News'} element={<News/>}/>
                             <Route path={'/Reservation'} element={<Reservation/>}/>
-                            <Route path={'/new'} element={<New/>}/>
+                            <Route path={'/new'} element={<New/>}>
+                                <Route path={":id"}
+                                       element={<New/>}></Route>
+                            </Route>
                         </Routes>
                         <Footer></Footer>
                     </div>
