@@ -19,9 +19,9 @@ export const getGalleryData = createAsyncThunk(
 
 
 export const gallerySlice = createSlice({
-        name: 'gallery',
-        initialState,
-    reducers:{
+    name: 'gallery',
+    initialState,
+    reducers: {
         clearData: state => {
             state.images = [];
         },
@@ -33,7 +33,7 @@ export const gallerySlice = createSlice({
                 state.loading = true;
             })
             //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-            .addCase(getGalleryData.fulfilled, (state, { payload }) => {
+            .addCase(getGalleryData.fulfilled, (state, {payload}) => {
                 state.loading = false;
                 state.images = payload;
                 console.log("Получил")

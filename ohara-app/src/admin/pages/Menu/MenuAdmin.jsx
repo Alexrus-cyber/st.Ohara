@@ -1,13 +1,23 @@
 import styles from './MenuAdmin.module.css'
-import {AddCard} from "../components/AddCard/AddCard";
-import React, {useCallback, useState} from "react";
-import {useSelector} from "react-redux";
+import {AddCard} from "./AddCard/AddCard";
+import React, {useCallback, useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import ImageViewer from "react-simple-image-viewer";
+import {deleteItemMenu, getMenuData} from "../../../slices/menu";
+import {Module} from "../../components/Module/Module";
+import {DeleteModule} from "../components/DeleteModule/DeleteModule";
 
 export const MenuAdmin = () => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
-    const {images} = useSelector(state => state.menuReducer)
+    const [active, setActive] = useState(false);
+    const [takeId, setTakeId] = useState(0);
+    const {images} = useSelector(state => state.menu)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getMenuData())
+    },[dispatch]);
 
 
     const openImageViewer = useCallback((index) => {
@@ -25,15 +35,20 @@ export const MenuAdmin = () => {
             <h1 className={styles.title}>Меню</h1>
             <div className={styles.cardContainer}>
                     {images.map( i => (
-                        <img
-                            className={styles.img}
-                            src={i.src}
-                            onClick={() => openImageViewer(i.id)}
-                            width="300"
-                            key={i.id}
-                            style={{margin: '50px'}}
-                            alt=""
-                        />
+                        <div  key={i.id} className={styles.closeContainer}>
+                            <img
+                                className={styles.img}
+                                src={i.src}
+                                onClick={() => openImageViewer(i.id)}
+                                width="300"
+                                height="200"
+                                alt=""
+                            />
+                            <button onClick={() => {
+                                setActive(!active)
+                                setTakeId(i.id)
+                            }} className={styles.close}>x</button>
+                        </div>
                     ))}
                     {isViewerOpen && (
                         <ImageViewer
@@ -45,6 +60,9 @@ export const MenuAdmin = () => {
                         />
                     )}
                 <AddCard />
+                <Module active={active} setActive={setActive}>
+                   <DeleteModule delete={deleteItemMenu} id={takeId} active={active} setActive={setActive}/>
+                </Module>
             </div>
         </section>
     )
