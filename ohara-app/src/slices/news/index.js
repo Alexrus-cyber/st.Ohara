@@ -29,6 +29,16 @@ export const getNew = createAsyncThunk(
         }
     }
 )
+export const deleteNew = createAsyncThunk(
+    'deleteNew',
+    async (id, {rejectedWithValue}) => {
+        try {
+            return id
+        } catch (e) {
+            return rejectedWithValue(e)
+        }
+    }
+)
 export const newsSlice = createSlice({
         name: 'newsPage',
         initialState,
@@ -63,6 +73,18 @@ export const newsSlice = createSlice({
                 })
                 //здесь можно обрабатывать ошибки. так же прерываем загрузку
                 .addCase(getNew.rejected, state => {
+                    state.loading = false;
+                })
+                .addCase(deleteNew.pending, state => {
+                    state.loading = true;
+                })
+                //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
+                .addCase(deleteNew.fulfilled, (state, { payload }) => {
+                    state.loading = false;
+                    state.news = state.news.filter((el) => el.id !== payload);
+                })
+                //здесь можно обрабатывать ошибки. так же прерываем загрузку
+                .addCase(deleteNew.rejected, state => {
                     state.loading = false;
                 })
         }

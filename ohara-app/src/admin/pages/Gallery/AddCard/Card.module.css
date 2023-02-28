@@ -1,17 +1,13 @@
 .card{
-    max-width: 300px;
+    max-width: 294px;
     width: 100%;
-    height: 220px;
-    margin: 30px;
-    max-height: 270px;
+    height: 194px;
+    margin: 50px;
+    max-height: 200px;
     border-radius: 30px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-position: center;
-    background-size: 600px;
-    background-repeat: no-repeat;
     border: gray 3px solid;
     cursor: pointer;
 }
@@ -22,6 +18,6 @@
 .card:hover{
     border: #d0d0d0 3px solid;
 }
-.plus:hover{
+.card:hover .plus{
     color: #d0d0d0;
 }

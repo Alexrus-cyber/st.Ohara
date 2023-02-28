@@ -1,14 +1,20 @@
-import React, {useCallback, useState} from "react";
-import {useSelector} from "react-redux";
+import React, {useCallback, useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import styles from './Gallery.module.css'
 import ImageViewer from "react-simple-image-viewer";
-import {AddCard} from "../components/AddCard/AddCard";
+import {AddCard} from "./AddCard/AddCard";
+import {getGalleryData} from "../../../slices/gallery";
 
 export const GalleryAdmin = () => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
-    const {images} = useSelector(state => state.galleryReducer)
+    const {images} = useSelector(state => state.gallery)
+    const dispatch = useDispatch();
 
+    //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
+    useEffect(() => {
+        dispatch(getGalleryData());
+    }, [dispatch])
 
     const openImageViewer = useCallback((index) => {
         setCurrentImage(index);
@@ -24,12 +30,13 @@ export const GalleryAdmin = () => {
         <section className={styles.container}>
             <h1 className={styles.title}>Галерея</h1>
             <div className={styles.cardContainer}>
-                {images.map( i => (
+                {images.map(i => (
                     <img
                         className={styles.img}
                         src={i.src}
                         onClick={() => openImageViewer(i.id)}
                         width="300"
+                        height="200"
                         key={i.id}
                         style={{margin: '50px'}}
                         alt=""
@@ -44,7 +51,7 @@ export const GalleryAdmin = () => {
                         onClose={closeImageViewer}
                     />
                 )}
-                <AddCard />
+                <AddCard/>
             </div>
         </section>
     )

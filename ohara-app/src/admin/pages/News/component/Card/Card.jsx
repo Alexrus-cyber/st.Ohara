@@ -1,22 +1,40 @@
 import styles from './Card.module.css'
-import slider from '../../../../../assets/slider1.png'
 import close from '../../../../../assets/close.png'
 import redact from '../../../../../assets/redact.png'
+import {Module} from "../../../../components/Module/Module";
+import {useState} from "react";
+import {DeleteModule} from "../../../components/DeleteModule/DeleteModule";
+import {deleteNew} from "../../../../../slices/news";
+
 export const Card = (props) => {
+    const [active, setActive] = useState(false);
+
+    const check = () => {
+        props.setId(props.id)
+        props.setActive(true)
+    }
+    const moduleDeleteCard = () => {
+        setActive(true)
+    }
+
     return (
-        <div style={{backgroundImage: `url("${slider}")`}} className={styles.card}>
+        <div style={{backgroundImage: `url("${props.img}")`}} className={styles.card}>
             <div className={styles.container}>
                 <div className={styles.closeContainer}>
-                    <img className={styles.img} src={redact} alt={"redact"}/>
-                    <img className={styles.img} src={close} alt={"close"}/>
+                    <img className={styles.img} onClick={() => check()}  src={redact} alt={"redact"}/>
+                    <img className={styles.img} onClick={() => moduleDeleteCard()} src={close} alt={"close"}/>
                 </div>
                 <div className={styles.textContainer}>
-                    <h2 className={styles.title}>Lorem ipsum dolor sit amet, consectetur...</h2>
-                    <p className={styles.text}>Genießen Sie unser Ambiente,
-                        und die exzellente Küche von Peter Hagen-Wies. ...</p>
+                    <h2 className={styles.title}>{props.title.substring(0, 30) + "..."}</h2>
+                    <p className={styles.text}>{props.text.substring(0, 80) + "..."}</p>
                 </div>
             </div>
-            <button onClick={() => props.setActive(true)} className={styles.button}>Посмотреть</button>
+            <div className={styles.buttonContainer}>
+                <button onClick={() => check()} className={styles.button}>Посмотреть</button>
+            </div>
+            <Module active={active} setActive={setActive}>
+                <DeleteModule delete={deleteNew} id={props.id} active={active} setActive={setActive}/>
+            </Module>
         </div>
     )
 }
