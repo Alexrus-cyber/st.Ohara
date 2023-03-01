@@ -6,11 +6,13 @@ import {Module} from "../../components/Module/Module";
 import {ModuleCard} from "./component/ModuleCard/ModuleCard";
 import {useDispatch, useSelector} from "react-redux";
 import {getNewsData} from "../../../slices/news";
+import {AddModuleCard} from "./component/AddModuleCard/AddModuleCard";
 
 export const NewsAdmin = () => {
     const [active, setActive] = useState(false);
-    const {news} = useSelector(state => state.news)
     const [takeCard, setTakeCard] = useState(0);
+    const [add, setAdd] = useState(false)
+    const {news} = useSelector(state => state.news)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -20,11 +22,18 @@ export const NewsAdmin = () => {
 
     return (
         <div className={styles.container}>
-            <Module active={active} setActive={setActive}>
-                {news.filter((el) => el.id === takeCard).map(c => <ModuleCard img={c.src} key={c.id} text={c.text}
-                                                                              title={c.title}
-                                                                              setActive={setActive}/>)}
-            </Module>
+            {add === false
+                ?
+                <Module active={active} setActive={setActive}>
+                    {news.filter((el) => el.id === takeCard).map(c => <ModuleCard img={c.src} key={c.id} text={c.text}
+                                                                                  title={c.title}
+                                                                                  setActive={setActive}/>)}
+                </Module>
+                :
+                <Module active={active} setAdd={setAdd} setActive={setActive}>
+                    <AddModuleCard setAdd={setAdd} active={active} setActive={setActive}/>
+                </Module>
+            }
             <div className={styles.inputContainer}>
                 <Search/>
             </div>
@@ -33,7 +42,11 @@ export const NewsAdmin = () => {
                     <h1 className={styles.title}>Новости</h1>
                     <button className={styles.date}>по дате</button>
                 </div>
-                <button className={styles.button}>Добавить новость</button>
+                <button onClick={() => {
+                    setAdd(true)
+                    setActive(true)
+                }} className={styles.button}>Добавить новость
+                </button>
             </div>
             <div className={styles.cardContainer}>
                 {news.map(c => <Card key={c.id} img={c.src} id={c.id} title={c.title} text={c.text} setId={setTakeCard}
