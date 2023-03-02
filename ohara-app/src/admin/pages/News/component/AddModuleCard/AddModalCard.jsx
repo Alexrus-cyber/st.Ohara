@@ -1,7 +1,7 @@
-import style from './AddModuleCard.module.css'
+import style from './AddModalCard.module.css'
 import {useMemo} from "react";
 
-export const AddModuleCard = (props) => {
+export const AddModalCard = (props) => {
 
     const subtitle = useMemo(() => {
         if (props.isEdit) {
@@ -16,15 +16,15 @@ export const AddModuleCard = (props) => {
                 <input className={style.title}></input>
                 <textarea className={style.text}></textarea>
                 <button onClick={()=> {
-                    props.setActive(false)
-                    props.setAdd(false)
+                    props.onClose()
                 }} className={style.save}>Сохранить</button>
             </div>
             <div className={style.imgContainer}>
                 <div className={style.imgChanger}>
                     <button className={style.load}>Загрузить</button>
                 </div>
-                <button className={style.delete}>Удалить</button>
+                {props.isEdit ?     <button className={style.delete}>Удалить</button> :  ""}
+
             </div>
         </div>
     )

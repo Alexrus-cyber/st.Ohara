@@ -8,9 +8,7 @@ const initialState = {
 export const getMenuData = createAsyncThunk(
     'getMenuData',
     async (data, {rejectedWithValue}) => {
-        const {data, callback} = data;
         try {
-
             return mockListMenu //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
 
         } catch (e) {

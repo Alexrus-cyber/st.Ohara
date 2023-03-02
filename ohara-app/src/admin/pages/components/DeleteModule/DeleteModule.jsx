@@ -8,10 +8,10 @@ export const DeleteModule = (props) => {
     const deleteCard = (yes) => {
         if (yes){
             dispatch(props.delete(props.id))
-            props.setActive(false)
+            props.onClose();
         }
         else{
-            props.setActive(false)
+            props.onClose()
         }
     }
 

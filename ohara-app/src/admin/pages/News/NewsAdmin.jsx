@@ -6,7 +6,7 @@ import {Module} from "../../components/Module/Module";
 import {ModuleCard} from "./component/ModuleCard/ModuleCard";
 import {useDispatch, useSelector} from "react-redux";
 import {getNewsData} from "../../../slices/news";
-import {AddModuleCard} from "./component/AddModuleCard/AddModuleCard";
+import {AddModalCard} from "./component/AddModuleCard/AddModalCard";
 import {nanoid} from "@reduxjs/toolkit";
 import {newsData} from "../../../slices/news/mocks/news";
 const initialModalState = {
@@ -17,11 +17,9 @@ const initialModalState = {
 }
 
 export const NewsAdmin = () => {
-    const [active, setActive] = useState(false);
-    const [takeCard, setTakeCard] = useState(0);
-    const [add, setAdd] = useState(false)
     const [modalState, setModalState] = useState(initialModalState)
     const [isOpenModal, setOpenModal] = useState(false);
+    const [isAdd, setIsAdd] = useState(false);
 
     const {news} = useSelector(state => state.news)
     const dispatch = useDispatch()
@@ -33,6 +31,7 @@ export const NewsAdmin = () => {
     const handleClickOpenNews = useCallback((newsData) => {
         setOpenModal(true);
         setModalState(newsData)
+        setIsAdd(false)
     }, [])
 
     const handleClickCloseModal = useCallback(() => {
@@ -46,26 +45,15 @@ export const NewsAdmin = () => {
             <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
                 <ModuleCard img={img} key={id} text={text}
                             title={title}
+                            isAdd={isAdd}
                             onClose={handleClickCloseModal}/>
             </Module>
         )
-    }, [modalState, isOpenModal, setOpenModal])
+    }, [modalState, isOpenModal, setOpenModal, handleClickCloseModal, isAdd])
 
     return (
         <>
             <div className={styles.container}>
-                {/*{add === false*/}
-                {/*    ?*/}
-                {/*    <Module active={active} setActive={setActive}>*/}
-                {/*        {news.filter((el) => el.id === takeCard).map(c => <ModuleCard img={c.src} key={c.id} text={c.text}*/}
-                {/*                                                                      title={c.title}*/}
-                {/*                                                                      setActive={setActive}/>)}*/}
-                {/*    </Module>*/}
-                {/*    :*/}
-                {/*    <Module active={active} setAdd={setAdd} setActive={setActive}>*/}
-                {/*        <AddModuleCard setAdd={setAdd} active={active} setActive={setActive}/>*/}
-                {/*    </Module>*/}
-                {/*}*/}
                 <div className={styles.inputContainer}>
                     <Search/>
                 </div>
@@ -75,25 +63,19 @@ export const NewsAdmin = () => {
                         <button className={styles.date}>по дате</button>
                     </div>
                     <button onClick={() => {
-                        // setAdd(true)
                         setOpenModal(true)
+                        setIsAdd(true)
                     }} className={styles.button}>Добавить новость
                     </button>
                 </div>
                 <div className={styles.cardContainer}>
-                    {/*{news.map(c => <Card key={c.id} img={c.src} id={c.id} title={c.title} text={c.text} setId={setTakeCard}*/}
-                    {/*                     setActive={setActive}/>)}*/}
                     {news.map(value => {
                         return (
                             <Card
-                                data={value}
                                 key={value.id}
-                                img={value.src}
-                                id={value.id}
-                                title={value.title}
-                                text={value.text}
+                                data={value}
                                 handleClickItem={() => handleClickOpenNews(value)}
-                                setAcive={setModalState}
+                                setModuleState={setModalState}
                             />
                         )
                     })}
