@@ -40,12 +40,11 @@ export const NewsAdmin = () => {
     }, [])
 
     const getModalWindow = useMemo(() => {
-        const {img, text, title, id} = modalState
         return (
             <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
-                <ModuleCard img={img} key={id} text={text}
-                            title={title}
+                <ModuleCard key={modalState.id}
                             isAdd={isAdd}
+                            data = {modalState}
                             onClose={handleClickCloseModal}/>
             </Module>
         )
