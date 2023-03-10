@@ -6,19 +6,36 @@ import ImageViewer from "react-simple-image-viewer";
 import {deleteItemMenu, getMenuData} from "../../../slices/menu";
 import {Module} from "../../components/Module/Module";
 import {DeleteModule} from "../components/DeleteModule/DeleteModule";
+import {nanoid} from "@reduxjs/toolkit";
+
+
+const initialModalState = {
+    src: null,
+    id: nanoid(5),
+}
 
 export const MenuAdmin = () => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
-    const [active, setActive] = useState(false);
-    const [takeId, setTakeId] = useState(0);
+    const [modalState, setModalState] = useState(initialModalState)
     const {images} = useSelector(state => state.menu)
+    const [isOpenModal, setOpenModal] = useState(false);
+    const [takeId, setTakeId] = useState(0);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getMenuData())
     },[dispatch]);
 
+    const handleClickOpenNews = useCallback((menuData) => {
+        setOpenModal(true);
+        setModalState(menuData)
+    }, [])
+
+    const handleClickCloseModal = useCallback(() => {
+        setOpenModal(false);
+        setModalState(initialModalState)
+    }, [])
 
     const openImageViewer = useCallback((index) => {
         setCurrentImage(index);
@@ -34,19 +51,18 @@ export const MenuAdmin = () => {
         <section className={styles.container}>
             <h1 className={styles.title}>Меню</h1>
             <div className={styles.cardContainer}>
-                    {images.map( i => (
-                        <div  key={i.id} className={styles.closeContainer}>
+                    {images.map(element => (
+                        <div  key={element.id} className={styles.closeContainer}>
                             <img
                                 className={styles.img}
-                                src={i.src}
-                                onClick={() => openImageViewer(i.id)}
+                                src={element.src}
+                                onClick={() => openImageViewer(element.id)}
                                 width="300"
                                 height="200"
                                 alt=""
                             />
                             <button onClick={() => {
-                                setActive(!active)
-                                setTakeId(i.id)
+                                handleClickOpenNews(element)
                             }} className={styles.close}>x</button>
                         </div>
                     ))}
@@ -60,8 +76,8 @@ export const MenuAdmin = () => {
                         />
                     )}
                 <AddCard />
-                <Module active={active} setActive={setActive}>
-                   <DeleteModule delete={deleteItemMenu} id={takeId} active={active} setActive={setActive}/>
+                <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
+                   <DeleteModule delete={deleteItemMenu} id={modalState.id}  onClose={handleClickCloseModal}/>
                 </Module>
             </div>
         </section>

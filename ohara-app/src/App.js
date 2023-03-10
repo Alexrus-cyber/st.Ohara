@@ -25,6 +25,7 @@ function App() {
                     <div className={styles.main}>
                         <Navbar/>
                         <Routes>
+                            <Route path={'/'} element={<MenuAdmin/>}/>
                             <Route path={'/galleryAdmin'} element={<GalleryAdmin/>}/>
                             <Route path={'/newsAdmin'} element={<NewsAdmin/>}/>
                             <Route path={'/menuAdmin'} element={<MenuAdmin/>}/>

@@ -1,44 +1,87 @@
 import styles from './News.module.css'
 import {Card} from "./component/Card/Card";
 import {Search} from "../../components/Search/Search";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import {Module} from "../../components/Module/Module";
 import {ModuleCard} from "./component/ModuleCard/ModuleCard";
 import {useDispatch, useSelector} from "react-redux";
 import {getNewsData} from "../../../slices/news";
+import {AddModalCard} from "./component/AddModuleCard/AddModalCard";
+import {nanoid} from "@reduxjs/toolkit";
+import {newsData} from "../../../slices/news/mocks/news";
+const initialModalState = {
+    img: null,
+    text: '',
+    title: '',
+    id: nanoid(5),
+}
 
 export const NewsAdmin = () => {
-    const [active, setActive] = useState(false);
+    const [modalState, setModalState] = useState(initialModalState)
+    const [isOpenModal, setOpenModal] = useState(false);
+    const [isAdd, setIsAdd] = useState(false);
+
     const {news} = useSelector(state => state.news)
-    const [takeCard, setTakeCard] = useState(0);
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getNewsData())
     }, [dispatch]);
 
+    const handleClickOpenNews = useCallback((newsData) => {
+        setOpenModal(true);
+        setModalState(newsData)
+        setIsAdd(false)
+    }, [])
+
+    const handleClickCloseModal = useCallback(() => {
+        setOpenModal(false);
+        setModalState(initialModalState)
+    }, [])
+
+    const getModalWindow = useMemo(() => {
+        const {img, text, title, id} = modalState
+        return (
+            <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
+                <ModuleCard img={img} key={id} text={text}
+                            title={title}
+                            isAdd={isAdd}
+                            onClose={handleClickCloseModal}/>
+            </Module>
+        )
+    }, [modalState, isOpenModal, setOpenModal, handleClickCloseModal, isAdd])
 
     return (
-        <div className={styles.container}>
-            <Module active={active} setActive={setActive}>
-                {news.filter((el) => el.id === takeCard).map(c => <ModuleCard img={c.src} key={c.id} text={c.text}
-                                                                              title={c.title}
-                                                                              setActive={setActive}/>)}
-            </Module>
-            <div className={styles.inputContainer}>
-                <Search/>
-            </div>
-            <div className={styles.middle}>
-                <div className={styles.newsDate}>
-                    <h1 className={styles.title}>Новости</h1>
-                    <button className={styles.date}>по дате</button>
+        <>
+            <div className={styles.container}>
+                <div className={styles.inputContainer}>
+                    <Search/>
                 </div>
-                <button className={styles.button}>Добавить новость</button>
+                <div className={styles.middle}>
+                    <div className={styles.newsDate}>
+                        <h1 className={styles.title}>Новости</h1>
+                        <button className={styles.date}>по дате</button>
+                    </div>
+                    <button onClick={() => {
+                        setOpenModal(true)
+                        setIsAdd(true)
+                    }} className={styles.button}>Добавить новость
+                    </button>
+                </div>
+                <div className={styles.cardContainer}>
+                    {news.map(value => {
+                        return (
+                            <Card
+                                key={value.id}
+                                data={value}
+                                handleClickItem={() => handleClickOpenNews(value)}
+                                setModuleState={setModalState}
+                            />
+                        )
+                    })}
+                </div>
             </div>
-            <div className={styles.cardContainer}>
-                {news.map(c => <Card key={c.id} img={c.src} id={c.id} title={c.title} text={c.text} setId={setTakeCard}
-                                     setActive={setActive}/>)}
-            </div>
-        </div>
+            {getModalWindow}
+        </>
     )
 }

@@ -3,20 +3,19 @@ import {useDispatch} from "react-redux";
 import {addItemMenu} from "../../../../slices/menu";
 import x from '../../../../assets/barman.png'
 
-export const AddCard = (props) => {
+export const AddCard = () => {
     const dispatch = useDispatch();
 
-    const AddItem = () => {
-        const image = {
-            id: 100,
-            src: x,
+    const PhotoSelected = (e) => {
+        if (e.target.files?.length) {
+            dispatch(addItemMenu(e.target.files[0]))
         }
-        dispatch(addItemMenu(image))
     }
 
     return (
-        <div onClick={AddItem} className={styles.card}>
-            <div  className={styles.plus}>+</div>
+        <div onClick={PhotoSelected} className={styles.card}>
+             <input type={"file"} className={styles.input} onChange={PhotoSelected}></input>
+             <span className={styles.imageEdit}>+</span>
         </div>
     )
 }
