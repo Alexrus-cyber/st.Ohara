@@ -36,3 +36,35 @@
 .link:hover{
     color: #7D4A7D;
 }
+
+@media screen  and (max-width: 1120px){
+    .middle{
+        column-gap: 20px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .container{
+        justify-content: center;
+    }
+    .middle{
+        display: none;
+        visibility: collapse;
+    }
+}
+@media screen and (max-width: 720px) {
+    .img{
+        padding-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .img{
+        padding-bottom: 50px;
+    }
+}
+@media screen and (max-width: 420px) {
+    .img{
+        padding-bottom: 50px;
+    }
+}

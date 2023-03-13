@@ -98,3 +98,9 @@
 .img:hover{
     opacity: 0.6;
 }
+
+@media screen and (max-width: 720px) {
+    .container{
+        padding: 150px 0 0 0;
+    }
+}
