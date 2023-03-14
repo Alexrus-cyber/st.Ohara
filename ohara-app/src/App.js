@@ -16,7 +16,7 @@ import {ReservationAdmin} from "./admin/pages/Reservation/ReservationAdmin";
 import {GalleryAdmin} from "./admin/pages/Gallery/GalleryAdmin";
 
 function App() {
-    const admin = true;
+    const admin = false;
     return (
         <BrowserRouter>
             <div className="App">

@@ -22,7 +22,6 @@ export const News = () => {
                         <NavLink key={e.id} className={styles.mainNew} to={"/new/" + e.id}>
                             <h1 className={styles.textImg}>Главная новость</h1>
                             <img className={styles.mainImg} src={xxx} alt={"xxx"}/>
-                            <p className={styles.data}>22.22.2022</p>
                         </NavLink>)
                 }
                 <div className={styles.gallery}>

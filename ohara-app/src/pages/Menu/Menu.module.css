@@ -15,6 +15,8 @@
     padding: 150px 50px 0 50px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .title{
     font-size: 48px;
@@ -33,10 +35,7 @@
 .link:hover{
     color: #1C675A;
 }
-.gallery{
-    display: flex;
-    justify-content: center;
-}
+.gallery{}
 .content{
     display: flex;
     max-width: 1200px;
@@ -48,6 +47,7 @@
     width: 100%;
     max-height: 280px;
     cursor: pointer;
+    margin: 50px;
 }
 .img:hover{
     opacity: 0.6;
@@ -67,4 +67,14 @@
     padding-left: 60px;
     color: #1C675A;
     cursor: pointer;
+}
+@media screen and (max-width: 900px) {
+    .img{
+        margin: 25px;
+    }
+}
+@media screen and (max-width: 720px) {
+    .img{
+        margin: 10px 0;
+    }
 }

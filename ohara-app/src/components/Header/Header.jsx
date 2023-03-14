@@ -13,7 +13,7 @@ export const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.container}>
-                <img src={logo} alt={"stOhara"}/>
+                <img className={styles.img} src={logo} alt={"stOhara"}/>
                 <div className={styles.middle}>
                     {arr.map(e => <NavLink className={({isActive}) => (isActive ? styles.active : styles.link)} key={e.id} to={e.path}>{e.text}</NavLink>)}
                 </div>

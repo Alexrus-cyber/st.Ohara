@@ -6,7 +6,7 @@ export const Hero = ({hero}) => {
         <section className={styles.hero}>
             <div className={styles.container}>
                 <div className={styles.text}>
-                    <p>{hero.title}</p>
+                    <p className={styles.title}>{hero.title}</p>
                     <div className={styles.imgContainer}>
                         <img className={styles.img} src={arrows} alt={"arrow"}/>
                     </div>

@@ -31,7 +31,7 @@ export const Menu = () => {
         <section className={styles.menu}>
             <div className={styles.container}>
                 <h1 className={styles.title}>Меню</h1>
-                <div>
+                <div className={styles.gallery}>
                     {images.map( i => (
                         <img
                             className={styles.img}
@@ -39,7 +39,6 @@ export const Menu = () => {
                             onClick={() => openImageViewer(i.id)}
                             width="300"
                             key={i.id}
-                            style={{margin: '50px'}}
                             alt=""
                         />
                     ))}

@@ -5,6 +5,7 @@ export const Content = (props) => {
         <>
             {props.left === 0 ?
                 <div className={styles.itemContainer}>
+                    <img className={styles.imgRes} src={props.img} alt={"barman"}/>
                     <div className={styles.backContainer}>
                         <img className={styles.img} src={props.img} alt={"barman"}/>
                         <div className={styles.back}></div>
@@ -27,6 +28,7 @@ export const Content = (props) => {
                 </div>
                 :
                 <div className={styles.itemContainer}>
+                    <img className={styles.img1} src={props.img} alt={"barman"}/>
                     <div className={styles.textContainer}>
                         <h5 className={styles.title}>
                             Exklusive Atmosphäre
@@ -47,7 +49,7 @@ export const Content = (props) => {
                         </div>
                     </div>
                     <div className={styles.backContainer}>
-                        <img className={styles.img} src={props.img} alt={"barman"}/>
+                        <img className={styles.img2} src={props.img} alt={"barman"}/>
                         <div className={props.left === 0 ? styles.back : styles.backRevert}></div>
                     </div>
                 </div>

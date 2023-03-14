@@ -23,7 +23,7 @@
     align-items: center;
 }
 .left{
-
+    padding: 20px;
 }
 .textLeft{
     max-width: 290px;
@@ -42,6 +42,7 @@
     flex-direction: column;
     align-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .right{
@@ -72,4 +73,25 @@
 }
 .info{
     padding-bottom: 20px;
+}
+@media screen and (max-width: 720px) {
+    .container{
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        text-align: center;
+    }
+    .left{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .img{
+        margin: 0;
+    }
+    .icons{
+        padding-bottom: 20px;
+    }
 }
