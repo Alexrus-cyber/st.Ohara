@@ -42,7 +42,7 @@
     width: 95%;
     text-decoration: none;
     color: black;
-    padding: 10px;
+    padding: 7px;
 
 }
 .link:hover{
@@ -53,6 +53,17 @@
     width: 95%;
     text-decoration: none;
     color: black;
-    padding: 10px;
+    padding: 7px;
     background-color: #D8BBD8;
+}
+
+@media screen and (max-width: 1200px) {
+    .navbar{
+        max-width: 300px;
+    }
+}
+@media screen and (max-width: 900px) {
+    .navbar{
+        display: none;
+    }
 }

@@ -20,7 +20,6 @@ export const MenuAdmin = () => {
     const [modalState, setModalState] = useState(initialModalState)
     const {images} = useSelector(state => state.menu)
     const [isOpenModal, setOpenModal] = useState(false);
-    const [takeId, setTakeId] = useState(0);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -57,8 +56,6 @@ export const MenuAdmin = () => {
                                 className={styles.img}
                                 src={element.src}
                                 onClick={() => openImageViewer(element.id)}
-                                width="300"
-                                height="200"
                                 alt=""
                             />
                             <button onClick={() => {

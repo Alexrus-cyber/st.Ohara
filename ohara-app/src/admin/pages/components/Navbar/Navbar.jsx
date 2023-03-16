@@ -4,11 +4,11 @@ import {NavLink} from "react-router-dom";
 
 export const Navbar = () => {
     const arr = [
+        {id: 5, src: "/landingAdmin", text: "Главная"},
         {id: 1, src: "/menuAdmin", text: "Меню"},
         {id: 2, src: "/newsAdmin", text: "Новости"},
         {id: 3, src: "/galleryAdmin", text: "Галерея"},
         {id: 4, src: "/reservationAdmin", text: "Бронирование"},
-
     ]
     return (
         <div className={styles.navbar}>
