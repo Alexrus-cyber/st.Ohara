@@ -51,7 +51,7 @@
 @media (max-width: 1400px) {
     .module{
         overflow: hidden;
-        height: 100vh;
+        height: 80vh;
         width: 100%;
         background-color: rgba(0,0,0,0.4);
         position: fixed;
@@ -97,6 +97,20 @@
         padding: 20px;
         border-radius: 12px;
         background-color: white;
+    }
+
+}
+@media (max-height: 880px) {
+    .moduleContentActive{
+        transform: scale(0.6);
+        padding: 20px;
+    }
+
+}
+@media (max-width: 340px) {
+    .moduleContentActive{
+        transform: scale(0.6);
+        padding: 20px;
     }
 
 }
