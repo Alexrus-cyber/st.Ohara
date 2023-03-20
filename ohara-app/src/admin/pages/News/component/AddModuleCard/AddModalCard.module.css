@@ -112,3 +112,24 @@
 .imageEdit:hover{
     background-color: #14463c;
 }
+
+@media screen and (max-width: 800px) {
+    .container{
+        flex-direction: column;
+    }
+    .textContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .imgContainer{
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .delete{
+        margin-top: 10px;
+    }
+}

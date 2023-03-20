@@ -20,7 +20,6 @@ export const MenuAdmin = () => {
     const [modalState, setModalState] = useState(initialModalState)
     const {images} = useSelector(state => state.menu)
     const [isOpenModal, setOpenModal] = useState(false);
-    const [takeId, setTakeId] = useState(0);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -46,19 +45,17 @@ export const MenuAdmin = () => {
         setCurrentImage(0);
         setIsViewerOpen(false);
     };
-
+    console.log(images);
     return (
         <section className={styles.container}>
             <h1 className={styles.title}>Меню</h1>
             <div className={styles.cardContainer}>
-                    {images.map(element => (
+                    {images.map((element, index) => (
                         <div  key={element.id} className={styles.closeContainer}>
                             <img
                                 className={styles.img}
-                                src={element.src}
-                                onClick={() => openImageViewer(element.id)}
-                                width="300"
-                                height="200"
+                                src={element.img}
+                                onClick={() => openImageViewer(index)}
                                 alt=""
                             />
                             <button onClick={() => {
@@ -68,7 +65,7 @@ export const MenuAdmin = () => {
                     ))}
                     {isViewerOpen && (
                         <ImageViewer
-                            src={images.map(e => e.src)}
+                            src={images.map(e => e.img)}
                             currentIndex={currentImage}
                             disableScroll={true}
                             closeOnClickOutside={true}

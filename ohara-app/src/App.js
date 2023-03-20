@@ -14,9 +14,10 @@ import styles from './main.module.css'
 import {MenuAdmin} from "./admin/pages/Menu/MenuAdmin";
 import {ReservationAdmin} from "./admin/pages/Reservation/ReservationAdmin";
 import {GalleryAdmin} from "./admin/pages/Gallery/GalleryAdmin";
+import {LandingAdmin} from "./admin/pages/LandingAdmin/LandingAdmin";
 
 function App() {
-    const admin = false;
+    const admin = true;
     return (
         <BrowserRouter>
             <div className="App">
@@ -29,6 +30,7 @@ function App() {
                             <Route path={'/galleryAdmin'} element={<GalleryAdmin/>}/>
                             <Route path={'/newsAdmin'} element={<NewsAdmin/>}/>
                             <Route path={'/menuAdmin'} element={<MenuAdmin/>}/>
+                            <Route path={'/landingAdmin'} element={<LandingAdmin/>}/>
                             <Route path={'/reservationAdmin'} element={<ReservationAdmin/>}/>
                         </Routes>
                     </div>

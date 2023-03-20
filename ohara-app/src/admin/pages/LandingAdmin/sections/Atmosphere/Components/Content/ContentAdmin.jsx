@@ -1,6 +1,6 @@
 import styles from "../../Atmosphere.module.css";
 
-export const Content = (props) => {
+export const ContentAdmin = (props) => {
     return (
         <>
             {!props.isLeftPosition ?

@@ -3,12 +3,22 @@ import {useDispatch, useSelector} from "react-redux";
 import styles from './Gallery.module.css'
 import ImageViewer from "react-simple-image-viewer";
 import {AddCard} from "./AddCard/AddCard";
-import {getGalleryData} from "../../../slices/gallery";
+import {deleteItemGallery, getGalleryData} from "../../../slices/gallery";
+import {nanoid} from "@reduxjs/toolkit";
+import {DeleteModule} from "../components/DeleteModule/DeleteModule";
+import {Module} from "../../components/Module/Module";
+
+const initialModalState = {
+    src: null,
+    id: nanoid(5),
+}
 
 export const GalleryAdmin = () => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
+    const [modalState, setModalState] = useState(initialModalState)
     const {images} = useSelector(state => state.gallery)
+    const [isOpenModal, setOpenModal] = useState(false);
     const dispatch = useDispatch();
 
     //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
@@ -26,21 +36,33 @@ export const GalleryAdmin = () => {
         setIsViewerOpen(false);
     };
 
+    const handleClickOpenNews = useCallback((menuData) => {
+        setOpenModal(true);
+        setModalState(menuData)
+    }, [])
+
+    const handleClickCloseModal = useCallback(() => {
+        setOpenModal(false);
+        setModalState(initialModalState)
+    }, [])
+
+
     return (
         <section className={styles.container}>
             <h1 className={styles.title}>Галерея</h1>
             <div className={styles.cardContainer}>
-                {images.map(i => (
-                    <img
-                        className={styles.img}
-                        src={i.src}
-                        onClick={() => openImageViewer(i.id)}
-                        width="300"
-                        height="200"
-                        key={i.id}
-                        style={{margin: '50px'}}
-                        alt=""
-                    />
+                {images.map((element, index) => (
+                    <div  key={element.id} className={styles.closeContainer}>
+                        <img
+                            className={styles.img}
+                            src={element.src}
+                            onClick={() => openImageViewer(index)}
+                            alt=""
+                        />
+                        <button onClick={() => {
+                            handleClickOpenNews(element)
+                        }} className={styles.close}>x</button>
+                    </div>
                 ))}
                 {isViewerOpen && (
                     <ImageViewer
@@ -52,6 +74,9 @@ export const GalleryAdmin = () => {
                     />
                 )}
                 <AddCard/>
+                <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
+                    <DeleteModule delete={deleteItemGallery} id={modalState.id}  onClose={handleClickCloseModal}/>
+                </Module>
             </div>
         </section>
     )

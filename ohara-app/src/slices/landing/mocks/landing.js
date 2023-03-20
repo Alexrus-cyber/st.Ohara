@@ -18,21 +18,21 @@ export const landingList = {
                 title: "О чем то?",
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 img: food1,
-                left: 0
+                isLeftPosition: false
             },
             {
                 id: 2,
                 title: "О чем то?",
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 img: food2,
-                left: 1
+                isLeftPosition: true
             },
             {
                 id: 3,
                 title: "О чем то?",
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 img: food3,
-                left: 0
+                isLeftPosition: false
             }
         ]
     },
@@ -60,7 +60,7 @@ export const landingList = {
                 title: "Exklusive Atmosphäre",
                 text1: "Genießen Sie unser Ambiente und die exzellente Küche von Peter Hagen-Wiest – ausgezeichnet mit zwei Michelin-Sternen und 18 Gault-Millau Punkte sowie 2020 von der Zeitschrift Feinschmecker“ zum Restaurant des Jahres gewählt.",
                 text2: "Entspannung, Persönlichkeit, Spontaneität – das „Ammolite“ ist frei von elitärer Attitüde, man beherrscht das Handwerk, man pflegt die Konventionen und den Stil – und stellt sich selbst dabei nicht in den Vordergrund.",
-                left: 0
+                isLeftPosition: false
             },
             {
                 id: 2,
@@ -68,7 +68,7 @@ export const landingList = {
                 title: "Exklusive Atmosphäre",
                 text1: "Genießen Sie unser Ambiente und die exzellente Küche von Peter Hagen-Wiest – ausgezeichnet mit zwei Michelin-Sternen und 18 Gault-Millau Punkte sowie 2020 von der Zeitschrift Feinschmecker“ zum Restaurant des Jahres gewählt.",
                 text2: "Entspannung, Persönlichkeit, Spontaneität – das „Ammolite“ ist frei von elitärer Attitüde, man beherrscht das Handwerk, man pflegt die Konventionen und den Stil – und stellt sich selbst dabei nicht in den Vordergrund.",
-                left: 1
+                isLeftPosition: true
             }
         ]
     }
