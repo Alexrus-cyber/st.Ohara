@@ -4,8 +4,8 @@ import drinks3 from "../../../assets/Drinks3.jpg";
 import food1 from "../../../assets/Menu.jpg";
 
 export const mockListMenu = [
-    {id: 0 , src: drinks1},
-    {id: 1 , src: drinks2},
-    {id: 2 , src: drinks3},
-    {id: 3 , src: food1},
+    {id: 0 , img: drinks1},
+    {id: 1 , img: drinks2},
+    {id: 2 , img: drinks3},
+    {id: 3 , img: food1},
 ]

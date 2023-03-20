@@ -51,12 +51,12 @@ export const GalleryAdmin = () => {
         <section className={styles.container}>
             <h1 className={styles.title}>Галерея</h1>
             <div className={styles.cardContainer}>
-                {images.map(element => (
+                {images.map((element, index) => (
                     <div  key={element.id} className={styles.closeContainer}>
                         <img
                             className={styles.img}
                             src={element.src}
-                            onClick={() => openImageViewer(element.id)}
+                            onClick={() => openImageViewer(index)}
                             alt=""
                         />
                         <button onClick={() => {
