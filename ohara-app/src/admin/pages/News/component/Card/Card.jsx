@@ -10,6 +10,7 @@ export const Card = ({ handleClickItem, data,setModuleState }) => {
     const [isOpenModal, setOpenModal] = useState(false);
     
     const handleClickOpenNews = useCallback((newsData) => {
+
         setOpenModal(true);
     }, [])
 

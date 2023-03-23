@@ -19,7 +19,7 @@ export const ModuleCard = ({data,onClose, isAdd}) => {
                 <p className={style.text}>{data.text}</p>
                 <p className={style.text}>{data.text}</p>
                 <button onClick={() => setIsEdit(true)}>Редактирование</button>
-                <button onClick={data.onClose} className={style.save}>Сохранить</button>
+                <button onClick={onClose} className={style.save}>Сохранить</button>
             </div>
             <div className={style.imgContainer}>
                 <div style={{backgroundImage: `url("${data.img}")`}} className={style.imgChanger}>

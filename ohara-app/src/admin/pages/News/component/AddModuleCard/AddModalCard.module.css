@@ -11,7 +11,7 @@
     font-size: 32px;
     color: #7D4A7D;
     margin: 20px 0;
-    max-width: 400px;
+    max-width: 390px;
     width: 100%;
 }
 
@@ -122,6 +122,8 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        padding: 20px;
+        text-align: center;
     }
     .imgContainer{
         padding: 0;

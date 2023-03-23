@@ -1,6 +1,5 @@
 import {HeroAdmin} from "./sections/Hero/HeroAdmin";
 import {AboutAdmin} from "./sections/About/AboutAdmin";
-import {SliderAdmin} from "./sections/Slider/SliderAdmin";
 import {AtmosphereAdmin} from "./sections/Atmosphere/AtmosphereAdmin";
 import {MapAdmin} from "./sections/Map/MapAdmin";
 import {LayingAdmin} from "./sections/Map/Components/Laying/LayingAdmin";
@@ -12,7 +11,7 @@ import styles from './LandingAdmin.module.css'
 
 export const LandingAdmin = () => {
     const {loading} = useSelector(state => state.landing)
-    const {hero,about,atmosphere,slider} = useSelector(state => state.landing.landingList)
+    const {hero,about,atmosphere} = useSelector(state => state.landing.landingList)
     const dispatch = useDispatch();
 
     useEffect(() => {

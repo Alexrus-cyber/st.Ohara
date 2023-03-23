@@ -32,11 +32,11 @@ export const Menu = () => {
             <div className={styles.container}>
                 <h1 className={styles.title}>Меню</h1>
                 <div className={styles.gallery}>
-                    {images.map( i => (
+                    {images.map( (i,index) => (
                         <img
                             className={styles.img}
-                            src={i.src}
-                            onClick={() => openImageViewer(i.id)}
+                            src={i.img}
+                            onClick={() => openImageViewer(index)}
                             width="300"
                             key={i.id}
                             alt=""
@@ -44,7 +44,7 @@ export const Menu = () => {
                     ))}
                     {isViewerOpen && (
                         <ImageViewer
-                            src={images.map(e => e.src)}
+                            src={images.map(e => e.img)}
                             currentIndex={currentImage}
                             disableScroll={true}
                             closeOnClickOutside={true}
