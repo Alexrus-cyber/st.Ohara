@@ -5,12 +5,14 @@ import newsReducer from '../slices/news'
 import landingReducer from "../slices/landing"
 import {persistReducer} from "redux-persist"
 import storage from 'redux-persist/lib/storage';
+import {reducer as formReducer} from "redux-form";
 
 const rootReducer = combineReducers({
     menu: menuReducer,
     landing: landingReducer,
     gallery: galleryReducer,
-    news: newsReducer
+    news: newsReducer,
+    form: formReducer
 })
 
 const persistConfig = {

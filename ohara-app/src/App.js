@@ -15,6 +15,8 @@ import {MenuAdmin} from "./admin/pages/Menu/MenuAdmin";
 import {ReservationAdmin} from "./admin/pages/Reservation/ReservationAdmin";
 import {GalleryAdmin} from "./admin/pages/Gallery/GalleryAdmin";
 import {LandingAdmin} from "./admin/pages/LandingAdmin/LandingAdmin";
+import {Auth} from "./admin/pages/Auth/Auth";
+import {Registration} from "./admin/pages/Registation/Registration";
 
 function App() {
     const admin = true;
@@ -32,6 +34,8 @@ function App() {
                             <Route path={'/menuAdmin'} element={<MenuAdmin/>}/>
                             <Route path={'/landingAdmin'} element={<LandingAdmin/>}/>
                             <Route path={'/reservationAdmin'} element={<ReservationAdmin/>}/>
+                            <Route path={'/login'} element={<Auth/>}/>
+                            <Route path={'/registration'} element={<Registration/>}/>
                         </Routes>
                     </div>
                     :
