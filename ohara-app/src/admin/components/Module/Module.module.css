@@ -47,6 +47,7 @@
     background-color: white;
     z-index: 10000;
     position: relative;
+    box-sizing: border-box;
 }
 
 .close{
@@ -60,9 +61,16 @@
     max-width: 30px;
     max-height: 30px;
     width: 100%;
-    height: 100%;
+    height: 30px;
     cursor: pointer;
 }
+.titleContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+}
+
 
 @media (max-width: 1400px) {
     .module{
@@ -109,13 +117,14 @@
     .moduleContentActive{
         overflow: hidden;
         transition: 0.4s all;
-        transform: scale(0.9);
+        transform: scale(1);
         padding: 20px;
         border-radius: 12px;
         background-color: white;
     }
 
 }
+
 @media (max-height: 880px) {
     .moduleContentActive{
         height: 100%;
@@ -134,9 +143,14 @@
         transform: scale(1);
         padding: 20px;
         width: 100%;
+        border-radius: 0;
     }
+
     .close{
         top:5%;
+    }
+    .title{
+        font-size: 24px;
     }
 }
 
