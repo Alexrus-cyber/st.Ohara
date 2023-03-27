@@ -3,7 +3,7 @@ import {useEffect, useMemo, useState} from "react";
 import {addNew} from "../../../../../slices/news";
 import {useDispatch} from "react-redux";
 
-export const AddModalCard = ({onClose, data, isEdit}) => {
+export const AddModalCard = ({onClose, data, isEdit, setIsEdit}) => {
     const [text, setText] = useState("");
     const [title, setTitle] = useState("");
     const dispatch = useDispatch()
@@ -47,6 +47,7 @@ export const AddModalCard = ({onClose, data, isEdit}) => {
                     <div className={styles.buttonContainer}>
                         <button onClick={() => {
                             onClose()
+                            setIsEdit(false)
                         }} className={styles.save}>Сохранить
                         </button>
                         <button className={styles.save}>Удалить</button>
@@ -54,7 +55,7 @@ export const AddModalCard = ({onClose, data, isEdit}) => {
                 </div>
             )
         }
-    }, [isEdit, title, text, data, onClose])
+    }, [isEdit, title, text, data.img, onClose, setIsEdit])
 
 
     const addNewsCard = useMemo(() => {
@@ -87,6 +88,7 @@ export const AddModalCard = ({onClose, data, isEdit}) => {
 
                             dispatch(addNew(news))
                             onClose()
+                            setIsEdit(false)
                             setTitle("");
                             setText("")
                         }} className={styles.save}>Сохранить
@@ -96,7 +98,7 @@ export const AddModalCard = ({onClose, data, isEdit}) => {
             )
         }
 
-    }, [data.img, dispatch, isEdit, onClose, text, title])
+    }, [data.img, dispatch, isEdit, onClose, setIsEdit, text, title])
     return (
         <>
             {editCard}
