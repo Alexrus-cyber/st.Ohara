@@ -50,8 +50,6 @@
 }
 
 .close{
-    position: absolute;
-    right: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,7 +62,6 @@
     width: 100%;
     height: 100%;
     cursor: pointer;
-    top:2%;
 }
 
 @media (max-width: 1400px) {
@@ -139,5 +136,12 @@
     }
     .close{
         top:5%;
+    }
+}
+
+@media (max-height: 880px) and (min-width: 1024px){
+    .moduleContentActive{
+        height: 60%;
+        transform: scale(0.9);
     }
 }
