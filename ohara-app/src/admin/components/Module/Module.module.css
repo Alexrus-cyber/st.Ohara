@@ -127,12 +127,13 @@
         top:5%;
     }
 }
-@media (max-width: 420px) {
+@media (max-width: 620px) {
     .moduleContentActive{
         height: 100%;
         overflow: auto;
         transform: scale(1);
         padding: 20px;
+        width: 100%;
     }
     .close{
         top:5%;
