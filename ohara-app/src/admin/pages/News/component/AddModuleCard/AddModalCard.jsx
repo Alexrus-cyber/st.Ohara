@@ -31,8 +31,15 @@ export const AddModalCard = ({onClose, data, isEdit, setIsEdit}) => {
                 <div className={styles.container}>
                     <div className={styles.two}>
                         <div className={styles.textContainer}>
-                            <input placeholder={"Заголовок"} className={styles.title} value={title} onChange={titleChange}></input>
-                            <textarea placeholder={"Текст"}  className={styles.text} value={text} onChange={onChanged}></textarea>
+                            <label className={styles.containerInput}>
+                                <p className={styles.titleInput}>Заголовок</p>
+                                <input placeholder={"Заголовок"} className={styles.title} value={title} onChange={titleChange}></input>
+                            </label>
+                            <label className={styles.containerInput}>
+                                <p className={styles.titleText}>Текст</p>
+                                <textarea placeholder={"Текст"}  className={styles.text} value={text} onChange={onChanged}></textarea>
+                            </label>
+
                         </div>
                         <div className={styles.imgContainer}>
                             <div style={{backgroundImage: `url("${data.img}")`}} className={styles.imgChanger}>

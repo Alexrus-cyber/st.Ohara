@@ -11,7 +11,7 @@
 .title{
     font-size: 20px;
     margin: 20px 0;
-    max-width: 390px;
+    max-width: 401px;
     width: 100%;
     border-radius: 5px;
     outline: none;
@@ -129,6 +129,33 @@
     justify-content: space-between;
 }
 
+
+.containerInput{
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+
+}
+.containerInput:hover{
+    color: cornflowerblue;
+}
+.containerInput:hover .titleText{
+    color: cornflowerblue;
+}
+.containerInput:hover .titleInput{
+    color: cornflowerblue;
+}
+.titleInput{
+    position: absolute;
+    font-size: 14px;
+    color: #1C675A;
+}
+.titleText{
+    position: absolute;
+    font-size: 14px;
+    top: 9%;
+    color: #1C675A;
+}
 @media screen and (max-width: 800px) {
     .container{
         flex-direction: column;
@@ -157,5 +184,8 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    .titleText{
+        top: -8%;
     }
 }

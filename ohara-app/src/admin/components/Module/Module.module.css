@@ -31,7 +31,7 @@
 }
 
 .moduleContent {
-    padding: 96px;
+    padding: 46px;
     border-radius: 12px;
     background-color: white;
     transform: scale(0.5);
@@ -42,7 +42,7 @@
 .moduleContentActive{
     transition: 0.4s all;
     transform: scale(1);
-    padding: 61px 96px;
+    padding: 20px 40px;
     border-radius: 12px;
     background-color: white;
     z-index: 10000;
