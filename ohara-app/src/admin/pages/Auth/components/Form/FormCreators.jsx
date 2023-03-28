@@ -15,14 +15,9 @@ export const InputLogin = ({input, meta: {error, warning, touched}, ...props}) =
     )
 }
 
-export function FieldCreator(name,
-                             placeholder,
-                             validators,
-                             component,
-                             className,
-                             type) {
+export function FieldCreator(keyId, name, placeholder, validators, component, className, type) {
     return (
-        <div className={className ? className : ""}>
+        <div key={keyId} className={className ? className : ""}>
             <Field name={name} placeholder={placeholder} validate={validators} component={component} type={type}/>
         </div>
     )

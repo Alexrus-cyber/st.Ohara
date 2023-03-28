@@ -1,21 +1,21 @@
 import styles from './Auth.module.css'
-import {FieldCreator, InputLogin} from "./components/Form/FormCreators";
+import {FieldCreator} from "./components/Form/FormCreators";
 import {Field, reduxForm} from "redux-form";
-import {maxLength, Required} from "./components/Validators/Validators";
+import {inputs} from "./components/Constant";
+import {ButtonUI} from "../components/ButtonUI/ButtonUI";
 
-const maxLength12 = maxLength(20)
-const maxLength16 = maxLength(20)
 
 const LoginForm = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
-            {FieldCreator('Email', 'Email', [Required, maxLength16], InputLogin, styles.title)}
-            {FieldCreator('Password', 'Password', [Required, maxLength12], InputLogin, styles.title, "password")}
+            {inputs.map(e =>
+                FieldCreator(e.id,e.name, e.placeholder, e.validators, e.typeButton, e.style , e.type)
+            )}
             <div className={styles.title}>
                 <Field name={'rememberMe'} component={"input"} type={"checkbox"}/> запомнить вход
             </div>
             <div className={styles.title}>
-                <button className={styles.button}>Авторизоваться</button>
+                <ButtonUI name={"Авторизоваться"}/>
             </div>
         </form>
     )
