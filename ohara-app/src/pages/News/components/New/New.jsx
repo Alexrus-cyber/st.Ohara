@@ -17,7 +17,7 @@ export const New = () => {
                     <p className={styles.text}>{oneNew.text}</p>
                 </div>
                 <div className={styles.rightContainer}>
-                    <img className={styles.img} src={oneNew.src} alt={"xxx"}/>
+                    <img className={styles.img} src={oneNew.img} alt={"xxx"}/>
                 </div>
             </div>
         </section>

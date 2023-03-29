@@ -1,11 +1,11 @@
 import styles from './AddModalCard.module.css'
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {addNew} from "../../../../../slices/news";
 import {useDispatch} from "react-redux";
 
-export const AddModalCard = (props) => {
-    const [text, setText] = useState(props.isEdit ? props.data.text : "");
-    const [title, setTitle] = useState(props.isEdit ? props.data.title : "");
+export const AddModalCard = ({onClose, data, isEdit, setIsEdit}) => {
+    const [text, setText] = useState("");
+    const [title, setTitle] = useState("");
     const dispatch = useDispatch()
 
     const titleChange = (e) => {
@@ -19,43 +19,72 @@ export const AddModalCard = (props) => {
 
         }
     }
+    useEffect(() => {
+        setTitle(data.title)
+        setText(data.text)
+    }, [data.title, data.text]);
+
 
     const editCard = useMemo(() => {
-        if (props.isEdit) {
+        if (isEdit) {
             return (
                 <div className={styles.container}>
-                    <div className={styles.textContainer}>
-                        <h1 className={styles.subtitle}>Изменения новости</h1>
-                        <input className={styles.title} value={title} onChange={titleChange}></input>
-                        <textarea className={styles.text} value={text} onChange={onChanged}></textarea>
+                    <div className={styles.two}>
+                        <div className={styles.textContainer}>
+                            <label className={styles.containerInput}>
+                                <p className={styles.titleInput}>Заголовок</p>
+                                <input placeholder={"Заголовок"} className={styles.title} value={title} onChange={titleChange}></input>
+                            </label>
+                            <label className={styles.containerInput}>
+                                <p className={styles.titleText}>Текст</p>
+                                <textarea placeholder={"Текст"}  className={styles.text} value={text} onChange={onChanged}></textarea>
+                            </label>
+
+                        </div>
+                        <div className={styles.imgContainer}>
+                            <div style={{backgroundImage: `url("${data.img}")`}} className={styles.imgChanger}>
+                                <label className={styles.label}>
+                                    <input type={"file"} className={styles.input} onChange={PhotoSelected}></input>
+                                    <span className={styles.imageEdit}>Загрузить</span>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className={styles.buttonContainer}>
                         <button onClick={() => {
-                            props.onClose()
+                            onClose()
+                            setIsEdit(false)
                         }} className={styles.save}>Сохранить
                         </button>
-                    </div>
-                    <div className={styles.imgContainer}>
-                        <div style={{backgroundImage: `url("${props.data.img}")`}} className={styles.imgChanger}>
-                            <label className={styles.label}>
-                                <input type={"file"} className={styles.input} onChange={PhotoSelected}></input>
-                                <span className={styles.imageEdit}>Загрузить</span>
-                            </label>
-                        </div>
-                        {props.isEdit ? <button className={styles.delete}>Удалить</button> : ""}
+                        <button className={styles.save}>Удалить</button>
                     </div>
                 </div>
             )
         }
-    }, [props, title, text, dispatch])
+    }, [isEdit, title, text, data.img, onClose, setIsEdit])
 
 
     const addNewsCard = useMemo(() => {
-        if (!props.isEdit) {
+        if (!isEdit) {
             return (
                 <div className={styles.container}>
-                    <div className={styles.textContainer}>
-                        <h1 className={styles.subtitle}>Создание новости</h1>
-                        <input className={styles.title} value={title} onChange={titleChange}></input>
-                        <textarea className={styles.text} value={text} onChange={onChanged}></textarea>
+                    <div className={styles.two}>
+                        <div className={styles.textContainer}>
+                            <input placeholder={"Заголовок"} className={styles.title} value={title} onChange={titleChange}></input>
+                            <textarea placeholder={"Текст"}  className={styles.text} value={text} onChange={onChanged}></textarea>
+                        </div>
+                        <div className={styles.imgContainer}>
+                            <div style={{backgroundImage: `url("${data.img}")`}} className={styles.imgChanger}>
+                                <label className={styles.label}>
+                                    <input type={"file"} className={styles.input} onChange={PhotoSelected}></input>
+                                    <span className={styles.imageEdit}>Загрузить</span>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className={styles.buttonContainer}>
                         <button onClick={() => {
                             const news = {
                                 id: 10,
@@ -65,24 +94,18 @@ export const AddModalCard = (props) => {
                             }
 
                             dispatch(addNew(news))
-                            props.onClose()
+                            onClose()
+                            setIsEdit(false)
+                            setTitle("");
+                            setText("")
                         }} className={styles.save}>Сохранить
                         </button>
-                    </div>
-                    <div className={styles.imgContainer}>
-                        <div className={styles.imgChanger}>
-                            <label className={styles.label}>
-                                <input type={"file"} className={styles.input} onChange={PhotoSelected}></input>
-                                <span className={styles.imageEdit}>Загрузить</span>
-                            </label>
-                        </div>
-                        {props.isEdit ? <button className={styles.delete}>Удалить</button> : ""}
                     </div>
                 </div>
             )
         }
 
-    }, [props, text, title, dispatch])
+    }, [data.img, dispatch, isEdit, onClose, setIsEdit, text, title])
     return (
         <>
             {editCard}

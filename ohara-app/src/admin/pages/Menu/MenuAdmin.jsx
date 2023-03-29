@@ -7,6 +7,7 @@ import {deleteItemMenu, getMenuData} from "../../../slices/menu";
 import {Module} from "../../components/Module/Module";
 import {DeleteModule} from "../components/DeleteModule/DeleteModule";
 import {nanoid} from "@reduxjs/toolkit";
+import {Loader} from "../../../components/Loader/Loader";
 
 
 const initialModalState = {
@@ -18,7 +19,7 @@ export const MenuAdmin = () => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
     const [modalState, setModalState] = useState(initialModalState)
-    const {images} = useSelector(state => state.menu)
+    const {images, loading} = useSelector(state => state.menu)
     const [isOpenModal, setOpenModal] = useState(false);
     const dispatch = useDispatch();
 
@@ -45,8 +46,10 @@ export const MenuAdmin = () => {
         setCurrentImage(0);
         setIsViewerOpen(false);
     };
-    console.log(images);
     return (
+        loading
+            ? <Loader/>
+            :
         <section className={styles.container}>
             <h1 className={styles.title}>Меню</h1>
             <div className={styles.cardContainer}>

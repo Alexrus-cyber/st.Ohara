@@ -1,6 +1,6 @@
 .input{
-    max-width: 200px;
-    width: 200px;
+    max-width: 170px;
+    width: 100%;
     color: gray;
     border-right: gray;
     outline: none;
@@ -15,4 +15,16 @@
 .img{
     position: absolute;
     top: -5px;
+}
+
+
+@media screen and (max-width: 550px) {
+    .img{
+        width: 20px;
+        top: 0;
+    }
+    .input{
+        padding-left: 30px;
+        max-width: 170px
+    }
 }

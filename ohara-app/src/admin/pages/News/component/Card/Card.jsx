@@ -6,10 +6,11 @@ import {useCallback, useState} from "react";
 import {DeleteModule} from "../../../components/DeleteModule/DeleteModule";
 import {deleteNew} from "../../../../../slices/news";
 
-export const Card = ({ handleClickItem, data,setModuleState }) => {
+export const Card = ({ handleClickItem, data,setModuleState , setIsEdit}) => {
     const [isOpenModal, setOpenModal] = useState(false);
     
     const handleClickOpenNews = useCallback((newsData) => {
+
         setOpenModal(true);
     }, [])
 
@@ -36,6 +37,7 @@ export const Card = ({ handleClickItem, data,setModuleState }) => {
                 <button onClick={() => {
                     handleClickItem()
                     setModuleState(data)
+                    setIsEdit(true)
                 }} className={styles.button}>Посмотреть</button>
             </div>
             <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>

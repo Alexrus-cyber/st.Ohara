@@ -3,12 +3,11 @@ import {Card} from "./component/Card/Card";
 import {Search} from "../../components/Search/Search";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {Module} from "../../components/Module/Module";
-import {ModuleCard} from "./component/ModuleCard/ModuleCard";
 import {useDispatch, useSelector} from "react-redux";
 import {getNewsData} from "../../../slices/news";
 import {AddModalCard} from "./component/AddModuleCard/AddModalCard";
 import {nanoid} from "@reduxjs/toolkit";
-import {newsData} from "../../../slices/news/mocks/news";
+
 const initialModalState = {
     img: null,
     text: '',
@@ -20,6 +19,7 @@ export const NewsAdmin = () => {
     const [modalState, setModalState] = useState(initialModalState)
     const [isOpenModal, setOpenModal] = useState(false);
     const [isAdd, setIsAdd] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
 
     const {news} = useSelector(state => state.news)
     const dispatch = useDispatch()
@@ -38,17 +38,13 @@ export const NewsAdmin = () => {
         setOpenModal(false);
         setModalState(initialModalState)
     }, [])
-
     const getModalWindow = useMemo(() => {
         return (
-            <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
-                <ModuleCard key={modalState.id}
-                            isAdd={isAdd}
-                            data = {modalState}
-                            onClose={handleClickCloseModal}/>
+            <Module title = {isEdit ? "Изменение новости" : "Создание новости"} setIsEdit={setIsEdit} active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
+                {isOpenModal ?  <AddModalCard onClose={handleClickCloseModal} data = {modalState} isEdit={isEdit} setIsEdit={setIsEdit}/> : ""}
             </Module>
         )
-    }, [modalState, isOpenModal, setOpenModal, handleClickCloseModal, isAdd])
+    }, [handleClickCloseModal, isEdit, isOpenModal, modalState])
 
     return (
         <>
@@ -75,6 +71,7 @@ export const NewsAdmin = () => {
                                 data={value}
                                 handleClickItem={() => handleClickOpenNews(value)}
                                 setModuleState={setModalState}
+                                setIsEdit={setIsEdit}
                             />
                         )
                     })}

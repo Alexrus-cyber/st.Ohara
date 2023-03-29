@@ -20,14 +20,14 @@
     justify-content: space-between;
     max-width: 1000px;
     align-items: center;
-    width: 100%;
-    padding-top: 40px;
+    width: 90%;
 }
 .inputContainer{
     display: flex;
     max-width: 1000px;
-    width: 100%;
+    width: 90%;
     padding-top: 50px;
+
 }
 
 .date{
@@ -68,11 +68,15 @@
     background-color: #563356;
 }
 
+
 @media screen and (max-width: 550px) {
     .middle{
         flex-direction: column;
     }
     .title{
         font-size: 32px;
+    }
+    .inputContainer{
+        justify-content: center;
     }
 }

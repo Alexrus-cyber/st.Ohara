@@ -40,18 +40,14 @@
     top: 5px;
     font-size: 23px;
     background-color: transparent;
-    border: 2px solid transparent;
     display: flex;
     justify-content: center;
     align-content: center;
     cursor: pointer;
     transition-duration: 0.5s;
-    border-radius: 50%;
-
+    border: none;
 }
 .close:hover{
-    border: 2px solid red;
-    border-radius: 50%;
     color: red;
 }
 

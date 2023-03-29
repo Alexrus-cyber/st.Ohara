@@ -32,18 +32,18 @@ export const Gallery = () => {
                 <div className={styles.container}>
                     <h1 className={styles.title}>Наши фотографии</h1>
                     <div className={styles.content}>
-                        {images.map( i => (
+                        {images.map( (i, index) => (
                             <img
                                 className={styles.img}
-                                src={i.src}
-                                onClick={() => openImageViewer(i.id)}
+                                src={i.img}
+                                onClick={() => openImageViewer(index)}
                                 key={i.id}
                                 alt=""
                             />
                         ))}
                         {isViewerOpen && (
                             <ImageViewer
-                                src={images.map(e => e.src)}
+                                src={images.map(e => e.img)}
                                 currentIndex={currentImage}
                                 disableScroll={true}
                                 closeOnClickOutside={true}
