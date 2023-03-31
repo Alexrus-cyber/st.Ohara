@@ -4,6 +4,8 @@ import styles from "../../Auth.module.css";
 
 export const maxLength12 = maxLength(20)
 export const maxLength16 = maxLength(25)
+export const maxLength100 = maxLength(100)
+
 export const inputs = [
     {
         id:1,

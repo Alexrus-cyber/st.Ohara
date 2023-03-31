@@ -18,21 +18,24 @@ export const landingList = {
                 title: "О чем то?",
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 img: food1,
-                isLeftPosition: false
+                isLeftPosition: false,
+                name: "item1"
             },
             {
                 id: 2,
                 title: "О чем то?",
-                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                text: "Соображения высшего порядка, а также дальнейшее развитие различных форм деятельности способствует повышению актуальности соответствующих условий активизации. ",
                 img: food2,
-                isLeftPosition: true
+                isLeftPosition: true,
+                name: "item2"
             },
             {
                 id: 3,
                 title: "О чем то?",
-                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                text: "Vasya himself can’t still decide on his future profession. At first he was going to enter the university and become a lawyer, a doctor or an economist but suddenly changed his mind. Now he’s thinking about college.",
                 img: food3,
-                isLeftPosition: false
+                isLeftPosition: false,
+                name: "item3"
             }
         ]
     },
@@ -53,7 +56,7 @@ export const landingList = {
         ]
     },
     atmosphere: {
-        ContentArr: [
+        content: [
             {
                 id: 1,
                 img: barman,
