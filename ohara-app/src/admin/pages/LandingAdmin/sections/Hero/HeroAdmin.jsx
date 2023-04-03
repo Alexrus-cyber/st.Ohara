@@ -1,6 +1,6 @@
 import styles from "./Hero.module.css"
 import arrows from "../../../../../assets/down-arrow 1.png"
-import {FieldCreator, InputTitles, TextAreaForm} from "../../../Auth/components/Form/FormCreators";
+import {FieldCreator, InputTitles} from "../../../Auth/components/Form/FormCreators";
 import {Required} from "../../../Auth/components/Validators/Validators";
 import {maxLength100} from "../../../Auth/components/Constant";
 

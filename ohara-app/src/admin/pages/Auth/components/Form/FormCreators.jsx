@@ -1,5 +1,6 @@
 import styles from './FormCreators.module.css'
 import {Field} from "redux-form";
+import {Component} from "react";
 
 
 
@@ -43,6 +44,28 @@ export const InputTitles = ({input, meta: {error, warning, touched}, ...props}) 
                     (warning && <span className={styles.warning}>{warning}</span>))} </div>
         </div>
     )
+}
+
+export class FileInput extends Component {
+    onChange = e => {
+        e.preventDefault();
+        const { input: { onChange } } = this.props;
+        onChange(e.target.files[0]);
+    };
+
+    render() {
+
+        let {meta: {touched, error}, input: {value}, ...props} = this.props; // достаем value из props.input
+
+        return (
+            <>
+                <input onChange={this.onChange} placeholder={"Заголовок"}  {...this.input} {...this.props}></input>
+                <div>{touched &&
+                    (error && <span className={styles.error}>{error}</span>)
+                        } </div>
+            </>
+        )
+    }
 }
 
 export function FieldCreator(keyId, name, placeholder, validators, component, className, type) {
