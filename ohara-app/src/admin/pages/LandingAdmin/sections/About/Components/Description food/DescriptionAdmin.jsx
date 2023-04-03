@@ -3,17 +3,17 @@ import {Field} from "redux-form";
 import {FileInput, InputTitles, TextAreaForm} from "../../../../../Auth/components/Form/FormCreators";
 
 export const DescriptionAdmin = ({img, isLeftPosition, index}) => {
-    const onChange = e => {
+  /*  const onChange = e => {
         e.preventDefault();
         const { input: { onChange } } = this.props;
         onChange(e.target.files[0]);
-    };
+    };*/
     return (
         <>{
             isLeftPosition ? <div className={styles.itemContainer}>
                 <img className={styles.imgRes} src={img} alt="food"/>
                     <Field
-                        name={`photo`}
+                        name={`about.items.${index}.img`}
                         type={'file'}
                         label={'Upload your photo'}
                         component={FileInput}
@@ -38,7 +38,6 @@ export const DescriptionAdmin = ({img, isLeftPosition, index}) => {
                     type={'file'}
                     label={'Upload your photo'}
                     component={FileInput}
-                    onChange={onChange}
                 />
                 <div className={styles.textContainer}>
                     <Field
