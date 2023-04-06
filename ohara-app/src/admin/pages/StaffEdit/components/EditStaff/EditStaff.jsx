@@ -9,7 +9,7 @@ export const EditStaff = ({user}) => {
         console.log(formData);
     }
     return (
-        <div>
+        <div className={styles.color}>
             <h1>Админ №{user.id}</h1>
             <RegisterReduxForm initialValues={user} onSubmit={onSubmit}/>
         </div>

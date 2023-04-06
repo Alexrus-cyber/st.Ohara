@@ -1,5 +1,5 @@
 import styles from './Navbar.module.css';
-import admin from '../../../../assets/admin.png'
+import admin from '../../../../assets/logo.png'
 import {NavLink} from "react-router-dom";
 import {AppBar, Drawer, IconButton, Toolbar, Typography, useTheme} from "@mui/material";
 import {useState} from "react";

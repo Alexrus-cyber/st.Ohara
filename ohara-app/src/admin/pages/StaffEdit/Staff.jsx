@@ -16,6 +16,7 @@ export const Staff = () => {
         <div className={styles.container}>
             <div className={styles.squareContainer}>
                 <div className={styles.square}>
+                    <h1 className={styles.title}>Работники</h1>
                     <div className={styles.search}>
                         <Search/>
                     </div>
@@ -24,7 +25,7 @@ export const Staff = () => {
                             <ItemStaff data={element} email={element.email} firstName={element.firstName} secondName={element.secondName} id={element.id} key={element.id}/>)}
                     </div>
                     <NavLink to={"/registration"} style={{margin:20}}>
-                        <button>Создать</button>
+                        <button className={styles.button}>Создать</button>
                     </NavLink>
                 </div>
             </div>

@@ -27,14 +27,16 @@ export const ItemStaff = ({data}) => {
 
     return (
         <div className={styles.listItem}>
-            <p className={styles.padding}>Имя: {data.firstName} {data.secondName.substring(0, 1).toUpperCase()}.</p>
-            <p className={styles.padding}>Email: {data.email}</p>
+            <p className={styles.padding}>ФИО: {data.firstName} {data.secondName.substring(0, 1).toUpperCase()}.</p>
+            <p className={styles.padding}>Почта: {data.email}</p>
+            <div className={styles.icons}>
                 <IconButton onClick={() => {setOpenModal(true)}}>
                     <ModeEdit  style={{color: "#1C675A"}}/>
                 </IconButton>
-            <IconButton>
-                <Close style={{color: "red"}}/>
-            </IconButton>
+                <IconButton>
+                    <Close style={{color: "red"}}/>
+                </IconButton>
+            </div>
             {getModalWindow}
         </div>
 

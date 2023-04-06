@@ -28,14 +28,14 @@ export const inputsRegister = [
     {
         id:1,
         name: 'email',
-        placeholder: 'email',
+        placeholder: 'Почта',
         validators: [Required, maxLength16],
         typeButton: InputLogin,
     },
     {
         id:2,
         name: 'password',
-        placeholder: 'password',
+        placeholder: 'Пароль',
         validators: [Required, maxLength12],
         typeButton: InputLogin,
         type: "password"
