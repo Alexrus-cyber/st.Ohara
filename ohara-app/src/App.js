@@ -17,6 +17,8 @@ import {GalleryAdmin} from "./admin/pages/Gallery/GalleryAdmin";
 import {LandingAdmin} from "./admin/pages/LandingAdmin/LandingAdmin";
 import {Auth} from "./admin/pages/Auth/Auth";
 import {Registration} from "./admin/pages/Registation/Registration";
+import {Staff} from "./admin/pages/StaffEdit/Staff";
+import {EditStaff} from "./admin/pages/StaffEdit/components/EditStaff/EditStaff";
 
 function App() {
     const admin = true;
@@ -36,6 +38,8 @@ function App() {
                             <Route path={'/reservationAdmin'} element={<ReservationAdmin/>}/>
                             <Route path={'/login'} element={<Auth/>}/>
                             <Route path={'/registration'} element={<Registration/>}/>
+                            <Route path={'/staff'} element={<Staff/>}/>
+                            <Route path={'/editStaff'} element={<EditStaff/>}/>
                         </Routes>
                     </div>
                     :

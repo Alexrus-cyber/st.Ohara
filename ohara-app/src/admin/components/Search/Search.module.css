@@ -2,11 +2,12 @@
     max-width: 170px;
     width: 100%;
     color: gray;
-    border-right: gray;
+    border: none;
     outline: none;
     background: transparent;
     font-size: 20px;
     padding-left: 30px;
+    border-bottom: 2px solid gray;
 }
 .search{
     position: relative;

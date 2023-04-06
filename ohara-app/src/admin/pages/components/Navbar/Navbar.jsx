@@ -15,6 +15,7 @@ export const Navbar = () => {
         {id: 2, src: "/newsAdmin", text: "Новости"},
         {id: 3, src: "/galleryAdmin", text: "Галерея"},
         {id: 4, src: "/reservationAdmin", text: "Бронирование"},
+        {id: 6, src: "/staff", text: "Работники"},
     ]
     const theme = useTheme();
     const [open, setOpen] = useState(false);
