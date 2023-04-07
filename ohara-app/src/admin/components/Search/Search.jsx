@@ -5,7 +5,7 @@ export const Search = () => {
     return (
         <div className={styles.search}>
             <img className={styles.img} src={lope} alt={"lope"}/>
-            <input className={styles.input}/>
+            <input placeholder={"Поиск"} className={styles.input}/>
         </div>
     )
 }

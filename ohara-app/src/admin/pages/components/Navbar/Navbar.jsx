@@ -1,5 +1,5 @@
 import styles from './Navbar.module.css';
-import admin from '../../../../assets/admin.png'
+import admin from '../../../../assets/logo.png'
 import {NavLink} from "react-router-dom";
 import {AppBar, Drawer, IconButton, Toolbar, Typography, useTheme} from "@mui/material";
 import {useState} from "react";
@@ -15,6 +15,7 @@ export const Navbar = () => {
         {id: 2, src: "/newsAdmin", text: "Новости"},
         {id: 3, src: "/galleryAdmin", text: "Галерея"},
         {id: 4, src: "/reservationAdmin", text: "Бронирование"},
+        {id: 6, src: "/staff", text: "Работники"},
     ]
     const theme = useTheme();
     const [open, setOpen] = useState(false);
