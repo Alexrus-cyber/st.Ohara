@@ -1,48 +1,44 @@
 import styles from "../../Atmosphere.module.css";
+import {InputTitles, TextAreaForm} from "../../../../../Auth/components/Form/FormCreators";
+import {Field} from "redux-form";
 
-export const ContentAdmin = (props) => {
+export const ContentAdmin = ({img, title, text1, index, isLeftPosition}) => {
     return (
         <>
-            {!props.isLeftPosition ?
+            {!isLeftPosition ?
                 <div className={styles.itemContainer}>
-                    <img className={styles.imgRes} src={props.img} alt={"barman"}/>
+                    <img className={styles.imgRes} src={img} alt={"barman"}/>
                     <div className={styles.backContainer}>
-                        <img className={styles.img} src={props.img} alt={"barman"}/>
+                        <img className={styles.img} src={img} alt={"barman"}/>
                         <div className={styles.back}></div>
                     </div>
                     <div className={styles.textContainer}>
-                        <h5 className={styles.title}>
-                            {props.title}
-                        </h5>
-                        <p className={styles.text}>
-                            {props.text1}
-                        </p>
-                        <p className={styles.text}>
-                            {props.text2}
-                        </p>
+                        <Field
+                            name={`atmosphere.content.${index}.title`}
+                            component={InputTitles}
+                        />
+                        <Field
+                            name={`atmosphere.content.${index}.text1`}
+                            component={TextAreaForm}
+                        />
                     </div>
                 </div>
                 :
                 <div className={styles.itemContainer}>
-                    <img className={styles.img1} src={props.img} alt={"barman"}/>
+                    <img className={styles.img1} src={img} alt={"barman"}/>
                     <div className={styles.textContainer}>
-                        <h5 className={styles.title}>
-                            {props.title}
-                        </h5>
-                        <p className={styles.text}>
-                            {props.text1}
-                        </p>
-                        <p className={styles.text}>
-                            {props.text2}
-                        </p>
-                        <div className={styles.buttonContainer}>
-                            <div className={styles.backButton}></div>
-                            <button className={styles.button}>Меню</button>
-                        </div>
+                        <Field
+                            name={`atmosphere.content.${index}.title`}
+                            component={InputTitles}
+                        />
+                        <Field
+                            name={`atmosphere.content.${index}.text1`}
+                            component={TextAreaForm}
+                        />
                     </div>
                     <div className={styles.backContainer}>
-                        <img className={styles.img2} src={props.img} alt={"barman"}/>
-                        <div className={props.left === 0 ? styles.back : styles.backRevert}></div>
+                        <img className={styles.img2} src={img} alt={"barman"}/>
+                        <div className={isLeftPosition === 0 ? styles.back : styles.backRevert}></div>
                     </div>
                 </div>
             }

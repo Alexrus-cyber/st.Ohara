@@ -42,7 +42,19 @@
     justify-content: center;
     position: relative;
 }
-
+.input{
+    padding: 10px 0;
+    max-width: 405px;
+    width: 100%;
+    max-height: 20vh;
+    height: 20vh;
+    resize: none;
+    border-radius: 12px;
+    border: 1px solid #1C675A;
+    text-align: center;
+    font-size: 36px;
+    overflow: hidden;
+}
 @keyframes arrow {
     0% {
         top:0;

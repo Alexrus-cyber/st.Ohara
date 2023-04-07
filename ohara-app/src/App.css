@@ -44,3 +44,14 @@ p{
   padding: 0;
   margin: 0;
 }
+body::-webkit-scrollbar{
+  width: 10px;
+}
+body::-webkit-scrollbar-track {
+  background-color: #282c34;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #367272;
+}

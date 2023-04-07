@@ -1,36 +1,74 @@
 .error {
     color: crimson;
-    font-size: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
+
 .warning {
     color: yellow;
 }
-.textArea{
-    width: 730px;
-    height: 50px;
+.containerError{
+    max-height: 40px;
+    height: 100%;
+}
+.textArea {
+    padding: 10px 0;
+    font-size: 24px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 20vh;
+    height: 20vh;
     resize: none;
+    border-radius: 12px;
+    border: 1px solid #1C675A;
     outline: none;
 }
 
-.textAreaError{
-    width: 730px;
-    height: 50px;
+.textAreaError {
+    padding: 10px 0;
+    font-size: 20px;
+    max-width: 405px;
+    width: 100%;
+    max-height: 20vh;
+    height: 20vh;
     resize: none;
-    border: 2px solid crimson;
+    border-radius: 12px;
     outline: none;
+    border: 2px solid crimson;
 }
-.textAreaCont{
+
+.textAreaCont {
     display: flex;
-    justify-content:flex-start;
+    justify-content: flex-start;
     align-items: center;
 }
+
 .text {
-    display: inline-block;
-    height: 40px;
+    padding: 10px;
+}
+.containerInput{
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+
+}
+.containerInput:hover{
+    color: cornflowerblue;
+}
+.containerInput:hover .titleText{
+    color: cornflowerblue;
+}
+.containerInput:hover .titleInput{
+    color: cornflowerblue;
+}
+.titleText{
+    font-size: 36px;
 }
 
-
-.input{
+.input {
     background-size: 20px;
     border-radius: 15px;
     border: 1px solid gray;
@@ -40,6 +78,7 @@
     outline: none;
     padding: 0 0 0 10px;
 }
+
 .inputError {
     border-radius: 15px;
     border: 1px solid gray;
@@ -49,9 +88,64 @@
     outline: none;
     padding: 0 0 0 10px;
 }
+
 .flex {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 
+}
+.textArea::-webkit-scrollbar{
+    width: 10px;
+}
+.textArea::-webkit-scrollbar-track {
+    background-color:#edeadf;
+}
+
+.textArea::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #367272;
+}
+.textAreaError::-webkit-scrollbar{
+    width: 10px;
+}
+.textAreaError::-webkit-scrollbar-track {
+    background-color:#edeadf;
+}
+
+.textAreaError::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #367272;
+}
+
+.inputTitle{
+    font-size: 20px;
+    margin: 20px 0;
+    max-width: 475px;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #1C675A;
+    height: 6vh;
+}
+
+.inputTitleEr{
+    font-size: 20px;
+    margin: 20px 0;
+    max-width: 475px;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid crimson;
+}
+
+@media screen and (max-width: 520px) {
+    .textArea{
+        max-height: 40vh;
+        height: 40vh;
+        max-width: 405px;
+    }
+    .inputTitle{
+        max-width: 405px;
+    }
 }

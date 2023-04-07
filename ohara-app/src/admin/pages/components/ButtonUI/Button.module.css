@@ -5,6 +5,8 @@
     color: white;
     border: none;
     cursor: pointer;
+    max-width: 120px;
+    width: 100%;
 }
 
 .button:hover {
