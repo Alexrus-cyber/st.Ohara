@@ -53,6 +53,7 @@ export const MenuAdmin = () => {
         <section className={styles.container}>
             <h1 className={styles.title}>Меню</h1>
             <div className={styles.cardContainer}>
+                    <AddCard />
                     {images.map((element, index) => (
                         <div  key={element.id} className={styles.closeContainer}>
                             <img
@@ -75,7 +76,6 @@ export const MenuAdmin = () => {
                             onClose={closeImageViewer}
                         />
                     )}
-                <AddCard />
                 <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
                    <DeleteModule delete={deleteItemMenu} id={modalState.id}  onClose={handleClickCloseModal}/>
                 </Module>

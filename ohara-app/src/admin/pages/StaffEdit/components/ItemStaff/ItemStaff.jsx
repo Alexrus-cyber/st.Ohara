@@ -3,11 +3,11 @@ import ModeEdit from "@mui/icons-material/ModeEdit";
 import {IconButton} from "@mui/material";
 import Close from "@mui/icons-material/Close";
 import {EditStaff} from "../EditStaff/EditStaff";
-import {useCallback, useMemo, useState} from "react";
+import {memo, useCallback, useMemo, useState} from "react";
 import {Module} from "../../../../components/Module/Module";
 
 
-export const ItemStaff = ({data}) => {
+export const ItemStaff = memo(({data}) => {
     const [isOpenModal, setOpenModal] = useState(false);
 
     const handleClickCloseModal = useCallback(() => {
@@ -38,4 +38,4 @@ export const ItemStaff = ({data}) => {
         </div>
 
     )
-}
+})

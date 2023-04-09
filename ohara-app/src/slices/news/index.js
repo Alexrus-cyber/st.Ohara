@@ -50,18 +50,6 @@ export const addNew = createAsyncThunk(
         }
     }
 )
-
-export const filterNews = createAsyncThunk(
-    'filterNews',
-    async (text, {rejectedWithValue}) => {
-        try {
-            return text
-
-        } catch (e) {
-            return rejectedWithValue(e)
-        }
-    }
-)
 export const newsSlice = createSlice({
         name: 'newsPage',
         initialState,
@@ -104,6 +92,7 @@ export const newsSlice = createSlice({
                 .addCase(deleteNew.fulfilled, (state, { payload }) => {
                     state.loading = false;
                     state.news = state.news.filter((el) => el.id !== payload);
+                    console.log(payload)
                 })
                 //здесь можно обрабатывать ошибки. так же прерываем загрузку
                 .addCase(deleteNew.rejected, state => {

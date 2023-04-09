@@ -2,15 +2,14 @@ import styles from './Card.module.css'
 import close from '../../../../../assets/close.png'
 import redact from '../../../../../assets/redact.png'
 import {Module} from "../../../../components/Module/Module";
-import {useCallback, useState} from "react";
+import {memo, useCallback, useMemo, useState} from "react";
 import {DeleteModule} from "../../../components/DeleteModule/DeleteModule";
 import {deleteNew} from "../../../../../slices/news";
 
-export const Card = ({ handleClickItem, data,setModuleState , setIsEdit}) => {
+export const Card = memo(({ handleClickItem, data,setModuleState , setIsEdit}) => {
     const [isOpenModal, setOpenModal] = useState(false);
     
     const handleClickOpenNews = useCallback((newsData) => {
-
         setOpenModal(true);
     }, [])
 
@@ -18,6 +17,13 @@ export const Card = ({ handleClickItem, data,setModuleState , setIsEdit}) => {
         setOpenModal(false);
     }, [])
 
+    const getModalWindow = useMemo(() => {
+        return (
+            <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
+                <DeleteModule delete={deleteNew} id={data.id} onClose={handleClickCloseModal}/>/>
+            </Module>
+        )
+    }, [data.id, handleClickCloseModal, isOpenModal])
     return (
         <div style={{backgroundImage: `url("${data.img}")`}} className={styles.card}>
             <div className={styles.container}>
@@ -40,9 +46,7 @@ export const Card = ({ handleClickItem, data,setModuleState , setIsEdit}) => {
                     setIsEdit(true)
                 }} className={styles.button}>Посмотреть</button>
             </div>
-            <Module active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
-                <DeleteModule delete={deleteNew} id={data.id} onClose={handleClickCloseModal}/>/>
-            </Module>
+            {getModalWindow}
         </div>
     )
-}
+})
