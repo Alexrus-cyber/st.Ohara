@@ -12,7 +12,7 @@ export const Registration = () => {
         <div className={styles.container}>
             <div className={styles.squareContainer}>
                 <div className={styles.square}>
-                    <h1>Регистрация</h1>
+                    <h1 className={styles.title}>Создание администратора</h1>
                     <RegisterReduxForm onSubmit={onSubmit}/>
                 </div>
             </div>
@@ -21,6 +21,9 @@ export const Registration = () => {
 }
 
 const RegisterForm = ({handleSubmit}) => {
+    const custom = {
+        backgroundColor: " #7D4A7D",
+    }
     return (
         <form onSubmit={handleSubmit}>
             {inputsRegister.map(e =>
@@ -29,8 +32,8 @@ const RegisterForm = ({handleSubmit}) => {
                     {FieldCreator(e.id,e.name, e.placeholder, e.validators, e.typeButton, e.style , e.type)}
                 </div>
             )}
-            <div className={styles.title}>
-                <ButtonUI name={"Зарегистрироваться"}/>
+            <div className={styles.buttonContainer}>
+                <ButtonUI styleProp={custom} name={"Создать"}/>
             </div>
         </form>
     )

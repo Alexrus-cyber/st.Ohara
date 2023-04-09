@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getNewsData} from "../../../slices/news";
 import {AddModalCard} from "./component/AddModuleCard/AddModalCard";
 import {nanoid} from "@reduxjs/toolkit";
+import {UseDebounce} from "../../hoocks/UseDebounce";
 
 const initialModalState = {
     img: null,
@@ -18,20 +19,20 @@ const initialModalState = {
 export const NewsAdmin = () => {
     const [modalState, setModalState] = useState(initialModalState)
     const [isOpenModal, setOpenModal] = useState(false);
-    const [isAdd, setIsAdd] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
-
+    const [text, setText] = useState('');
     const {news} = useSelector(state => state.news)
+    const [data, setData] = useState([]);
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getNewsData())
-    }, [dispatch]);
+        setData(news)
+    }, [dispatch, news]);
 
     const handleClickOpenNews = useCallback((newsData) => {
         setOpenModal(true);
         setModalState(newsData)
-        setIsAdd(false)
     }, [])
 
     const handleClickCloseModal = useCallback(() => {
@@ -46,12 +47,26 @@ export const NewsAdmin = () => {
         )
     }, [handleClickCloseModal, isEdit, isOpenModal, modalState])
 
+    const makeRequest = UseDebounce(() => {
+        const filteredValues = news.filter(
+            (item) =>
+                item.title.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        );
+        setData(filteredValues)
+    },300);
+
+    const handleChange = (element) => {
+        const {value} = element.target;
+        makeRequest(value)
+        setText(value)
+
+        if (value === '') {
+            dispatch(getNewsData())
+        }
+    }
     return (
         <>
             <div className={styles.container}>
-                <div className={styles.inputContainer}>
-                    <Search/>
-                </div>
                 <div className={styles.middle}>
                     <div className={styles.newsDate}>
                         <h1 className={styles.title}>Новости</h1>
@@ -59,12 +74,14 @@ export const NewsAdmin = () => {
                     </div>
                     <button onClick={() => {
                         setOpenModal(true)
-                        setIsAdd(true)
                     }} className={styles.button}>Добавить новость
                     </button>
                 </div>
+                <div className={styles.inputContainer}>
+                    <Search value={text} placeholder={"Поиск"} onChange={handleChange}/>
+                </div>
                 <div className={styles.cardContainer}>
-                    {news.map(value => {
+                    {data.map(value => {
                         return (
                             <Card
                                 key={value.id}
