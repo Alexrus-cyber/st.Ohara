@@ -76,7 +76,7 @@ export const NewsAdmin = () => {
                 </div>
                 <div className={styles.cardContainer}>
                     {news.filter((item) => {
-                        return searchValue.toLowerCase() === '' ? item : item.title.toLowerCase().includes(searchValue)
+                        return searchValue.toLowerCase() === '' ? item : item.title.toLowerCase().includes(searchValue) || item.title.includes(searchValue)
                     }).map(value => {
                         return (
                             <Card
