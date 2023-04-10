@@ -4,6 +4,7 @@ import {NewData, newsData} from "./mocks/news";
 
 const initialState = {
     news: [],
+    searchValue: '',
     loading: true,
     oneNew: {}
 }
@@ -54,7 +55,9 @@ export const newsSlice = createSlice({
         name: 'newsPage',
         initialState,
         reducers: {
-
+            setSearchValue(state, {payload}) {
+                state.searchValue = payload;
+            },
         },
         extraReducers:builder => {
             builder
@@ -115,5 +118,5 @@ export const newsSlice = createSlice({
         }
     }
 )
-
+export const { setSearchValue } = newsSlice.actions;
 export default newsSlice.reducer;

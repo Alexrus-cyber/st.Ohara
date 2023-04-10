@@ -4,7 +4,7 @@ import {Search} from "../../components/Search/Search";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {Module} from "../../components/Module/Module";
 import {useDispatch, useSelector} from "react-redux";
-import {getNewsData} from "../../../slices/news";
+import {getNewsData, setSearchValue} from "../../../slices/news";
 import {AddModalCard} from "./component/AddModuleCard/AddModalCard";
 import {nanoid} from "@reduxjs/toolkit";
 import {UseDebounce} from "../../hoocks/UseDebounce";
@@ -21,7 +21,7 @@ export const NewsAdmin = () => {
     const [isOpenModal, setOpenModal] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [text, setText] = useState('');
-    const {news} = useSelector(state => state.news)
+    const {news, searchValue} = useSelector(state => state.news)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -45,10 +45,15 @@ export const NewsAdmin = () => {
         )
     }, [handleClickCloseModal, isEdit, isOpenModal, modalState])
 
+    const makeRequest = UseDebounce((value) => {
+         dispatch(setSearchValue(value));
+    },300);
 
     const handleChange = (element) => {
         const {value} = element.target;
+        makeRequest(value)
         setText(value)
+
         if (value === '') {
             dispatch(getNewsData())
         }
@@ -71,7 +76,7 @@ export const NewsAdmin = () => {
                 </div>
                 <div className={styles.cardContainer}>
                     {news.filter((item) => {
-                        return text.toLowerCase() === '' ? item : item.title.toLowerCase().includes(text)
+                        return searchValue.toLowerCase() === '' ? item : item.title.toLowerCase().includes(searchValue)
                     }).map(value => {
                         return (
                             <Card
