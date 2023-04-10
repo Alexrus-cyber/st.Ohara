@@ -22,13 +22,11 @@ export const NewsAdmin = () => {
     const [isEdit, setIsEdit] = useState(false);
     const [text, setText] = useState('');
     const {news} = useSelector(state => state.news)
-    const [data, setData] = useState([]);
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getNewsData())
-        setData(news)
-    }, [dispatch, news]);
+    }, [dispatch]);
 
     const handleClickOpenNews = useCallback((newsData) => {
         setOpenModal(true);
@@ -47,19 +45,10 @@ export const NewsAdmin = () => {
         )
     }, [handleClickCloseModal, isEdit, isOpenModal, modalState])
 
-    const makeRequest = UseDebounce(() => {
-        const filteredValues = news.filter(
-            (item) =>
-                item.title.toLowerCase().indexOf(text.toLowerCase()) !== -1
-        );
-        setData(filteredValues)
-    },300);
 
     const handleChange = (element) => {
         const {value} = element.target;
-        makeRequest(value)
         setText(value)
-
         if (value === '') {
             dispatch(getNewsData())
         }
@@ -81,7 +70,9 @@ export const NewsAdmin = () => {
                     <Search value={text} placeholder={"Поиск"} onChange={handleChange}/>
                 </div>
                 <div className={styles.cardContainer}>
-                    {data.map(value => {
+                    {news.filter((item) => {
+                        return text.toLowerCase() === '' ? item : item.title.toLowerCase().includes(text)
+                    }).map(value => {
                         return (
                             <Card
                                 key={value.id}
