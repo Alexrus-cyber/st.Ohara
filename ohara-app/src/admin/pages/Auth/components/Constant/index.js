@@ -1,5 +1,5 @@
 import {maxLength, Required} from "../Validators/Validators";
-import {InputLogin} from "../Form/FormCreators";
+import {InputUI} from "../Form/FormCreators";
 import styles from "../../Auth.module.css";
 
 export const maxLength12 = maxLength(20)
@@ -12,7 +12,7 @@ export const inputs = [
         name: 'Email',
         placeholder: 'email',
         validators: [Required, maxLength16],
-        typeButton: InputLogin,
+        typeButton: InputUI,
         style: styles.title
     },
     {
@@ -20,7 +20,7 @@ export const inputs = [
         name: 'Password',
         placeholder: 'password',
         validators: [Required, maxLength12],
-        typeButton: InputLogin,
+        typeButton: InputUI,
         style: styles.title,
         type: "password"
     },
@@ -32,44 +32,48 @@ export const inputsRegister = [
         name: 'email',
         placeholder: 'Почта',
         validators: [Required, maxLength16],
-        typeButton: InputLogin,
+        typeButton: InputUI,
+        typeInput:'reg',
     },
     {
         id:2,
         name: 'password',
         placeholder: 'Пароль',
         validators: [Required, maxLength12],
-        typeButton: InputLogin,
-        type: "password"
+        typeButton: InputUI,
+        type: "password",
+        typeInput:'reg',
     },
     {
         id:3,
         name: 'firstName',
         placeholder: 'Имя',
         validators: [Required, maxLength12],
-        typeButton: InputLogin,
-
+        typeButton: InputUI,
+        typeInput:'reg',
     },
     {
         id:4,
         name: 'secondName',
         placeholder: 'Фамилия',
         validators: [Required, maxLength12],
-        typeButton: InputLogin,
-
+        typeButton: InputUI,
+        typeInput:'reg',
     },
     {
         id:5,
         name: 'lastName',
         placeholder: 'Отчество',
         validators: [Required, maxLength12],
-        typeButton: InputLogin,
+        typeButton: InputUI,
+        typeInput:'reg',
     },
     {
         id:6,
         name: 'phoneNumber',
         placeholder: 'Номер',
         validators: [Required, maxLength12],
-        typeButton: InputLogin,
+        typeButton: InputUI,
+        typeInput:'reg',
     },
 ]

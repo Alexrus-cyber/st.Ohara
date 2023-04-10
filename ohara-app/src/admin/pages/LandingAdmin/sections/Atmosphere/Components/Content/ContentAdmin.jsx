@@ -1,5 +1,5 @@
 import styles from "../../Atmosphere.module.css";
-import {InputTitles, TextAreaForm} from "../../../../../Auth/components/Form/FormCreators";
+import {InputUI, TextAreaForm} from "../../../../../Auth/components/Form/FormCreators";
 import {Field} from "redux-form";
 
 export const ContentAdmin = ({img, title, text1, index, isLeftPosition}) => {
@@ -15,11 +15,15 @@ export const ContentAdmin = ({img, title, text1, index, isLeftPosition}) => {
                     <div className={styles.textContainer}>
                         <Field
                             name={`atmosphere.content.${index}.title`}
-                            component={InputTitles}
+                            component={InputUI}
+                            title={"Заголовок"}
+                            typeInput={"input"}
                         />
                         <Field
                             name={`atmosphere.content.${index}.text1`}
-                            component={TextAreaForm}
+                            component={InputUI}
+                            title={"Текст"}
+                            typeInput={"text"}
                         />
                     </div>
                 </div>
@@ -29,11 +33,15 @@ export const ContentAdmin = ({img, title, text1, index, isLeftPosition}) => {
                     <div className={styles.textContainer}>
                         <Field
                             name={`atmosphere.content.${index}.title`}
-                            component={InputTitles}
+                            component={InputUI}
+                            title={"Заголовок"}
+                            typeInput={"input"}
                         />
                         <Field
                             name={`atmosphere.content.${index}.text1`}
-                            component={TextAreaForm}
+                            component={InputUI}
+                            title={"Текст"}
+                            typeInput={"text"}
                         />
                     </div>
                     <div className={styles.backContainer}>

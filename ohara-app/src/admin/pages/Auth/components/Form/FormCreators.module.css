@@ -25,19 +25,22 @@
     border-radius: 12px;
     border: 1px solid #1C675A;
     outline: none;
+    margin-top: 20px;
+
 }
 
 .textAreaError {
     padding: 10px 0;
-    font-size: 20px;
-    max-width: 405px;
+    font-size: 24px;
+    max-width: 500px;
     width: 100%;
+    margin-top: 10px;
     max-height: 20vh;
     height: 20vh;
     resize: none;
     border-radius: 12px;
+    border: 1px solid #f80000;
     outline: none;
-    border: 2px solid crimson;
 }
 
 .textAreaCont {
@@ -53,7 +56,7 @@
     position: relative;
     max-width: 500px;
     width: 100%;
-
+    line-height: 0;
 }
 .containerInput:hover{
     color: cornflowerblue;
@@ -65,9 +68,13 @@
     color: cornflowerblue;
 }
 .titleText{
-    font-size: 36px;
+    font-size: 10px;
 }
-
+.titleInput{
+    font-size: 20px;
+    text-align: left;
+    color: #ffffff;
+}
 .input {
     background-size: 20px;
     border-radius: 15px;
@@ -78,7 +85,38 @@
     outline: none;
     padding: 0 0 0 10px;
 }
+.file{
+    position: absolute;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+}
+.span{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+    font-size: 20px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: #367272;
+    padding: 0 5px;
+    max-width: 300px;
 
+}
+.label{
+    max-width: 300px;
+    width: 100%;
+    position: absolute;
+}
+.xxx{
+    background-color: white;
+}
 .inputError {
     border-radius: 15px;
     border: 1px solid gray;
@@ -136,7 +174,8 @@
     width: 100%;
     border-radius: 5px;
     outline: none;
-    border: 2px solid crimson;
+    border: 1px solid #d30e0e;
+    height: 6vh;
 }
 
 @media screen and (max-width: 520px) {
