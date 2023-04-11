@@ -3,8 +3,6 @@ import {FieldCreator} from "./components/Form/FormCreators";
 import {Field, reduxForm} from "redux-form";
 import {inputs} from "./components/Constant";
 import {ButtonUI} from "../components/ButtonUI/ButtonUI";
-import {NavLink} from "react-router-dom";
-
 
 const LoginForm = ({handleSubmit}) => {
     return (
@@ -12,7 +10,6 @@ const LoginForm = ({handleSubmit}) => {
             {inputs.map(e =>
                 FieldCreator(e.id,e.name, e.placeholder, e.validators, e.typeButton, e.style , e.type)
             )}
-            <NavLink className={styles.title} to={"/registration"}>Зарегистрироватся</NavLink>
             <div className={styles.title}>
                 <Field name={'rememberMe'} component={"input"} type={"checkbox"}/> запомнить вход
             </div>

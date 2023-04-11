@@ -19,7 +19,7 @@
     display: flex;
     border-radius: 30px;
     flex-direction: column;
-    max-height: 600px;
+    max-height: 100%;
     max-width: 1200px;
     width: 100%;
     height: 100%;
@@ -29,18 +29,21 @@
 }
 .title{
     text-align: left;
-    font-size: 40px;
-    padding-left: 30px;
+    font-size: 46px;
     color: white;
+    padding-top: 50px;
 }
 .list{
     display: flex;
     align-items: center;
     flex-direction: column;
-    max-height: 400px;
-    height: 400px;
+    max-height: 800px;
+    height: 600px;
     width: 95%;
     overflow: auto;
+    border: 1px solid #7D4A7D;
+    border-radius: 30px;
+    margin-bottom: 40px;
 }
 .listItem{
     display: flex;
@@ -68,7 +71,11 @@
     padding: 5px;
 }
 .search{
-    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+    max-width: 97%;
 }
 .icons{
     max-width: 100px;
@@ -88,6 +95,10 @@
 .button:hover{
     color: #dadada;
     background-color: #603a60;
+}
+.buttonContainer{
+    max-width: 200px;
+    width: 100%;
 }
 .list::-webkit-scrollbar{
     width: 10px;
@@ -111,10 +122,9 @@
 @media screen and (max-width: 520px) {
    .listItem{
        flex-direction: column;
-       justify-content:unset;
-       align-items: unset;
-       height: 100%;
        font-size: 16px;
+       max-width: 80%;
+       padding: 15px;
    }
     .list{
         max-width: 100%;
@@ -133,5 +143,11 @@
     }
     .title{
         padding: 0;
+    }
+    .search{
+        flex-direction: column;
+    }
+    .button{
+        margin: 40px 0;
     }
 }

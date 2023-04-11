@@ -55,7 +55,7 @@ export class FileInput extends Component {
 
     render() {
 
-        let {meta: {touched, error}, input: {value}, ...props} = this.props; // достаем value из props.input
+        let {meta: {touched, error}} = this.props; // достаем value из props.input
 
         return (
             <>

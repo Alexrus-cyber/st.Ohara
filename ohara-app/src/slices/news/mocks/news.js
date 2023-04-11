@@ -13,7 +13,7 @@ export const newsData = [
     {
         id: 2,
         img: slider1,
-        title: "Новость",
+        title: "Новост",
         text: "Entspannung, Persönlichkeit, Spontaneität – das „Ammolite“ ist frei von elitärer Attitüde, " +
             "man beherrscht das Handwerk, man pflegt die Konventionen und den Stil – " +
             "und stellt sich selbst dabei nicht in den Vordergrund.",
@@ -23,7 +23,7 @@ export const newsData = [
     {
         id: 3,
         img: slider1,
-        title: "Новость",
+        title: "Новос",
         text: "Entspannung, Persönlichkeit, Spontaneität – das „Ammolite“ ist frei von elitärer Attitüde, " +
             "man beherrscht das Handwerk, man pflegt die Konventionen und den Stil – " +
             "und stellt sich selbst dabei nicht in den Vordergrund.",
