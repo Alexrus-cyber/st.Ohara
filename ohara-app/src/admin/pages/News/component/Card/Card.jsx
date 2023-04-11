@@ -2,7 +2,7 @@ import styles from './Card.module.css'
 import close from '../../../../../assets/close.png'
 import redact from '../../../../../assets/redact.png'
 import {Module} from "../../../../components/Module/Module";
-import {memo, useCallback, useMemo, useState} from "react";
+import React, {memo, useCallback, useMemo, useState} from "react";
 import {DeleteModule} from "../../../components/DeleteModule/DeleteModule";
 import {deleteNew} from "../../../../../slices/news";
 
@@ -32,7 +32,10 @@ export const Card = memo(({ handleClickItem, data,setModuleState , setIsEdit}) =
                         handleClickItem()
                         setModuleState(data)
                     }}  src={redact} alt={"redact"}/>
-                    <img className={styles.img} onClick={() => handleClickOpenNews()} src={close} alt={"close"}/>
+                    <button onClick={() => {
+                        handleClickOpenNews()
+                    }} className={styles.close}>x
+                    </button>
                 </div>
                 <div className={styles.textContainer}>
                     <h2 className={styles.title}>{data.title.substring(0, 30) + "..."}</h2>
