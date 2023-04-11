@@ -1,7 +1,7 @@
 import styles from './Navbar.module.css';
 import admin from '../../../../assets/logo.png'
 import {NavLink} from "react-router-dom";
-import {AppBar, Drawer, IconButton, Toolbar, Typography, useTheme} from "@mui/material";
+import {AppBar, Drawer, IconButton, Toolbar, useTheme} from "@mui/material";
 import {useState} from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";

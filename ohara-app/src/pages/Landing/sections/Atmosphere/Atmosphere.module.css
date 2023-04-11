@@ -16,6 +16,11 @@
     padding: 200px 50px 0 50px;
 }
 
+.link{
+    text-decoration: none;
+    color: white;
+}
+
 .itemContainer {
     display: flex;
     justify-content: space-between;

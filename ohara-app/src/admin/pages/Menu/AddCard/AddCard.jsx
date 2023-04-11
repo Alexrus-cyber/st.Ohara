@@ -1,7 +1,6 @@
 import styles from './Card.module.css'
 import {useDispatch} from "react-redux";
 import {addItemMenu} from "../../../../slices/menu";
-import x from '../../../../assets/barman.png'
 
 export const AddCard = () => {
     const dispatch = useDispatch();

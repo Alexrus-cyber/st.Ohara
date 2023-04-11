@@ -8,7 +8,7 @@ const LoginForm = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
             {inputs.map(e =>
-                FieldCreator(e.id,e.name, e.placeholder, e.validators, e.typeButton, e.style , e.type)
+                FieldCreator(e.id,e.name, e.placeholder, e.validators, e.typeButton, e.style , e.type,  e.typeInput)
             )}
             <div className={styles.title}>
                 <Field name={'rememberMe'} component={"input"} type={"checkbox"}/> запомнить вход

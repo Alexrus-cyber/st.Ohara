@@ -1,15 +1,28 @@
 import styles from "../../Atmosphere.module.css";
-import {InputUI, TextAreaForm} from "../../../../../Auth/components/Form/FormCreators";
+import {FilesInput, InputUI} from "../../../../../Auth/components/Form/FormCreators";
 import {Field} from "redux-form";
+import {useState} from "react";
+import {getFile} from "../../../../../../../slices/landing";
 
-export const ContentAdmin = ({img, title, text1, index, isLeftPosition}) => {
+export const ContentAdmin = ({img,index, isLeftPosition, id}) => {
+
+    const [imageUrl, setImageUrl] = useState(img);
+
     return (
         <>
             {!isLeftPosition ?
                 <div className={styles.itemContainer}>
-                    <img className={styles.imgRes} src={img} alt={"barman"}/>
                     <div className={styles.backContainer}>
-                        <img className={styles.img} src={img} alt={"barman"}/>
+                        <Field
+                            name={`atmosphere.content.${index}.img`}
+                            type={'file'}
+                            setImageUrl={setImageUrl}
+                            id={id}
+                            getFile={getFile}
+                            section={'atmosphere'}
+                            component={FilesInput}
+                        />
+                        <img className={styles.img} src={imageUrl} alt={"barman"}/>
                         <div className={styles.back}></div>
                     </div>
                     <div className={styles.textContainer}>
@@ -29,7 +42,19 @@ export const ContentAdmin = ({img, title, text1, index, isLeftPosition}) => {
                 </div>
                 :
                 <div className={styles.itemContainer}>
-                    <img className={styles.img1} src={img} alt={"barman"}/>
+                    <div className={styles.backContainer2}>
+                        <Field
+                            name={`atmosphere.content.${index}.img`}
+                            type={'file'}
+                            setImageUrl={setImageUrl}
+                            id={id}
+                            getFile={getFile}
+                            section={'atmosphere'}
+                            component={FilesInput}
+                        />
+                        <img className={styles.img} src={imageUrl} alt={"barman"}/>
+                        <div className={isLeftPosition === 0 ? styles.back : styles.backRevert}></div>
+                    </div>
                     <div className={styles.textContainer}>
                         <Field
                             name={`atmosphere.content.${index}.title`}
@@ -44,8 +69,17 @@ export const ContentAdmin = ({img, title, text1, index, isLeftPosition}) => {
                             typeInput={"text"}
                         />
                     </div>
-                    <div className={styles.backContainer}>
-                        <img className={styles.img2} src={img} alt={"barman"}/>
+                    <div className={styles.backContainerRight}>
+                        <Field
+                            name={`atmosphere.content.${index}.img`}
+                            type={'file'}
+                            setImageUrl={setImageUrl}
+                            id={id}
+                            getFile={getFile}
+                            section={'atmosphere'}
+                            component={FilesInput}
+                        />
+                        <img className={styles.img} src={imageUrl} alt={"barman"}/>
                         <div className={isLeftPosition === 0 ? styles.back : styles.backRevert}></div>
                     </div>
                 </div>

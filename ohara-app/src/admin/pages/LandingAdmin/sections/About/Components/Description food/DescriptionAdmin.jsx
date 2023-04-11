@@ -2,6 +2,7 @@ import styles from "../../About.module.css";
 import {Field} from "redux-form";
 import {FilesInput, InputUI} from "../../../../../Auth/components/Form/FormCreators";
 import {memo, useState} from "react";
+import {getFile} from "../../../../../../../slices/landing";
 
 export const DescriptionAdmin = memo(({img, isLeftPosition, index, id}) => {
 
@@ -16,10 +17,12 @@ export const DescriptionAdmin = memo(({img, isLeftPosition, index, id}) => {
                             name={`about.items.${index}.img`}
                             type={'file'}
                             setImageUrl={setImageUrl}
+                            getFile={getFile}
+                            section={'about'}
                             id={id}
                             component={FilesInput}
                         />
-                        <img className={styles.imgRes} src={img} alt="food"/>
+                        <img className={styles.imgRes} src={imageUrl} alt="food"/>
                     </div>
 
                 <div className={styles.textContainer}>
@@ -41,10 +44,12 @@ export const DescriptionAdmin = memo(({img, isLeftPosition, index, id}) => {
                         name={`about.items.${index}.img`}
                         type={'file'}
                         setImageUrl={setImageUrl}
+                        getFile={getFile}
+                        section={'about'}
                         id={id}
                         component={FilesInput}
                     />
-                    <img className={styles.imgRes} src={img} alt="food"/>
+                    <img className={styles.imgRes} src={imageUrl} alt="food"/>
                 </div>
 
             </div>
@@ -55,6 +60,8 @@ export const DescriptionAdmin = memo(({img, isLeftPosition, index, id}) => {
                         name={`about.items.${index}.img`}
                         type={'file'}
                         setImageUrl={setImageUrl}
+                        getFile={getFile}
+                        section={'about'}
                         id={id}
                         component={FilesInput}
                     />

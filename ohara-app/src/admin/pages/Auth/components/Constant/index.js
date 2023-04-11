@@ -1,21 +1,20 @@
-import {maxLength, Required, minLength} from "../Validators/Validators";
+import {maxLength, Required} from "../Validators/Validators";
 import {InputUI} from "../Form/FormCreators";
 import styles from "../../Auth.module.css";
 
 export const maxLength20 = maxLength(20)
 export const maxLength25 = maxLength(25)
 export const maxLength100 = maxLength(100)
-const minLength8 = minLength(8)
-const minLength3 = minLength(3)
 
 export const inputs = [
     {
         id:1,
         name: 'Email',
         placeholder: 'email',
-        validators: [Required, maxLength20],
+        validators: [Required, maxLength25],
         typeButton: InputUI,
-        style: styles.title
+        style: styles.title,
+        typeInput: 'reg'
     },
     {
         id:2,
@@ -24,7 +23,8 @@ export const inputs = [
         validators: [Required, maxLength20],
         typeButton: InputUI,
         style: styles.title,
-        type: "password"
+        type: "password",
+        typeInput: 'reg'
     },
 ]
 
@@ -33,7 +33,7 @@ export const inputsRegister = [
         id:1,
         name: 'email',
         placeholder: 'Почта',
-        validators: [Required, maxLength20],
+        validators: [Required, maxLength25],
         typeButton: InputUI,
         typeInput:'reg',
     },
@@ -50,7 +50,7 @@ export const inputsRegister = [
         id:3,
         name: 'firstName',
         placeholder: 'Имя',
-        validators: [Required, maxLength20],
+        validators: [Required, maxLength25],
         typeButton: InputUI,
         typeInput:'reg',
     },

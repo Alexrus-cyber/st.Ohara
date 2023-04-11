@@ -1,4 +1,4 @@
-import {createSlice, createSelector, createEntityAdapter, createAsyncThunk} from "@reduxjs/toolkit";
+import {createSlice, createSelector,createAsyncThunk} from "@reduxjs/toolkit";
 import {mockListMenu} from "./mocks/menu";
 
 const initialState = {
@@ -39,7 +39,7 @@ export const addItemMenu = createAsyncThunk(
     }
 )
 
-const menuAdapter = createEntityAdapter();
+/*const menuAdapter = createEntityAdapter();*/
 
 export const menuSlice = createSlice({
     name: 'menu',

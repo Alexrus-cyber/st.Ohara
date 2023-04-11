@@ -16,7 +16,7 @@ const renderContent = (content) => {
     return (
        content.map((a, index) => {
             return (
-                <ContentAdmin index={index} key={a.id} img={a.img} title={a.title} text1={a.text1} text2={a.text2} isLeftPosition={a.isLeftPosition}/>
+                <ContentAdmin id={a.id} index={index} key={a.id} img={a.img} title={a.title} text1={a.text1} text2={a.text2} isLeftPosition={a.isLeftPosition}/>
             )
         }))
 

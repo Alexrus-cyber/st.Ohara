@@ -39,7 +39,7 @@ export const Footer = () => {
                 </div>
                 <div className={styles.right}>
                     <p className={styles.rightTitle}>АКТУАЛЬНЫЕ НОВОСТИ</p>
-                    {news.slice(-3).map(el => <NavLink to={`new/${el.id}`} className={styles.rightText}>{el.title}</NavLink>)}
+                    {news.slice(-3).map(el => <NavLink key={el.id} to={`new/${el.id}`} className={styles.rightText}>{el.title}</NavLink>)}
                 </div>
             </div>
             <p className={styles.footerText}>© 2022 Europa-Park St.O'Hara Irish Pub</p>
