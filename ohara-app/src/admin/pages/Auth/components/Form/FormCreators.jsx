@@ -1,6 +1,5 @@
 import styles from './FormCreators.module.css'
 import {Field} from "redux-form";
-import {getFile} from "../../../../../slices/landing";
 import {useDispatch} from "react-redux";
 import {memo} from "react";
 
@@ -21,12 +20,13 @@ export const InputUI = memo(({input:{value}, input, meta: {error, warning, touch
         </div>
     )
 })
-export const FilesInput = memo(({input: {value}, meta: {error, warning, touched}, type, name, style, setImageUrl, id}) => {
+export const FilesInput = memo(({input: {value}, meta: {error, warning, touched}, type, name, style, setImageUrl, id, getFile, section}) => {
     const fileReader = new FileReader();
     const dispatch = useDispatch();
+
     fileReader.onloadend = () => {
         setImageUrl(fileReader.result)
-        dispatch( getFile({id, file:fileReader.result})) ;
+        dispatch(getFile({id, file:fileReader.result, section})) ;
     }
 
     const onChange = e => {

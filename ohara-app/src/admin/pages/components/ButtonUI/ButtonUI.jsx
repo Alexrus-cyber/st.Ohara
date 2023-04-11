@@ -1,7 +1,7 @@
 import styles from "./Button.module.css";
 
-export const ButtonUI = ({styleProp, name}) => {
+export const ButtonUI = ({name, ...props}) => {
     return (
-        <button style={styleProp} className={styles.button}>{name}</button>
+        <button {...props} className={styles.button}>{name}</button>
     )
 }

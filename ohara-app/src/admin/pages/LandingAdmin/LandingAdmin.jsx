@@ -1,8 +1,6 @@
 import {HeroAdmin} from "./sections/Hero/HeroAdmin";
 import {AboutAdmin} from "./sections/About/AboutAdmin";
 import {AtmosphereAdmin} from "./sections/Atmosphere/AtmosphereAdmin";
-import {MapAdmin} from "./sections/Map/MapAdmin";
-import {LayingAdmin} from "./sections/Map/Components/Laying/LayingAdmin";
 import {memo, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getLandingData} from "../../../slices/landing";
@@ -24,7 +22,7 @@ const LandingForm = memo(({handleSubmit,data}) => {
             <HeroAdmin hero={data.hero}/>
             <AboutAdmin about={data.about}/>
             <AtmosphereAdmin atmosphere={data.atmosphere}/>
-            <ButtonUI styleProp={customButton} name={"Сохранить"}/>
+            <ButtonUI style={customButton} name={"Сохранить"}/>
         </form>
     )
 })

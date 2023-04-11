@@ -24,9 +24,9 @@ export const getLandingData = createAsyncThunk(
 
 export const getFile = createAsyncThunk(
     'getFile',
-    async ({file, id}, {rejectedWithValue}) => {
+    async ({file, id, section}, {rejectedWithValue}) => {
         try {
-            return {img: file, id} //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+            return {img: file, id, section} //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
 
         } catch (e) {
             return rejectedWithValue(e)
@@ -61,13 +61,26 @@ export const landingSlice = createSlice({
             //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
             .addCase(getFile.fulfilled, (state, {payload}) => {
                 state.loading = false;
-                state.landingList = {...state.landingList, about: {...state.landingList.about, items: state.landingList.about.items.map(value => {
-                                if (value.id === payload.id) {
-                                    return {...value, img: payload.img}
+
+                if (payload.section === 'about'){
+                    state.landingList = {...state.landingList, about: {...state.landingList.about, items: state.landingList.about.items.map(value => {
+                                    if (value.id === payload.id) {
+                                        return {...value, img: payload.img}
+                                    }
+                                    return value;
                                 }
-                                return value;
-                            }
-                        )}}
+                            )}}
+                }
+
+                if (payload.section === 'atmosphere'){
+                    state.landingList = {...state.landingList, atmosphere: {...state.landingList.atmosphere, content: state.landingList.atmosphere.content.map(value => {
+                                    if (value.id === payload.id) {
+                                        return {...value, img: payload.img}
+                                    }
+                                    return value;
+                                }
+                            )}}
+                }
             })
             //здесь можно обрабатывать ошибки. так же прерываем загрузку
             .addCase(getFile.rejected, state => {

@@ -1,4 +1,5 @@
 import styles from "../../Atmosphere.module.css";
+import {NavLink} from "react-router-dom";
 
 export const Content = (props) => {
     return (
@@ -37,7 +38,12 @@ export const Content = (props) => {
                         </p>
                         <div className={styles.buttonContainer}>
                             <div className={styles.backButton}></div>
-                            <button className={styles.button}>Меню</button>
+                            <button className={styles.button}>
+                                <NavLink className={styles.link} to={'/menu'}>
+                                    Меню
+                                </NavLink>
+
+                            </button>
                         </div>
                     </div>
                     <div className={styles.backContainer}>

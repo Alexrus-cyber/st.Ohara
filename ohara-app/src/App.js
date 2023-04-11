@@ -21,7 +21,7 @@ import {Staff} from "./admin/pages/StaffEdit/Staff";
 import {EditStaff} from "./admin/pages/StaffEdit/components/EditStaff/EditStaff";
 
 function App() {
-    const admin = true;
+    const admin = false;
     return (
         <BrowserRouter>
             <div className="App">

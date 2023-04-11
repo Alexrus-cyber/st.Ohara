@@ -29,11 +29,11 @@ const RegisterForm = ({handleSubmit}) => {
             {inputsRegister.map(e =>
                 <div className={styles.textArea} key={e.id}>
                     <p className={styles.p}>{e.placeholder}</p>
-                    {FieldCreator(e.id,e.name, e.placeholder, e.validators, e.typeButton, e.style , e.type)}
+                    {FieldCreator(e.id,e.name, e.placeholder, e.validators, e.typeButton, e.style , e.type, e.typeInput)}
                 </div>
             )}
             <div className={styles.buttonContainer}>
-                <ButtonUI styleProp={custom} name={"Создать"}/>
+                <ButtonUI style={custom} name={"Создать"}/>
             </div>
         </form>
     )
