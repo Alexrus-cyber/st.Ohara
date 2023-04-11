@@ -2,8 +2,17 @@ import styles from './Footer.module.css'
 import logo from "../../assets/logo.png";
 import insta from "../../assets/insta.png";
 import vk from "../../assets/vk.png";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getNewsData} from "../../slices/news";
+import {NavLink} from "react-router-dom";
 
 export const Footer = () => {
+    const {news} = useSelector(state => state.news)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getNewsData())
+    }, [dispatch])
     return (
         <footer className={styles.footer}>
             <div className={styles.container}>
@@ -30,12 +39,7 @@ export const Footer = () => {
                 </div>
                 <div className={styles.right}>
                     <p className={styles.rightTitle}>АКТУАЛЬНЫЕ НОВОСТИ</p>
-                    <p className={styles.rightText}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. </p>
-                    <p className={styles.rightText}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. </p>
-                    <p className={styles.rightText}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. </p>
+                    {news.slice(-3).map(el => <NavLink to={`new/${el.id}`} className={styles.rightText}>{el.title}</NavLink>)}
                 </div>
             </div>
             <p className={styles.footerText}>© 2022 Europa-Park St.O'Hara Irish Pub</p>

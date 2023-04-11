@@ -1,14 +1,17 @@
 import {HeroAdmin} from "./sections/Hero/HeroAdmin";
 import {AboutAdmin} from "./sections/About/AboutAdmin";
 import {AtmosphereAdmin} from "./sections/Atmosphere/AtmosphereAdmin";
-import {useEffect} from "react";
+import {MapAdmin} from "./sections/Map/MapAdmin";
+import {LayingAdmin} from "./sections/Map/Components/Laying/LayingAdmin";
+import {memo, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getLandingData} from "../../../slices/landing";
 import styles from './LandingAdmin.module.css'
 import {ButtonUI} from "../components/ButtonUI/ButtonUI";
 import {reduxForm} from "redux-form";
+import {Loader} from "../../../components/Loader/Loader";
 
-const LandingForm = ({handleSubmit,data}) => {
+const LandingForm = memo(({handleSubmit,data}) => {
     const customButton = {
         position: "fixed",
         top: "90%",
@@ -24,9 +27,9 @@ const LandingForm = ({handleSubmit,data}) => {
             <ButtonUI styleProp={customButton} name={"Сохранить"}/>
         </form>
     )
-}
+})
 
-export const LandingAdmin = () => {
+export const LandingAdmin = memo(() => {
     const {loading} = useSelector(state => state.landing)
     const {landingList} = useSelector(state => state.landing)
     const dispatch = useDispatch();
@@ -43,12 +46,12 @@ export const LandingAdmin = () => {
     return (
         <>
             {loading ?
-                "" :
+                <Loader/> :
                 <LandingReduxForm initialValues={landingList} data={landingList} onSubmit={onSubmit}/>
             }
 
         </>
     )
-}
+})
 
 const LandingReduxForm = reduxForm({form: 'landing'})(LandingForm);
