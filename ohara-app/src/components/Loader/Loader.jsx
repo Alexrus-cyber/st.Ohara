@@ -1,4 +1,4 @@
-import load from '../../assets/Loader.gif'
+import load from '../../assets/beer-86.gif'
 import styles from './Loader.module.css'
 export const Loader = () => {
     return (
@@ -7,10 +7,10 @@ export const Loader = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                maxWidth: "100px",
+                maxWidth: "70%",
                 width: "100%",
                 height: "100%",
-                maxHeight:"100px"
+                maxHeight:"90%"
             }} src={load} alt={"load"}></img>
         </div>
 

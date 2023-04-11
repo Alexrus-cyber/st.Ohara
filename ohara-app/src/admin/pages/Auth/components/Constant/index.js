@@ -1,10 +1,12 @@
-import {maxLength, Required} from "../Validators/Validators";
+import {maxLength, Required, minLength} from "../Validators/Validators";
 import {InputUI} from "../Form/FormCreators";
 import styles from "../../Auth.module.css";
 
-export const maxLength12 = maxLength(20)
-export const maxLength16 = maxLength(25)
+export const maxLength20 = maxLength(20)
+export const maxLength25 = maxLength(25)
 export const maxLength100 = maxLength(100)
+const minLength8 = minLength(8)
+const minLength3 = minLength(3)
 
 export const inputs = [
     {

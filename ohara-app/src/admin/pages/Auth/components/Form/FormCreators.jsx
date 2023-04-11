@@ -45,7 +45,6 @@ export const FilesInput = memo(({input: {value}, meta: {error, warning, touched}
     )
 })
 
-
 export const FieldCreator = (keyId, name, placeholder, validators, component, className, type, typeInput) => {
     return (
         <div key={keyId} className={className ? className : ""}>

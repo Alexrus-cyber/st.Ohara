@@ -6,6 +6,3 @@ export const Required = (value) =>
 
 export const minLength = (min) => (value) =>
     value && value.length < min ? `Вы не можете ввести меньше ${min} символов` : undefined
-
-export const Nothing = (value) =>
-    value === '' ? 'Вы ничего не ввели' : undefined

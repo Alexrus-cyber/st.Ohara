@@ -21,12 +21,12 @@
     max-width: 1000px;
     align-items: center;
     width: 90%;
+    padding-top: 50px;
 }
 .inputContainer{
     display: flex;
     max-width: 1000px;
     width: 90%;
-    padding-top: 50px;
 
 }
 
@@ -78,5 +78,6 @@
     }
     .inputContainer{
         justify-content: center;
+        padding: 40px 0;
     }
 }

@@ -81,12 +81,7 @@ export const menuSlice = createSlice({
             })
             .addCase(addItemMenu.fulfilled, (state, { payload }) => {
                 state.loading = false;
-                const findItem = state.images.find((obj) => obj.id !== payload.id);
-                if (findItem) {
-                   state.images.push({
-                        ...payload,
-                    });
-                }
+                state.images = [...state.images, payload]
             })
             //здесь можно обрабатывать ошибки. так же прерываем загрузку
             .addCase(addItemMenu.rejected, state => {

@@ -4,6 +4,7 @@ import {NewData, newsData} from "./mocks/news";
 
 const initialState = {
     news: [],
+    searchValue: '',
     loading: true,
     oneNew: {}
 }
@@ -22,7 +23,7 @@ export const getNew = createAsyncThunk(
     'getNew',
     async (data, {rejectedWithValue}) => {
         try {
-            return NewData //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+            return NewData
 
         } catch (e) {
             return rejectedWithValue(e)
@@ -43,7 +44,7 @@ export const addNew = createAsyncThunk(
     'addNew',
     async (data, {rejectedWithValue}) => {
         try {
-            return data //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+            return data
 
         } catch (e) {
             return rejectedWithValue(e)
@@ -54,7 +55,9 @@ export const newsSlice = createSlice({
         name: 'newsPage',
         initialState,
         reducers: {
-
+            setSearchValue(state, {payload}) {
+                state.searchValue = payload;
+            },
         },
         extraReducers:builder => {
             builder
@@ -66,7 +69,6 @@ export const newsSlice = createSlice({
                 .addCase(getNewsData.fulfilled, (state, { payload }) => {
                     state.loading = false;
                     state.news = payload;
-                    console.log("Получил")
                 })
                 //здесь можно обрабатывать ошибки. так же прерываем загрузку
                 .addCase(getNewsData.rejected, state => {
@@ -93,6 +95,7 @@ export const newsSlice = createSlice({
                 .addCase(deleteNew.fulfilled, (state, { payload }) => {
                     state.loading = false;
                     state.news = state.news.filter((el) => el.id !== payload);
+                    console.log(payload)
                 })
                 //здесь можно обрабатывать ошибки. так же прерываем загрузку
                 .addCase(deleteNew.rejected, state => {
@@ -105,12 +108,8 @@ export const newsSlice = createSlice({
                 //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
                 .addCase(addNew.fulfilled, (state, { payload }) => {
                     state.loading = false;
-                    const findItem = state.news.find((obj) => obj.id !== payload.id);
-                    if (findItem) {
-                        state.news.push({
-                            ...payload,
-                        });
-                    }
+                    state.news = [...state.news, payload]
+                    console.log(payload)
                 })
                 //здесь можно обрабатывать ошибки. так же прерываем загрузку
                 .addCase(addNew.rejected, state => {
@@ -119,5 +118,5 @@ export const newsSlice = createSlice({
         }
     }
 )
-
+export const { setSearchValue } = newsSlice.actions;
 export default newsSlice.reducer;

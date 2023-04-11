@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 export const AddModalCard = ({onClose, data, isEdit, setIsEdit}) => {
     const [text, setText] = useState("");
     const [title, setTitle] = useState("");
+    const [img, setImg] = useState(data.img);
     const dispatch = useDispatch()
 
     const titleChange = (e) => {
@@ -16,7 +17,8 @@ export const AddModalCard = ({onClose, data, isEdit, setIsEdit}) => {
     }
     const PhotoSelected = (e) => {
         if (e.target.files?.length) {
-
+            setImg(e.target.files[0])
+            console.log(e.target.files[0])
         }
     }
     useEffect(() => {
@@ -42,7 +44,7 @@ export const AddModalCard = ({onClose, data, isEdit, setIsEdit}) => {
 
                         </div>
                         <div className={styles.imgContainer}>
-                            <div style={{backgroundImage: `url("${data.img}")`}} className={styles.imgChanger}>
+                            <div style={{backgroundImage: `url("${img}")`}} className={styles.imgChanger}>
                                 <label className={styles.label}>
                                     <input type={"file"} className={styles.input} onChange={PhotoSelected}></input>
                                     <span className={styles.imageEdit}>Загрузить</span>
@@ -62,7 +64,7 @@ export const AddModalCard = ({onClose, data, isEdit, setIsEdit}) => {
                 </div>
             )
         }
-    }, [isEdit, title, text, data.img, onClose, setIsEdit])
+    }, [isEdit, title, text, img, onClose, setIsEdit])
 
 
     const addNewsCard = useMemo(() => {
@@ -88,7 +90,7 @@ export const AddModalCard = ({onClose, data, isEdit, setIsEdit}) => {
                         <button onClick={() => {
                             const news = {
                                 id: 10,
-                                img: "",
+                                img: img,
                                 title: title,
                                 text: text
                             }
@@ -105,7 +107,7 @@ export const AddModalCard = ({onClose, data, isEdit, setIsEdit}) => {
             )
         }
 
-    }, [data.img, dispatch, isEdit, onClose, setIsEdit, text, title])
+    }, [data.img, dispatch, img, isEdit, onClose, setIsEdit, text, title])
     return (
         <>
             {editCard}

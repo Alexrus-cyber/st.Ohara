@@ -15,9 +15,7 @@ const LandingForm = memo(({handleSubmit,data}) => {
     const customButton = {
         position: "fixed",
         top: "90%",
-        maxWidth: 200,
         zIndex: 10000,
-        height: 50,
         fontSize: 26,
     }
 
@@ -26,8 +24,6 @@ const LandingForm = memo(({handleSubmit,data}) => {
             <HeroAdmin hero={data.hero}/>
             <AboutAdmin about={data.about}/>
             <AtmosphereAdmin atmosphere={data.atmosphere}/>
-            <MapAdmin/>
-            <LayingAdmin/>
             <ButtonUI styleProp={customButton} name={"Сохранить"}/>
         </form>
     )

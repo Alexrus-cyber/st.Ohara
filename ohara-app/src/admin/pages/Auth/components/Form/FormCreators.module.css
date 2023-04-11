@@ -1,10 +1,11 @@
 .error {
     color: crimson;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 13px;
     height: 100%;
     padding: 0;
     margin: 0;
+    max-width: 50px;
+    width: 100%;
 }
 
 .warning {
@@ -119,7 +120,7 @@
 }
 .inputError {
     border-radius: 15px;
-    border: 1px solid gray;
+    border: 1px solid crimson;
     max-width: 200px;
     width: 100%;
     height: 30px;
@@ -131,7 +132,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 .textArea::-webkit-scrollbar{
     width: 10px;
