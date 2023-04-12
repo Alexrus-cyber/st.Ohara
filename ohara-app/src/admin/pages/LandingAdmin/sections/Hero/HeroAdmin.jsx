@@ -12,7 +12,7 @@ export const HeroAdmin = () => {
             <div className={styles.container}>
                 <div className={styles.text}>
                     <Field name={'hero.title'} title={"Главный заголовок"} placeholder={"Заголовок"}
-                           validate={[Required, maxLength100]} component={InputUI} typeInput={'input'}/>
+                           validate={[Required, maxLength100]} component={InputUI} typeInput={'text'}/>
                     <div className={styles.imgContainer}>
                         <img className={styles.img} src={arrows} alt={"arrow"}/>
                     </div>
