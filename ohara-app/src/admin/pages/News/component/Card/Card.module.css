@@ -15,9 +15,9 @@
 
 .img{
     cursor: pointer;
-    max-width: 20px;
+    max-width: 18px;
     width: 100%;
-    height: 25px;
+    height: 17px;
 }
 .close{
     color: white;
@@ -43,11 +43,13 @@
 .closeContainer{
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    align-items: center;
+    padding: 10px 10px 0 10px;
 }
 .textContainer{
     text-align: center;
-    padding-bottom: 20px;
+    max-height: 170px;
+    height: 100%;
 }
 
 .title{

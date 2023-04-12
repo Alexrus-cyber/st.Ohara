@@ -18,11 +18,11 @@ export const EditStaff = ({user}) => {
 
 const RegisterForm = ({handleSubmit}) => {
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.squareContainer} onSubmit={handleSubmit}>
             {inputsRegister.map(e =>
                 <div className={styles.textArea} key={e.id}>
                     <p className={styles.p}>{e.placeholder}</p>
-                    {FieldCreator(e.id, e.name, e.placeholder, e.validators, e.typeButton, e.style, e.type)}
+                    {FieldCreator(e.id, e.name, e.placeholder, e.validators, e.typeButton, e.style, e.type, e.typeInput)}
                 </div>
             )}
             <div className={styles.title}>

@@ -28,7 +28,7 @@
     position: fixed;
     font-size: 24px;
     padding: 15px;
-    top: 28%;
+    top: 30%;
 }
 .position{
     position: fixed;
@@ -39,6 +39,7 @@
 .links{
     font-size: 36px;
     line-height: 44px;
+    max-height: 428px;
     max-width: 400px;
     width: 100%;
     cursor: pointer;
@@ -48,12 +49,13 @@
     flex-direction: column;
     position: fixed;
     top: 40%;
+    overflow: auto;
 }
 .link{
     width: 95%;
     text-decoration: none;
     color: black;
-    padding: 7px;
+    padding: 7px 0;
 
 }
 .link:hover{
@@ -64,7 +66,7 @@
     width: 95%;
     text-decoration: none;
     color: black;
-    padding: 7px;
+    padding: 7px 0;
     background-color: #D8BBD8;
 }
 .secret{
@@ -76,13 +78,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    max-width: 400px;
-    width: 100%;
+    max-width: 100%;
     background-color: white;
     font-weight: 700;
     line-height: 24px;
     letter-spacing: 0;
-    position: relative;
 }
 
 @media screen and (max-width: 1200px) {
@@ -92,13 +92,14 @@
     .links{
         max-width: 300px;
     }
-    .navbarSecret{
-        max-width: 300px;
-    }
 }
 @media screen and (max-width: 1100px) {
     .navbar{
         display: none;
+    }
+    .title{
+        position: unset;
+        padding: 0;
     }
     .secret{
         display: unset;
@@ -108,24 +109,52 @@
         z-index: 100000;
     }
     .links{
-        font-size: 24px;
-        max-width: 238px;
-        padding: 40px 0;
+        font-size: 36px;
+        position: unset;
+        max-width: 100%;
+        padding: 0;
     }
     .img{
-        padding: 40px;
+        position: unset;
+        padding: 0;
     }
     .name{
-        padding: 40px;
+        position: unset;
+        padding: 0 0 40px 0;
+    }
+    .active{
+        width: 100%;
+
+    }
+    .link{
+       width: 100%;
     }
 }
 
 @media screen and (max-width: 740px) {
     .title{
         font-size: 28px;
+        padding: 0;
     }
     .img{
-        max-width: 120px;
+        max-width: 200px;
+        margin: 0;
+        padding: 0;
     }
 
+}
+
+@media screen and (max-width: 520px) {
+    .links{
+        font-size: 30px;
+    }
+}
+@media screen and (max-width: 340px) {
+    .img{
+        max-width: 180px;
+
+    }
+    .links{
+        font-size: 24px;
+    }
 }

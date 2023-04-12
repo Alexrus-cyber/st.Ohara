@@ -1,9 +1,9 @@
 .textArea {
     display: flex;
     justify-content: center;
-    max-width: 400px;
-    margin-top: 10px;
+    margin-top: 20px;
     column-gap: 20px;
+    flex-direction: column;
 }
 .container{
     display: flex;
@@ -47,15 +47,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
     text-decoration: none;
 }
 
 .p{
-    max-width: 75px;
-    width: 100%;
     text-align: left;
+    width: 100%;
+    font-size: 16px;
 }
+
+.textArea:hover .p{
+    color: cornflowerblue;
+}
+
 
 @media screen and (max-width: 550px) {
     .title{

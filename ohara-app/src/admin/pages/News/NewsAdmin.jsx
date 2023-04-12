@@ -39,15 +39,17 @@ export const NewsAdmin = () => {
     }, [])
     const getModalWindow = useMemo(() => {
         return (
-            <Module title = {isEdit ? "Изменение новости" : "Создание новости"} setIsEdit={setIsEdit} active={isOpenModal} setActive={setOpenModal} onClose={handleClickCloseModal}>
-                {isOpenModal ?  <AddModalCard onClose={handleClickCloseModal} data = {modalState} isEdit={isEdit} setIsEdit={setIsEdit}/> : ""}
+            <Module title={isEdit ? "Изменение новости" : "Создание новости"} setIsEdit={setIsEdit} active={isOpenModal}
+                    setActive={setOpenModal} onClose={handleClickCloseModal}>
+                {isOpenModal ? <AddModalCard onClose={handleClickCloseModal} data={modalState} isEdit={isEdit}
+                                             setIsEdit={setIsEdit}/> : ""}
             </Module>
         )
     }, [handleClickCloseModal, isEdit, isOpenModal, modalState])
 
     const makeRequest = UseDebounce((value) => {
-         dispatch(setSearchValue(value));
-    },300);
+        dispatch(setSearchValue(value));
+    }, 300);
 
     const handleChange = (element) => {
         const {value} = element.target;
@@ -61,33 +63,35 @@ export const NewsAdmin = () => {
     return (
         <>
             <div className={styles.container}>
-                <div className={styles.middle}>
-                    <div className={styles.newsDate}>
-                        <h1 className={styles.title}>Новости</h1>
-                        <button className={styles.date}>по дате</button>
+                <div className={styles.secondContainer}>
+                    <div className={styles.middle}>
+                        <div className={styles.newsDate}>
+                            <h1 className={styles.title}>Новости</h1>
+                            <button className={styles.date}>по дате</button>
+                        </div>
+                        <button onClick={() => {
+                            setOpenModal(true)
+                        }} className={styles.button}>Добавить новость
+                        </button>
                     </div>
-                    <button onClick={() => {
-                        setOpenModal(true)
-                    }} className={styles.button}>Добавить новость
-                    </button>
-                </div>
-                <div className={styles.inputContainer}>
-                    <Search value={text} placeholder={"Поиск"} onChange={handleChange}/>
-                </div>
-                <div className={styles.cardContainer}>
-                    {news.filter((item) => {
-                        return searchValue.toLowerCase() === '' ? item : item.title.toLowerCase().includes(searchValue) || item.title.includes(searchValue)
-                    }).map(value => {
-                        return (
-                            <Card
-                                key={value.id}
-                                data={value}
-                                handleClickItem={() => handleClickOpenNews(value)}
-                                setModuleState={setModalState}
-                                setIsEdit={setIsEdit}
-                            />
-                        )
-                    })}
+                    <div className={styles.inputContainer}>
+                        <Search value={text} placeholder={"Поиск"} onChange={handleChange}/>
+                    </div>
+                    <div className={styles.cardContainer}>
+                        {news.filter((item) => {
+                            return searchValue.toLowerCase() === '' ? item : item.title.toLowerCase().includes(searchValue) || item.title.includes(searchValue)
+                        }).map(value => {
+                            return (
+                                <Card
+                                    key={value.id}
+                                    data={value}
+                                    handleClickItem={() => handleClickOpenNews(value)}
+                                    setModuleState={setModalState}
+                                    setIsEdit={setIsEdit}
+                                />
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
             {getModalWindow}

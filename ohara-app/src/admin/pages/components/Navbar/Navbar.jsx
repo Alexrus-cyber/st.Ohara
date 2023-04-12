@@ -7,7 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-const drawerWidth = 240;
+const drawerWidth = "100%";
 export const Navbar = () => {
     const arr = [
         {id: 5, src: "/landingAdmin", text: "Главная"},
@@ -22,15 +22,18 @@ export const Navbar = () => {
 
     const handleDrawerOpen = () => {
         setOpen(true);
+        document.body.style.overflow = 'hidden';
     };
 
     const handleDrawerClose = () => {
         setOpen(false);
+        document.body.style.overflow = 'auto';
     };
+
     return (
         <>
-            <AppBar style={{backgroundColor: "transparent", boxShadow: "unset"}} className={styles.secret} position="fixed" open={open}>
-                <Toolbar>
+            <AppBar style={{backgroundColor: "transparent", boxShadow: "unset",height: 10}} className={styles.secret} position="fixed" open={open}>
+                <Toolbar style={{maxWidth: 50 , width: "100%"}}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -66,7 +69,7 @@ export const Navbar = () => {
                     <img className={styles.img} src={admin} alt={"admin"}/>
                     <p className={styles.name}>Анастасия Михайлова</p>
                     <div className={styles.links}>
-                        {arr.map(e =>  <NavLink key={e.id} to={e.src} className={({isActive}) => (isActive ? styles.active : styles.link)}>{e.text}</NavLink>)}
+                        {arr.map(e =>  <NavLink key={e.id} to={e.src} onClick={handleDrawerClose} className={({isActive}) => (isActive ? styles.active : styles.link)}>{e.text}</NavLink>)}
                     </div>
                 </div>
             </Drawer>

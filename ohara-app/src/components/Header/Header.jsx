@@ -7,7 +7,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import {useState} from "react";
 
-const drawerWidth = 240;
+const drawerWidth = "100%";
 export const Header = () => {
     const arr = [
         {id: 1, text: "Главная", path: '/'},
@@ -21,11 +21,14 @@ export const Header = () => {
 
     const handleDrawerOpen = () => {
         setOpen(true);
+        document.body.style.overflow = 'hidden';
     };
 
     const handleDrawerClose = () => {
         setOpen(false);
+        document.body.style.overflow = 'auto';
     };
+
     return (
         <header className={styles.header}>
             <div className={styles.container}>
@@ -66,7 +69,7 @@ export const Header = () => {
                         <h1 className={styles.title}>St.O'hara</h1>
                         <img className={styles.imgSecret} src={logo} alt={"admin"}/>
                         <div className={styles.links}>
-                            {arr.map(e =>  <NavLink key={e.id} to={e.path} className={({isActive}) => (isActive ? styles.active : styles.link)}>{e.text}</NavLink>)}
+                            {arr.map(e =>  <NavLink onClick={handleDrawerClose} key={e.id} to={e.path} className={({isActive}) => (isActive ? styles.active : styles.link)}>{e.text}</NavLink>)}
                         </div>
                     </div>
                 </Drawer>

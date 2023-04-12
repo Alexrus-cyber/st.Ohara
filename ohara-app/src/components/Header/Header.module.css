@@ -73,7 +73,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    max-width: 400px;
+    max-width: 100%;
     width: 100%;
     background-color: white;
     font-weight: 700;
@@ -91,9 +91,7 @@
     .links{
         max-width: 300px;
     }
-    .navbarSecret{
-        max-width: 300px;
-    }
+
 }
 
 @media screen and (max-width: 900px) {
@@ -104,6 +102,13 @@
         display: none;
         visibility: collapse;
     }
+    .imgSecret{
+        padding: 0;
+    }
+    .title{
+        position: unset;
+        padding: 0;
+    }
     .secret{
         display: unset;
         visibility: visible;
@@ -112,20 +117,28 @@
         z-index: 100000;
     }
     .links{
-        font-size: 24px;
-        max-width: 238px;
+        font-size: 36px;
+        position: unset;
+        max-width: 100%;
+        padding: 0;
+        color: black;
     }
     .img{
-        padding: 40px;
-    }
-    .imgSecret{
+        position: unset;
         padding: 0;
     }
     .name{
-        padding: 40px;
+        position: unset;
+        padding: 0 0 40px 0;
+    }
+    .active{
+        width: 100%;
+        padding: 15px 0;
     }
     .link{
+        padding: 15px 0;
         color: black;
+        width: 100%;
     }
 }
 @media screen and (max-width: 720px) {
