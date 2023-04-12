@@ -1,4 +1,4 @@
-import styles from "./About.module.css"
+import styles from "./About.module.scss"
 import {DescriptionAdmin} from "./Components/Description food/DescriptionAdmin";
 import {memo} from "react";
 

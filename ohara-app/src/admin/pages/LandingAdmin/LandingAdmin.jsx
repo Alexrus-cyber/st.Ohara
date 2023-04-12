@@ -4,7 +4,7 @@ import {AtmosphereAdmin} from "./sections/Atmosphere/AtmosphereAdmin";
 import {memo, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getLandingData} from "../../../slices/landing";
-import styles from './LandingAdmin.module.css'
+import styles from './LandingAdmin.module.scss'
 import {ButtonUI} from "../components/ButtonUI/ButtonUI";
 import {reduxForm} from "redux-form";
 import {Loader} from "../../../components/Loader/Loader";

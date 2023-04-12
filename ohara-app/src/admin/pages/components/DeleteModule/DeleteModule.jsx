@@ -1,4 +1,4 @@
-import styles from "./DeleteModule.module.css";
+import styles from "./DeleteModule.module.scss";
 import React from "react";
 import {useDispatch} from "react-redux";
 

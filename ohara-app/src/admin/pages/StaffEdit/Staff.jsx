@@ -1,4 +1,4 @@
-import styles from "./Staff.module.css";
+import styles from "./Staff.module.scss";
 import {Search} from "../../components/Search/Search";
 import {ItemStaff} from "./components/ItemStaff/ItemStaff";
 import {NavLink} from "react-router-dom";

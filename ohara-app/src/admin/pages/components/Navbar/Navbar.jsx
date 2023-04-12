@@ -1,4 +1,4 @@
-import styles from './Navbar.module.css';
+import styles from './Navbar.module.scss';
 import admin from '../../../../assets/logo.png'
 import {NavLink} from "react-router-dom";
 import {AppBar, Drawer, IconButton, Toolbar, useTheme} from "@mui/material";

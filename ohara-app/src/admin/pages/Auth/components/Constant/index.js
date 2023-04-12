@@ -1,6 +1,6 @@
 import {maxLength, Required} from "../Validators/Validators";
 import {InputUI} from "../Form/FormCreators";
-import styles from "../../Auth.module.css";
+import styles from "../../Auth.module.scss";
 
 export const maxLength20 = maxLength(20)
 export const maxLength25 = maxLength(25)

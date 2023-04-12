@@ -1,4 +1,4 @@
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 
 export const ButtonUI = ({name, ...props}) => {
     return (

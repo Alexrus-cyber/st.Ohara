@@ -1,4 +1,4 @@
-import styles from './Atmosphere.module.css'
+import styles from './Atmosphere.module.scss'
 import {ContentAdmin} from "./Components/Content/ContentAdmin";
 import {memo} from "react";
 

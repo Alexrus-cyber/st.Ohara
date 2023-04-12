@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import styles from './Gallery.module.css'
+import styles from './Gallery.module.scss'
 import ImageViewer from "react-simple-image-viewer";
 import {AddCard} from "./AddCard/AddCard";
 import {deleteItemGallery, getGalleryData} from "../../../slices/gallery";

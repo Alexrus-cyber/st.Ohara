@@ -1,4 +1,4 @@
-import styles from './Module.module.css'
+import styles from './Module.module.scss'
 
 export const Module = ({active, children, onClose, title, setIsEdit}) => {
     if (active) {

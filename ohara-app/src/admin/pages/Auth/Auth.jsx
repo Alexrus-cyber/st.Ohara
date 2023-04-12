@@ -1,4 +1,4 @@
-import styles from './Auth.module.css'
+import styles from './Auth.module.scss'
 import {FieldCreator} from "./components/Form/FormCreators";
 import {Field, reduxForm} from "redux-form";
 import {inputs} from "./components/Constant";

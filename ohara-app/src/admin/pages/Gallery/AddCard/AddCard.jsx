@@ -1,6 +1,6 @@
-import styles from './Card.module.css'
+import styles from './Card.module.scss'
 
-export const AddCard = (props) => {
+export const AddCard = () => {
     
     return (
         <div className={styles.card}>

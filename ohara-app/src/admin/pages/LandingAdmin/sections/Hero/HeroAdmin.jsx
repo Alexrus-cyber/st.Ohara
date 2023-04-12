@@ -1,4 +1,4 @@
-import styles from "./Hero.module.css"
+import styles from "./Hero.module.scss"
 import arrows from "../../../../../assets/down-arrow 1.png"
 import {InputUI} from "../../../Auth/components/Form/FormCreators";
 import {Required} from "../../../Auth/components/Validators/Validators";

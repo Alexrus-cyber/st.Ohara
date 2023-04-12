@@ -1,4 +1,4 @@
-import styles from './AddModalCard.module.css'
+import styles from './AddModalCard.module.scss'
 import {useEffect, useMemo, useState} from "react";
 import {addNew} from "../../../../../slices/news";
 import {useDispatch} from "react-redux";

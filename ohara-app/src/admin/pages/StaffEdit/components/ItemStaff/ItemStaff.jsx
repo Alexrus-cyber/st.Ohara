@@ -1,4 +1,4 @@
-import styles from "../../Staff.module.css";
+import styles from "../../Staff.module.scss";
 import ModeEdit from "@mui/icons-material/ModeEdit";
 import {IconButton} from "@mui/material";
 import Close from "@mui/icons-material/Close";

@@ -1,4 +1,4 @@
-import styles from './MenuAdmin.module.css'
+import styles from './MenuAdmin.module.scss'
 import {AddCard} from "./AddCard/AddCard";
 import React, {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";

@@ -1,4 +1,4 @@
-import styles from "./Search.module.css";
+import styles from "./Search.module.scss";
 import lope from "../../../assets/search.png";
 
 export const Search = ({onChange, placeholder , value}) => {

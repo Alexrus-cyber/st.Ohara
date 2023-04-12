@@ -1,4 +1,4 @@
-import styles from './News.module.css'
+import styles from './News.module.scss'
 import {Card} from "./component/Card/Card";
 import {Search} from "../../components/Search/Search";
 import {useCallback, useEffect, useMemo, useState} from "react";

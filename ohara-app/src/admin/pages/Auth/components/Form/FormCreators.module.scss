@@ -114,6 +114,7 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     font-size: 20px;
@@ -130,6 +131,14 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
     z-index: 100;
     cursor: pointer;
     background-color: #00000052;
+}
+
+
+.label:hover{
+    background: transparent;
+}
+.label:hover .p{
+    visibility: hidden;
 }
 .xxx{
     background-color: white;

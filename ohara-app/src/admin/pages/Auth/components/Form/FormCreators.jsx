@@ -3,6 +3,7 @@ import {Field} from "redux-form";
 import {useDispatch} from "react-redux";
 import {memo} from "react";
 import cl from 'classnames'
+import {CloudUpload} from "@mui/icons-material";
 
 export const InputUI = memo(({input: {value}, input, meta: {error, warning, touched}, title, typeInput, ...props}) => {
     const showError = touched && error;
@@ -58,7 +59,10 @@ export const FilesInput = memo(({
             <label className={styles.label}>
                 <input onChange={onChange} className={styles.file} placeholder={"Заголовок"} type={type} name={name}
                        style={style}></input>
-                <span className={styles.span}>Загрузить</span>
+                <span className={styles.span}>
+                    <CloudUpload/>
+                    <p className={styles.p}>Загрузить</p>
+                </span>
             </label>
         </div>
     )

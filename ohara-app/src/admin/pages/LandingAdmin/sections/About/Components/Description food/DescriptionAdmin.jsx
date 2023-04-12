@@ -1,4 +1,4 @@
-import styles from "../../About.module.css";
+import styles from "../../About.module.scss";
 import {Field} from "redux-form";
 import {FilesInput, InputUI} from "../../../../../Auth/components/Form/FormCreators";
 import {memo, useState} from "react";

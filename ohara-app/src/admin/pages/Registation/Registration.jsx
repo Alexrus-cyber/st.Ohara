@@ -1,6 +1,6 @@
 import {inputsRegister} from "../Auth/components/Constant";
 import {FieldCreator} from "../Auth/components/Form/FormCreators";
-import styles from "./Registration.module.css";
+import styles from "./Registration.module.scss";
 import {reduxForm} from "redux-form";
 import {ButtonUI} from "../components/ButtonUI/ButtonUI";
 

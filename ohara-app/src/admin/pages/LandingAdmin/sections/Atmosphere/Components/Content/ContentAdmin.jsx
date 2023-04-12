@@ -1,10 +1,11 @@
-import styles from "../../Atmosphere.module.css";
+import styles from "../../Atmosphere.module.scss";
 import {FilesInput, InputUI} from "../../../../../Auth/components/Form/FormCreators";
 import {Field} from "redux-form";
 import {useState} from "react";
 import {getFile} from "../../../../../../../slices/landing";
+import cl from 'classnames'
 
-export const ContentAdmin = ({img,index, isLeftPosition, id}) => {
+export const ContentAdmin = ({img, index, isLeftPosition, id}) => {
 
     const [imageUrl, setImageUrl] = useState(img);
 
@@ -53,7 +54,9 @@ export const ContentAdmin = ({img,index, isLeftPosition, id}) => {
                             component={FilesInput}
                         />
                         <img className={styles.img} src={imageUrl} alt={"barman"}/>
-                        <div className={isLeftPosition === 0 ? styles.back : styles.backRevert}></div>
+                        <div className={cl(styles.backRevert, {
+                            [styles.back]: !isLeftPosition
+                        })}></div>
                     </div>
                     <div className={styles.textContainer}>
                         <Field
@@ -80,7 +83,9 @@ export const ContentAdmin = ({img,index, isLeftPosition, id}) => {
                             component={FilesInput}
                         />
                         <img className={styles.img} src={imageUrl} alt={"barman"}/>
-                        <div className={isLeftPosition === 0 ? styles.back : styles.backRevert}></div>
+                        <div className={cl(styles.backRevert, {
+                            [styles.back]: !isLeftPosition
+                        })}></div>
                     </div>
                 </div>
             }

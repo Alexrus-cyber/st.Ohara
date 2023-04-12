@@ -1,4 +1,4 @@
-import styles from "./EditStaff.module.css";
+import styles from "./EditStaff.module.scss";
 import {reduxForm} from "redux-form";
 import {FieldCreator} from "../../../Auth/components/Form/FormCreators";
 import {ButtonUI} from "../../../components/ButtonUI/ButtonUI";

@@ -1,5 +1,4 @@
-import styles from './Card.module.css'
-import close from '../../../../../assets/close.png'
+import styles from './Card.module.scss'
 import redact from '../../../../../assets/redact.png'
 import {Module} from "../../../../components/Module/Module";
 import React, {memo, useCallback, useMemo, useState} from "react";
@@ -9,7 +8,7 @@ import {deleteNew} from "../../../../../slices/news";
 export const Card = memo(({ handleClickItem, data,setModuleState , setIsEdit}) => {
     const [isOpenModal, setOpenModal] = useState(false);
     
-    const handleClickOpenNews = useCallback((newsData) => {
+    const handleClickOpenNews = useCallback(() => {
         setOpenModal(true);
     }, [])
 
