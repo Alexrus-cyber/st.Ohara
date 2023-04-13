@@ -1,12 +1,3 @@
-@mixin img {
-  max-width: 501px;
-  width: 100%;
-  max-height: 683px;
-  height: 100%;
-  position: absolute;
-  z-index: 52;
-}
-
 @mixin backContainer {
   position: relative;
   max-width: 501px;
@@ -25,20 +16,20 @@
   position: absolute;
   z-index: 50;
 }
-
 .img {
-  @include img;
-}
-
-.img2 {
-  @include img;
+  max-width: 501px;
+  width: 100%;
+  max-height: 683px;
+  height: 100%;
+  position: absolute;
+  z-index: 52;
 }
 
 .backContainer {
   @include backContainer;
 }
 
-.backContainer2 {
+.backContainerMobile {
   @include backContainer;
   display: none;
 }
@@ -78,11 +69,6 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 200px;
-}
-
-.img1 {
-  display: none;
-  visibility: collapse;
 }
 
 .textContainer {
@@ -175,7 +161,7 @@
     width: 100%;
     height: 683px;
   }
-  .backContainer2 {
+  .backContainerMobile {
     margin: 30px 0;
     display: flex;
     position: relative;
@@ -186,15 +172,6 @@
   }
   .backContainerRight {
     display: none;
-  }
-  .img1 {
-    display: flex;
-    visibility: visible;
-    max-width: 401px;
-    width: 100%;
-    max-height: 500px;
-    height: 100%;
-    z-index: 52;
   }
   .img2 {
     display: none;

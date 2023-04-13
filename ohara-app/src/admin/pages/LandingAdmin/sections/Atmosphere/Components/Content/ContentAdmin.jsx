@@ -43,7 +43,7 @@ export const ContentAdmin = ({img, index, isLeftPosition, id}) => {
                 </div>
                 :
                 <div className={styles.itemContainer}>
-                    <div className={styles.backContainer2}>
+                    <div className={styles.backContainerMobile}>
                         <Field
                             name={`atmosphere.content.${index}.img`}
                             type={'file'}
