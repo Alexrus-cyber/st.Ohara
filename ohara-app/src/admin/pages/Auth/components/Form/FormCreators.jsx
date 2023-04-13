@@ -9,7 +9,9 @@ export const InputUI = memo(({input: {value}, input, meta: {error, warning, touc
     const showError = touched && error;
 
     return (
-        <div className={typeInput === 'reg' ? "" : styles.text}>
+        <div className={cl({
+            [styles.text]: typeInput !== 'reg'
+        })}>
             <label className={styles.containerInput}>
                 {value !== '' && <p className={styles.titleInput}>{title}</p>}
                 {typeInput === 'text' && <textarea className={cl(styles.textArea, {
@@ -33,13 +35,11 @@ export const FilesInput = memo(({
                                     meta: {error, warning, touched},
                                     type,
                                     name,
-                                    style,
                                     setImageUrl,
                                     id,
                                     getFile,
                                     section
-                                }) =>
-{
+                                }) => {
     const fileReader = new FileReader();
     const dispatch = useDispatch();
 
@@ -57,8 +57,11 @@ export const FilesInput = memo(({
     return (
         <div>
             <label className={styles.label}>
-                <input onChange={onChange} className={styles.file} placeholder={"Заголовок"} type={type} name={name}
-                       style={style}></input>
+                <input onChange={onChange}
+                       className={styles.file}
+                       placeholder={"Заголовок"}
+                       type={type}
+                       name={name}/>
                 <span className={styles.span}>
                     <CloudUpload/>
                     <p className={styles.p}>Загрузить</p>
@@ -70,9 +73,16 @@ export const FilesInput = memo(({
 
 export const FieldCreator = (keyId, name, placeholder, validators, component, className, type, typeInput) => {
     return (
-        <div key={keyId} className={className ? className : ""}>
-            <Field name={name} placeholder={placeholder} validate={validators} component={component}
-                   typeInput={typeInput} title={''} type={type}/>
+        <div key={keyId} className={cl({
+            [className]: className
+        })}>
+            <Field name={name}
+                   placeholder={placeholder}
+                   validate={validators}
+                   component={component}
+                   typeInput={typeInput}
+                   title={''}
+                   type={type}/>
         </div>
     )
 }

@@ -1,4 +1,3 @@
-
 @mixin imgRes{
     display: flex;
     align-items: center;
@@ -71,17 +70,14 @@
 .imgRes {
     @include imgRes;
 }
-.imgRes2{
-    @include imgRes;
-}
 
-.imgContainer{
+.imgContainerLeft{
     @include imgResContainer;
 }
-.imgContainer3{
+.imgContainerRight{
     @include imgResContainer;
 }
-.imgContainer2{
+.imgContainerLeftMobile{
     @include imgResContainer;
     visibility: collapse;
     display: none;
@@ -108,15 +104,11 @@
     .img {
         padding: 30px;
     }
-    .imgRes2 {
-        visibility: collapse;
-        display: none;
-    }
-    .imgContainer{
+    .imgContainerLeft{
         display: none;
         visibility: collapse;
     }
-    .imgContainer2{
+    .imgContainerLeftMobile{
         display: unset;
         visibility: visible;
 
@@ -138,7 +130,7 @@
     .img {
         padding: 30px 0;
     }
-    .itemContainer{
+    .itemContainerLeft{
         padding-bottom: 10px;
     }
 

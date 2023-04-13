@@ -12,7 +12,7 @@ export const DescriptionAdmin = memo(({img, isLeftPosition, index, id}) => {
     return (
         <>{
             isLeftPosition ? <div className={styles.itemContainer}>
-                    <div className={styles.imgContainer2}>
+                    <div className={styles.imgContainerLeftMobile}>
                         <Field
                             name={`about.items.${index}.img`}
                             type={'file'}
@@ -39,7 +39,7 @@ export const DescriptionAdmin = memo(({img, isLeftPosition, index, id}) => {
                         typeInput={'text'}
                     />
                 </div>
-                <div className={styles.imgContainer}>
+                <div className={styles.imgContainerLeft}>
                     <Field
                         name={`about.items.${index}.img`}
                         type={'file'}
@@ -55,7 +55,7 @@ export const DescriptionAdmin = memo(({img, isLeftPosition, index, id}) => {
             </div>
             :
             <div className={styles.itemContainer}>
-                <div className={styles.imgContainer3}>
+                <div className={styles.imgContainerRight}>
                     <Field
                         name={`about.items.${index}.img`}
                         type={'file'}
