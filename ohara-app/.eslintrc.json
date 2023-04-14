@@ -35,7 +35,14 @@
   /* Правила для отслеживания линтером. Если пресеты покрывают не все ситуации,
   вы можете прописать нужные правила вручную. */
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "react/no-unescaped-entities": 0,
+    "react/display-name": "off",
     // Обязательно!! Подсвечивает ошибки из Prettier.
     "react/prop-types": 0,
     // Отключаем правило проверки передаваемых типов.

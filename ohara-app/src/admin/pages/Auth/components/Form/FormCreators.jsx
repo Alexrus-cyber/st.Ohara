@@ -65,16 +65,7 @@ export const InputUI = memo(
   }
 );
 export const FilesInput = memo(
-  ({
-    input: { value },
-    meta: { error, warning, touched },
-    type,
-    name,
-    setImageUrl,
-    id,
-    getFile,
-    section,
-  }) => {
+  ({ type, name, setImageUrl, id, getFile, section }) => {
     const fileReader = new FileReader();
     const dispatch = useDispatch();
 
