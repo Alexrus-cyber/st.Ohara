@@ -16,6 +16,7 @@
   position: absolute;
   z-index: 50;
 }
+
 .img {
   max-width: 501px;
   width: 100%;
@@ -33,14 +34,17 @@
   @include backContainer;
   display: none;
 }
+
 .backContainerRight {
   @include backContainer;
 }
+
 .back {
   @include backSquare;
   top: -26px;
   left: -37px;
 }
+
 .backRevert {
   @include backSquare;
   top: -26px;

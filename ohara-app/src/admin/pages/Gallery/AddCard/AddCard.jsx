@@ -1,10 +1,9 @@
-import styles from './Card.module.scss'
+import styles from "./Card.module.scss";
 
 export const AddCard = () => {
-    
-    return (
-        <div className={styles.card}>
-            <div className={styles.plus}>+</div>
-        </div>
-    )
-}
+  return (
+    <div className={styles.card}>
+      <div className={styles.plus}>+</div>
+    </div>
+  );
+};

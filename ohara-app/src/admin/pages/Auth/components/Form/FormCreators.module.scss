@@ -1,168 +1,180 @@
 $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
 
 .error {
-    color: crimson;
-    font-size: 13px;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    max-width: 50px;
-    width: 100%;
+  color: crimson;
+  font-size: 13px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  max-width: 50px;
+  width: 100%;
 }
 
 .warning {
-    color: yellow;
-}
-.text{
-    padding: 10px;
-}
-.textAreaCont {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  color: yellow;
 }
 
-.containerInput{
-    position: relative;
+.text {
+  padding: 10px;
+}
+
+.textAreaCont {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.containerInput {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  line-height: 0;
+
+  .inputTitle {
+    font-size: 20px;
+    margin: 10px 0;
+    max-width: 475px;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    height: 6vh;
+    border: 1px solid #1C675A;
+  }
+
+  .inputTitleEr {
+    border: 1px solid crimson;
+  }
+
+  .input {
+    border-radius: 15px;
+    max-width: 200px;
+    width: 100%;
+    height: 30px;
+    outline: none;
+    padding: 0 0 0 10px;
+    border: 1px solid gray;
+  }
+
+  .inputError {
+    border: 1px solid crimson;
+  }
+
+  .textArea {
+    padding: 10px 0;
+    font-size: 24px;
     max-width: 500px;
     width: 100%;
-    line-height: 0;
+    max-height: 20vh;
+    height: 20vh;
+    resize: none;
+    border-radius: 12px;
+    outline: none;
+    margin-top: 10px;
+    border: 1px solid #1C675A;
+  }
 
-    .inputTitle{
-        font-size: 20px;
-        margin: 10px 0;
-        max-width: 475px;
-        width: 100%;
-        border-radius: 5px;
-        outline: none;
-        height: 6vh;
-        border: 1px solid #1C675A;
-    }
+  .textAreaError {
+    border: 1px solid crimson;
+  }
+}
 
-    .inputTitleEr{
-        border: 1px solid crimson;
-    }
+.containerInput:hover {
+  color: cornflowerblue;
+}
 
-    .input{
-        border-radius: 15px;
-        max-width: 200px;
-        width: 100%;
-        height: 30px;
-        outline: none;
-        padding: 0 0 0 10px;
-        border: 1px solid gray;
-    }
+.containerInput:hover .titleText {
+  color: cornflowerblue;
+}
 
-    .inputError{
-        border: 1px solid crimson;
-    }
+.containerInput:hover .titleInput {
+  color: cornflowerblue;
+}
 
-    .textArea{
-        padding: 10px 0;
-        font-size: 24px;
-        max-width: 500px;
-        width: 100%;
-        max-height: 20vh;
-        height: 20vh;
-        resize: none;
-        border-radius: 12px;
-        outline: none;
-        margin-top: 10px;
-        border: 1px solid #1C675A;
-    }
+.titleText {
+  font-size: 10px;
+}
 
-    .textAreaError{
-        border: 1px solid crimson;
-    }
+.titleInput {
+  font-size: 20px;
+  text-align: left;
+  color: #ffffff;
 }
-.containerInput:hover{
-    color: cornflowerblue;
+
+.file {
+  position: absolute;
+  opacity: 0;
+  display: block;
+  width: 0;
+  height: 0;
 }
-.containerInput:hover .titleText{
-    color: cornflowerblue;
+
+.span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  padding: 0 5px;
 }
-.containerInput:hover .titleInput{
-    color: cornflowerblue;
-}
-.titleText{
-    font-size: 10px;
-}
-.titleInput{
-    font-size: 20px;
-    text-align: left;
-    color: #ffffff;
-}
-.file{
-    position: absolute;
-    opacity: 0;
-    display: block;
-    width: 0;
-    height: 0;
-}
-.span{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    font-size: 20px;
-    font-weight: 700;
-    border: none;
-    border-radius: 10px;
-    background: transparent;
-    padding: 0 5px;
-}
-.label{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 100;
-    cursor: pointer;
-    background-color: #00000052;
+
+.label {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 100;
+  cursor: pointer;
+  background-color: #00000052;
 }
 
 
-.label:hover{
-    background: transparent;
+.label:hover {
+  background: transparent;
 }
-.label:hover .p{
-    visibility: hidden;
+
+.label:hover .p {
+  visibility: hidden;
 }
-.xxx{
-    background-color: white;
+
+.xxx {
+  background-color: white;
 }
 
 .flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @each $variable in $textAreaConfig {
-    .textArea#{nth($variable, 1)}::-webkit-scrollbar{
-        width: 10px;
-    }
-    .textArea#{nth($variable, 1)}::-webkit-scrollbar-track {
-        background-color:#edeadf;
-        border-radius: 10px;
-        margin: 5px;
-    }
+  .textArea#{nth($variable, 1)}::-webkit-scrollbar {
+    width: 10px;
+  }
+  .textArea#{nth($variable, 1)}::-webkit-scrollbar-track {
+    background-color: #edeadf;
+    border-radius: 10px;
+    margin: 5px;
+  }
 
-    .textArea#{nth($variable, 1)}::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background-color: #367272;
-    }
+  .textArea#{nth($variable, 1)}::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #367272;
+  }
 }
 
 @media screen and (max-width: 520px) {
-    .textArea{
-        max-height: 40vh;
-        height: 40vh;
-        max-width: 405px;
-    }
-    .inputTitle{
-        max-width: 405px;
-    }
+  .textArea {
+    max-height: 40vh;
+    height: 40vh;
+    max-width: 405px;
+  }
+  .inputTitle {
+    max-width: 405px;
+  }
 }
