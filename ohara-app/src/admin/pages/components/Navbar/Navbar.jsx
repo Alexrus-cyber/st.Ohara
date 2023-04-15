@@ -6,6 +6,7 @@ import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import cl from "classnames";
 
 const drawerWidth = "100%";
 export const Navbar = () => {
@@ -99,7 +100,9 @@ const ContentNavbar = ({ handleDrawerClose }) => {
             to={e.src}
             onClick={handleDrawerClose}
             className={({ isActive }) =>
-              isActive ? styles.active : styles.link
+              cl(styles.link, {
+                [styles.active]: isActive,
+              })
             }
           >
             {e.text}

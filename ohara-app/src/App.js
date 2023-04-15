@@ -1,4 +1,5 @@
 import "./App.css";
+import styles from "./main.module.scss";
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
 import { Landing } from "./pages/Landing/Landing";
@@ -10,7 +11,6 @@ import { Reservation } from "./pages/Reservation/Reservation";
 import { New } from "./pages/News/components/New/New";
 import { NewsAdmin } from "./admin/pages/News/NewsAdmin";
 import { Navbar } from "./admin/pages/components/Navbar/Navbar";
-import styles from "./main.module.css";
 import { MenuAdmin } from "./admin/pages/Menu/MenuAdmin";
 import { ReservationAdmin } from "./admin/pages/Reservation/ReservationAdmin";
 import { GalleryAdmin } from "./admin/pages/Gallery/GalleryAdmin";
@@ -21,7 +21,7 @@ import { Staff } from "./admin/pages/StaffEdit/Staff";
 import { EditStaff } from "./admin/pages/StaffEdit/components/EditStaff/EditStaff";
 
 function App() {
-  const admin = true;
+  const admin = false;
   return (
     <BrowserRouter>
       <div className="App">
