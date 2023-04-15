@@ -68,10 +68,6 @@ export const NewsAdmin = () => {
     const { value } = element.target;
     makeRequest(value);
     setText(value);
-
-    if (value === "") {
-      dispatch(getNewsData());
-    }
   };
   return (
     <>

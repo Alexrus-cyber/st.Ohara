@@ -24,7 +24,7 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
               id={id}
               component={FilesInput}
             />
-            <img className={styles.imgRes} src={imageUrl} alt="food" />
+            <img className={styles.img} src={imageUrl} alt="food" />
           </div>
 
           <div className={styles.textContainer}>
@@ -51,7 +51,7 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
               id={id}
               component={FilesInput}
             />
-            <img className={styles.imgRes} src={imageUrl} alt="food" />
+            <img className={styles.img} src={imageUrl} alt="food" />
           </div>
         </div>
       ) : (
@@ -66,7 +66,7 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
               id={id}
               component={FilesInput}
             />
-            <img className={styles.imgRes} src={img} alt="food1" />
+            <img className={styles.img} src={img} alt="food1" />
           </div>
           <div className={styles.textContainer}>
             <Field
