@@ -34,6 +34,7 @@
   max-width: 300px;
   max-height: 300px;
   width: 100%;
+  border-radius: 50%;
 }
 
 .imgRight {
@@ -87,6 +88,8 @@
     max-width: 300px;
     max-height: 300px;
     width: 100%;
+    visibility: visible;
+    padding: 30px 0;
   }
   .imgRight {
     visibility: collapse;
@@ -96,7 +99,7 @@
 
 @media screen and (max-width: 500px) {
   .img {
-    padding: 0;
+    padding: 30px 0;
     margin: 0;
   }
   .container {

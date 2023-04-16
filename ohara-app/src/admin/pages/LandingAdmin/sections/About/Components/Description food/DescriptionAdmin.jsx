@@ -12,7 +12,7 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
 
   return (
     <>
-      {isLeftPosition ? (
+      {!isLeftPosition && (
         <div className={styles.itemContainer}>
           <div className={styles.imgContainerLeftMobile}>
             <Field
@@ -54,7 +54,9 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
             <img className={styles.img} src={imageUrl} alt="food" />
           </div>
         </div>
-      ) : (
+      )}
+
+      {isLeftPosition && (
         <div className={styles.itemContainer}>
           <div className={styles.imgContainerRight}>
             <Field

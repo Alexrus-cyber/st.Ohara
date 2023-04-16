@@ -56,9 +56,7 @@ export const InputUI = memo(
         <div>
           {touched &&
             ((error && <span className={styles.error}>{error}</span>) ||
-              (warning && (
-                <span className={styles.warning}>{warning}</span>
-              )))}{" "}
+              (warning && <span className={styles.warning}>{warning}</span>))}
         </div>
       </div>
     );
