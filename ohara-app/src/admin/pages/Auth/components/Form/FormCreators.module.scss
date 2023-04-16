@@ -131,15 +131,20 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
   z-index: 100;
   cursor: pointer;
   background-color: #00000052;
+  transition: 0.5s;
 }
 
+.p {
+  transition-duration: 0.5s;
+  opacity: 1;
+}
 
 .label:hover {
   background: transparent;
 }
 
 .label:hover .p {
-  visibility: hidden;
+  opacity: 0;
 }
 
 .xxx {
