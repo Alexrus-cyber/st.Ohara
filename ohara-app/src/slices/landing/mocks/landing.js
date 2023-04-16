@@ -1,11 +1,11 @@
-import food1 from "../../../assets/bludo.png";
-import food2 from "../../../assets/food2.png";
-import food3 from "../../../assets/food3.png";
-import photo1 from "../../../assets/slider3.png";
+import food1 from "../../../assets/bludo.webp";
+import food2 from "../../../assets/food2.webp";
+import food3 from "../../../assets/food3.webp";
+import photo1 from "../../../assets/slider3.webp";
 import photo2 from "../../../assets/slider2.png";
-import photo3 from "../../../assets/slider1.png";
-import barman from "../../../assets/barman.png";
-import singer from "../../../assets/singer.png";
+import photo3 from "../../../assets/slider1.webp";
+import barman from "../../../assets/barman.webp";
+import singer from "../../../assets/singer.webp";
 
 export const landingList = {
   hero: {
