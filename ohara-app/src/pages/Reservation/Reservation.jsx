@@ -1,5 +1,3 @@
 export const Reservation = () => {
-    return (
-        <>fdsafasdfsdaf</>
-    )
-}
+  return <>fdsafasdfsdaf</>;
+};

@@ -1,0 +1,177 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 250px;
+  height: 100%;
+  font-size: 24px;
+  color: white;
+  position: absolute;
+}
+
+.container {
+  max-width: 1600px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.middle {
+  display: flex;
+  padding-bottom: 50px;
+  column-count: auto;
+  column-gap: 50px;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+  transition-duration: 0.5s;
+}
+
+.active {
+  text-decoration: none;
+  color: #7D4A7D;
+}
+
+.link:hover {
+  color: #7D4A7D;
+}
+
+
+.name {
+  position: fixed;
+  font-size: 24px;
+  padding: 15px;
+  top: 28%;
+}
+
+.position {
+  position: fixed;
+  top: 33%;
+  font-size: 20px;
+  padding: 0 10px;
+}
+
+.links {
+  font-size: 36px;
+  line-height: 44px;
+  max-width: 400px;
+  width: 100%;
+  padding: 50px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  top: 40%;
+}
+
+.secret {
+  display: none;
+  visibility: collapse;
+}
+
+.navbarSecret {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 100%;
+  width: 100%;
+  background-color: white;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0;
+  position: relative;
+}
+
+
+@media screen and (max-width: 1120px) {
+  .middle {
+    column-gap: 20px;
+  }
+  .links {
+    max-width: 300px;
+  }
+
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    justify-content: center;
+  }
+  .middle {
+    display: none;
+    visibility: collapse;
+  }
+  .imgSecret {
+    padding: 0;
+  }
+  .title {
+    position: unset;
+    padding: 0;
+  }
+  .secret {
+    display: unset;
+    visibility: visible;
+    background-color: transparent;
+    box-shadow: unset;
+    z-index: 100000;
+  }
+  .links {
+    font-size: 36px;
+    position: unset;
+    max-width: 100%;
+    padding: 0;
+    color: black;
+  }
+  .img {
+    position: unset;
+    padding: 0;
+  }
+  .name {
+    position: unset;
+    padding: 0 0 40px 0;
+  }
+  .active {
+    width: 100%;
+    padding: 15px 0;
+  }
+  .link {
+    padding: 15px 0;
+    color: black;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .img {
+    padding: 50px 0;
+  }
+  .title {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .img {
+    padding: 50px 0;
+  }
+  .links {
+    font-size: 30px;
+  }
+  .imgSecret {
+    max-width: 150px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .img {
+    padding: 50px 0;
+  }
+}

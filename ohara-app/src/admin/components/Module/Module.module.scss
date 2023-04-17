@@ -1,0 +1,168 @@
+.module{
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+
+}
+.active{
+    opacity: 1;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    pointer-events: all;
+    transition: 0.5s;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+.moduleContent {
+    padding: 46px;
+    border-radius: 12px;
+    background-color: white;
+    transform: scale(0.5);
+    transition: 0.4s all;
+
+}
+
+.moduleContentActive{
+    transition: 0.4s all;
+    transform: scale(1);
+    padding: 20px 40px;
+    border-radius: 12px;
+    background-color: white;
+    z-index: 10000;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.close{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: 700;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    max-width: 30px;
+    max-height: 30px;
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+.close:hover{
+    color: red;
+}
+.titleContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: black;
+}
+
+
+@media (max-width: 1400px) {
+    .module{
+        overflow: hidden;
+        height: 80vh;
+        width: 100%;
+        background-color: rgba(0,0,0,0.4);
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+    .active{
+        overflow: hidden;
+        opacity: 1;
+        height: 100vh;
+        width: 100%;
+        background-color: rgba(0,0,0,0.4);
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        pointer-events: all;
+        transition: 0.5s;
+    }
+
+    .moduleContent{
+        overflow: hidden;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: white;
+        transform: scale(0.5);
+        transition: 0.4s all;
+
+    }
+
+    .moduleContentActive{
+        overflow: hidden;
+        transition: 0.4s all;
+        transform: scale(1);
+        padding: 20px;
+        border-radius: 12px;
+        background-color: white;
+    }
+
+}
+
+@media (max-height: 880px) {
+    .moduleContentActive{
+        height: 100%;
+        overflow: auto;
+        transform: scale(1);
+        padding: 20px;
+    }
+    .close{
+        top:5%;
+    }
+}
+@media (max-width: 620px) {
+    .moduleContentActive{
+        height: 100%;
+        overflow: auto;
+        transform: scale(1);
+        padding: 20px;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .close{
+        top:5%;
+    }
+    .title{
+        font-size: 24px;
+    }
+}
+
+@media (max-height: 880px) and (min-width: 1024px){
+    .moduleContentActive{
+        height: 60%;
+        transform: scale(0.9);
+    }
+}

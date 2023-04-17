@@ -1,0 +1,28 @@
+.map{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    height: 100vh;
+    max-height: 100vh;
+    color: white;
+    background-color: #222223;
+}
+.container{
+    padding: 100px 10px;
+    max-width: 1500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.full{
+    max-width: 1920px;
+    width: 100%;
+}
+
+@media screen and (max-width: 420px) {
+    .full{
+        max-height: 500px;
+    }
+}
