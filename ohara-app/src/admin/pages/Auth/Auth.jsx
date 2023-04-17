@@ -31,9 +31,10 @@ const LoginForm = ({ handleSubmit }) => {
   );
 };
 
-const Auth = memo(() => {
+const Auth = memo(({ setAdmin }) => {
   const onSubmit = (formData) => {
     console.log(formData);
+    formData && setAdmin(true);
   };
   return (
     <div className={styles.container}>

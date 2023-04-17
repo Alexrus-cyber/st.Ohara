@@ -9,7 +9,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import cl from "classnames";
 
 const drawerWidth = "100%";
-const Navbar = memo(() => {
+const Navbar = memo(({ setAdmin }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -68,17 +68,20 @@ const Navbar = memo(() => {
           )}
         </IconButton>
         <div className={styles.navbarSecret}>
-          <ContentNavbar handleDrawerClose={handleDrawerClose} />
+          <ContentNavbar
+            setAdmin={setAdmin}
+            handleDrawerClose={handleDrawerClose}
+          />
         </div>
       </Drawer>
       <div className={styles.navbar}>
-        <ContentNavbar />
+        <ContentNavbar setAdmin={setAdmin} />
       </div>
     </>
   );
 });
 
-const ContentNavbar = ({ handleDrawerClose }) => {
+const ContentNavbar = ({ handleDrawerClose, setAdmin }) => {
   const arr = [
     { id: 5, src: "/landingAdmin", text: "Главная" },
     { id: 1, src: "/menuAdmin", text: "Меню" },
@@ -109,6 +112,11 @@ const ContentNavbar = ({ handleDrawerClose }) => {
           </NavLink>
         ))}
       </div>
+      <button onClick={() => setAdmin(false)} className={styles.buttonBack}>
+        <NavLink className={styles.back} to={"/"}>
+          Выйти
+        </NavLink>
+      </button>
     </>
   );
 };
