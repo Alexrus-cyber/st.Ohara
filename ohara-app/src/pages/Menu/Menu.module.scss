@@ -16,7 +16,6 @@
   padding: 150px 50px 0 50px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
@@ -55,6 +54,17 @@
   max-width: 300px;
   width: 100%;
   max-height: 280px;
+  cursor: pointer;
+  margin: 50px;
+  border-radius: 10px;
+  transition-duration: 0.5s;
+}
+
+.imgLoad {
+  max-width: 300px;
+  width: 100%;
+  max-height: 280px;
+  background: rgba(192, 192, 192, 0.55);
   cursor: pointer;
   margin: 50px;
   border-radius: 10px;
