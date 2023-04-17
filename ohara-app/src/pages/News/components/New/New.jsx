@@ -1,9 +1,9 @@
 import styles from "./New.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { getNew } from "../../../../slices/news";
 
-export const New = () => {
+export const New = memo(() => {
   const { oneNew } = useSelector((state) => state.news);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,4 +22,5 @@ export const New = () => {
       </div>
     </section>
   );
-};
+});
+export default New;

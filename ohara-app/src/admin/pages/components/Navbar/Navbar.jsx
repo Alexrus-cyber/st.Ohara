@@ -1,15 +1,15 @@
 import styles from "./Navbar.module.scss";
-import admin from "../../../../assets/logo.png";
+import admin from "../../../../assets/logo.webp";
 import { NavLink } from "react-router-dom";
 import { AppBar, Drawer, IconButton, Toolbar, useTheme } from "@mui/material";
-import { useState } from "react";
+import { memo, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import cl from "classnames";
 
 const drawerWidth = "100%";
-export const Navbar = () => {
+const Navbar = memo(() => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -76,7 +76,7 @@ export const Navbar = () => {
       </div>
     </>
   );
-};
+});
 
 const ContentNavbar = ({ handleDrawerClose }) => {
   const arr = [
@@ -112,3 +112,4 @@ const ContentNavbar = ({ handleDrawerClose }) => {
     </>
   );
 };
+export default Navbar;

@@ -14,7 +14,7 @@ const initialModalState = {
   id: nanoid(5),
 };
 
-export const GalleryAdmin = () => {
+const GalleryAdmin = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalState, setModalState] = useState(initialModalState);
@@ -96,3 +96,4 @@ export const GalleryAdmin = () => {
     </section>
   );
 };
+export default GalleryAdmin;

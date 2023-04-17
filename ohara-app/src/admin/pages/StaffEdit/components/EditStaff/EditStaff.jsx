@@ -3,8 +3,9 @@ import { reduxForm } from "redux-form";
 import { FieldCreator } from "../../../Auth/components/Form/FormCreators";
 import { ButtonUI } from "../../../components/ButtonUI/ButtonUI";
 import { inputsRegister } from "../../../Auth/components/Constant";
+import { memo } from "react";
 
-export const EditStaff = ({ user }) => {
+const EditStaff = memo(({ user }) => {
   const onSubmit = (formData) => {
     console.log(formData);
   };
@@ -14,7 +15,7 @@ export const EditStaff = ({ user }) => {
       <RegisterReduxForm initialValues={user} onSubmit={onSubmit} />
     </div>
   );
-};
+});
 
 const RegisterForm = ({ handleSubmit }) => {
   return (
@@ -40,5 +41,5 @@ const RegisterForm = ({ handleSubmit }) => {
     </form>
   );
 };
-
+export default EditStaff;
 const RegisterReduxForm = reduxForm({ form: "registration" })(RegisterForm);

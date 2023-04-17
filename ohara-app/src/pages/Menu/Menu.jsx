@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, memo } from "react";
 import ImageViewer from "react-simple-image-viewer";
 import styles from "./Menu.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getMenuData, listImagesSelector } from "../../slices/menu";
 
-export const Menu = () => {
+const Menu = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const dispatch = useDispatch();
@@ -54,4 +54,6 @@ export const Menu = () => {
       </div>
     </section>
   );
-};
+});
+
+export default Menu;

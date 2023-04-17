@@ -1,5 +1,5 @@
 import styles from "./Header.module.scss";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.webp";
 import { NavLink } from "react-router-dom";
 import { AppBar, Drawer, IconButton, Toolbar, useTheme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -9,7 +9,7 @@ import { useState } from "react";
 import cl from "classnames";
 
 const drawerWidth = "100%";
-export const Header = () => {
+const Header = () => {
   const arr = [
     { id: 1, text: "Главная", path: "/" },
     { id: 2, text: "Меню", path: "/Menu" },
@@ -114,3 +114,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;

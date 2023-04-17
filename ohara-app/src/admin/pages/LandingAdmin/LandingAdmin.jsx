@@ -27,7 +27,7 @@ const LandingForm = memo(({ handleSubmit, data }) => {
   );
 });
 
-export const LandingAdmin = memo(() => {
+const LandingAdmin = memo(() => {
   const { loading } = useSelector((state) => state.landing);
   const { landingList } = useSelector((state) => state.landing);
   const dispatch = useDispatch();
@@ -54,5 +54,5 @@ export const LandingAdmin = memo(() => {
     </>
   );
 });
-
+export default LandingAdmin;
 const LandingReduxForm = reduxForm({ form: "landing" })(LandingForm);

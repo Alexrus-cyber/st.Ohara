@@ -3,11 +3,11 @@ import logo from "../../assets/logo.png";
 import insta from "../../assets/insta.png";
 import vk from "../../assets/vk.png";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { getNewsData } from "../../slices/news";
 import { NavLink } from "react-router-dom";
 
-export const Footer = () => {
+const Footer = memo(() => {
   const { news } = useSelector((state) => state.news);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -55,4 +55,6 @@ export const Footer = () => {
       </p>
     </footer>
   );
-};
+});
+
+export default Footer;

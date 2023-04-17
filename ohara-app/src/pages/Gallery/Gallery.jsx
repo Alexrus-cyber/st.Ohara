@@ -1,10 +1,10 @@
 import styles from "./Gallery.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import ImageViewer from "react-simple-image-viewer";
 import { getGalleryData } from "../../slices/gallery";
 
-export const Gallery = () => {
+const Gallery = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const dispatch = useDispatch();
@@ -55,4 +55,5 @@ export const Gallery = () => {
       </div>
     </section>
   );
-};
+});
+export default Gallery;

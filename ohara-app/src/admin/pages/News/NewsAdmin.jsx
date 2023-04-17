@@ -1,7 +1,7 @@
 import styles from "./News.module.scss";
 import { Card } from "./component/Card/Card";
 import { Search } from "../../components/Search/Search";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { Module } from "../../components/Module/Module";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewsData, setSearchValue } from "../../../slices/news";
@@ -16,7 +16,7 @@ const initialModalState = {
   id: nanoid(5),
 };
 
-export const NewsAdmin = () => {
+export const NewsAdmin = memo(() => {
   const [modalState, setModalState] = useState(initialModalState);
   const [isOpenModal, setOpenModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -119,4 +119,5 @@ export const NewsAdmin = () => {
       {getModalWindow}
     </>
   );
-};
+});
+export default NewsAdmin;
