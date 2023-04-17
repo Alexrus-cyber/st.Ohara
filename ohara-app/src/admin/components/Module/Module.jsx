@@ -1,13 +1,16 @@
 import styles from "./Module.module.scss";
 
-export const Module = ({ active, children, onClose, title, setIsEdit }) => {
+export const Module = ({
+  active,
+  children,
+  onClose,
+  title = "",
+  setIsEdit,
+}) => {
   if (active) {
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "auto";
-  }
-  if (!title) {
-    title = "";
   }
 
   return (
@@ -15,9 +18,7 @@ export const Module = ({ active, children, onClose, title, setIsEdit }) => {
       className={active ? styles.active : styles.module}
       onClick={() => {
         onClose();
-        if (setIsEdit) {
-          setIsEdit(false);
-        }
+        setIsEdit && setIsEdit(false);
       }}
     >
       <div

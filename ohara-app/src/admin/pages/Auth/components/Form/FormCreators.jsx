@@ -41,7 +41,7 @@ export const InputUI = memo(
               })}
               {...input}
               {...props}
-            ></input>
+            />
           )}
           {typeInput === "reg" && (
             <input
@@ -50,7 +50,7 @@ export const InputUI = memo(
               })}
               {...input}
               {...props}
-            ></input>
+            />
           )}
         </label>
         <div>
