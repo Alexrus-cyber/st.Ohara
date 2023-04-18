@@ -35,7 +35,7 @@ const Menu = memo(() => {
         <div className={styles.content}>
           {images.map((i, index) => (
             <LoadableImage
-              key={index}
+              key={i.id}
               src={i.img}
               onClick={() => openImageViewer(index)}
               alt="menu"

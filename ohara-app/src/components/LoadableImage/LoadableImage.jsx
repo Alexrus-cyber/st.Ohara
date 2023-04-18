@@ -4,10 +4,10 @@ import cn from "classnames";
 import useOnScreen from "../hoocks/useOnScreen";
 
 const LoadableImage = (props) => {
-  const { src, alt = "", onLoad = () => {} } = props;
+  const { src, alt = "" } = props;
   const [isLoaded, setIsLoaded] = useState(false);
-  const imageRef = useRef();
-  const containerRef = useRef();
+  const imageRef = useRef(null);
+  const containerRef = useRef(null);
   const isVisible = useOnScreen(containerRef);
 
   useEffect(() => {
@@ -17,10 +17,9 @@ const LoadableImage = (props) => {
     if (imageRef.current) {
       imageRef.current.onload = () => {
         setIsLoaded(true);
-        onLoad();
       };
     }
-  }, [isVisible, onLoad, isLoaded]);
+  }, [isVisible, isLoaded]);
 
   return (
     <div
