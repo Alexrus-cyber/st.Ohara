@@ -33,7 +33,7 @@ const Gallery = lazy(() => import("./pages/Gallery/Gallery"));
 const NotFound = lazy(() => import("./components/NotFound/NotFound"));
 
 function App() {
-  const [admin, setAdmin] = useState(true);
+  const [admin, setAdmin] = useState(false);
 
   return (
     <BrowserRouter>
@@ -56,6 +56,7 @@ function App() {
                 <Route path={"/registration"} element={<Registration />} />
                 <Route path={"/staff"} element={<Staff />} />
                 <Route path={"/editStaff"} element={<EditStaff />} />
+                <Route path={"/*"} element={<NotFound />} />
               </Routes>
             </Suspense>
           </div>

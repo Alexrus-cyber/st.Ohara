@@ -7,7 +7,6 @@ import { deleteItemGallery, getGalleryData } from "../../../slices/gallery";
 import { nanoid } from "@reduxjs/toolkit";
 import { DeleteModule } from "../components/DeleteModule/DeleteModule";
 import { Module } from "../../components/Module/Module";
-import { Loader } from "../../../components/Loader/Loader";
 
 const initialModalState = {
   src: null,
@@ -18,7 +17,7 @@ const GalleryAdmin = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalState, setModalState] = useState(initialModalState);
-  const { images, loading } = useSelector((state) => state.gallery);
+  const { images } = useSelector((state) => state.gallery);
   const [isOpenModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -47,9 +46,7 @@ const GalleryAdmin = () => {
     setModalState(initialModalState);
   }, []);
 
-  return loading ? (
-    <Loader />
-  ) : (
+  return (
     <section className={styles.container}>
       <h1 className={styles.title}>Галерея</h1>
       <div className={styles.cardContainer}>

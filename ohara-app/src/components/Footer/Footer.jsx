@@ -17,7 +17,13 @@ const Footer = memo(() => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.left}>
-          <img className={styles.img} src={logo} alt={"stOhara"} />
+          <NavLink
+            className={styles.imgContainer}
+            onClick={() => window.scrollTo(0, 0)}
+            to={"/"}
+          >
+            <img className={styles.img} src={logo} alt={"stOhara"} />
+          </NavLink>
           <p className={styles.textLeft}>
             Ammolite - The Lighthouse Restaurant Peter-Thumb-Straße 6 77977 Rust
             Deutschland
