@@ -76,7 +76,6 @@ export const NewsAdmin = memo(() => {
           <div className={styles.middle}>
             <div className={styles.newsDate}>
               <h1 className={styles.title}>Новости</h1>
-              <button className={styles.date}>по дате</button>
             </div>
             <button
               onClick={() => {
