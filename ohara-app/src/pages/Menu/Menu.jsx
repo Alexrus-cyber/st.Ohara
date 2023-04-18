@@ -36,6 +36,7 @@ const Menu = memo(() => {
             <LoadableImage
               key={i.id}
               src={i.img}
+              casual={true}
               onClick={() => openImageViewer(index)}
               alt="menu"
             />

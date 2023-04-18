@@ -3,7 +3,7 @@ import styles from "./LoadableImage.module.scss";
 import cn from "classnames";
 import { useInView } from "react-intersection-observer";
 
-const LoadableImage = ({ src, alt, onClick }) => {
+const LoadableImage = ({ src, alt, onClick, admin, casual, custom }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const imageRef = useRef(null);
@@ -28,11 +28,15 @@ const LoadableImage = ({ src, alt, onClick }) => {
     setIsVisible(true);
   }
 
+  console.log(isVisible);
   return (
     <div
       ref={ref}
-      className={cn(styles.container, {
+      className={cn({
+        [styles.admin]: admin,
         [styles.containerLoaded]: isVisible,
+        [styles.container]: casual,
+        [custom]: custom,
       })}
     >
       {(isVisible || isLoaded) && (

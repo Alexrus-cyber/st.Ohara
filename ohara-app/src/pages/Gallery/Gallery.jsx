@@ -36,6 +36,7 @@ const Gallery = memo(() => {
           {images.map((i, index) => (
             <LoadableImage
               key={index}
+              casual={true}
               src={i.img}
               onClick={() => openImageViewer(index)}
               alt="gallery"

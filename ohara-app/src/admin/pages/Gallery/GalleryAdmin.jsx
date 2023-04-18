@@ -7,6 +7,7 @@ import { deleteItemGallery, getGalleryData } from "../../../slices/gallery";
 import { nanoid } from "@reduxjs/toolkit";
 import { DeleteModule } from "../components/DeleteModule/DeleteModule";
 import { Module } from "../../components/Module/Module";
+import LoadableImage from "../../../components/LoadableImage/LoadableImage";
 
 const initialModalState = {
   src: null,
@@ -52,8 +53,8 @@ const GalleryAdmin = () => {
       <div className={styles.cardContainer}>
         {images.map((element, index) => (
           <div key={element.id} className={styles.closeContainer}>
-            <img
-              className={styles.img}
+            <LoadableImage
+              admin={true}
               src={element.img}
               onClick={() => openImageViewer(index)}
               alt=""
