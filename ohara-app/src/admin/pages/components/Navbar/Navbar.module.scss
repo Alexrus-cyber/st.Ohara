@@ -203,3 +203,50 @@
     font-size: 24px;
   }
 }
+
+@media screen and (max-height: 800px) {
+  .navbar {
+    display: none;
+  }
+  .title {
+    position: unset;
+    padding: 0;
+  }
+  .secret {
+    display: unset;
+    visibility: visible;
+    background-color: transparent;
+    box-shadow: unset;
+    z-index: 100000;
+  }
+  .links {
+    font-size: 36px;
+    position: unset;
+    max-width: 100%;
+    padding: 0;
+  }
+  .img {
+    position: unset;
+    padding: 0;
+  }
+  .name {
+    position: unset;
+    padding: 0 0 40px 0;
+  }
+  .active {
+    width: 100%;
+    color: #7D4A7D;
+    background: transparent;
+  }
+  .link {
+    width: 100%;
+  }
+  .link:hover {
+    background: transparent;
+    color: #7D4A7D;
+  }
+  .buttonBack {
+    position: unset;
+    padding: 20px 0;
+  }
+}

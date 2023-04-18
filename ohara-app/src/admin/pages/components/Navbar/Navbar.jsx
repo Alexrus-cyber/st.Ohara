@@ -6,7 +6,6 @@ import { memo, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import cl from "classnames";
 
 const drawerWidth = "100%";
 const Navbar = memo(({ setAdmin }) => {
@@ -103,9 +102,7 @@ const ContentNavbar = ({ handleDrawerClose, setAdmin }) => {
             to={e.src}
             onClick={handleDrawerClose}
             className={({ isActive }) =>
-              cl(styles.link, {
-                [styles.active]: isActive,
-              })
+              isActive ? styles.active : styles.link
             }
           >
             {e.text}

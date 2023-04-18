@@ -7,7 +7,6 @@ import { getLandingData } from "../../../slices/landing";
 import styles from "./LandingAdmin.module.scss";
 import { ButtonUI } from "../components/ButtonUI/ButtonUI";
 import { reduxForm } from "redux-form";
-import { Loader } from "../../../components/Loader/Loader";
 
 const LandingForm = memo(({ handleSubmit, data }) => {
   const customButton = {
@@ -43,7 +42,7 @@ const LandingAdmin = memo(() => {
   return (
     <>
       {loading ? (
-        <Loader />
+        ""
       ) : (
         <LandingReduxForm
           initialValues={landingList}

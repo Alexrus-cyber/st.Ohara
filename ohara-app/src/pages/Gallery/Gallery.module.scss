@@ -80,3 +80,9 @@
     font-size: 30px;
   }
 }
+
+@media screen and (max-height: 750px) {
+  .container {
+    padding: 0;
+  }
+}

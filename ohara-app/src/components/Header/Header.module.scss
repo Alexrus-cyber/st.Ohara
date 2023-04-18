@@ -102,6 +102,7 @@
 @media screen and (max-width: 900px) {
   .container {
     justify-content: center;
+    padding: 0;
   }
   .middle {
     display: none;
@@ -181,6 +182,55 @@
   }
   .active {
     padding: 5px 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-height: 750px) {
+  .container {
+    justify-content: center;
+  }
+  .middle {
+    display: none;
+    visibility: collapse;
+  }
+  .imgSecret {
+    padding: 0;
+  }
+  .title {
+    position: unset;
+    padding: 0;
+  }
+  .secret {
+    display: unset;
+    visibility: visible;
+    background-color: transparent;
+    box-shadow: unset;
+    z-index: 100000;
+  }
+  .links {
+    font-size: 36px;
+    position: unset;
+    max-width: 100%;
+    padding: 0;
+    color: black;
+  }
+  .img {
+    position: unset;
+    padding: 0;
+    display: none;
+  }
+  .name {
+    position: unset;
+    padding: 0 0 40px 0;
+  }
+  .active {
+    width: 100%;
+    padding: 15px 0;
+  }
+  .link {
+    padding: 15px 0;
+    color: black;
     width: 100%;
   }
 }
