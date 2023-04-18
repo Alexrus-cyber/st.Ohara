@@ -171,8 +171,17 @@
   }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 400px) {
   .img {
     padding: 50px 0;
+  }
+  .link {
+    padding: 5px 0;
+    color: black;
+    width: 100%;
+  }
+  .active {
+    padding: 5px 0;
+    width: 100%;
   }
 }

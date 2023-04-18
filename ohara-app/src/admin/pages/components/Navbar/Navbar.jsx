@@ -1,5 +1,5 @@
 import styles from "./Navbar.module.scss";
-import admin from "../../../../assets/logo.webp";
+import admin from "../../../../assets/logotest.webp";
 import { NavLink } from "react-router-dom";
 import { AppBar, Drawer, IconButton, Toolbar, useTheme } from "@mui/material";
 import { memo, useState } from "react";

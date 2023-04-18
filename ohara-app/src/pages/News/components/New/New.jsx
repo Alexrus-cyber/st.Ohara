@@ -8,6 +8,7 @@ export const New = memo(() => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNew());
+    window.scrollTo(0, 0);
   }, [dispatch]);
   return (
     <section className={styles.new}>

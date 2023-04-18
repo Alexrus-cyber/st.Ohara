@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import ImageViewer from "react-simple-image-viewer";
 import { getGalleryData } from "../../slices/gallery";
+import LoadableImage from "../../components/LoadableImage/LoadableImage";
 
 const Gallery = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -12,9 +13,10 @@ const Gallery = memo(() => {
   //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
   useEffect(() => {
     dispatch(getGalleryData());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
-  const { images, loading } = useSelector((state) => state.gallery);
+  const { images } = useSelector((state) => state.gallery);
 
   const openImageViewer = useCallback((index) => {
     setCurrentImage(index);
@@ -26,20 +28,17 @@ const Gallery = memo(() => {
     setIsViewerOpen(false);
   };
 
-  return loading ? (
-    " "
-  ) : (
+  return (
     <section className={styles.Gallery}>
       <div className={styles.container}>
         <h1 className={styles.title}>Наши фотографии</h1>
         <div className={styles.content}>
           {images.map((i, index) => (
-            <img
-              className={styles.img}
+            <LoadableImage
+              key={index}
               src={i.img}
               onClick={() => openImageViewer(index)}
-              key={i.id}
-              alt=""
+              alt="gallery"
             />
           ))}
           {isViewerOpen && (

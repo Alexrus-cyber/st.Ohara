@@ -16,6 +16,7 @@ const Landing = memo(() => {
 
   useEffect(() => {
     dispatch(getLandingData());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   return (

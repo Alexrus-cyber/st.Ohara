@@ -12,7 +12,7 @@ import { Loader } from "../../../components/Loader/Loader";
 const LandingForm = memo(({ handleSubmit, data }) => {
   const customButton = {
     position: "fixed",
-    top: "90%",
+    top: "87%",
     zIndex: 10000,
     fontSize: 26,
   };

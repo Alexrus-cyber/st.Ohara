@@ -3,6 +3,7 @@ import ImageViewer from "react-simple-image-viewer";
 import styles from "./Menu.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getMenuData, listImagesSelector } from "../../slices/menu";
+import LoadableImage from "../../components/LoadableImage/LoadableImage";
 
 const Menu = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -12,6 +13,7 @@ const Menu = memo(() => {
   //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
   useEffect(() => {
     dispatch(getMenuData());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   const images = useSelector(listImagesSelector);
@@ -30,15 +32,13 @@ const Menu = memo(() => {
     <section className={styles.menu}>
       <div className={styles.container}>
         <h1 className={styles.title}>Меню</h1>
-        <div className={styles.gallery}>
+        <div className={styles.content}>
           {images.map((i, index) => (
-            <img
-              className={styles.img}
+            <LoadableImage
+              key={index}
               src={i.img}
               onClick={() => openImageViewer(index)}
-              width="300"
-              key={i.id}
-              alt=""
+              alt="menu"
             />
           ))}
           {isViewerOpen && (

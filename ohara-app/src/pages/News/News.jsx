@@ -10,6 +10,7 @@ const News = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewsData());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   return (

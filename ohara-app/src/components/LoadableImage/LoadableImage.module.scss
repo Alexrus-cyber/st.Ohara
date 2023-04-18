@@ -1,0 +1,85 @@
+.container {
+  background: linear-gradient(101.42deg, #1b2026 -0.04%, rgba(12, 41, 72, 0.27) 94.2%);
+  box-sizing: border-box;
+  overflow: hidden;
+  max-width: 300px;
+  width: 300px;
+  max-height: 210px;
+  height: 210px;
+  position: relative;
+  cursor: pointer;
+  margin: 50px;
+  border-radius: 10px;
+  transition-duration: 0.5s;
+}
+
+.container::before {
+  content: '';
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  left: -150px;
+  top: 0;
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(to right, transparent 0%, #26b3ff17 50%, transparent 100%);
+  animation: load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  transition-duration: 0.5s;
+}
+
+
+@keyframes load {
+  from {
+    left: -150px;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+.containerLoaded::before {
+  animation: none;
+}
+
+
+.image {
+  opacity: 0;
+  width: 100%;
+  min-height: 150px;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: 0.5s;
+  transition: opacity .3s ease-in-out;
+}
+
+.imageLoaded {
+  opacity: 1;
+  min-height: unset;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    margin: 25px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .container {
+    margin: 10px 10px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    margin: 10px 10px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .container {
+    height: unset;
+    width: 100%;
+  }
+
+}

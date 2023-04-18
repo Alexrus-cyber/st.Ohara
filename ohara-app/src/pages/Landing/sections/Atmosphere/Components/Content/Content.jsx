@@ -27,11 +27,9 @@ export const Content = (props) => {
             <p className={styles.text}>{props.text2}</p>
             <div className={styles.buttonContainer}>
               <div className={styles.backButton}></div>
-              <button className={styles.button}>
-                <NavLink className={styles.link} to={"/menu"}>
-                  Меню
-                </NavLink>
-              </button>
+              <NavLink className={styles.button} to={"/menu"}>
+                Меню
+              </NavLink>
             </div>
           </div>
           <div className={styles.backContainer}>

@@ -98,6 +98,10 @@
 
 .button {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
   max-width: 256px;
   width: 100%;
   height: 74px;
