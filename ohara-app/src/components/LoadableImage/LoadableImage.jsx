@@ -3,13 +3,17 @@ import styles from "./LoadableImage.module.scss";
 import cn from "classnames";
 import { useInView } from "react-intersection-observer";
 
-const LoadableImage = ({ src, alt, onClick, admin, casual, custom }) => {
+// admin = "false" - обычный стиль без кастома без марджина
+// custom = "false" - стиль приходящий из вне пропсами
+
+const LoadableImage = ({ src, alt, onClick, admin, custom }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const imageRef = useRef(null);
   const { ref, inView } = useInView({
     threshold: 0.3,
   });
+
   useEffect(() => {
     if (inView) {
       setIsLoaded(true);
@@ -28,14 +32,12 @@ const LoadableImage = ({ src, alt, onClick, admin, casual, custom }) => {
     setIsVisible(true);
   }
 
-  console.log(isVisible);
   return (
     <div
       ref={ref}
-      className={cn({
+      className={cn(styles.container, {
         [styles.admin]: admin,
         [styles.containerLoaded]: isVisible,
-        [styles.container]: casual,
         [custom]: custom,
       })}
     >

@@ -33,7 +33,7 @@ const Gallery = lazy(() => import("./pages/Gallery/Gallery"));
 const NotFound = lazy(() => import("./components/NotFound/NotFound"));
 
 function App() {
-  const [admin, setAdmin] = useState(false);
+  const [admin, setAdmin] = useState(true);
 
   return (
     <BrowserRouter>
