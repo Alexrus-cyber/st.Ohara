@@ -1,42 +1,50 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./LoadableImage.module.scss";
 import cn from "classnames";
-import useOnScreen from "../hoocks/useOnScreen";
+import { useInView } from "react-intersection-observer";
 
-const LoadableImage = (props) => {
-  const { src, alt = "" } = props;
+const LoadableImage = ({ src, alt, onClick }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const imageRef = useRef(null);
-  const containerRef = useRef(null);
-  const isVisible = useOnScreen(containerRef);
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+  });
+  useEffect(() => {
+    if (inView) {
+      setIsLoaded(true);
+    }
+  }, [inView]);
 
   useEffect(() => {
-    if (!isVisible || isLoaded) {
-      return;
-    }
-    if (imageRef.current) {
+    if (imageRef.current?.complete) {
       imageRef.current.onload = () => {
-        setIsLoaded(true);
+        onLoad();
       };
     }
-  }, [isVisible, isLoaded]);
+  }, [isLoaded]);
+
+  function onLoad() {
+    setIsVisible(true);
+  }
 
   return (
     <div
-      ref={containerRef}
+      ref={ref}
       className={cn(styles.container, {
-        [styles.containerLoaded]: isLoaded,
+        [styles.containerLoaded]: isVisible,
       })}
     >
       {(isVisible || isLoaded) && (
         <img
-          {...props}
           ref={imageRef}
+          onClick={onClick}
           className={cn(styles.image, {
-            [styles.imageLoaded]: isLoaded,
+            [styles.imageLoaded]: isVisible,
           })}
           src={src}
           alt={alt}
+          onLoad={onLoad}
         />
       )}
     </div>

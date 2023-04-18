@@ -9,7 +9,6 @@ const Menu = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const dispatch = useDispatch();
-
   //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
   useEffect(() => {
     dispatch(getMenuData());
