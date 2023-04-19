@@ -3,10 +3,11 @@ import styles from "./LoadableImage.module.scss";
 import cn from "classnames";
 import { useInView } from "react-intersection-observer";
 
-// admin = "false" - обычный стиль без кастома без марджина
-// custom = "false" - стиль приходящий из вне пропсами
+// imgStyle !== undefined - кастомный стиль картинки приходящий из вне пропсами
+// custom !== undefined - кастомный стиль контейнера приходящий из вне пропсами
+// slider === true - стиль для работы с библиотекой слайдер
 
-const LoadableImage = ({ src, alt, onClick, admin, custom }) => {
+const LazyLoadImage = ({ src, alt, onClick, custom, imgStyle, slider }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const imageRef = useRef(null);
@@ -36,9 +37,9 @@ const LoadableImage = ({ src, alt, onClick, admin, custom }) => {
     <div
       ref={ref}
       className={cn(styles.container, {
-        [styles.admin]: admin,
         [styles.containerLoaded]: isVisible,
         [custom]: custom,
+        [styles.slider]: slider,
       })}
     >
       {(isVisible || isLoaded) && (
@@ -47,6 +48,7 @@ const LoadableImage = ({ src, alt, onClick, admin, custom }) => {
           onClick={onClick}
           className={cn(styles.image, {
             [styles.imageLoaded]: isVisible,
+            [imgStyle]: imgStyle,
           })}
           src={src}
           alt={alt}
@@ -57,4 +59,4 @@ const LoadableImage = ({ src, alt, onClick, admin, custom }) => {
   );
 };
 
-export default LoadableImage;
+export default LazyLoadImage;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import ImageViewer from "react-simple-image-viewer";
 import { getGalleryData } from "../../slices/gallery";
-import LoadableImage from "../../components/LoadableImage/LoadableImage";
+import LazyLoadImage from "../../components/LazyLoadImage/LazyLoadImage";
 
 const Gallery = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -34,12 +34,15 @@ const Gallery = memo(() => {
         <h1 className={styles.title}>Наши фотографии</h1>
         <div className={styles.content}>
           {images.map((i, index) => (
-            <LoadableImage
-              key={index}
-              src={i.img}
-              onClick={() => openImageViewer(index)}
-              alt="gallery"
-            />
+            <div className={styles.img} key={i.id}>
+              <LazyLoadImage
+                src={i.img}
+                custom={styles.border}
+                imgStyle={styles.border}
+                onClick={() => openImageViewer(index)}
+                alt="menu"
+              />
+            </div>
           ))}
           {isViewerOpen && (
             <ImageViewer

@@ -2,6 +2,7 @@ import React from "react";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import styles from "./Slider.module.scss";
+import LazyLoadImage from "../../../../components/LazyLoadImage/LazyLoadImage";
 
 export const Slider = ({ slider }) => {
   return (
@@ -9,7 +10,7 @@ export const Slider = ({ slider }) => {
       <Fade cssClass={styles.sliderMain}>
         {slider.images.map((fadeImage, index) => (
           <div className={styles.imgContainer} key={index}>
-            <img className={styles.img} src={fadeImage.src} alt={"fdsfds"} />
+            <LazyLoadImage slider={true} src={fadeImage.src} alt={"slider"} />
             <div className={styles.text}>
               <p>{fadeImage.caption}</p>
             </div>

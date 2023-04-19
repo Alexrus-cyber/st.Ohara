@@ -5,6 +5,7 @@ import { Atmosphere } from "./sections/Atmosphere/Atmosphere";
 import { memo, useEffect, Suspense, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLandingData } from "../../slices/landing";
+import { LoaderPage } from "../../components/LoaderPage/LoaderPage";
 
 const Map = lazy(() => import("./sections/Map/Map"));
 const Landing = memo(() => {
@@ -29,7 +30,9 @@ const Landing = memo(() => {
         <>
           <Hero hero={hero} />
           <About about={about} />
-          <Slider slider={slider} />
+          <Suspense fallback={<LoaderPage />}>
+            <Slider slider={slider} />
+          </Suspense>
           <Atmosphere atmosphere={atmosphere} />
           <Suspense fallback={<div>Loading...</div>}>
             <Map />

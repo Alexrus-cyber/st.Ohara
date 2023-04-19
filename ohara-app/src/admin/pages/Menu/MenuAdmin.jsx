@@ -7,7 +7,7 @@ import { deleteItemMenu, getMenuData } from "../../../slices/menu";
 import { Module } from "../../components/Module/Module";
 import { DeleteModule } from "../components/DeleteModule/DeleteModule";
 import { nanoid } from "@reduxjs/toolkit";
-import LoadableImage from "../../../components/LoadableImage/LoadableImage";
+import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
 
 const initialModalState = {
   src: null,
@@ -52,8 +52,9 @@ const MenuAdmin = memo(() => {
         <AddCard />
         {images.map((element, index) => (
           <div key={element.id} className={styles.closeContainer}>
-            <LoadableImage
-              admin={true}
+            <LazyLoadImage
+              custom={styles.custom}
+              imgStyle={styles.custom}
               src={element.img}
               onClick={() => openImageViewer(index)}
               alt=""

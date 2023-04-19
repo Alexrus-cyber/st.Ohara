@@ -112,11 +112,11 @@ const ContentNavbar = ({ handleDrawerClose, setAdmin }) => {
       <button
         onClick={() => {
           setAdmin(false);
-          handleDrawerClose();
+          handleDrawerClose;
         }}
         className={styles.buttonBack}
       >
-        <NavLink className={styles.back} to={"/"}>
+        <NavLink onClick={handleDrawerClose} className={styles.back} to={"/"}>
           Выйти
         </NavLink>
       </button>
