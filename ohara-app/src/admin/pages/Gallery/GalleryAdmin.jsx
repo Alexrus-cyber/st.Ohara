@@ -3,11 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Gallery.module.scss";
 import ImageViewer from "react-simple-image-viewer";
 import { AddCard } from "./AddCard/AddCard";
-import { deleteItemGallery, getGalleryData } from "../../../slices/gallery";
+import {
+  deleteItemGallery,
+  getGalleryData,
+  reOrderList,
+} from "../../../slices/gallery";
 import { nanoid } from "@reduxjs/toolkit";
 import { DeleteModule } from "../components/DeleteModule/DeleteModule";
 import { Module } from "../../components/Module/Module";
 import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
+import { ReactSortable } from "react-sortablejs";
 
 const initialModalState = {
   src: null,
@@ -47,10 +52,31 @@ const GalleryAdmin = () => {
     setModalState(initialModalState);
   }, []);
 
+  const sortableOptions = {
+    animation: 250,
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    ghostClass: "ghost",
+    group: "grid",
+    forceFallback: true,
+  };
+
+  const listChangeHandler = useCallback((newState) => {
+    dispatch(reOrderList(newState));
+  }, []);
+
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Галерея</h1>
-      <div className={styles.cardContainer}>
+      <div className={styles.addContainer}>
+        <AddCard />
+      </div>
+      <ReactSortable
+        className={styles.cardContainer}
+        list={images.map((element) => ({ ...element }))}
+        setList={(newState) => listChangeHandler(newState)}
+        {...sortableOptions}
+      >
         {images.map((element, index) => (
           <div key={element.id} className={styles.closeContainer}>
             <LazyLoadImage
@@ -70,16 +96,6 @@ const GalleryAdmin = () => {
             </button>
           </div>
         ))}
-        {isViewerOpen && (
-          <ImageViewer
-            src={images.map((e) => e.img)}
-            currentIndex={currentImage}
-            disableScroll={true}
-            closeOnClickOutside={true}
-            onClose={closeImageViewer}
-          />
-        )}
-        <AddCard />
         <Module
           active={isOpenModal}
           setActive={setOpenModal}
@@ -91,7 +107,16 @@ const GalleryAdmin = () => {
             onClose={handleClickCloseModal}
           />
         </Module>
-      </div>
+      </ReactSortable>
+      {isViewerOpen && (
+        <ImageViewer
+          src={images.map((e) => e.img)}
+          currentIndex={currentImage}
+          disableScroll={true}
+          closeOnClickOutside={true}
+          onClose={closeImageViewer}
+        />
+      )}
     </section>
   );
 };

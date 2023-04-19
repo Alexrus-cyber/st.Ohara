@@ -62,46 +62,46 @@ const MenuAdmin = memo(() => {
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Меню</h1>
-      <AddCard />
-      {images && (
-        <ReactSortable
-          className={styles.cardContainer}
-          list={images.map((x) => ({ ...x }))}
-          setList={(newState) => listChangeHandler(newState)}
-          {...sortableOptions}
-        >
-          {images.map((element, index) => (
-            <div key={element.id} className={styles.closeContainer}>
-              <LazyLoadImage
-                custom={styles.custom}
-                imgStyle={styles.custom}
-                src={element.img}
-                onClick={() => openImageViewer(index)}
-                alt=""
-              />
-              <button
-                onClick={() => {
-                  handleClickOpenNews(element);
-                }}
-                className={styles.close}
-              >
-                x
-              </button>
-            </div>
-          ))}
-          <Module
-            active={isOpenModal}
-            setActive={setOpenModal}
-            onClose={handleClickCloseModal}
-          >
-            <DeleteModule
-              delete={deleteItemMenu}
-              id={modalState.id}
-              onClose={handleClickCloseModal}
+      <div className={styles.addContainer}>
+        <AddCard />
+      </div>
+      <ReactSortable
+        className={styles.cardContainer}
+        list={images.map((element) => ({ ...element }))}
+        setList={(newState) => listChangeHandler(newState)}
+        {...sortableOptions}
+      >
+        {images.map((element, index) => (
+          <div key={element.id} className={styles.closeContainer}>
+            <LazyLoadImage
+              custom={styles.custom}
+              imgStyle={styles.custom}
+              src={element.img}
+              onClick={() => openImageViewer(index)}
+              alt=""
             />
-          </Module>
-        </ReactSortable>
-      )}
+            <button
+              onClick={() => {
+                handleClickOpenNews(element);
+              }}
+              className={styles.close}
+            >
+              x
+            </button>
+          </div>
+        ))}
+        <Module
+          active={isOpenModal}
+          setActive={setOpenModal}
+          onClose={handleClickCloseModal}
+        >
+          <DeleteModule
+            delete={deleteItemMenu}
+            id={modalState.id}
+            onClose={handleClickCloseModal}
+          />
+        </Module>
+      </ReactSortable>
       {isViewerOpen && (
         <ImageViewer
           src={images.map((e) => e.img)}

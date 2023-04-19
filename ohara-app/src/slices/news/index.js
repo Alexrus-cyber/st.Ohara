@@ -64,7 +64,7 @@ export const newsSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getNewsData.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.news = payload;
+        state.news = payload.reverse();
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getNewsData.rejected, (state) => {

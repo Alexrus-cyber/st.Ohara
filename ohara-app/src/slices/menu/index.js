@@ -62,7 +62,7 @@ export const menuSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getMenuData.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = payload;
+        state.images = payload.reverse();
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getMenuData.rejected, (state) => {
@@ -85,7 +85,7 @@ export const menuSlice = createSlice({
       })
       .addCase(addItemMenu.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = [...state.images, payload];
+        state.images = [payload, ...state.images];
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(addItemMenu.rejected, (state) => {
