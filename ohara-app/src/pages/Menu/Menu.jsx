@@ -1,17 +1,18 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, memo } from "react";
 import ImageViewer from "react-simple-image-viewer";
 import styles from "./Menu.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getMenuData, listImagesSelector } from "../../slices/menu";
+import LazyLoadImage from "../../components/LazyLoadImage/LazyLoadImage";
 
-export const Menu = () => {
+const Menu = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const dispatch = useDispatch();
-
   //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
   useEffect(() => {
     dispatch(getMenuData());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   const images = useSelector(listImagesSelector);
@@ -30,16 +31,17 @@ export const Menu = () => {
     <section className={styles.menu}>
       <div className={styles.container}>
         <h1 className={styles.title}>Меню</h1>
-        <div className={styles.gallery}>
+        <div className={styles.content}>
           {images.map((i, index) => (
-            <img
-              className={styles.img}
-              src={i.img}
-              onClick={() => openImageViewer(index)}
-              width="300"
-              key={i.id}
-              alt=""
-            />
+            <div className={styles.img} key={i.id}>
+              <LazyLoadImage
+                src={i.img}
+                custom={styles.border}
+                imgStyle={styles.border}
+                onClick={() => openImageViewer(index)}
+                alt="menu"
+              />
+            </div>
           ))}
           {isViewerOpen && (
             <ImageViewer
@@ -54,4 +56,6 @@ export const Menu = () => {
       </div>
     </section>
   );
-};
+});
+
+export default Menu;

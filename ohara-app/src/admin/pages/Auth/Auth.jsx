@@ -3,6 +3,7 @@ import { FieldCreator } from "./components/Form/FormCreators";
 import { Field, reduxForm } from "redux-form";
 import { inputs } from "./components/Constant";
 import { ButtonUI } from "../components/ButtonUI/ButtonUI";
+import { memo } from "react";
 
 const LoginForm = ({ handleSubmit }) => {
   return (
@@ -30,9 +31,10 @@ const LoginForm = ({ handleSubmit }) => {
   );
 };
 
-export const Auth = () => {
+const Auth = memo(({ setAdmin }) => {
   const onSubmit = (formData) => {
     console.log(formData);
+    formData && setAdmin(true);
   };
   return (
     <div className={styles.container}>
@@ -44,6 +46,6 @@ export const Auth = () => {
       </div>
     </div>
   );
-};
-
+});
+export default Auth;
 const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);

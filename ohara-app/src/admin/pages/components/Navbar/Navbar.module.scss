@@ -62,7 +62,6 @@
   max-height: 428px;
   max-width: 400px;
   width: 100%;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,6 +89,23 @@
   visibility: collapse;
 }
 
+.buttonBack {
+  position: fixed;
+  border: transparent;
+  background: transparent;
+  font-weight: 700;
+  font-size: 26px;
+  top: 90%;
+}
+
+.back {
+  text-decoration: none;
+  color: black;
+}
+
+.back:hover {
+  color: #7d4a7d;
+}
 
 @media screen and (max-width: 1200px) {
   .navbar {
@@ -154,12 +170,28 @@
     margin: 0;
     padding: 0;
   }
-
+  .buttonBack {
+    position: unset;
+    padding: 20px 0;
+  }
 }
 
 @media screen and (max-width: 520px) {
   .links {
     font-size: 30px;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .link {
+    padding: 5px 0;
+    color: black;
+    width: 100%;
+  }
+  .active {
+    padding: 5px 0;
+    width: 100%;
   }
 }
 
@@ -169,5 +201,52 @@
   }
   .links {
     font-size: 24px;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  .navbar {
+    display: none;
+  }
+  .title {
+    position: unset;
+    padding: 0;
+  }
+  .secret {
+    display: unset;
+    visibility: visible;
+    background-color: transparent;
+    box-shadow: unset;
+    z-index: 100000;
+  }
+  .links {
+    font-size: 36px;
+    position: unset;
+    max-width: 100%;
+    padding: 0;
+  }
+  .img {
+    position: unset;
+    padding: 0;
+  }
+  .name {
+    position: unset;
+    padding: 0 0 40px 0;
+  }
+  .active {
+    width: 100%;
+    color: #7D4A7D;
+    background: transparent;
+  }
+  .link {
+    width: 100%;
+  }
+  .link:hover {
+    background: transparent;
+    color: #7D4A7D;
+  }
+  .buttonBack {
+    position: unset;
+    padding: 20px 0;
   }
 }

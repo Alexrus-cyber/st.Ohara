@@ -15,7 +15,6 @@
   width: 100%;
   padding: 150px 50px 0 50px;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
 }
@@ -115,7 +114,7 @@
 
 @media screen and (max-width: 720px) {
   .container {
-    padding: 150px 10px 0 10px;
+    padding: 0 10px 0 10px;
   }
   .gallery {
     padding: 0;
@@ -128,6 +127,31 @@
 @media screen and (max-width: 500px) {
   .secondNews {
     padding: 20px 0;
+  }
+  .textImg {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-height: 750px) {
+  .container {
+    padding: 0;
+  }
+  .mainNew {
+    max-width: 1000px;
+  }
+  .mainImg {
+    max-width: 800px;
+  }
+}
+
+@media screen and (max-height: 670px) {
+  .mainNew {
+    max-width: 900px;
+
+  }
+  .mainImg {
+    max-width: 700px;
   }
   .textImg {
     font-size: 30px;

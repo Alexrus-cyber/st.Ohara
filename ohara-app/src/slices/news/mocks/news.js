@@ -1,4 +1,4 @@
-import slider1 from "../../../assets/slider1.png";
+import slider1 from "../../../assets/slider1.webp";
 
 export const newsData = [
   {

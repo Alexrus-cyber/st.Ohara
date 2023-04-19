@@ -7,13 +7,14 @@
 
 .textContainer {
   max-width: 500px;
+  width: 500px;
 }
 
 .title {
   font-size: 20px;
-  margin: 20px 0;
+  margin-bottom: 20px;
   max-width: 401px;
-  width: 100%;
+  width: 95%;
   border-radius: 5px;
   outline: none;
   border: 1px solid #1C675A;
@@ -33,9 +34,10 @@
 .text {
   padding: 10px 0;
   font-size: 20px;
-  max-width: 405px;
+  max-width: 406px;
   width: 100%;
   max-height: 20vh;
+  min-height: 20vh;
   height: 20vh;
   resize: none;
   border-radius: 12px;
@@ -143,9 +145,7 @@
 
 .containerInput {
   position: relative;
-  max-width: 500px;
   width: 100%;
-
 }
 
 .containerInput:hover {
@@ -161,15 +161,14 @@
 }
 
 .titleInput {
-  position: absolute;
+  text-align: left;
   font-size: 14px;
   color: #1C675A;
 }
 
 .titleText {
-  position: absolute;
+  text-align: left;
   font-size: 14px;
-  top: 9%;
   color: #1C675A;
 }
 
@@ -196,8 +195,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
     text-align: center;
+    width: 100%;
   }
   .imgContainer {
     padding: 0;
@@ -218,5 +217,11 @@
   }
   .titleText {
     top: -8%;
+  }
+}
+
+@media screen and (max-width: 500px) and (max-height: 800px) {
+  .text {
+    min-height: 40vh;
   }
 }

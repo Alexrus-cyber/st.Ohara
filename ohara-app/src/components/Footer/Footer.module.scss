@@ -35,9 +35,12 @@
   margin-top: -50px;
 }
 
-.img {
+.imgContainer {
   max-width: 195px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: -30px;
 }
 
@@ -86,6 +89,7 @@
 
 .footerText {
   padding-top: 120px;
+  text-align: center;
 }
 
 .info {
@@ -108,7 +112,7 @@
     flex-direction: column;
   }
 
-  .img {
+  .imgContainer {
     margin: 0;
   }
 

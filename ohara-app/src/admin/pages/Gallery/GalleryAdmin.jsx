@@ -7,18 +7,18 @@ import { deleteItemGallery, getGalleryData } from "../../../slices/gallery";
 import { nanoid } from "@reduxjs/toolkit";
 import { DeleteModule } from "../components/DeleteModule/DeleteModule";
 import { Module } from "../../components/Module/Module";
-import { Loader } from "../../../components/Loader/Loader";
+import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
 
 const initialModalState = {
   src: null,
   id: nanoid(5),
 };
 
-export const GalleryAdmin = () => {
+const GalleryAdmin = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalState, setModalState] = useState(initialModalState);
-  const { images, loading } = useSelector((state) => state.gallery);
+  const { images } = useSelector((state) => state.gallery);
   const [isOpenModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -47,16 +47,15 @@ export const GalleryAdmin = () => {
     setModalState(initialModalState);
   }, []);
 
-  return loading ? (
-    <Loader />
-  ) : (
+  return (
     <section className={styles.container}>
       <h1 className={styles.title}>Галерея</h1>
       <div className={styles.cardContainer}>
         {images.map((element, index) => (
           <div key={element.id} className={styles.closeContainer}>
-            <img
-              className={styles.img}
+            <LazyLoadImage
+              custom={styles.custom}
+              imgStyle={styles.custom}
               src={element.img}
               onClick={() => openImageViewer(index)}
               alt=""
@@ -96,3 +95,4 @@ export const GalleryAdmin = () => {
     </section>
   );
 };
+export default GalleryAdmin;

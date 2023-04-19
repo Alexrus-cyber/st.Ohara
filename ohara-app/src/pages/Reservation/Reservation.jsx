@@ -1,3 +1,4 @@
-export const Reservation = () => {
+const Reservation = () => {
   return <>fdsafasdfsdaf</>;
 };
+export default Reservation;

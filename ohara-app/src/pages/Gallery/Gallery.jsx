@@ -1,10 +1,11 @@
 import styles from "./Gallery.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import ImageViewer from "react-simple-image-viewer";
 import { getGalleryData } from "../../slices/gallery";
+import LazyLoadImage from "../../components/LazyLoadImage/LazyLoadImage";
 
-export const Gallery = () => {
+const Gallery = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const dispatch = useDispatch();
@@ -12,9 +13,10 @@ export const Gallery = () => {
   //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
   useEffect(() => {
     dispatch(getGalleryData());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
-  const { images, loading } = useSelector((state) => state.gallery);
+  const { images } = useSelector((state) => state.gallery);
 
   const openImageViewer = useCallback((index) => {
     setCurrentImage(index);
@@ -26,21 +28,21 @@ export const Gallery = () => {
     setIsViewerOpen(false);
   };
 
-  return loading ? (
-    " "
-  ) : (
+  return (
     <section className={styles.Gallery}>
       <div className={styles.container}>
         <h1 className={styles.title}>Наши фотографии</h1>
         <div className={styles.content}>
           {images.map((i, index) => (
-            <img
-              className={styles.img}
-              src={i.img}
-              onClick={() => openImageViewer(index)}
-              key={i.id}
-              alt=""
-            />
+            <div className={styles.img} key={i.id}>
+              <LazyLoadImage
+                src={i.img}
+                custom={styles.border}
+                imgStyle={styles.border}
+                onClick={() => openImageViewer(index)}
+                alt="menu"
+              />
+            </div>
           ))}
           {isViewerOpen && (
             <ImageViewer
@@ -55,4 +57,5 @@ export const Gallery = () => {
       </div>
     </section>
   );
-};
+});
+export default Gallery;

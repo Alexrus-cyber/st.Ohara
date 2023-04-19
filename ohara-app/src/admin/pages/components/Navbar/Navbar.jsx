@@ -1,15 +1,14 @@
 import styles from "./Navbar.module.scss";
-import admin from "../../../../assets/logo.png";
+import admin from "../../../../assets/logotest.webp";
 import { NavLink } from "react-router-dom";
 import { AppBar, Drawer, IconButton, Toolbar, useTheme } from "@mui/material";
-import { useState } from "react";
+import { memo, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import cl from "classnames";
 
 const drawerWidth = "100%";
-export const Navbar = () => {
+const Navbar = memo(({ setAdmin }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -68,17 +67,20 @@ export const Navbar = () => {
           )}
         </IconButton>
         <div className={styles.navbarSecret}>
-          <ContentNavbar handleDrawerClose={handleDrawerClose} />
+          <ContentNavbar
+            setAdmin={setAdmin}
+            handleDrawerClose={handleDrawerClose}
+          />
         </div>
       </Drawer>
       <div className={styles.navbar}>
-        <ContentNavbar />
+        <ContentNavbar setAdmin={setAdmin} />
       </div>
     </>
   );
-};
+});
 
-const ContentNavbar = ({ handleDrawerClose }) => {
+const ContentNavbar = ({ handleDrawerClose, setAdmin }) => {
   const arr = [
     { id: 5, src: "/landingAdmin", text: "Главная" },
     { id: 1, src: "/menuAdmin", text: "Меню" },
@@ -100,15 +102,25 @@ const ContentNavbar = ({ handleDrawerClose }) => {
             to={e.src}
             onClick={handleDrawerClose}
             className={({ isActive }) =>
-              cl(styles.link, {
-                [styles.active]: isActive,
-              })
+              isActive ? styles.active : styles.link
             }
           >
             {e.text}
           </NavLink>
         ))}
       </div>
+      <button
+        onClick={() => {
+          setAdmin(false);
+          handleDrawerClose;
+        }}
+        className={styles.buttonBack}
+      >
+        <NavLink onClick={handleDrawerClose} className={styles.back} to={"/"}>
+          Выйти
+        </NavLink>
+      </button>
     </>
   );
 };
+export default Navbar;

@@ -3,11 +3,11 @@ import { Search } from "../../components/Search/Search";
 import { ItemStaff } from "./components/ItemStaff/ItemStaff";
 import { NavLink } from "react-router-dom";
 import { UseDebounce } from "../../hoocks/UseDebounce";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStaffData, setSearchValue } from "../../../slices/staff";
 
-export const Staff = () => {
+const Staff = memo(() => {
   const { staffList, searchValue } = useSelector((state) => state.staff);
   const [text, setText] = useState("");
   const dispatch = useDispatch();
@@ -64,4 +64,5 @@ export const Staff = () => {
       </div>
     </div>
   );
-};
+});
+export default Staff;

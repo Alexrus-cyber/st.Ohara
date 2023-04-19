@@ -3,11 +3,11 @@ import logo from "../../assets/logo.png";
 import insta from "../../assets/insta.png";
 import vk from "../../assets/vk.png";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { getNewsData } from "../../slices/news";
 import { NavLink } from "react-router-dom";
 
-export const Footer = () => {
+const Footer = memo(() => {
   const { news } = useSelector((state) => state.news);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,7 +17,13 @@ export const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.left}>
-          <img className={styles.img} src={logo} alt={"stOhara"} />
+          <NavLink
+            className={styles.imgContainer}
+            onClick={() => window.scrollTo(0, 0)}
+            to={"/"}
+          >
+            <img className={styles.img} src={logo} alt={"stOhara"} />
+          </NavLink>
           <p className={styles.textLeft}>
             Ammolite - The Lighthouse Restaurant Peter-Thumb-Straße 6 77977 Rust
             Deutschland
@@ -55,4 +61,6 @@ export const Footer = () => {
       </p>
     </footer>
   );
-};
+});
+
+export default Footer;

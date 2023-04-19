@@ -7,12 +7,11 @@ import { getLandingData } from "../../../slices/landing";
 import styles from "./LandingAdmin.module.scss";
 import { ButtonUI } from "../components/ButtonUI/ButtonUI";
 import { reduxForm } from "redux-form";
-import { Loader } from "../../../components/Loader/Loader";
 
 const LandingForm = memo(({ handleSubmit, data }) => {
   const customButton = {
     position: "fixed",
-    top: "90%",
+    top: "87%",
     zIndex: 10000,
     fontSize: 26,
   };
@@ -27,7 +26,7 @@ const LandingForm = memo(({ handleSubmit, data }) => {
   );
 });
 
-export const LandingAdmin = memo(() => {
+const LandingAdmin = memo(() => {
   const { loading } = useSelector((state) => state.landing);
   const { landingList } = useSelector((state) => state.landing);
   const dispatch = useDispatch();
@@ -43,7 +42,7 @@ export const LandingAdmin = memo(() => {
   return (
     <>
       {loading ? (
-        <Loader />
+        ""
       ) : (
         <LandingReduxForm
           initialValues={landingList}
@@ -54,5 +53,5 @@ export const LandingAdmin = memo(() => {
     </>
   );
 });
-
+export default LandingAdmin;
 const LandingReduxForm = reduxForm({ form: "landing" })(LandingForm);

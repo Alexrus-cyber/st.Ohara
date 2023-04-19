@@ -1,24 +1,24 @@
 import styles from "./MenuAdmin.module.scss";
 import { AddCard } from "./AddCard/AddCard";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ImageViewer from "react-simple-image-viewer";
 import { deleteItemMenu, getMenuData } from "../../../slices/menu";
 import { Module } from "../../components/Module/Module";
 import { DeleteModule } from "../components/DeleteModule/DeleteModule";
 import { nanoid } from "@reduxjs/toolkit";
-import { Loader } from "../../../components/Loader/Loader";
+import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
 
 const initialModalState = {
   src: null,
   id: nanoid(5),
 };
 
-export const MenuAdmin = () => {
+const MenuAdmin = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalState, setModalState] = useState(initialModalState);
-  const { images, loading } = useSelector((state) => state.menu);
+  const { images } = useSelector((state) => state.menu);
   const [isOpenModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -45,17 +45,16 @@ export const MenuAdmin = () => {
     setCurrentImage(0);
     setIsViewerOpen(false);
   };
-  return loading ? (
-    <Loader />
-  ) : (
+  return (
     <section className={styles.container}>
       <h1 className={styles.title}>Меню</h1>
       <div className={styles.cardContainer}>
         <AddCard />
         {images.map((element, index) => (
           <div key={element.id} className={styles.closeContainer}>
-            <img
-              className={styles.img}
+            <LazyLoadImage
+              custom={styles.custom}
+              imgStyle={styles.custom}
               src={element.img}
               onClick={() => openImageViewer(index)}
               alt=""
@@ -93,4 +92,6 @@ export const MenuAdmin = () => {
       </div>
     </section>
   );
-};
+});
+
+export default MenuAdmin;

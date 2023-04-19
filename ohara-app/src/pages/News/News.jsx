@@ -1,15 +1,16 @@
 import styles from "./News.module.scss";
-import xxx from "../../assets/slider1.png";
+import xxx from "../../assets/slider1.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { getNewsData } from "../../slices/news";
 
-export const News = () => {
+const News = () => {
   const { news } = useSelector((state) => state.news);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewsData());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   return (
@@ -44,3 +45,4 @@ export const News = () => {
     </section>
   );
 };
+export default News;

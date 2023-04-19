@@ -1,6 +1,6 @@
 import styles from "./Map.module.scss";
 
-export const Map = () => {
+const Map = () => {
   return (
     <section className={styles.map}>
       <div className={styles.container}>
@@ -15,3 +15,4 @@ export const Map = () => {
     </section>
   );
 };
+export default Map;
