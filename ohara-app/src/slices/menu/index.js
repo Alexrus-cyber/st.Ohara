@@ -49,6 +49,9 @@ export const menuSlice = createSlice({
     clearData: (state) => {
       state.images = [];
     },
+    reOrderList: (state, { payload }) => {
+      state.images = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -101,5 +104,5 @@ export const listImagesSelector = createSelector(
   stateSelector,
   (state) => state.images
 );
-
+export const { reOrderList } = menuSlice.actions;
 export default reducer;

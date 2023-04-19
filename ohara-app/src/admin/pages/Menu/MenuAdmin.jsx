@@ -3,11 +3,12 @@ import { AddCard } from "./AddCard/AddCard";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ImageViewer from "react-simple-image-viewer";
-import { deleteItemMenu, getMenuData } from "../../../slices/menu";
+import { deleteItemMenu, getMenuData, reOrderList } from "../../../slices/menu";
 import { Module } from "../../components/Module/Module";
 import { DeleteModule } from "../components/DeleteModule/DeleteModule";
 import { nanoid } from "@reduxjs/toolkit";
 import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
+import { ReactSortable } from "react-sortablejs";
 
 const initialModalState = {
   src: null,
@@ -45,51 +46,71 @@ const MenuAdmin = memo(() => {
     setCurrentImage(0);
     setIsViewerOpen(false);
   };
+  const sortableOptions = {
+    animation: 250,
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    ghostClass: "ghost",
+    group: "grid",
+    forceFallback: true,
+  };
+
+  const listChangeHandler = useCallback((newState) => {
+    dispatch(reOrderList(newState));
+  }, []);
+
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Меню</h1>
-      <div className={styles.cardContainer}>
-        <AddCard />
-        {images.map((element, index) => (
-          <div key={element.id} className={styles.closeContainer}>
-            <LazyLoadImage
-              custom={styles.custom}
-              imgStyle={styles.custom}
-              src={element.img}
-              onClick={() => openImageViewer(index)}
-              alt=""
-            />
-            <button
-              onClick={() => {
-                handleClickOpenNews(element);
-              }}
-              className={styles.close}
-            >
-              x
-            </button>
-          </div>
-        ))}
-        {isViewerOpen && (
-          <ImageViewer
-            src={images.map((e) => e.img)}
-            currentIndex={currentImage}
-            disableScroll={true}
-            closeOnClickOutside={true}
-            onClose={closeImageViewer}
-          />
-        )}
-        <Module
-          active={isOpenModal}
-          setActive={setOpenModal}
-          onClose={handleClickCloseModal}
+      <AddCard />
+      {images && (
+        <ReactSortable
+          className={styles.cardContainer}
+          list={images.map((x) => ({ ...x }))}
+          setList={(newState) => listChangeHandler(newState)}
+          {...sortableOptions}
         >
-          <DeleteModule
-            delete={deleteItemMenu}
-            id={modalState.id}
+          {images.map((element, index) => (
+            <div key={element.id} className={styles.closeContainer}>
+              <LazyLoadImage
+                custom={styles.custom}
+                imgStyle={styles.custom}
+                src={element.img}
+                onClick={() => openImageViewer(index)}
+                alt=""
+              />
+              <button
+                onClick={() => {
+                  handleClickOpenNews(element);
+                }}
+                className={styles.close}
+              >
+                x
+              </button>
+            </div>
+          ))}
+          <Module
+            active={isOpenModal}
+            setActive={setOpenModal}
             onClose={handleClickCloseModal}
-          />
-        </Module>
-      </div>
+          >
+            <DeleteModule
+              delete={deleteItemMenu}
+              id={modalState.id}
+              onClose={handleClickCloseModal}
+            />
+          </Module>
+        </ReactSortable>
+      )}
+      {isViewerOpen && (
+        <ImageViewer
+          src={images.map((e) => e.img)}
+          currentIndex={currentImage}
+          disableScroll={true}
+          closeOnClickOutside={true}
+          onClose={closeImageViewer}
+        />
+      )}
     </section>
   );
 });

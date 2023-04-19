@@ -87,6 +87,7 @@ export const FilesInput = memo(
             placeholder={"Заголовок"}
             type={type}
             name={name}
+            accept={"image/*"}
           />
           <span className={styles.span}>
             <CloudUpload />
