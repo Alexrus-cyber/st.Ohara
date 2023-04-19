@@ -2,7 +2,7 @@ import styles from "./Card.module.scss";
 import redact from "../../../../../assets/redact.png";
 import { Module } from "../../../../components/Module/Module";
 import React, { memo, useCallback, useMemo, useState } from "react";
-import { DeleteModule } from "../../../components/DeleteModule/DeleteModule";
+import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { deleteNew } from "../../../../../slices/news";
 
 export const Card = memo(
@@ -24,7 +24,7 @@ export const Card = memo(
           setActive={setOpenModal}
           onClose={handleClickCloseModal}
         >
-          <DeleteModule
+          <DeleteModal
             delete={deleteNew}
             id={data.id}
             onClose={handleClickCloseModal}

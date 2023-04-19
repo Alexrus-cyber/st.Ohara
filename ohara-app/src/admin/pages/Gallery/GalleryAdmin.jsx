@@ -9,10 +9,11 @@ import {
   reOrderList,
 } from "../../../slices/gallery";
 import { nanoid } from "@reduxjs/toolkit";
-import { DeleteModule } from "../components/DeleteModule/DeleteModule";
+import { DeleteModal } from "../components/DeleteModal/DeleteModal";
 import { Module } from "../../components/Module/Module";
 import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
 import { ReactSortable } from "react-sortablejs";
+import { DragModal } from "../components/DragModal/DragModal";
 
 const initialModalState = {
   src: null,
@@ -25,6 +26,8 @@ const GalleryAdmin = () => {
   const [modalState, setModalState] = useState(initialModalState);
   const { images } = useSelector((state) => state.gallery);
   const [isOpenModal, setOpenModal] = useState(false);
+  const [change, setChange] = useState(false);
+  const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
   //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
@@ -62,8 +65,14 @@ const GalleryAdmin = () => {
   };
 
   const listChangeHandler = useCallback((newState) => {
-    dispatch(reOrderList(newState));
+    setOpenModal(true);
+    setChange(true);
+    setData(newState);
   }, []);
+
+  function acceptList(newState) {
+    dispatch(reOrderList(newState));
+  }
 
   return (
     <section className={styles.container}>
@@ -74,7 +83,16 @@ const GalleryAdmin = () => {
       <ReactSortable
         className={styles.cardContainer}
         list={images.map((element) => ({ ...element }))}
-        setList={(newState) => listChangeHandler(newState)}
+        setList={(currentList, sortable, store) => {
+          if (
+            store.dragging &&
+            store.dragging.props &&
+            JSON.stringify(store.dragging.props.list) !==
+              JSON.stringify(currentList)
+          ) {
+            listChangeHandler(currentList);
+          }
+        }}
         {...sortableOptions}
       >
         {images.map((element, index) => (
@@ -96,17 +114,6 @@ const GalleryAdmin = () => {
             </button>
           </div>
         ))}
-        <Module
-          active={isOpenModal}
-          setActive={setOpenModal}
-          onClose={handleClickCloseModal}
-        >
-          <DeleteModule
-            delete={deleteItemGallery}
-            id={modalState.id}
-            onClose={handleClickCloseModal}
-          />
-        </Module>
       </ReactSortable>
       {isViewerOpen && (
         <ImageViewer
@@ -116,6 +123,34 @@ const GalleryAdmin = () => {
           closeOnClickOutside={true}
           onClose={closeImageViewer}
         />
+      )}
+      {change && (
+        <Module
+          active={isOpenModal}
+          setActive={setOpenModal}
+          onClose={handleClickCloseModal}
+        >
+          <DragModal
+            title={"Вы уверены что хотите поменять местами данные карточки?"}
+            setOpenModal={setOpenModal}
+            setChange={setChange}
+            data={data}
+            acceptList={acceptList}
+          />
+        </Module>
+      )}
+      {!change && (
+        <Module
+          active={isOpenModal}
+          setActive={setOpenModal}
+          onClose={handleClickCloseModal}
+        >
+          <DeleteModal
+            delete={deleteItemGallery}
+            id={modalState.id}
+            onClose={handleClickCloseModal}
+          />
+        </Module>
       )}
     </section>
   );

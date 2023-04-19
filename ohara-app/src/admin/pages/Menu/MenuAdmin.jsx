@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import ImageViewer from "react-simple-image-viewer";
 import { deleteItemMenu, getMenuData, reOrderList } from "../../../slices/menu";
 import { Module } from "../../components/Module/Module";
-import { DeleteModule } from "../components/DeleteModule/DeleteModule";
+import { DeleteModal } from "../components/DeleteModal/DeleteModal";
 import { nanoid } from "@reduxjs/toolkit";
 import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
 import { ReactSortable } from "react-sortablejs";
+import { DragModal } from "../components/DragModal/DragModal";
 
 const initialModalState = {
   src: null,
@@ -21,6 +22,8 @@ const MenuAdmin = memo(() => {
   const [modalState, setModalState] = useState(initialModalState);
   const { images } = useSelector((state) => state.menu);
   const [isOpenModal, setOpenModal] = useState(false);
+  const [change, setChange] = useState(false);
+  const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +37,7 @@ const MenuAdmin = memo(() => {
 
   const handleClickCloseModal = useCallback(() => {
     setOpenModal(false);
+    setChange(false);
     setModalState(initialModalState);
   }, []);
 
@@ -56,8 +60,14 @@ const MenuAdmin = memo(() => {
   };
 
   const listChangeHandler = useCallback((newState) => {
-    dispatch(reOrderList(newState));
+    setOpenModal(true);
+    setChange(true);
+    setData(newState);
   }, []);
+
+  function acceptList(newState) {
+    dispatch(reOrderList(newState));
+  }
 
   return (
     <section className={styles.container}>
@@ -68,7 +78,16 @@ const MenuAdmin = memo(() => {
       <ReactSortable
         className={styles.cardContainer}
         list={images.map((element) => ({ ...element }))}
-        setList={(newState) => listChangeHandler(newState)}
+        setList={(currentList, sortable, store) => {
+          if (
+            store.dragging &&
+            store.dragging.props &&
+            JSON.stringify(store.dragging.props.list) !==
+              JSON.stringify(currentList)
+          ) {
+            listChangeHandler(currentList);
+          }
+        }}
         {...sortableOptions}
       >
         {images.map((element, index) => (
@@ -90,17 +109,6 @@ const MenuAdmin = memo(() => {
             </button>
           </div>
         ))}
-        <Module
-          active={isOpenModal}
-          setActive={setOpenModal}
-          onClose={handleClickCloseModal}
-        >
-          <DeleteModule
-            delete={deleteItemMenu}
-            id={modalState.id}
-            onClose={handleClickCloseModal}
-          />
-        </Module>
       </ReactSortable>
       {isViewerOpen && (
         <ImageViewer
@@ -110,6 +118,34 @@ const MenuAdmin = memo(() => {
           closeOnClickOutside={true}
           onClose={closeImageViewer}
         />
+      )}
+      {change && (
+        <Module
+          active={isOpenModal}
+          setActive={setOpenModal}
+          onClose={handleClickCloseModal}
+        >
+          <DragModal
+            title={"Вы уверены что хотите поменять местами данные карточки?"}
+            setOpenModal={setOpenModal}
+            setChange={setChange}
+            data={data}
+            acceptList={acceptList}
+          />
+        </Module>
+      )}
+      {!change && (
+        <Module
+          active={isOpenModal}
+          setActive={setOpenModal}
+          onClose={handleClickCloseModal}
+        >
+          <DeleteModal
+            delete={deleteItemMenu}
+            id={modalState.id}
+            onClose={handleClickCloseModal}
+          />
+        </Module>
       )}
     </section>
   );

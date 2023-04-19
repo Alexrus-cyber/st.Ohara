@@ -5,7 +5,7 @@ import Close from "@mui/icons-material/Close";
 import EditStaff from "../EditStaff/EditStaff";
 import React, { memo, useCallback, useMemo, useState } from "react";
 import { Module } from "../../../../components/Module/Module";
-import { DeleteModule } from "../../../components/DeleteModule/DeleteModule";
+import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { deleteStaff } from "../../../../../slices/staff";
 
 export const ItemStaff = memo(({ data }) => {
@@ -40,7 +40,7 @@ export const ItemStaff = memo(({ data }) => {
         setActive={setOpenModal}
         onClose={handleClickCloseModal}
       >
-        <DeleteModule
+        <DeleteModal
           delete={deleteStaff}
           id={data.id}
           onClose={handleClickCloseModal}
