@@ -11,22 +11,13 @@
   display: flex;
   justify-content: center;
   max-width: 1200px;
-  width: 100%;
+  width: 95%;
   flex-wrap: wrap;
 }
 
 .addContainer {
   @extend .cardContainer;
   width: 90%;
-}
-
-.xxx {
-  display: flex;
-  justify-content: center;
-  max-width: 1200px;
-  width: 100%;
-  flex-wrap: wrap;
-  height: 900px;
 }
 
 .title {
