@@ -11,8 +11,13 @@
   display: flex;
   justify-content: center;
   max-width: 1200px;
-  width: 100%;
+  width: 95%;
   flex-wrap: wrap;
+}
+
+.addContainer {
+  @extend .cardContainer;
+  width: 90%;
 }
 
 .title {
@@ -37,7 +42,6 @@
   max-height: 210px;
   height: 210px;
   margin: 50px;
-  transition-duration: 0.5s;
 }
 
 .custom {
@@ -76,6 +80,6 @@
 
 @media screen and (max-width: 420px) {
   .closeContainer {
-    margin: 25px 10px;
+    margin: 25px 0;
   }
 }

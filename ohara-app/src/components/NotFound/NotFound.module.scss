@@ -88,3 +88,13 @@
     max-width: 180px;
   }
 }
+
+@media screen and (max-height: 740px) {
+  .title {
+    font-size: 28px;
+    padding: 0;
+  }
+  .img {
+    max-width: 180px;
+  }
+}

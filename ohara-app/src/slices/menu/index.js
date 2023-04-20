@@ -40,6 +40,17 @@ export const addItemMenu = createAsyncThunk(
   }
 );
 
+export const swapItemMenu = createAsyncThunk(
+  "swapItemMenu",
+  async (data, { rejectedWithValue }) => {
+    try {
+      return data;
+    } catch (e) {
+      return rejectedWithValue(e);
+    }
+  }
+);
+
 /*const menuAdapter = createEntityAdapter();*/
 
 export const menuSlice = createSlice({
@@ -82,10 +93,21 @@ export const menuSlice = createSlice({
       })
       .addCase(addItemMenu.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = [...state.images, payload];
+        state.images = [payload, ...state.images];
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(addItemMenu.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(swapItemMenu.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(swapItemMenu.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.images = payload;
+      })
+      //здесь можно обрабатывать ошибки. так же прерываем загрузку
+      .addCase(swapItemMenu.rejected, (state) => {
         state.loading = false;
       });
   },
@@ -101,5 +123,4 @@ export const listImagesSelector = createSelector(
   stateSelector,
   (state) => state.images
 );
-
 export default reducer;

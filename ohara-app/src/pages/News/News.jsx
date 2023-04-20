@@ -20,7 +20,7 @@ const News = () => {
         {news
           .filter((e) => e.main === true)
           .map((e) => (
-            <NavLink key={e.id} className={styles.mainNew} to={"/new/" + e.id}>
+            <NavLink key={e.id} className={styles.mainNew} to={"/News/" + e.id}>
               <h1 className={styles.textImg}>Главная новость</h1>
               <img className={styles.mainImg} src={xxx} alt={"xxx"} />
             </NavLink>
@@ -31,7 +31,7 @@ const News = () => {
               .filter((e) => e.main !== true)
               .map((e) => (
                 <NavLink
-                  to={`/new/` + e.id}
+                  to={`/News/` + e.id}
                   key={e.id}
                   className={styles.secondNews}
                 >

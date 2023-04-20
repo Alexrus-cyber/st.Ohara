@@ -1,0 +1,54 @@
+.deleteModule {
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.yes {
+  display: flex;
+  justify-content: center;
+  color: white;
+  background-color: green;
+  padding: 10px;
+  font-size: 20px;
+  max-width: 120px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.no {
+  display: flex;
+  justify-content: center;
+  color: white;
+  background-color: #ff033d;
+  padding: 10px;
+  font-size: 20px;
+  max-width: 120px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.yes:hover {
+  background-color: #10ff00;
+}
+
+.no:hover {
+  background-color: #8a1212;
+}
+
+.titleModule {
+  color: black;
+  width: 100%;
+}
+
+.buttonContainerM {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 50px;
+  padding-top: 20px;
+}

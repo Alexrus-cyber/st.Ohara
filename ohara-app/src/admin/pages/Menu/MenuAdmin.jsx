@@ -1,13 +1,20 @@
 import styles from "./MenuAdmin.module.scss";
-import { AddCard } from "./AddCard/AddCard";
+import { AddCard } from "../../components/AddCard/AddCard";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ImageViewer from "react-simple-image-viewer";
-import { deleteItemMenu, getMenuData } from "../../../slices/menu";
+import {
+  addItemMenu,
+  deleteItemMenu,
+  getMenuData,
+  swapItemMenu,
+} from "../../../slices/menu";
 import { Module } from "../../components/Module/Module";
-import { DeleteModule } from "../components/DeleteModule/DeleteModule";
+import { DeleteModal } from "../components/DeleteModal/DeleteModal";
 import { nanoid } from "@reduxjs/toolkit";
 import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
+import { ReactSortable } from "react-sortablejs";
+import { DragModal } from "../components/DragModal/DragModal";
 
 const initialModalState = {
   src: null,
@@ -20,6 +27,8 @@ const MenuAdmin = memo(() => {
   const [modalState, setModalState] = useState(initialModalState);
   const { images } = useSelector((state) => state.menu);
   const [isOpenModal, setOpenModal] = useState(false);
+  const [change, setChange] = useState(false);
+  const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,6 +42,7 @@ const MenuAdmin = memo(() => {
 
   const handleClickCloseModal = useCallback(() => {
     setOpenModal(false);
+    setChange(false);
     setModalState(initialModalState);
   }, []);
 
@@ -45,11 +55,46 @@ const MenuAdmin = memo(() => {
     setCurrentImage(0);
     setIsViewerOpen(false);
   };
+  const sortableOptions = {
+    animation: 250,
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    ghostClass: "ghost",
+    group: "images",
+    forceFallback: true,
+  };
+
+  const listChangeHandler = useCallback((newState) => {
+    setOpenModal(true);
+    setChange(true);
+    setData(newState);
+  }, []);
+
+  function acceptList(newState) {
+    dispatch(swapItemMenu(newState));
+  }
+
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Меню</h1>
-      <div className={styles.cardContainer}>
-        <AddCard />
+      <div className={styles.addContainer}>
+        <AddCard addHandler={addItemMenu} />
+      </div>
+      <ReactSortable
+        className={styles.cardContainer}
+        list={images.map((element) => ({ ...element }))}
+        setList={(currentList, sortable, store) => {
+          if (
+            store.dragging &&
+            store.dragging.props &&
+            JSON.stringify(store.dragging.props.list) !==
+              JSON.stringify(currentList)
+          ) {
+            listChangeHandler(currentList);
+          }
+        }}
+        {...sortableOptions}
+      >
         {images.map((element, index) => (
           <div key={element.id} className={styles.closeContainer}>
             <LazyLoadImage
@@ -69,27 +114,44 @@ const MenuAdmin = memo(() => {
             </button>
           </div>
         ))}
-        {isViewerOpen && (
-          <ImageViewer
-            src={images.map((e) => e.img)}
-            currentIndex={currentImage}
-            disableScroll={true}
-            closeOnClickOutside={true}
-            onClose={closeImageViewer}
-          />
-        )}
+      </ReactSortable>
+      {isViewerOpen && (
+        <ImageViewer
+          src={images.map((e) => e.img)}
+          currentIndex={currentImage}
+          disableScroll={true}
+          closeOnClickOutside={true}
+          onClose={closeImageViewer}
+        />
+      )}
+      {change && (
         <Module
           active={isOpenModal}
           setActive={setOpenModal}
           onClose={handleClickCloseModal}
         >
-          <DeleteModule
+          <DragModal
+            title={"Вы уверены что хотите поменять местами данные карточки?"}
+            setOpenModal={setOpenModal}
+            setChange={setChange}
+            data={data}
+            acceptList={acceptList}
+          />
+        </Module>
+      )}
+      {!change && (
+        <Module
+          active={isOpenModal}
+          setActive={setOpenModal}
+          onClose={handleClickCloseModal}
+        >
+          <DeleteModal
             delete={deleteItemMenu}
             id={modalState.id}
             onClose={handleClickCloseModal}
           />
         </Module>
-      </div>
+      )}
     </section>
   );
 });

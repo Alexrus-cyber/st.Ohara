@@ -1,8 +1,8 @@
-import styles from "./DeleteModule.module.scss";
+import styles from "./DeleteModal.module.scss";
 import React from "react";
 import { useDispatch } from "react-redux";
 
-export const DeleteModule = (props) => {
+export const DeleteModal = (props) => {
   const dispatch = useDispatch();
 
   const deleteCard = (yes) => {
