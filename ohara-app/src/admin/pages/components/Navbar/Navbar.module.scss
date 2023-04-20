@@ -4,17 +4,20 @@
   align-items: center;
   justify-content: flex-start;
   max-width: 100%;
-  background-color: white;
+  background-color: transparent;
   font-weight: 700;
   line-height: 24px;
+  border-radius: 0 20px 20px 0;
   letter-spacing: 0;
 }
 
 @mixin link {
-  width: 100%;
+  width: 90%;
+  border-radius: 15px;
   text-decoration: none;
   color: black;
-  padding: 7px 0;
+  padding: 5px 0;
+  margin: 5px 0;
 }
 
 .navbar {
@@ -24,64 +27,76 @@
   position: relative;
 }
 
+.navbarContainer {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  max-width: 400px;
+  border-radius: 0 20px 20px 0;
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+}
+
 .navbarSecret {
   @include navbar;
 }
 
 .title {
   font-size: 40px;
-  position: fixed;
-  padding: 20px;
 }
 
 .img {
-  position: fixed;
-  max-width: 200px;
+  max-width: 180px;
   width: 100%;
   border-radius: 50%;
   top: 10%;
 }
 
 .name {
-  position: fixed;
   font-size: 24px;
   padding: 15px;
   top: 30%;
 }
 
 .position {
-  position: fixed;
+
   top: 33%;
   font-size: 20px;
   padding: 0 10px;
 }
 
 .links {
-  font-size: 36px;
+  font-size: 30px;
   line-height: 44px;
-  max-height: 428px;
+  height: 100%;
   max-width: 400px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: fixed;
+  max-height: 450px;
   top: 40%;
   overflow: auto;
 }
 
 .link {
   @include link;
+  transition-duration: 0.5s;
 }
 
 .link:hover {
   background-color: #D8BBD8;
+  box-shadow: 0 0 50px 0 #D8BBD8;
 }
 
 .active {
   @include link;
   background-color: #D8BBD8;
+  box-shadow: 0 0 50px 0 #D8BBD8;
 }
 
 .secret {
@@ -90,12 +105,10 @@
 }
 
 .buttonBack {
-  position: fixed;
   border: transparent;
   background: transparent;
   font-weight: 700;
   font-size: 26px;
-  top: 90%;
 }
 
 .back {
@@ -114,7 +127,9 @@
   .links {
     max-width: 300px;
   }
-
+  .navbarContainer {
+    max-width: 300px;
+  }
 }
 
 @media screen and (max-width: 1100px) {
@@ -134,7 +149,6 @@
   }
   .links {
     font-size: 36px;
-    position: unset;
     max-width: 100%;
     padding: 0;
   }
@@ -150,6 +164,7 @@
     width: 100%;
     color: #7D4A7D;
     background: transparent;
+    box-shadow: unset;
   }
   .link {
     width: 100%;
@@ -157,6 +172,7 @@
   .link:hover {
     background: transparent;
     color: #7D4A7D;
+    box-shadow: unset;
   }
 }
 

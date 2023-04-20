@@ -74,7 +74,9 @@ const Navbar = memo(({ setAdmin }) => {
         </div>
       </Drawer>
       <div className={styles.navbar}>
-        <ContentNavbar setAdmin={setAdmin} />
+        <div className={styles.navbarContainer}>
+          <ContentNavbar setAdmin={setAdmin} />
+        </div>
       </div>
     </>
   );
@@ -83,7 +85,7 @@ const Navbar = memo(({ setAdmin }) => {
 const ContentNavbar = ({ handleDrawerClose, setAdmin }) => {
   const arr = [
     { id: 5, src: "/landingAdmin", text: "Главная" },
-    { id: 1, src: "/menuAdmin", text: "Меню" },
+    { id: 1, src: "/", text: "Меню" },
     { id: 2, src: "/newsAdmin", text: "Новости" },
     { id: 3, src: "/galleryAdmin", text: "Галерея" },
     { id: 4, src: "/reservationAdmin", text: "Бронирование" },

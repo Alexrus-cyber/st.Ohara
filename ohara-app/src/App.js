@@ -52,11 +52,17 @@ function App() {
                   path={"/reservationAdmin"}
                   element={<ReservationAdmin />}
                 />
-                <Route path={"/login"} element={<Auth />} />
                 <Route path={"/registration"} element={<Registration />} />
                 <Route path={"/staff"} element={<Staff />} />
                 <Route path={"/editStaff"} element={<EditStaff />} />
                 <Route path={"/*"} element={<NotFound />} />
+                <Route path={"/Menu"} element={<Menu />} />
+                <Route path={"/Gallery"} element={<Gallery />} />
+                <Route path={"/News"} element={<News />} />
+                <Route path={"/News/:id"} element={<New />} />
+                <Route path={"/Reservation"} element={<Reservation />} />
+                <Route path={"/landing"} element={<Landing />} />
+                <Route path={"/login"} element={<Auth setAdmin={setAdmin} />} />
               </Routes>
             </Suspense>
           </div>
