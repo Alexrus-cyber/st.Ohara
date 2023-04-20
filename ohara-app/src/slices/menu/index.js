@@ -40,6 +40,17 @@ export const addItemMenu = createAsyncThunk(
   }
 );
 
+export const swapItemMenu = createAsyncThunk(
+  "swapItemMenu",
+  async (data, { rejectedWithValue }) => {
+    try {
+      return data;
+    } catch (e) {
+      return rejectedWithValue(e);
+    }
+  }
+);
+
 /*const menuAdapter = createEntityAdapter();*/
 
 export const menuSlice = createSlice({
@@ -48,9 +59,6 @@ export const menuSlice = createSlice({
   reducers: {
     clearData: (state) => {
       state.images = [];
-    },
-    reOrderList: (state, { payload }) => {
-      state.images = payload;
     },
   },
   extraReducers: (builder) => {
@@ -90,6 +98,17 @@ export const menuSlice = createSlice({
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(addItemMenu.rejected, (state) => {
         state.loading = false;
+      })
+      .addCase(swapItemMenu.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(swapItemMenu.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.images = payload;
+      })
+      //здесь можно обрабатывать ошибки. так же прерываем загрузку
+      .addCase(swapItemMenu.rejected, (state) => {
+        state.loading = false;
       });
   },
 });
@@ -104,5 +123,4 @@ export const listImagesSelector = createSelector(
   stateSelector,
   (state) => state.images
 );
-export const { reOrderList } = menuSlice.actions;
 export default reducer;

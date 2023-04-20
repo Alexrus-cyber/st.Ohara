@@ -7,7 +7,7 @@ import {
   addItemMenu,
   deleteItemMenu,
   getMenuData,
-  reOrderList,
+  swapItemMenu,
 } from "../../../slices/menu";
 import { Module } from "../../components/Module/Module";
 import { DeleteModal } from "../components/DeleteModal/DeleteModal";
@@ -71,7 +71,7 @@ const MenuAdmin = memo(() => {
   }, []);
 
   function acceptList(newState) {
-    dispatch(reOrderList(newState));
+    dispatch(swapItemMenu(newState));
   }
 
   return (

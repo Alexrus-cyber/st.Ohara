@@ -37,6 +37,16 @@ export const addItemGallery = createAsyncThunk(
     }
   }
 );
+export const swapItemGallery = createAsyncThunk(
+  "swapItemGallery",
+  async (data, { rejectedWithValue }) => {
+    try {
+      return data; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+    } catch (e) {
+      return rejectedWithValue(e);
+    }
+  }
+);
 
 export const gallerySlice = createSlice({
   name: "gallery",
@@ -44,9 +54,6 @@ export const gallerySlice = createSlice({
   reducers: {
     clearData: (state) => {
       state.images = [];
-    },
-    reOrderList: (state, { payload }) => {
-      state.images = payload;
     },
   },
   extraReducers: (builder) => {
@@ -59,7 +66,6 @@ export const gallerySlice = createSlice({
       .addCase(getGalleryData.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.images = payload;
-        console.log("Получил");
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getGalleryData.rejected, (state) => {
@@ -87,8 +93,18 @@ export const gallerySlice = createSlice({
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(addItemGallery.rejected, (state) => {
         state.loading = false;
+      })
+      .addCase(swapItemGallery.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(swapItemGallery.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.images = payload;
+      })
+      //здесь можно обрабатывать ошибки. так же прерываем загрузку
+      .addCase(swapItemGallery.rejected, (state) => {
+        state.loading = false;
       });
   },
 });
-export const { reOrderList } = gallerySlice.actions;
 export default gallerySlice.reducer;

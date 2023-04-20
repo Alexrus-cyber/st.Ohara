@@ -6,7 +6,7 @@ import {
   addItemGallery,
   deleteItemGallery,
   getGalleryData,
-  reOrderList,
+  swapItemGallery,
 } from "../../../slices/gallery";
 import { nanoid } from "@reduxjs/toolkit";
 import { DeleteModal } from "../components/DeleteModal/DeleteModal";
@@ -72,7 +72,7 @@ const GalleryAdmin = () => {
   }, []);
 
   function acceptList(newState) {
-    dispatch(reOrderList(newState));
+    dispatch(swapItemGallery(newState));
   }
 
   return (
