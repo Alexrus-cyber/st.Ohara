@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   color: white;
-  background-color: #be2323;
+  background-color: green;
   padding: 10px;
   font-size: 20px;
   max-width: 120px;
@@ -22,7 +22,7 @@
   display: flex;
   justify-content: center;
   color: white;
-  background-color: green;
+  background-color: #ff033d;
   padding: 10px;
   font-size: 20px;
   max-width: 120px;
@@ -33,11 +33,11 @@
 }
 
 .yes:hover {
-  background-color: #562020;
+  background-color: #10ff00;
 }
 
 .no:hover {
-  background-color: #165b16;
+  background-color: #8a1212;
 }
 
 .titleModule {

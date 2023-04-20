@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Gallery.module.scss";
 import ImageViewer from "react-simple-image-viewer";
-import { AddCard } from "./AddCard/AddCard";
 import {
+  addItemGallery,
   deleteItemGallery,
   getGalleryData,
   reOrderList,
@@ -14,6 +14,7 @@ import { Module } from "../../components/Module/Module";
 import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
 import { ReactSortable } from "react-sortablejs";
 import { DragModal } from "../components/DragModal/DragModal";
+import { AddCard } from "../../components/AddCard/AddCard";
 
 const initialModalState = {
   src: null,
@@ -78,7 +79,7 @@ const GalleryAdmin = () => {
     <section className={styles.container}>
       <h1 className={styles.title}>Галерея</h1>
       <div className={styles.addContainer}>
-        <AddCard />
+        <AddCard addHandler={addItemGallery} />
       </div>
       <ReactSortable
         className={styles.cardContainer}

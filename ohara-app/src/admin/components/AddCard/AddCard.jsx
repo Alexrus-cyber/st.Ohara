@@ -1,10 +1,9 @@
 import styles from "./Card.module.scss";
 import { useDispatch } from "react-redux";
-import { addItemMenu } from "../../../../slices/menu";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export const AddCard = () => {
+export const AddCard = ({ addHandler }) => {
   const [isFileTooLarge, setIsFileTooLarge] = useState(false);
   const dispatch = useDispatch();
   const maxSize = 1048576;
@@ -14,7 +13,7 @@ export const AddCard = () => {
       setIsFileTooLarge(true);
     }
     if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
-      dispatch(addItemMenu(acceptedFiles));
+      dispatch(addHandler(acceptedFiles));
       setIsFileTooLarge(false);
     }
   }, []);
@@ -36,7 +35,7 @@ export const AddCard = () => {
     <div className={styles.card} {...getRootProps()}>
       <input onDrop={onDrop} accept="image/*" {...getInputProps()} />
       {isDragActive && !isDragReject && <h1>Вы почти закинули файл 😍😍😍</h1>}
-      {!isDragActive && (
+      {!isDragActive && !isFileTooLarge && (
         <h1>
           Вы можете закинуть картинку или кликнуть на данную область чтобы
           выбрать файл
@@ -46,9 +45,13 @@ export const AddCard = () => {
       )}
       {isDragReject && <h1>Нельзя закидывать такой файл 💀💀💀</h1>}
       <div className={styles.error}>
-        {isFileTooLarge && (
+        {isFileTooLarge && !isDragActive && (
           <h1 style={{ color: "red" }}>
-            Этот файл слишком большого размера 💀💀💀
+            Этот файл слишком большого размера <br />
+            или
+            <br />
+            Данный тип файла не поддерживается разработчиком
+            <br /> 💀💀💀
           </h1>
         )}
       </div>

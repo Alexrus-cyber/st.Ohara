@@ -1,9 +1,14 @@
 import styles from "./MenuAdmin.module.scss";
-import { AddCard } from "./AddCard/AddCard";
+import { AddCard } from "../../components/AddCard/AddCard";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ImageViewer from "react-simple-image-viewer";
-import { deleteItemMenu, getMenuData, reOrderList } from "../../../slices/menu";
+import {
+  addItemMenu,
+  deleteItemMenu,
+  getMenuData,
+  reOrderList,
+} from "../../../slices/menu";
 import { Module } from "../../components/Module/Module";
 import { DeleteModal } from "../components/DeleteModal/DeleteModal";
 import { nanoid } from "@reduxjs/toolkit";
@@ -55,7 +60,7 @@ const MenuAdmin = memo(() => {
     fallbackOnBody: true,
     swapThreshold: 0.65,
     ghostClass: "ghost",
-    group: "grid",
+    group: "images",
     forceFallback: true,
   };
 
@@ -73,7 +78,7 @@ const MenuAdmin = memo(() => {
     <section className={styles.container}>
       <h1 className={styles.title}>Меню</h1>
       <div className={styles.addContainer}>
-        <AddCard />
+        <AddCard addHandler={addItemMenu} />
       </div>
       <ReactSortable
         className={styles.cardContainer}
