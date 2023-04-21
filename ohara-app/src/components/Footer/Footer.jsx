@@ -48,7 +48,7 @@ const Footer = memo(() => {
           {news.slice(-3).map((el) => (
             <NavLink
               key={el.id}
-              to={`new/${el.id}`}
+              to={`news/${el.id}`}
               className={styles.rightText}
             >
               {el.title}

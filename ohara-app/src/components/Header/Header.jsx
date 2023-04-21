@@ -12,10 +12,10 @@ const drawerWidth = "100%";
 const Header = () => {
   const arr = [
     { id: 1, text: "Главная", path: "/" },
-    { id: 2, text: "Меню", path: "/Menu" },
-    { id: 3, text: "Галерея", path: "/Gallery" },
-    { id: 4, text: "Новости", path: "/News" },
-    { id: 5, text: "Бронирование", path: "/Reservation" },
+    { id: 2, text: "Меню", path: "/menu" },
+    { id: 3, text: "Галерея", path: "/gallery" },
+    { id: 4, text: "Новости", path: "/news" },
+    { id: 5, text: "Бронирование", path: "/reservation" },
   ];
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -33,7 +33,9 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <img className={styles.img} src={logo} alt={"stOhara"} />
+        <NavLink to={"/"} className={styles.img}>
+          <img className={styles.img} src={logo} alt={"stOhara"} />
+        </NavLink>
         <AppBar
           style={{
             backgroundColor: "transparent",

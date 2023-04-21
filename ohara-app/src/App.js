@@ -56,11 +56,11 @@ function App() {
                 <Route path={"/staff"} element={<Staff />} />
                 <Route path={"/editStaff"} element={<EditStaff />} />
                 <Route path={"/*"} element={<NotFound />} />
-                <Route path={"/Menu"} element={<Menu />} />
-                <Route path={"/Gallery"} element={<Gallery />} />
-                <Route path={"/News"} element={<News />} />
-                <Route path={"/News/:id"} element={<New />} />
-                <Route path={"/Reservation"} element={<Reservation />} />
+                <Route path={"/menu"} element={<Menu />} />
+                <Route path={"/gallery"} element={<Gallery />} />
+                <Route path={"/news"} element={<News />} />
+                <Route path={"/news/:id"} element={<New />} />
+                <Route path={"/reservation"} element={<Reservation />} />
                 <Route path={"/landing"} element={<Landing />} />
                 <Route path={"/login"} element={<Auth setAdmin={setAdmin} />} />
               </Routes>
@@ -73,11 +73,11 @@ function App() {
               <Routes>
                 <Route path={"/login"} element={<Auth setAdmin={setAdmin} />} />
                 <Route path={"/"} element={<Landing />} />
-                <Route path={"/Menu"} element={<Menu />} />
-                <Route path={"/Gallery"} element={<Gallery />} />
-                <Route path={"/News"} element={<News />} />
-                <Route path={"/News/:id"} element={<New />} />
-                <Route path={"/Reservation"} element={<Reservation />} />
+                <Route path={"/menu"} element={<Menu />} />
+                <Route path={"/gallery"} element={<Gallery />} />
+                <Route path={"/news"} element={<News />} />
+                <Route path={"/news/:id"} element={<New />} />
+                <Route path={"/reservation"} element={<Reservation />} />
                 <Route path={"/*"} element={<NotFound />} />
               </Routes>
             </Suspense>
