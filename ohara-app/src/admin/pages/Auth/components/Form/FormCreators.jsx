@@ -1,9 +1,10 @@
 import styles from "./FormCreators.module.scss";
 import { Field } from "redux-form";
 import { useDispatch } from "react-redux";
-import { memo } from "react";
+import { memo, useCallback, useState } from "react";
 import cl from "classnames";
 import { CloudUpload } from "@mui/icons-material";
+import { useDropzone } from "react-dropzone";
 
 export const InputUI = memo(
   ({
@@ -62,38 +63,77 @@ export const InputUI = memo(
     );
   }
 );
+
 export const FilesInput = memo(
-  ({ type, name, setImageUrl, id, getFile, section }) => {
+  ({ name, setImageUrl, id, getFile, section, circle }) => {
     const fileReader = new FileReader();
     const dispatch = useDispatch();
+    const [isFileTooLarge, setIsFileTooLarge] = useState(false);
+    const maxSize = 1048576;
 
-    fileReader.onloadend = () => {
-      setImageUrl(fileReader.result);
-      dispatch(getFile({ id, file: fileReader.result, section }));
-    };
-
-    const onChange = (e) => {
-      const file = e.target.files[0];
-      /*    dispatch( getFile(file)) ;*/
-      fileReader.readAsDataURL(file);
-      e.target.files = null;
-    };
+    const onDrop = useCallback((acceptedFiles) => {
+      if (!acceptedFiles.length) {
+        setIsFileTooLarge(true);
+      }
+      if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
+        fileReader.readAsDataURL(acceptedFiles[0]);
+        fileReader.onloadend = () => {
+          setImageUrl(fileReader.result);
+          dispatch(getFile({ id, file: fileReader.result, section }));
+        };
+        setIsFileTooLarge(false);
+      }
+    }, []);
+    const { getRootProps, getInputProps, isDragActive, isDragReject } =
+      useDropzone({
+        onDrop,
+        accept: {
+          "image/jpeg": [],
+          "image/png": [],
+          "image/jpg": [],
+          "image/webp": [],
+          "image/gif": [],
+        },
+        minSize: 0,
+        maxSize,
+        multiple: false,
+      });
     return (
-      <div>
-        <label className={styles.label}>
-          <input
-            onChange={onChange}
-            className={styles.file}
-            placeholder={"Заголовок"}
-            type={type}
-            name={name}
-            accept={"image/*"}
-          />
-          <span className={styles.span}>
-            <CloudUpload />
+      <div
+        {...getRootProps()}
+        className={cl(styles.label, {
+          [styles.circle]: circle,
+        })}
+      >
+        <input
+          {...getInputProps()}
+          className={styles.file}
+          name={name}
+          onDrop={onDrop}
+        />
+        <span className={styles.span}>
+          <CloudUpload />
+          {isDragActive && !isDragReject && (
+            <p style={{ fontSize: 12 }}>Вы почти закинули файл 😍😍😍</p>
+          )}
+          {isDragReject && (
+            <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>
+              Нельзя закидывать такой файл 💀💀💀
+            </p>
+          )}
+          {!isDragActive && !isFileTooLarge && (
             <p className={styles.p}>Загрузить</p>
-          </span>
-        </label>
+          )}
+          {isFileTooLarge && !isDragActive && (
+            <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>
+              Этот файл слишком большого размера <br />
+              или
+              <br />
+              Данный тип файла не поддерживается разработчиком
+              <br /> 💀💀💀
+            </p>
+          )}
+        </span>
       </div>
     );
   }

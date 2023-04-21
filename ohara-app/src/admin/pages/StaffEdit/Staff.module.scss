@@ -20,7 +20,6 @@
 .square {
   display: flex;
   border-radius: 30px;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   max-height: 100%;
@@ -48,7 +47,6 @@
   max-height: 800px;
   height: 600px;
   width: 95%;
-  overflow: auto;
   border: 1px solid #7D4A7D;
   border-radius: 30px;
   margin-bottom: 40px;

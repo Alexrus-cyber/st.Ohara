@@ -236,7 +236,7 @@
     z-index: 100000;
   }
   .links {
-    font-size: 36px;
+    font-size: 30px;
     position: unset;
     max-width: 100%;
     padding: 0;
@@ -253,6 +253,7 @@
     width: 100%;
     color: #7D4A7D;
     background: transparent;
+    box-shadow: unset;
   }
   .link {
     width: 100%;
@@ -260,6 +261,7 @@
   .link:hover {
     background: transparent;
     color: #7D4A7D;
+    box-shadow: unset;
   }
   .buttonBack {
     position: unset;

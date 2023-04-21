@@ -33,7 +33,7 @@ export const AddCard = ({ addHandler }) => {
     });
   return (
     <div className={styles.card} {...getRootProps()}>
-      <input onDrop={onDrop} accept="image/*" {...getInputProps()} />
+      <input onDrop={onDrop} {...getInputProps()} />
       {isDragActive && !isDragReject && <h1>Вы почти закинули файл 😍😍😍</h1>}
       {!isDragActive && !isFileTooLarge && (
         <h1>

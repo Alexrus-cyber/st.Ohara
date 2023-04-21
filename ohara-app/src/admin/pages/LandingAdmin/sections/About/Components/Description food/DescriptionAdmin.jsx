@@ -17,11 +17,11 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
           <div className={styles.imgContainerLeftMobile}>
             <Field
               name={`about.items.${index}.img`}
-              type={"file"}
               setImageUrl={setImageUrl}
               getFile={getFile}
               section={"about"}
               id={id}
+              circle={true}
               component={FilesInput}
             />
             <img className={styles.img} src={imageUrl} alt="food" />
@@ -44,10 +44,10 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
           <div className={styles.imgContainerLeft}>
             <Field
               name={`about.items.${index}.img`}
-              type={"file"}
               setImageUrl={setImageUrl}
               getFile={getFile}
               section={"about"}
+              circle={true}
               id={id}
               component={FilesInput}
             />
@@ -61,10 +61,10 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
           <div className={styles.imgContainerRight}>
             <Field
               name={`about.items.${index}.img`}
-              type={"file"}
               setImageUrl={setImageUrl}
               getFile={getFile}
               section={"about"}
+              circle={true}
               id={id}
               component={FilesInput}
             />
