@@ -18,7 +18,6 @@ export const ContentAdmin = ({ img, index, isLeftPosition, id }) => {
           <div className={styles.backContainer}>
             <Field
               name={`atmosphere.content.${index}.img`}
-              type={"file"}
               setImageUrl={setImageUrl}
               id={id}
               getFile={getFile}
@@ -48,7 +47,6 @@ export const ContentAdmin = ({ img, index, isLeftPosition, id }) => {
           <div className={styles.backContainerMobile}>
             <Field
               name={`atmosphere.content.${index}.img`}
-              type={"file"}
               setImageUrl={setImageUrl}
               id={id}
               getFile={getFile}
@@ -79,7 +77,6 @@ export const ContentAdmin = ({ img, index, isLeftPosition, id }) => {
           <div className={styles.backContainerRight}>
             <Field
               name={`atmosphere.content.${index}.img`}
-              type={"file"}
               setImageUrl={setImageUrl}
               id={id}
               getFile={getFile}

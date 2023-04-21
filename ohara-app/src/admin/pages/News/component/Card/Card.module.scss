@@ -140,3 +140,13 @@
   column-gap: 50px;
   padding-top: 20px;
 }
+
+
+@media screen and (max-width: 350px) {
+  .title {
+    font-size: 20px;
+  }
+  .text {
+    font-size: 12px;
+  }
+}

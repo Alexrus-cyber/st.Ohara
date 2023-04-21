@@ -24,6 +24,7 @@ export const getFile = createAsyncThunk(
   "getFile",
   async ({ file, id, section }, { rejectedWithValue }) => {
     try {
+      console.log(file);
       return { img: file, id, section }; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
       return rejectedWithValue(e);
