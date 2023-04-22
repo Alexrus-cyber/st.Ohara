@@ -3,17 +3,20 @@ import {
   createSelector,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
-import { mockListMenu } from "./mocks/menu";
+import { instance } from "../API/API";
 
 const initialState = {
-  images: [],
+  items: [],
   loading: true,
 };
 export const getMenuData = createAsyncThunk(
   "getMenuData",
   async (data, { rejectedWithValue }) => {
     try {
-      return mockListMenu; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      const response = await instance
+        .get(`menu`)
+        .then((response) => response.data);
+      return response.data.items; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -23,6 +26,7 @@ export const deleteItemMenu = createAsyncThunk(
   "deleteItemMenu",
   async (id, { rejectedWithValue }) => {
     try {
+      await instance.delete(`menu`, id).then((response) => response.data);
       return id; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
       return rejectedWithValue(e);
@@ -33,7 +37,14 @@ export const addItemMenu = createAsyncThunk(
   "addItemMenu",
   async (data, { rejectedWithValue }) => {
     try {
-      return data;
+      let formData = new FormData();
+      formData.append("file", data);
+      const response = await instance
+        .post(`menu`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((response) => response.data);
+      return response.data;
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -44,14 +55,19 @@ export const swapItemMenu = createAsyncThunk(
   "swapItemMenu",
   async (data, { rejectedWithValue }) => {
     try {
+      await instance
+        .put(`menu`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => response.data);
       return data;
     } catch (e) {
       return rejectedWithValue(e);
     }
   }
 );
-
-/*const menuAdapter = createEntityAdapter();*/
 
 export const menuSlice = createSlice({
   name: "menu",
@@ -70,7 +86,7 @@ export const menuSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getMenuData.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = payload;
+        state.items = payload;
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getMenuData.rejected, (state) => {
@@ -82,7 +98,7 @@ export const menuSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(deleteItemMenu.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = state.images.filter((el) => el.id !== payload);
+        state.items = state.items.filter((el) => el.id !== payload);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(deleteItemMenu.rejected, (state) => {
@@ -93,7 +109,7 @@ export const menuSlice = createSlice({
       })
       .addCase(addItemMenu.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = [payload, ...state.images];
+        state.items = [payload, ...state.items];
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(addItemMenu.rejected, (state) => {
@@ -104,7 +120,7 @@ export const menuSlice = createSlice({
       })
       .addCase(swapItemMenu.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = payload;
+        state.items = payload;
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(swapItemMenu.rejected, (state) => {
@@ -121,6 +137,6 @@ const stateSelector = (state) => state?.menu;
 
 export const listImagesSelector = createSelector(
   stateSelector,
-  (state) => state.images
+  (state) => state.items
 );
 export default reducer;

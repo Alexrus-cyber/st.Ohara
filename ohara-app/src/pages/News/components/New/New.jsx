@@ -1,13 +1,11 @@
 import styles from "./New.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect } from "react";
-import { getNew } from "../../../../slices/news";
 
 export const New = memo(() => {
   const { oneNew } = useSelector((state) => state.news);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getNew());
     window.scrollTo(0, 0);
   }, [dispatch]);
   return (

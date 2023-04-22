@@ -16,7 +16,7 @@ const Gallery = memo(() => {
     window.scrollTo(0, 0);
   }, [dispatch]);
 
-  const { images } = useSelector((state) => state.gallery);
+  const { items } = useSelector((state) => state.gallery);
 
   const openImageViewer = useCallback((index) => {
     setCurrentImage(index);
@@ -33,10 +33,10 @@ const Gallery = memo(() => {
       <div className={styles.container}>
         <h1 className={styles.title}>Наши фотографии</h1>
         <div className={styles.content}>
-          {images.map((i, index) => (
+          {items.map((i, index) => (
             <div className={styles.img} key={i.id}>
               <LazyLoadImage
-                src={i.img}
+                src={i.file}
                 custom={styles.border}
                 imgStyle={styles.border}
                 onClick={() => openImageViewer(index)}
@@ -46,7 +46,7 @@ const Gallery = memo(() => {
           ))}
           {isViewerOpen && (
             <ImageViewer
-              src={images.map((e) => e.img)}
+              src={items.map((e) => e.file)}
               currentIndex={currentImage}
               disableScroll={true}
               closeOnClickOutside={true}

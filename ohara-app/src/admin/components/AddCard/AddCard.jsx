@@ -13,7 +13,8 @@ export const AddCard = ({ addHandler }) => {
       setIsFileTooLarge(true);
     }
     if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
-      dispatch(addHandler(acceptedFiles));
+      console.log(acceptedFiles[0]);
+      dispatch(addHandler(acceptedFiles[0]));
       setIsFileTooLarge(false);
     }
   }, []);

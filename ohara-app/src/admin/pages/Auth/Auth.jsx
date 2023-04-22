@@ -3,7 +3,9 @@ import { FieldCreator } from "./components/Form/FormCreators";
 import { Field, reduxForm } from "redux-form";
 import { inputs } from "./components/Constant";
 import { ButtonUI } from "../components/ButtonUI/ButtonUI";
-import { memo } from "react";
+import { memo, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getMe, loginMe } from "../../../slices/AuthApi";
 
 const LoginForm = ({ handleSubmit }) => {
   return (
@@ -31,10 +33,15 @@ const LoginForm = ({ handleSubmit }) => {
   );
 };
 
-const Auth = memo(({ setAdmin }) => {
+const Auth = memo(() => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMe());
+  });
+
   const onSubmit = (formData) => {
-    console.log(formData);
-    formData && setAdmin(true);
+    dispatch(loginMe({ email: formData.email, password: formData.password }));
   };
   return (
     <div className={styles.container}>

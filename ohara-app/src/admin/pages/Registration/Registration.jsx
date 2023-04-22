@@ -4,10 +4,13 @@ import styles from "./Registration.module.scss";
 import { reduxForm } from "redux-form";
 import { ButtonUI } from "../components/ButtonUI/ButtonUI";
 import { memo } from "react";
+import { useDispatch } from "react-redux";
+import { addStaff } from "../../../slices/staff";
 
 const Registration = memo(() => {
+  const dispatch = useDispatch();
   const onSubmit = (formData) => {
-    console.log(formData);
+    dispatch(addStaff(formData));
   };
   return (
     <div className={styles.container}>

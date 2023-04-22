@@ -21,7 +21,7 @@ export const NewsAdmin = memo(() => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [text, setText] = useState("");
-  const { news, searchValue } = useSelector((state) => state.news);
+  const { items, searchValue } = useSelector((state) => state.news);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -94,12 +94,12 @@ export const NewsAdmin = memo(() => {
             />
           </div>
           <div className={styles.cardContainer}>
-            {news
+            {items
               .filter((item) => {
                 return searchValue.toLowerCase() === ""
                   ? item
-                  : item.title.toLowerCase().includes(searchValue) ||
-                      item.title.includes(searchValue);
+                  : item.header.toLowerCase().includes(searchValue) ||
+                      item.header.includes(searchValue);
               })
               .map((value) => {
                 return (

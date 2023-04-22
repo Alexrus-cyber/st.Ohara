@@ -53,6 +53,18 @@ export const InputUI = memo(
               {...props}
             />
           )}
+          {typeInput === "select" && (
+            <select
+              className={cl(styles.input, {
+                [styles.inputError]: showError,
+              })}
+              {...input}
+              {...props}
+            >
+              <option>Admin</option>
+              <option>Employee</option>
+            </select>
+          )}
         </label>
         <div>
           {touched &&

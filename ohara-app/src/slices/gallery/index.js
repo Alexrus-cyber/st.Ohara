@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { galleryData } from "./mocks/gallery";
+import { instance } from "../API/API";
 
 const initialState = {
-  images: [],
+  items: [],
   loading: true,
 };
 export const getGalleryData = createAsyncThunk(
   "getGalleryData",
   async (data, { rejectedWithValue }) => {
     try {
-      return galleryData; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      const response = await instance
+        .get(`gallery`)
+        .then((response) => response.data);
+      return response.data.items; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -53,7 +56,7 @@ export const gallerySlice = createSlice({
   initialState,
   reducers: {
     clearData: (state) => {
-      state.images = [];
+      state.items = [];
     },
   },
   extraReducers: (builder) => {
@@ -65,7 +68,7 @@ export const gallerySlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getGalleryData.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = payload;
+        state.items = payload;
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getGalleryData.rejected, (state) => {
@@ -77,7 +80,7 @@ export const gallerySlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(deleteItemGallery.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = state.images.filter((el) => el.id !== payload);
+        state.items = state.items.filter((el) => el.id !== payload);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(deleteItemGallery.rejected, (state) => {
@@ -88,7 +91,7 @@ export const gallerySlice = createSlice({
       })
       .addCase(addItemGallery.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = [payload, ...state.images];
+        state.items = [payload, ...state.items];
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(addItemGallery.rejected, (state) => {
@@ -99,7 +102,7 @@ export const gallerySlice = createSlice({
       })
       .addCase(swapItemGallery.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.images = payload;
+        state.items = payload;
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(swapItemGallery.rejected, (state) => {

@@ -8,7 +8,7 @@ import { getNewsData } from "../../slices/news";
 import { NavLink } from "react-router-dom";
 
 const Footer = memo(() => {
-  const { news } = useSelector((state) => state.news);
+  const { items } = useSelector((state) => state.news);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewsData());
@@ -45,7 +45,7 @@ const Footer = memo(() => {
         </div>
         <div className={styles.right}>
           <p className={styles.rightTitle}>АКТУАЛЬНЫЕ НОВОСТИ</p>
-          {news.slice(-3).map((el) => (
+          {items.slice(-3).map((el) => (
             <NavLink
               key={el.id}
               to={`news/${el.id}`}

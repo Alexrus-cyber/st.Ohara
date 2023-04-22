@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { getNewsData } from "../../slices/news";
 
 const News = () => {
-  const { news } = useSelector((state) => state.news);
+  const { items } = useSelector((state) => state.news);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewsData());
@@ -17,7 +17,7 @@ const News = () => {
     <section className={styles.news}>
       <div className={styles.container}>
         <h1 className={styles.title}>Новости</h1>
-        {news
+        {items
           .filter((e) => e.main === true)
           .map((e) => (
             <NavLink key={e.id} className={styles.mainNew} to={"/News/" + e.id}>
@@ -27,7 +27,7 @@ const News = () => {
           ))}
         <div className={styles.gallery}>
           <div className={styles.content}>
-            {news
+            {items
               .filter((e) => e.main !== true)
               .map((e) => (
                 <NavLink

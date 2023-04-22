@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { NewData, newsData } from "./mocks/news";
+import { instance } from "../API/API";
 
 const initialState = {
-  news: [],
+  items: [],
   searchValue: "",
   loading: true,
   oneNew: {},
@@ -11,22 +11,16 @@ export const getNewsData = createAsyncThunk(
   "getNewsData",
   async (data, { rejectedWithValue }) => {
     try {
-      return newsData; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      const response = await instance
+        .get(`news`)
+        .then((response) => response.data);
+      return response.data.items;
     } catch (e) {
       return rejectedWithValue(e);
     }
   }
 );
-export const getNew = createAsyncThunk(
-  "getNew",
-  async (data, { rejectedWithValue }) => {
-    try {
-      return NewData;
-    } catch (e) {
-      return rejectedWithValue(e);
-    }
-  }
-);
+
 export const deleteNew = createAsyncThunk(
   "deleteNew",
   async (id, { rejectedWithValue }) => {
@@ -41,7 +35,10 @@ export const addNew = createAsyncThunk(
   "addNew",
   async (data, { rejectedWithValue }) => {
     try {
-      return data;
+      const response = await instance
+        .post(`news`, { data })
+        .then((response) => response.data);
+      return response.data.items;
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -64,24 +61,10 @@ export const newsSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getNewsData.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.news = payload;
+        state.items = payload;
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getNewsData.rejected, (state) => {
-        state.loading = false;
-      })
-
-      .addCase(getNew.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(getNew.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.oneNew = payload;
-        console.log("Получил");
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(getNew.rejected, (state) => {
         state.loading = false;
       })
       .addCase(deleteNew.pending, (state) => {
@@ -90,7 +73,7 @@ export const newsSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(deleteNew.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.news = state.news.filter((el) => el.id !== payload);
+        state.items = state.items.filter((el) => el.id !== payload);
         console.log(payload);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
@@ -104,7 +87,7 @@ export const newsSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(addNew.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.news = [...state.news, payload];
+        state.items = [...state.items, payload];
         console.log(payload);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку

@@ -25,7 +25,7 @@ const GalleryAdmin = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalState, setModalState] = useState(initialModalState);
-  const { images } = useSelector((state) => state.gallery);
+  const { items } = useSelector((state) => state.gallery);
   const [isOpenModal, setOpenModal] = useState(false);
   const [change, setChange] = useState(false);
   const [data, setData] = useState([]);
@@ -83,7 +83,7 @@ const GalleryAdmin = () => {
       </div>
       <ReactSortable
         className={styles.cardContainer}
-        list={images.map((element) => ({ ...element }))}
+        list={items.map((element) => ({ ...element }))}
         setList={(currentList, sortable, store) => {
           if (
             store.dragging &&
@@ -96,12 +96,12 @@ const GalleryAdmin = () => {
         }}
         {...sortableOptions}
       >
-        {images.map((element, index) => (
+        {items.map((element, index) => (
           <div key={element.id} className={styles.closeContainer}>
             <LazyLoadImage
               custom={styles.custom}
               imgStyle={styles.custom}
-              src={element.img}
+              src={element.file}
               onClick={() => openImageViewer(index)}
               alt=""
             />
@@ -118,7 +118,7 @@ const GalleryAdmin = () => {
       </ReactSortable>
       {isViewerOpen && (
         <ImageViewer
-          src={images.map((e) => e.img)}
+          src={items.map((e) => e.file)}
           currentIndex={currentImage}
           disableScroll={true}
           closeOnClickOutside={true}

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
-  const [img, setImg] = useState(data.img);
+  const [img, setImg] = useState(data.file);
   const dispatch = useDispatch();
 
   const titleChange = (e) => {
@@ -22,9 +22,9 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
     }
   };
   useEffect(() => {
-    setTitle(data.title);
-    setText(data.text);
-  }, [data.title, data.text]);
+    setTitle(data.header);
+    setText(data.description);
+  }, [data.header, data.description]);
 
   const editCard = useMemo(() => {
     if (isEdit) {
@@ -111,7 +111,7 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
             </div>
             <div className={styles.imgContainer}>
               <div
-                style={{ backgroundImage: `url("${data.img}")` }}
+                style={{ backgroundImage: `url("${data.file}")` }}
                 className={styles.imgChanger}
               >
                 <label className={styles.label}>
@@ -129,12 +129,10 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
             <button
               onClick={() => {
                 const news = {
-                  id: 10,
-                  img: img,
-                  title: title,
-                  text: text,
+                  file: img,
+                  header: title,
+                  description: text,
                 };
-
                 dispatch(addNew(news));
                 onClose();
                 setIsEdit(false);
@@ -149,7 +147,7 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
         </div>
       );
     }
-  }, [data.img, dispatch, img, isEdit, onClose, setIsEdit, text, title]);
+  }, [data.file, dispatch, img, isEdit, onClose, setIsEdit, text, title]);
   return (
     <>
       {editCard}

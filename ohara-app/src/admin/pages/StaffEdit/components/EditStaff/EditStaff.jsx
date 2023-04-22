@@ -4,10 +4,14 @@ import { FieldCreator } from "../../../Auth/components/Form/FormCreators";
 import { ButtonUI } from "../../../components/ButtonUI/ButtonUI";
 import { inputsRegister } from "../../../Auth/components/Constant";
 import { memo } from "react";
+import { useDispatch } from "react-redux";
+import { editStaff } from "../../../../../slices/staff";
 
 const EditStaff = memo(({ user }) => {
+  const dispatch = useDispatch();
   const onSubmit = (formData) => {
     console.log(formData);
+    dispatch(editStaff(formData));
   };
   return (
     <div className={styles.color}>
