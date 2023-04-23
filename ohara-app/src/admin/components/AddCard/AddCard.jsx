@@ -1,11 +1,9 @@
 import styles from "./Card.module.scss";
-import { useDispatch } from "react-redux";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 export const AddCard = ({ addHandler }) => {
   const [isFileTooLarge, setIsFileTooLarge] = useState(false);
-  const dispatch = useDispatch();
   const maxSize = 1048576;
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -14,7 +12,7 @@ export const AddCard = ({ addHandler }) => {
     }
     if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
       console.log(acceptedFiles[0]);
-      dispatch(addHandler(acceptedFiles[0]));
+      addHandler(acceptedFiles[0]);
       setIsFileTooLarge(false);
     }
   }, []);

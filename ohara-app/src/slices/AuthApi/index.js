@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { instance, setToken } from "../API/API";
+import { instance } from "../API/API";
 
 const initialState = {
   email: null,
@@ -49,8 +49,6 @@ export const authSlice = createSlice({
       .addCase(loginMe.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.token = payload;
-        setToken(payload);
-        console.log(payload);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(loginMe.rejected, (state) => {

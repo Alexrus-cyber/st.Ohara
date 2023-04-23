@@ -23,6 +23,7 @@ export const deleteItemGallery = createAsyncThunk(
   "deleteItemGallery",
   async (id, { rejectedWithValue }) => {
     try {
+      await instance.delete(`gallery/${id}`).then((response) => response.data);
       return id; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
       return rejectedWithValue(e);
@@ -34,7 +35,15 @@ export const addItemGallery = createAsyncThunk(
   "addItemGallery",
   async (file, { rejectedWithValue }) => {
     try {
-      return file; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      let formData = new FormData();
+      formData.append("file", file);
+      const response = await instance
+        .post(`menu`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((response) => response.data);
+      console.log(response.data);
+      return response.data;
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -91,7 +100,8 @@ export const gallerySlice = createSlice({
       })
       .addCase(addItemGallery.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.items = [payload, ...state.items];
+        state.items = [...state.items, ...payload];
+        console.log(state.items);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(addItemGallery.rejected, (state) => {

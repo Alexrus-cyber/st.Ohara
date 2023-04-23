@@ -6,11 +6,14 @@ import { ButtonUI } from "../components/ButtonUI/ButtonUI";
 import { memo } from "react";
 import { useDispatch } from "react-redux";
 import { addStaff } from "../../../slices/staff";
+import { useNavigate } from "react-router-dom";
 
 const Registration = memo(() => {
   const dispatch = useDispatch();
+  let navigate = useNavigate();
   const onSubmit = (formData) => {
     dispatch(addStaff(formData));
+    navigate("/staff");
   };
   return (
     <div className={styles.container}>

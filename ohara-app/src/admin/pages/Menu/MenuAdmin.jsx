@@ -70,16 +70,24 @@ const MenuAdmin = memo(() => {
     setData(newState);
   }, []);
 
-  function acceptList(newState) {
-    dispatch(swapItemMenu(newState));
-    console.log(newState);
-  }
+  const acceptList = useCallback(
+    (newState) => {
+      dispatch(swapItemMenu(newState));
+    },
+    [dispatch]
+  );
+  const addItem = useCallback(
+    (file) => {
+      dispatch(addItemMenu(file));
+    },
+    [dispatch]
+  );
 
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Меню</h1>
       <div className={styles.addContainer}>
-        <AddCard addHandler={addItemMenu} />
+        <AddCard addHandler={addItem} />
       </div>
       <ReactSortable
         className={styles.cardContainer}

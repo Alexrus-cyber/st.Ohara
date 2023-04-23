@@ -6,14 +6,11 @@ import {
   addItemGallery,
   deleteItemGallery,
   getGalleryData,
-  swapItemGallery,
 } from "../../../slices/gallery";
 import { nanoid } from "@reduxjs/toolkit";
 import { DeleteModal } from "../components/DeleteModal/DeleteModal";
 import { Module } from "../../components/Module/Module";
 import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
-import { ReactSortable } from "react-sortablejs";
-import { DragModal } from "../components/DragModal/DragModal";
 import { AddCard } from "../../components/AddCard/AddCard";
 
 const initialModalState = {
@@ -27,8 +24,6 @@ const GalleryAdmin = () => {
   const [modalState, setModalState] = useState(initialModalState);
   const { items } = useSelector((state) => state.gallery);
   const [isOpenModal, setOpenModal] = useState(false);
-  const [change, setChange] = useState(false);
-  const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
   //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
@@ -56,46 +51,20 @@ const GalleryAdmin = () => {
     setModalState(initialModalState);
   }, []);
 
-  const sortableOptions = {
-    animation: 250,
-    fallbackOnBody: true,
-    swapThreshold: 0.65,
-    ghostClass: "ghost",
-    group: "grid",
-    forceFallback: true,
-  };
-
-  const listChangeHandler = useCallback((newState) => {
-    setOpenModal(true);
-    setChange(true);
-    setData(newState);
-  }, []);
-
-  function acceptList(newState) {
-    dispatch(swapItemGallery(newState));
-  }
+  const addItem = useCallback(
+    (file) => {
+      dispatch(addItemGallery(file));
+    },
+    [dispatch]
+  );
 
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Галерея</h1>
       <div className={styles.addContainer}>
-        <AddCard addHandler={addItemGallery} />
+        <AddCard addHandler={addItem} />
       </div>
-      <ReactSortable
-        className={styles.cardContainer}
-        list={items.map((element) => ({ ...element }))}
-        setList={(currentList, sortable, store) => {
-          if (
-            store.dragging &&
-            store.dragging.props &&
-            JSON.stringify(store.dragging.props.list) !==
-              JSON.stringify(currentList)
-          ) {
-            listChangeHandler(currentList);
-          }
-        }}
-        {...sortableOptions}
-      >
+      <div className={styles.cardContainer}>
         {items.map((element, index) => (
           <div key={element.id} className={styles.closeContainer}>
             <LazyLoadImage
@@ -115,7 +84,7 @@ const GalleryAdmin = () => {
             </button>
           </div>
         ))}
-      </ReactSortable>
+      </div>
       {isViewerOpen && (
         <ImageViewer
           src={items.map((e) => e.file)}
@@ -125,34 +94,17 @@ const GalleryAdmin = () => {
           onClose={closeImageViewer}
         />
       )}
-      {change && (
-        <Module
-          active={isOpenModal}
-          setActive={setOpenModal}
+      <Module
+        active={isOpenModal}
+        setActive={setOpenModal}
+        onClose={handleClickCloseModal}
+      >
+        <DeleteModal
+          delete={deleteItemGallery}
+          id={modalState.id}
           onClose={handleClickCloseModal}
-        >
-          <DragModal
-            title={"Вы уверены что хотите поменять местами данные карточки?"}
-            setOpenModal={setOpenModal}
-            setChange={setChange}
-            data={data}
-            acceptList={acceptList}
-          />
-        </Module>
-      )}
-      {!change && (
-        <Module
-          active={isOpenModal}
-          setActive={setOpenModal}
-          onClose={handleClickCloseModal}
-        >
-          <DeleteModal
-            delete={deleteItemGallery}
-            id={modalState.id}
-            onClose={handleClickCloseModal}
-          />
-        </Module>
-      )}
+        />
+      </Module>
     </section>
   );
 };

@@ -6,6 +6,7 @@ import { ButtonUI } from "../components/ButtonUI/ButtonUI";
 import { memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getMe, loginMe } from "../../../slices/AuthApi";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ handleSubmit }) => {
   return (
@@ -35,13 +36,14 @@ const LoginForm = ({ handleSubmit }) => {
 
 const Auth = memo(() => {
   const dispatch = useDispatch();
-
+  let navigate = useNavigate();
   useEffect(() => {
     dispatch(getMe());
   });
 
   const onSubmit = (formData) => {
     dispatch(loginMe({ email: formData.email, password: formData.password }));
+    navigate("/");
   };
   return (
     <div className={styles.container}>

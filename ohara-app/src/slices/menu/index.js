@@ -26,8 +26,8 @@ export const deleteItemMenu = createAsyncThunk(
   "deleteItemMenu",
   async (id, { rejectedWithValue }) => {
     try {
-      await instance.delete(`menu`, id).then((response) => response.data);
-      return id; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      await instance.delete(`menu/${id}`).then((response) => response.data);
+      return id;
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -109,7 +109,7 @@ export const menuSlice = createSlice({
       })
       .addCase(addItemMenu.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.items = [payload, ...state.items];
+        state.items = [...state.items, ...payload];
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(addItemMenu.rejected, (state) => {

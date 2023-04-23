@@ -7,11 +7,11 @@ import { memo } from "react";
 import { useDispatch } from "react-redux";
 import { editStaff } from "../../../../../slices/staff";
 
-const EditStaff = memo(({ user }) => {
+const EditStaff = memo(({ user, onClose }) => {
   const dispatch = useDispatch();
   const onSubmit = (formData) => {
-    console.log(formData);
     dispatch(editStaff(formData));
+    onClose();
   };
   return (
     <div className={styles.color}>

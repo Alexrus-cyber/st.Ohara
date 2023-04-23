@@ -35,7 +35,7 @@ export const Card = memo(
     }, [data.id, handleClickCloseModal, isOpenModal]);
     return (
       <div
-        style={{ backgroundImage: `url("${data.img}")` }}
+        style={{ backgroundImage: `url("${data.file}")` }}
         className={styles.card}
       >
         <div className={styles.container}>
@@ -60,9 +60,11 @@ export const Card = memo(
           </div>
           <div className={styles.textContainer}>
             <h2 className={styles.title}>
-              {data.title.substring(0, 30) + "..."}
+              {data.header.substring(0, 30) + "..."}
             </h2>
-            <p className={styles.text}>{data.text.substring(0, 80) + "..."}</p>
+            <p className={styles.text}>
+              {data.description.substring(0, 80) + "..."}
+            </p>
           </div>
         </div>
         <div className={styles.buttonContainer}>
