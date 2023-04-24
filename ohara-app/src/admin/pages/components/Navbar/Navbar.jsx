@@ -2,24 +2,17 @@ import styles from "./Navbar.module.scss";
 import admin from "../../../../assets/logotest.webp";
 import { NavLink } from "react-router-dom";
 import { AppBar, Drawer, IconButton, Toolbar, useTheme } from "@mui/material";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useDispatch, useSelector } from "react-redux";
-import { getMe } from "../../../../slices/AuthApi";
+import { useDispatch } from "react-redux";
+import { setUserNull } from "../../../../slices/AuthApi";
 
 const drawerWidth = "100%";
-const Navbar = memo(({ setAdmin }) => {
+const Navbar = memo(({ setAdmin, user }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-
-  const { user } = useSelector((state) => state.login);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getMe());
-  }, [dispatch]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -92,7 +85,8 @@ const Navbar = memo(({ setAdmin }) => {
   );
 });
 
-const ContentNavbar = ({ handleDrawerClose, setAdmin, user }) => {
+const ContentNavbar = ({ handleDrawerClose, user }) => {
+  const dispatch = useDispatch();
   const arr = [
     { id: 5, src: "/landingAdmin", text: "Главная" },
     { id: 1, src: "/", text: "Меню" },
@@ -124,8 +118,10 @@ const ContentNavbar = ({ handleDrawerClose, setAdmin, user }) => {
       </div>
       <button
         onClick={() => {
-          setAdmin(false);
           handleDrawerClose;
+          sessionStorage.clear();
+          console.log("dfsdfsd");
+          dispatch(setUserNull());
         }}
         className={styles.buttonBack}
       >

@@ -51,7 +51,7 @@ const Footer = memo(() => {
               to={`news/${el.id}`}
               className={styles.rightText}
             >
-              {el.title}
+              {el.header}
             </NavLink>
           ))}
         </div>

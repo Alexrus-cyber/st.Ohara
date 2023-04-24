@@ -3,7 +3,7 @@ import styles from "./main.module.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./admin/pages/components/Navbar/Navbar";
 import Header from "./components/Header/Header";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useMemo } from "react";
 import { LoaderPage } from "./components/LoaderPage/LoaderPage";
 import { getMe } from "./slices/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,61 +39,68 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMe());
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      dispatch(getMe());
+    }
   }, [dispatch]);
 
+  const routing = useMemo(() => {
+    if (user !== null && user.id) {
+      return (
+        <div className={styles.main}>
+          <Navbar user={user} />
+          <Suspense fallback={<LoaderPage />}>
+            <Routes>
+              <Route path={"/"} element={<MenuAdmin />} />
+              <Route path={"/galleryAdmin"} element={<GalleryAdmin />} />
+              <Route path={"/newsAdmin"} element={<NewsAdmin />} />
+              <Route path={"/menuAdmin"} element={<MenuAdmin />} />
+              <Route path={"/landingAdmin"} element={<LandingAdmin />} />
+              <Route
+                path={"/reservationAdmin"}
+                element={<ReservationAdmin />}
+              />
+              <Route path={"/registration"} element={<Registration />} />
+              <Route path={"/staff"} element={<Staff />} />
+              <Route path={"/editStaff"} element={<EditStaff />} />
+              <Route path={"/*"} element={<NotFound />} />
+              <Route path={"/menu"} element={<Menu />} />
+              <Route path={"/gallery"} element={<Gallery />} />
+              <Route path={"/news"} element={<News />} />
+              <Route path={"/news/:id"} element={<New />} />
+              <Route path={"/reservation"} element={<Reservation />} />
+              <Route path={"/landing"} element={<Landing />} />
+              <Route path={"/login"} element={<Auth />} />
+            </Routes>
+          </Suspense>
+        </div>
+      );
+    }
+    return (
+      <div>
+        <Header />
+        <Suspense fallback={<LoaderPage />}>
+          <Routes>
+            <Route path={"/login"} element={<Auth />} />
+            <Route path={"/"} element={<Landing />} />
+            <Route path={"/menu"} element={<Menu />} />
+            <Route path={"/gallery"} element={<Gallery />} />
+            <Route path={"/news"} element={<News />} />
+            <Route path={"/news/:id"} element={<New />} />
+            <Route path={"/reservation"} element={<Reservation />} />
+            <Route path={"/*"} element={<NotFound />} />
+          </Routes>
+        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Footer />
+        </Suspense>
+      </div>
+    );
+  }, [user]);
   return (
     <BrowserRouter>
-      <div className="App">
-        {user.roleEntity ? (
-          <div className={styles.main}>
-            <Navbar />
-            <Suspense fallback={<LoaderPage />}>
-              <Routes>
-                <Route path={"/"} element={<MenuAdmin />} />
-                <Route path={"/galleryAdmin"} element={<GalleryAdmin />} />
-                <Route path={"/newsAdmin"} element={<NewsAdmin />} />
-                <Route path={"/menuAdmin"} element={<MenuAdmin />} />
-                <Route path={"/landingAdmin"} element={<LandingAdmin />} />
-                <Route
-                  path={"/reservationAdmin"}
-                  element={<ReservationAdmin />}
-                />
-                <Route path={"/registration"} element={<Registration />} />
-                <Route path={"/staff"} element={<Staff />} />
-                <Route path={"/editStaff"} element={<EditStaff />} />
-                <Route path={"/*"} element={<NotFound />} />
-                <Route path={"/menu"} element={<Menu />} />
-                <Route path={"/gallery"} element={<Gallery />} />
-                <Route path={"/news"} element={<News />} />
-                <Route path={"/news/:id"} element={<New />} />
-                <Route path={"/reservation"} element={<Reservation />} />
-                <Route path={"/landing"} element={<Landing />} />
-                <Route path={"/login"} element={<Auth />} />
-              </Routes>
-            </Suspense>
-          </div>
-        ) : (
-          <div>
-            <Header />
-            <Suspense fallback={<LoaderPage />}>
-              <Routes>
-                <Route path={"/login"} element={<Auth />} />
-                <Route path={"/"} element={<Landing />} />
-                <Route path={"/menu"} element={<Menu />} />
-                <Route path={"/gallery"} element={<Gallery />} />
-                <Route path={"/news"} element={<News />} />
-                <Route path={"/news/:id"} element={<New />} />
-                <Route path={"/reservation"} element={<Reservation />} />
-                <Route path={"/*"} element={<NotFound />} />
-              </Routes>
-            </Suspense>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Footer />
-            </Suspense>
-          </div>
-        )}
-      </div>
+      <div className="App">{routing}</div>
     </BrowserRouter>
   );
 }

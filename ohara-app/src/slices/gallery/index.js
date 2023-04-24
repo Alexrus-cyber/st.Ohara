@@ -4,6 +4,7 @@ import { instance } from "../API/API";
 const initialState = {
   items: [],
   loading: true,
+  error: "",
 };
 export const getGalleryData = createAsyncThunk(
   "getGalleryData",
@@ -14,17 +15,17 @@ export const getGalleryData = createAsyncThunk(
         .then((response) => response.data);
       return response.data.items; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
-      return rejectedWithValue(e);
+      return prompt(rejectedWithValue(e));
     }
   }
 );
 
 export const deleteItemGallery = createAsyncThunk(
   "deleteItemGallery",
-  async (id, { rejectedWithValue }) => {
+  async (id, { rejectedWithValue, dispatch }) => {
     try {
       await instance.delete(`gallery/${id}`).then((response) => response.data);
-      return id; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      dispatch(getGalleryData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -33,17 +34,19 @@ export const deleteItemGallery = createAsyncThunk(
 
 export const addItemGallery = createAsyncThunk(
   "addItemGallery",
-  async (file, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
       let formData = new FormData();
-      formData.append("file", file);
+      for (let file of data) {
+        formData.append("file", file);
+      }
       const response = await instance
-        .post(`menu`, formData, {
+        .post(`gallery`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => response.data);
       console.log(response.data);
-      return response.data;
+      dispatch(getGalleryData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -81,41 +84,6 @@ export const gallerySlice = createSlice({
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getGalleryData.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(deleteItemGallery.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(deleteItemGallery.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.items = state.items.filter((el) => el.id !== payload);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(deleteItemGallery.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(addItemGallery.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(addItemGallery.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.items = [...state.items, ...payload];
-        console.log(state.items);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(addItemGallery.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(swapItemGallery.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(swapItemGallery.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.items = payload;
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(swapItemGallery.rejected, (state) => {
         state.loading = false;
       });
   },

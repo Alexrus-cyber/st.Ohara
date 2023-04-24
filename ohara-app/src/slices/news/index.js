@@ -23,10 +23,10 @@ export const getNewsData = createAsyncThunk(
 
 export const deleteNew = createAsyncThunk(
   "deleteNew",
-  async (id, { rejectedWithValue }) => {
+  async (id, { rejectedWithValue, dispatch }) => {
     try {
       await instance.delete(`news/${id}`).then((response) => response.data);
-      getNewsData();
+      dispatch(getNewsData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -34,10 +34,14 @@ export const deleteNew = createAsyncThunk(
 );
 export const addNew = createAsyncThunk(
   "addNew",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
-      await instance.post(`news`, data).then((response) => response.data);
-      getNewsData();
+      const { header, description, file } = data;
+      await instance
+        .post(`news`, { header, description })
+        .then((response) => response.data);
+      await instance.post(`news`, { file }).then((response) => response.data);
+      dispatch(getNewsData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -76,33 +80,6 @@ export const newsSlice = createSlice({
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getNewsData.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(deleteNew.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(deleteNew.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.items = state.items.filter((el) => el.id !== payload);
-        console.log(payload);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(deleteNew.rejected, (state) => {
-        state.loading = false;
-      })
-
-      .addCase(addNew.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(addNew.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.items = [...state.items, payload];
-        console.log(payload);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(addNew.rejected, (state) => {
         state.loading = false;
       });
   },

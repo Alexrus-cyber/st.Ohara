@@ -11,8 +11,7 @@ export const AddCard = ({ addHandler }) => {
       setIsFileTooLarge(true);
     }
     if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
-      console.log(acceptedFiles[0]);
-      addHandler(acceptedFiles[0]);
+      addHandler(acceptedFiles);
       setIsFileTooLarge(false);
     }
   }, []);
@@ -28,7 +27,7 @@ export const AddCard = ({ addHandler }) => {
       },
       minSize: 0,
       maxSize,
-      multiple: false,
+      multiple: true,
     });
   return (
     <div className={styles.card} {...getRootProps()}>

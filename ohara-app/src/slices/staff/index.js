@@ -22,14 +22,14 @@ export const getStaffData = createAsyncThunk(
 );
 export const addStaff = createAsyncThunk(
   "addStaff",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
-      const response = await instance
+      await instance
         .post(`user`, data, {
           headers: { "Content-Type": "application/json" },
         })
         .then((response) => response.data);
-      return response.data;
+      dispatch(getStaffData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -38,16 +38,8 @@ export const addStaff = createAsyncThunk(
 
 export const editStaff = createAsyncThunk(
   "editStaff",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
-      /*  const id = data.id;
-        const name = data.name;
-        const surname = data.surname;
-        const patronymic = data.patronymic;
-        const email = data.email;
-        const phoneNumber = data.phoneNumber;
-        const roleEntity = data.roleEntity;*/
-
       const { id, password, ...rest } = data;
       console.log(password);
       await instance
@@ -55,8 +47,8 @@ export const editStaff = createAsyncThunk(
           headers: { "Content-Type": "application/json" },
         })
         .then((response) => response.data);
-      await getMe();
-      return data;
+      await dispatch(getMe());
+      dispatch(getStaffData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -65,10 +57,10 @@ export const editStaff = createAsyncThunk(
 
 export const deleteStaff = createAsyncThunk(
   "deleteStaff",
-  async (id, { rejectedWithValue }) => {
+  async (id, { rejectedWithValue, dispatch }) => {
     try {
       await instance.delete(`user/${id}`).then((response) => response.data);
-      return id; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      dispatch(getStaffData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -97,58 +89,6 @@ export const staffSlice = createSlice({
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getStaffData.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(deleteStaff.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(deleteStaff.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.staffList = state.staffList.filter((el) => el.id !== payload);
-        console.log(payload);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(deleteStaff.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(addStaff.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(addStaff.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.staffList = [...state.staffList, payload];
-        console.log(payload);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(addStaff.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(editStaff.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(editStaff.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.staffList = state.staffList.map((value) => {
-          if (value.id === payload.id) {
-            return {
-              ...value,
-              name: payload.name,
-              surname: payload.surname,
-              patronymic: payload.patronymic,
-              email: payload.email,
-              phoneNumber: payload.phoneNumber,
-              roleEntity: payload.roleEntity,
-            };
-          }
-          return value;
-        });
-        console.log(payload);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(editStaff.rejected, (state) => {
         state.loading = false;
       });
   },

@@ -64,11 +64,23 @@ const MenuAdmin = memo(() => {
     forceFallback: true,
   };
 
-  const listChangeHandler = useCallback((newState) => {
+  const listChangeHandler = useCallback(() => {
     setOpenModal(true);
     setChange(true);
-    setData(newState);
   }, []);
+
+  const addItem = useCallback(
+    (file) => {
+      dispatch(addItemMenu(file));
+    },
+    [dispatch]
+  );
+  const reorder = ({ oldIndex, newIndex }) => {
+    const result = Array.from(items);
+    result[oldIndex] = { ...result[oldIndex], position: newIndex };
+    result[newIndex] = { ...result[newIndex], position: oldIndex };
+    setData(result);
+  };
 
   const acceptList = useCallback(
     (newState) => {
@@ -76,13 +88,6 @@ const MenuAdmin = memo(() => {
     },
     [dispatch]
   );
-  const addItem = useCallback(
-    (file) => {
-      dispatch(addItemMenu(file));
-    },
-    [dispatch]
-  );
-
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Меню</h1>
@@ -90,6 +95,7 @@ const MenuAdmin = memo(() => {
         <AddCard addHandler={addItem} />
       </div>
       <ReactSortable
+        onEnd={reorder}
         className={styles.cardContainer}
         list={items.map((element) => ({ ...element }))}
         setList={(currentList, sortable, store) => {

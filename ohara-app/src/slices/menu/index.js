@@ -24,10 +24,10 @@ export const getMenuData = createAsyncThunk(
 );
 export const deleteItemMenu = createAsyncThunk(
   "deleteItemMenu",
-  async (id, { rejectedWithValue }) => {
+  async (id, { rejectedWithValue, dispatch }) => {
     try {
       await instance.delete(`menu/${id}`).then((response) => response.data);
-      return id;
+      dispatch(getMenuData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -35,26 +35,29 @@ export const deleteItemMenu = createAsyncThunk(
 );
 export const addItemMenu = createAsyncThunk(
   "addItemMenu",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
       let formData = new FormData();
-      formData.append("file", data);
-      const response = await instance
+      for (let file of data) {
+        formData.append("file", file);
+      }
+      await instance
         .post(`menu`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => response.data);
-      return response.data;
+      dispatch(getMenuData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return prompt(rejectedWithValue(e));
     }
   }
 );
 
 export const swapItemMenu = createAsyncThunk(
   "swapItemMenu",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
+      console.log(data);
       await instance
         .put(`menu`, data, {
           headers: {
@@ -62,7 +65,7 @@ export const swapItemMenu = createAsyncThunk(
           },
         })
         .then((response) => response.data);
-      return data;
+      dispatch(getMenuData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -86,44 +89,13 @@ export const menuSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getMenuData.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.items = payload;
+        console.log(payload);
+        state.items = payload.sort(function (a, b) {
+          return a.position - b.position;
+        });
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getMenuData.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(deleteItemMenu.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(deleteItemMenu.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.items = state.items.filter((el) => el.id !== payload);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(deleteItemMenu.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(addItemMenu.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(addItemMenu.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.items = [...state.items, ...payload];
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(addItemMenu.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(swapItemMenu.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(swapItemMenu.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.items = payload;
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(swapItemMenu.rejected, (state) => {
         state.loading = false;
       });
   },

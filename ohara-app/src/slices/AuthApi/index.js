@@ -19,26 +19,11 @@ export const loginMe = createAsyncThunk(
           sessionStorage.setItem("token", response.data.data);
           setAccessToken(response.data.data);
           console.log(response.data);
+          window.location.reload();
+          console.log("hello");
         });
       return response.data;
     } catch (e) {
-      return rejectedWithValue(e);
-    }
-  }
-);
-
-export const logout = createAsyncThunk(
-  "logout",
-  async (data, { rejectedWithValue }) => {
-    try {
-      const response = await instance
-        .get(`users/me`)
-        .then((response) => response.data);
-      return response.data;
-    } catch (e) {
-      if (e.response.status === 401) {
-        console.log("Пользователь не авторизован");
-      }
       return rejectedWithValue(e);
     }
   }
@@ -61,10 +46,31 @@ export const getMe = createAsyncThunk(
   }
 );
 
+export const logout = createAsyncThunk(
+  "logout",
+  async (data, { rejectedWithValue }) => {
+    try {
+      const response = await instance
+        .get(`users/me`)
+        .then((response) => response.data);
+      return response.data;
+    } catch (e) {
+      if (e.response.status === 401) {
+        console.log("Пользователь не авторизован");
+      }
+      return rejectedWithValue(e);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "login",
   initialState,
-  reducers: {},
+  reducers: {
+    setUserNull(state) {
+      state.user = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginMe.pending, (state) => {
@@ -92,5 +98,5 @@ export const authSlice = createSlice({
       });
   },
 });
-
+export const { setUserNull } = authSlice.actions;
 export default authSlice.reducer;
