@@ -26,7 +26,7 @@ export const deleteNew = createAsyncThunk(
   async (id, { rejectedWithValue }) => {
     try {
       await instance.delete(`news/${id}`).then((response) => response.data);
-      return id;
+      getNewsData();
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -37,7 +37,7 @@ export const addNew = createAsyncThunk(
   async (data, { rejectedWithValue }) => {
     try {
       await instance.post(`news`, data).then((response) => response.data);
-      return data;
+      getNewsData();
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -49,7 +49,7 @@ export const editNew = createAsyncThunk(
   async (data, { rejectedWithValue }) => {
     try {
       await instance.post(`news`, data).then((response) => response.data);
-      return data;
+      getNewsData();
     } catch (e) {
       return rejectedWithValue(e);
     }

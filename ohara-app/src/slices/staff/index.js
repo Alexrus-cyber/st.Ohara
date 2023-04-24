@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instance } from "../API/API";
+import { getMe } from "../AuthApi";
 
 const initialState = {
   staffList: [],
   searchValue: "",
   loading: true,
 };
-
 export const getStaffData = createAsyncThunk(
   "getStaffData",
   async (data, { rejectedWithValue }) => {
@@ -40,23 +40,22 @@ export const editStaff = createAsyncThunk(
   "editStaff",
   async (data, { rejectedWithValue }) => {
     try {
-      const id = data.id;
-      const name = data.name;
-      const surname = data.surname;
-      const patronymic = data.patronymic;
-      const email = data.email;
-      const phoneNumber = data.phoneNumber;
-      const roleEntity = data.roleEntity;
+      /*  const id = data.id;
+        const name = data.name;
+        const surname = data.surname;
+        const patronymic = data.patronymic;
+        const email = data.email;
+        const phoneNumber = data.phoneNumber;
+        const roleEntity = data.roleEntity;*/
 
+      const { id, password, ...rest } = data;
+      console.log(password);
       await instance
-        .put(
-          `user/${id}`,
-          { name, surname, patronymic, email, phoneNumber, roleEntity },
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        )
+        .put(`user/${id}`, rest, {
+          headers: { "Content-Type": "application/json" },
+        })
         .then((response) => response.data);
+      await getMe();
       return data;
     } catch (e) {
       return rejectedWithValue(e);

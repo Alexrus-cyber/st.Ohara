@@ -3,8 +3,10 @@ import styles from "./main.module.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./admin/pages/components/Navbar/Navbar";
 import Header from "./components/Header/Header";
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { LoaderPage } from "./components/LoaderPage/LoaderPage";
+import { getMe } from "./slices/AuthApi";
+import { useDispatch, useSelector } from "react-redux";
 
 const MenuAdmin = lazy(() => import("./admin/pages/Menu/MenuAdmin"));
 const GalleryAdmin = lazy(() => import("./admin/pages/Gallery/GalleryAdmin"));
@@ -33,14 +35,19 @@ const Gallery = lazy(() => import("./pages/Gallery/Gallery"));
 const NotFound = lazy(() => import("./components/NotFound/NotFound"));
 
 function App() {
-  const [admin, setAdmin] = useState(true);
+  const { user } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
       <div className="App">
-        {admin ? (
+        {user.roleEntity ? (
           <div className={styles.main}>
-            <Navbar setAdmin={setAdmin} />
+            <Navbar />
             <Suspense fallback={<LoaderPage />}>
               <Routes>
                 <Route path={"/"} element={<MenuAdmin />} />
@@ -62,7 +69,7 @@ function App() {
                 <Route path={"/news/:id"} element={<New />} />
                 <Route path={"/reservation"} element={<Reservation />} />
                 <Route path={"/landing"} element={<Landing />} />
-                <Route path={"/login"} element={<Auth setAdmin={setAdmin} />} />
+                <Route path={"/login"} element={<Auth />} />
               </Routes>
             </Suspense>
           </div>
@@ -71,7 +78,7 @@ function App() {
             <Header />
             <Suspense fallback={<LoaderPage />}>
               <Routes>
-                <Route path={"/login"} element={<Auth setAdmin={setAdmin} />} />
+                <Route path={"/login"} element={<Auth />} />
                 <Route path={"/"} element={<Landing />} />
                 <Route path={"/menu"} element={<Menu />} />
                 <Route path={"/gallery"} element={<Gallery />} />
