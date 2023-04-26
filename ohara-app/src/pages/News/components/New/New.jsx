@@ -12,8 +12,8 @@ export const New = memo(() => {
     <section className={styles.new}>
       <div className={styles.container}>
         <div className={styles.itemContainer}>
-          <p className={styles.title}>{oneNew.title}</p>
-          <p className={styles.text}>{oneNew.text}</p>
+          <p className={styles.title}>{oneNew.header}</p>
+          <p className={styles.text}>{oneNew.description}</p>
         </div>
         <div className={styles.rightContainer}>
           <img className={styles.img} src={oneNew.img} alt={"xxx"} />

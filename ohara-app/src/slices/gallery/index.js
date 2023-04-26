@@ -40,12 +40,11 @@ export const addItemGallery = createAsyncThunk(
       for (let file of data) {
         formData.append("file", file);
       }
-      const response = await instance
+      await instance
         .post(`gallery`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => response.data);
-      console.log(response.data);
       dispatch(getGalleryData());
     } catch (e) {
       return rejectedWithValue(e);

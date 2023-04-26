@@ -35,7 +35,11 @@ export const Card = memo(
     }, [data.id, handleClickCloseModal, isOpenModal]);
     return (
       <div
-        style={{ backgroundImage: `url("${data.file}")` }}
+        style={{
+          background: `linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)), url("${data.file}")`,
+          backgroundPosition: `center`,
+          backgroundSize: `cover`,
+        }}
         className={styles.card}
       >
         <div className={styles.container}>

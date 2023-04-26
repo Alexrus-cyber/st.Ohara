@@ -6,6 +6,9 @@ const initialState = {
   searchValue: "",
   loading: true,
   oneNew: {},
+  header: "",
+  description: "",
+  file: "",
 };
 export const getNewsData = createAsyncThunk(
   "getNewsData",
@@ -37,10 +40,23 @@ export const addNew = createAsyncThunk(
   async (data, { rejectedWithValue, dispatch }) => {
     try {
       const { header, description, file } = data;
-      await instance
-        .post(`news`, { header, description })
+      let formData = new FormData();
+      formData.append("file", file);
+      const response = await instance
+        .post(`news/upload`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
         .then((response) => response.data);
-      await instance.post(`news`, { file }).then((response) => response.data);
+      const idFile = [response.data[0].id];
+      if (idFile) {
+        await instance
+          .post(
+            `news`,
+            { header, description, idFile },
+            { headers: { "Content-Type": "application/json" } }
+          )
+          .then((response) => response.data);
+      }
       dispatch(getNewsData());
     } catch (e) {
       return rejectedWithValue(e);
@@ -49,10 +65,28 @@ export const addNew = createAsyncThunk(
 );
 
 export const editNew = createAsyncThunk(
-  "addNew",
+  "editNew",
   async (data, { rejectedWithValue }) => {
     try {
-      await instance.post(`news`, data).then((response) => response.data);
+      const { header, description, file } = data;
+      /*let formData = new FormData();
+      formData.append("file", file);
+      const response = await instance
+        .post(`news/upload`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((response) => response.data);*/
+      console.log(file);
+      const idFile = undefined;
+      if (idFile) {
+        await instance
+          .post(
+            `news`,
+            { header, description, idFile },
+            { headers: { "Content-Type": "application/json" } }
+          )
+          .then((response) => response.data);
+      }
       getNewsData();
     } catch (e) {
       return rejectedWithValue(e);
@@ -65,6 +99,12 @@ export const newsSlice = createSlice({
   reducers: {
     setSearchValue(state, { payload }) {
       state.searchValue = payload;
+    },
+    setTitleR(state, { payload }) {
+      state.header = payload;
+    },
+    setTextR(state, { payload }) {
+      state.description = payload;
     },
   },
   extraReducers: (builder) => {
@@ -84,5 +124,5 @@ export const newsSlice = createSlice({
       });
   },
 });
-export const { setSearchValue } = newsSlice.actions;
+export const { setSearchValue, setTitleR, setTextR } = newsSlice.actions;
 export default newsSlice.reducer;

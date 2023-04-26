@@ -1,30 +1,45 @@
 import styles from "./AddModalCard.module.scss";
 import { useEffect, useMemo, useState } from "react";
-import { addNew } from "../../../../../slices/news";
-import { useDispatch } from "react-redux";
+import {
+  addNew,
+  editNew,
+  setTextR,
+  setTitleR,
+} from "../../../../../slices/news";
+import { useDispatch, useSelector } from "react-redux";
 
 export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
-  const [text, setText] = useState("");
-  const [title, setTitle] = useState("");
+  const { header, description } = useSelector((state) => state.news);
   const [img, setImg] = useState(data.file);
+  const [imageUrl, setImageUrl] = useState("");
   const dispatch = useDispatch();
+  const fileReader = new FileReader();
 
   const titleChange = (e) => {
-    setTitle(e.currentTarget.value);
+    dispatch(setTitleR(e.currentTarget.value));
   };
   const onChanged = (e) => {
-    setText(e.currentTarget.value);
+    dispatch(setTextR(e.currentTarget.value));
   };
   const PhotoSelected = (e) => {
     if (e.target.files?.length) {
-      setImg(e.target.files[0]);
-      console.log(e.target.files[0]);
+      fileReader.readAsDataURL(e.target.files[0]);
+      fileReader.onloadend = () => {
+        setImageUrl(fileReader.result);
+        setImg(e.target.files[0]);
+      };
     }
   };
+
   useEffect(() => {
-    setTitle(data.header);
-    setText(data.description);
-  }, [data.header, data.description]);
+    if (data.header) {
+      dispatch(setTitleR(data.header));
+      dispatch(setTextR(data.description));
+    } else {
+      dispatch(setTitleR(""));
+      dispatch(setTextR(""));
+    }
+  }, [dispatch, data.header, data.description]);
 
   const editCard = useMemo(() => {
     if (isEdit) {
@@ -37,7 +52,7 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
                 <input
                   placeholder={"Заголовок"}
                   className={styles.title}
-                  value={title}
+                  value={header}
                   onChange={titleChange}
                 ></input>
               </label>
@@ -46,14 +61,14 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
                 <textarea
                   placeholder={"Текст"}
                   className={styles.text}
-                  value={text}
+                  value={description}
                   onChange={onChanged}
                 ></textarea>
               </label>
             </div>
             <div className={styles.imgContainer}>
               <div
-                style={{ backgroundImage: `url("${img}")` }}
+                style={{ backgroundImage: `url("${img ? img : ""}")` }}
                 className={styles.imgChanger}
               >
                 <label className={styles.label}>
@@ -72,6 +87,14 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
               onClick={() => {
                 onClose();
                 setIsEdit(false);
+                dispatch(
+                  editNew({
+                    id: data.id,
+                    header,
+                    description,
+                    file: img,
+                  })
+                );
               }}
               className={styles.save}
             >
@@ -82,7 +105,7 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
         </div>
       );
     }
-  }, [isEdit, title, text, img, onClose, setIsEdit]);
+  }, [isEdit, header, description, img, onClose, setIsEdit]);
 
   const addNewsCard = useMemo(() => {
     if (!isEdit) {
@@ -95,7 +118,7 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
                 <input
                   placeholder={"Заголовок"}
                   className={styles.title}
-                  value={title}
+                  value={header}
                   onChange={titleChange}
                 ></input>
               </label>
@@ -104,14 +127,14 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
                 <textarea
                   placeholder={"Текст"}
                   className={styles.text}
-                  value={text}
+                  value={description}
                   onChange={onChanged}
                 ></textarea>
               </label>
             </div>
             <div className={styles.imgContainer}>
               <div
-                style={{ backgroundImage: `url("${data.file}")` }}
+                style={{ backgroundImage: `url("${imageUrl}")` }}
                 className={styles.imgChanger}
               >
                 <label className={styles.label}>
@@ -130,14 +153,12 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
               onClick={() => {
                 const news = {
                   file: img,
-                  header: title,
-                  description: text,
+                  header,
+                  description,
                 };
                 dispatch(addNew(news));
                 onClose();
                 setIsEdit(false);
-                setTitle("");
-                setText("");
               }}
               className={styles.save}
             >
@@ -147,7 +168,16 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
         </div>
       );
     }
-  }, [data.file, dispatch, img, isEdit, onClose, setIsEdit, text, title]);
+  }, [
+    data.file,
+    dispatch,
+    img,
+    isEdit,
+    onClose,
+    setIsEdit,
+    header,
+    description,
+  ]);
   return (
     <>
       {editCard}
