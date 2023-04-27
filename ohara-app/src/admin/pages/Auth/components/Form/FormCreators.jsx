@@ -5,7 +5,26 @@ import { memo, useCallback, useState } from "react";
 import cl from "classnames";
 import { CloudUpload, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useDropzone } from "react-dropzone";
-import { TextField } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
+
+const currencies = [
+  {
+    value: "1",
+    label: "1",
+  },
+  {
+    value: "2",
+    label: "2",
+  },
+  {
+    value: "3",
+    label: "3",
+  },
+  {
+    value: "4",
+    label: "4",
+  },
+];
 
 export const InputUI = memo(
   ({
@@ -26,10 +45,11 @@ export const InputUI = memo(
           [styles.text]: typeInput !== "reg",
         })}
       >
-        <label className={styles.containerInput}>
+        <div className={styles.containerInput}>
           {value !== "" && <p className={styles.titleInput}>{title}</p>}
           {typeInput === "text" && (
             <textarea
+              placeholder={title}
               className={cl(styles.textArea, {
                 [styles.textAreaError]: showError,
               })}
@@ -49,6 +69,7 @@ export const InputUI = memo(
           )}
           {typeInput === "material" && (
             <TextField
+              style={{ width: "220px" }}
               variant={"standard"}
               label={placeholder}
               placeholder={placeholder}
@@ -56,15 +77,37 @@ export const InputUI = memo(
               {...props}
             />
           )}
-          {typeInput === "materialDate" && (
-            <Date
-            /*<DatePicker
+          {typeInput === "materialPicker" && (
+            <TextField
+              style={{ width: "220px", zIndex: 20000000 }}
               variant={"standard"}
+              select
+              defaultValue={1}
               label={placeholder}
               placeholder={placeholder}
               {...input}
               {...props}
-            />*/
+            >
+              {currencies.map((option) => (
+                <MenuItem
+                  style={{ zIndex: 20000000 }}
+                  key={option.value}
+                  value={option.value}
+                >
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          )}
+          {typeInput === "materialDate" && (
+            <input
+              type={"datetime-local"}
+              className={cl(styles.datePicker, {
+                [styles.datePickerError]: showError,
+              })}
+              {...input}
+              {...props}
+            />
           )}
           {typeInput === "reg" && (
             <div className={styles.passwordBox}>
@@ -99,7 +142,7 @@ export const InputUI = memo(
               <option>Employee</option>
             </select>
           )}
-        </label>
+        </div>
         <div style={{ maxWidth: "200px" }}>
           {touched &&
             ((error && <span className={styles.error}>{error}</span>) ||

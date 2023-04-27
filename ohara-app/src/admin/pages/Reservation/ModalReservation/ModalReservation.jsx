@@ -1,8 +1,8 @@
 import { memo } from "react";
-import { reduxForm } from "redux-form";
-import { FieldCreator } from "../../Auth/components/Form/FormCreators";
+import { Field, reduxForm } from "redux-form";
+import { FieldCreator, InputUI } from "../../Auth/components/Form/FormCreators";
 import { ButtonUI } from "../../components/ButtonUI/ButtonUI";
-import { reservationInputs } from "./Inputs";
+import { reservationInputs, reservationInputsRight } from "./Inputs";
 import styles from "./ModalReservation.module.scss";
 
 const ModalReservation = memo(({ onClose }) => {
@@ -15,7 +15,8 @@ const ModalReservation = memo(({ onClose }) => {
 
 const ReservationForm = ({ handleSubmit }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h1>Стол №1</h1>
       <div className={styles.container}>
         <div>
           {reservationInputs.map((e) => (
@@ -34,7 +35,7 @@ const ReservationForm = ({ handleSubmit }) => {
           ))}
         </div>
         <div>
-          {reservationInputs.map((e) => (
+          {reservationInputsRight.map((e) => (
             <div className={styles.field} key={e.id}>
               {FieldCreator(
                 e.id,
@@ -50,7 +51,16 @@ const ReservationForm = ({ handleSubmit }) => {
           ))}
         </div>
       </div>
-      <div>
+      <div className={styles.message}>
+        <Field
+          name={`message`}
+          component={InputUI}
+          title={"Сообщение"}
+          typeInput={"text"}
+        />
+      </div>
+
+      <div className={styles.padding}>
         <ButtonUI name={"Забронировать"} />
       </div>
     </form>

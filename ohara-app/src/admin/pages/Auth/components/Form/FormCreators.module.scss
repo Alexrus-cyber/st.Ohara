@@ -83,6 +83,21 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
   .textAreaError {
     border: 1px solid crimson;
   }
+
+  .datePicker {
+    width: 220px;
+    height: 47px;
+    border: none;
+    border-bottom: 1px solid gray;
+    text-decoration: none;
+    outline: none;
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .datePickerError {
+    border-bottom: 1px solid red;
+  }
 }
 
 .passwordBox {
