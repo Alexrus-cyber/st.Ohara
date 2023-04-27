@@ -43,10 +43,12 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
     outline: none;
     height: 6vh;
     border: 1px solid #1C675A;
+    position: relative;
   }
 
   .inputTitleEr {
     border: 1px solid crimson;
+    position: relative;
   }
 
   .input {
@@ -57,10 +59,12 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
     outline: none;
     padding: 0 0 0 10px;
     border: 1px solid gray;
+    position: relative;
   }
 
   .inputError {
     border: 1px solid crimson;
+    position: relative;
   }
 
   .textArea {
@@ -79,6 +83,16 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
   .textAreaError {
     border: 1px solid crimson;
   }
+}
+
+.passwordBox {
+  display: flex;
+  align-items: center;
+}
+
+.eyes {
+  position: absolute;
+  right: -25%;
 }
 
 .containerInput:hover {

@@ -15,7 +15,7 @@ const EditStaff = memo(({ user, onClose }) => {
   };
   return (
     <div className={styles.color}>
-      <h1>Админ №{user.id}</h1>
+      <h1>Админ {user.name}</h1>
       <RegisterReduxForm initialValues={user} onSubmit={onSubmit} />
     </div>
   );
@@ -46,4 +46,4 @@ const RegisterForm = ({ handleSubmit }) => {
   );
 };
 export default EditStaff;
-const RegisterReduxForm = reduxForm({ form: "registration" })(RegisterForm);
+const RegisterReduxForm = reduxForm({ form: "editForm" })(RegisterForm);

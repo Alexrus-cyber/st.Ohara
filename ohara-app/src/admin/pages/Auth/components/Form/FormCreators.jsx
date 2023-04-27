@@ -3,20 +3,23 @@ import { Field } from "redux-form";
 import { useDispatch } from "react-redux";
 import { memo, useCallback, useState } from "react";
 import cl from "classnames";
-import { CloudUpload } from "@mui/icons-material";
+import { CloudUpload, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useDropzone } from "react-dropzone";
+import { TextField } from "@mui/material";
 
 export const InputUI = memo(
   ({
     input: { value },
     input,
     meta: { error, warning, touched },
+    placeholder,
     title,
     typeInput,
+    type,
     ...props
   }) => {
     const showError = touched && error;
-
+    const [visible, setVisible] = useState(false);
     return (
       <div
         className={cl({
@@ -44,14 +47,45 @@ export const InputUI = memo(
               {...props}
             />
           )}
-          {typeInput === "reg" && (
-            <input
-              className={cl(styles.input, {
-                [styles.inputError]: showError,
-              })}
+          {typeInput === "material" && (
+            <TextField
+              variant={"standard"}
+              label={placeholder}
+              placeholder={placeholder}
               {...input}
               {...props}
             />
+          )}
+          {typeInput === "materialDate" && (
+            <Date
+            /*<DatePicker
+              variant={"standard"}
+              label={placeholder}
+              placeholder={placeholder}
+              {...input}
+              {...props}
+            />*/
+          )}
+          {typeInput === "reg" && (
+            <div className={styles.passwordBox}>
+              <input
+                className={cl(styles.input, {
+                  [styles.inputError]: showError,
+                })}
+                type={visible && type === "password" ? "text" : type}
+                {...input}
+                {...props}
+              />
+              {type === "password" && (
+                <div className={styles.eyes}>
+                  {visible ? (
+                    <Visibility onClick={() => setVisible(false)} />
+                  ) : (
+                    <VisibilityOff onClick={() => setVisible(true)} />
+                  )}
+                </div>
+              )}
+            </div>
           )}
           {typeInput === "select" && (
             <select
@@ -66,7 +100,7 @@ export const InputUI = memo(
             </select>
           )}
         </label>
-        <div>
+        <div style={{ maxWidth: "200px" }}>
           {touched &&
             ((error && <span className={styles.error}>{error}</span>) ||
               (warning && <span className={styles.warning}>{warning}</span>))}
