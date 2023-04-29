@@ -1,24 +1,20 @@
 import styles from "./New.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
 import { getNew } from "../../../../slices/news";
-import { LoaderPage } from "../../../../components/LoaderPage/LoaderPage";
+import { useParams } from "react-router-dom";
 
 export const New = memo(() => {
-  const { oneNew, id } = useSelector((state) => state.news);
+  const { oneNew } = useSelector((state) => state.news);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const param = useParams();
   useEffect(() => {
-    dispatch(getNew(id));
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 750);
+    dispatch(getNew(param.id));
     window.scrollTo(0, 0);
-    return () => clearTimeout(timer);
   }, [dispatch]);
-  return loading ? (
-    <LoaderPage />
-  ) : (
+
+  console.log(param);
+  return (
     <section className={styles.new}>
       <div className={styles.container}>
         <div className={styles.itemContainer}>

@@ -121,9 +121,6 @@ export const newsSlice = createSlice({
     setTextR(state, { payload }) {
       state.description = payload;
     },
-    setId(state, { payload }) {
-      state.id = payload;
-    },
   },
   extraReducers: (builder) => {
     builder

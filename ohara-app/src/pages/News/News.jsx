@@ -3,7 +3,7 @@ import xxx from "../../assets/slider1.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
-import { getNewsData, setId } from "../../slices/news";
+import { getNewsData } from "../../slices/news";
 
 const News = () => {
   const { items } = useSelector((state) => state.news);
@@ -34,7 +34,6 @@ const News = () => {
                   to={`/News/` + e.id}
                   key={e.id}
                   className={styles.secondNews}
-                  onClick={() => dispatch(setId(e.id))}
                 >
                   <p className={styles.text}>{e.header}</p>
                   <img className={styles.img} src={e.file} alt={"xxx"} />
