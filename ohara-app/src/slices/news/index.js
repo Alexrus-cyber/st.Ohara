@@ -9,6 +9,7 @@ const initialState = {
   header: "",
   description: "",
   file: "",
+  id: 0,
 };
 export const getNewsData = createAsyncThunk(
   "getNewsData",
@@ -18,6 +19,20 @@ export const getNewsData = createAsyncThunk(
         .get(`news`)
         .then((response) => response.data);
       return response.data.items;
+    } catch (e) {
+      return rejectedWithValue(e);
+    }
+  }
+);
+
+export const getNew = createAsyncThunk(
+  "getNew",
+  async (id, { rejectedWithValue }) => {
+    try {
+      const response = await instance
+        .get(`news/${id}`)
+        .then((response) => response.data);
+      return response.data;
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -106,6 +121,9 @@ export const newsSlice = createSlice({
     setTextR(state, { payload }) {
       state.description = payload;
     },
+    setId(state, { payload }) {
+      state.id = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -121,8 +139,20 @@ export const newsSlice = createSlice({
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getNewsData.rejected, (state) => {
         state.loading = false;
+      })
+      .addCase(getNew.pending, (state) => {
+        state.loading = true;
+      })
+      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
+      .addCase(getNew.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.oneNew = payload;
+      })
+      //здесь можно обрабатывать ошибки. так же прерываем загрузку
+      .addCase(getNew.rejected, (state) => {
+        state.loading = false;
       });
   },
 });
-export const { setSearchValue, setTitleR, setTextR } = newsSlice.actions;
+export const { setSearchValue, setTitleR, setTextR, setId } = newsSlice.actions;
 export default newsSlice.reducer;

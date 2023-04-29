@@ -101,7 +101,8 @@
 .img {
   max-width: 250px;
   width: 100%;
-  max-height: 280px;
+  height: 180px;
+  object-fit: cover;
   cursor: pointer;
   position: unset;
   border-radius: 10px;
