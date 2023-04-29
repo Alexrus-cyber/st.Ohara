@@ -55,9 +55,17 @@
 @media screen and (max-width: 900px) {
   .container {
     flex-direction: column;
+    padding: 0 30px;
   }
   .img {
     padding-bottom: 40px;
+  }
+  .itemContainer {
+    align-items: center;
+    justify-content: center;
+  }
+  .rightContainer {
+    padding: 0;
   }
 }
 

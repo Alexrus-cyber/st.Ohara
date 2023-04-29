@@ -11,7 +11,7 @@ export const New = memo(() => {
   useEffect(() => {
     dispatch(getNew(param.id));
     window.scrollTo(0, 0);
-  }, [dispatch]);
+  }, [dispatch, param.id]);
 
   console.log(param);
   return (

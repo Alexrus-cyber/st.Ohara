@@ -33,6 +33,7 @@ export const Card = memo(
         </Module>
       );
     }, [data.id, handleClickCloseModal, isOpenModal]);
+
     return (
       <div
         style={{

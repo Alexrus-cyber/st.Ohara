@@ -81,28 +81,38 @@ export const addNew = createAsyncThunk(
 
 export const editNew = createAsyncThunk(
   "editNew",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
-      const { header, description, file } = data;
-      /*let formData = new FormData();
-      formData.append("file", file);
-      const response = await instance
-        .post(`news/upload`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-        .then((response) => response.data);*/
-      console.log(file);
-      const idFile = undefined;
-      if (idFile) {
+      let { id, header, description, file, idFile } = data;
+      console.log(idFile);
+      if (!idFile) {
+        let formData = new FormData();
+        formData.append("file", file);
+        const response = await instance
+          .post(`news/upload`, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then((response) => response.data);
+
+        idFile = [response.data[0].id];
+        console.log(idFile);
         await instance
-          .post(
-            `news`,
+          .put(
+            `news/${id}`,
+            { header, description, idFile },
+            { headers: { "Content-Type": "application/json" } }
+          )
+          .then((response) => response.data);
+      } else {
+        await instance
+          .put(
+            `news/${id}`,
             { header, description, idFile },
             { headers: { "Content-Type": "application/json" } }
           )
           .then((response) => response.data);
       }
-      getNewsData();
+      dispatch(getNewsData());
     } catch (e) {
       return rejectedWithValue(e);
     }

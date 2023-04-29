@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
   const { header, description } = useSelector((state) => state.news);
   const [img, setImg] = useState(data.file);
+  const [url, setUrl] = useState(data.idFile);
   const [imageUrl, setImageUrl] = useState("");
   const dispatch = useDispatch();
   const fileReader = new FileReader();
@@ -27,6 +28,7 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
       fileReader.onloadend = () => {
         setImageUrl(fileReader.result);
         setImg(e.target.files[0]);
+        setUrl(null);
       };
     }
   };
@@ -40,6 +42,7 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
       dispatch(setTextR(""));
     }
   }, [dispatch, data.header, data.description]);
+  console.log(data);
 
   const editCard = useMemo(() => {
     if (isEdit) {
@@ -68,7 +71,9 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
             </div>
             <div className={styles.imgContainer}>
               <div
-                style={{ backgroundImage: `url("${img ? img : ""}")` }}
+                style={{
+                  backgroundImage: `url("${imageUrl ? imageUrl : img}")`,
+                }}
                 className={styles.imgChanger}
               >
                 <label className={styles.label}>
@@ -92,6 +97,7 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
                     id: data.id,
                     header,
                     description,
+                    idFile: url,
                     file: img,
                   })
                 );

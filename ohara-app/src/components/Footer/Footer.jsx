@@ -45,10 +45,10 @@ const Footer = memo(() => {
         </div>
         <div className={styles.right}>
           <p className={styles.rightTitle}>АКТУАЛЬНЫЕ НОВОСТИ</p>
-          {items.slice(-3).map((el) => (
+          {items.slice(0, 3).map((el) => (
             <NavLink
               key={el.id}
-              to={`news/${el.id}`}
+              to={`News/${el.id}`}
               className={styles.rightText}
             >
               {el.header}
