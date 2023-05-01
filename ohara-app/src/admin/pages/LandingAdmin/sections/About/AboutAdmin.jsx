@@ -7,23 +7,23 @@ export const AboutAdmin = memo(({ about }) => {
     <section className={styles.about}>
       <div className={styles.container}>
         <h1 className={styles.title}>Может быть о нас?</h1>
-        {renderItems(about.items)}
+        {renderItems(about)}
       </div>
     </section>
   );
 });
 
-const renderItems = (items) => {
-  return items.map((a, index) => {
+const renderItems = (about) => {
+  return about.map((a, index) => {
     return (
       <DescriptionAdmin
         id={a.id}
         index={index}
         key={a.id}
-        name={a.name}
-        text={a.text}
-        title={a.title}
-        img={a.img}
+        text={a.description}
+        title={a.header}
+        img={a.urlFile}
+        idImg={a.idFile}
         isLeftPosition={a.isLeftPosition}
       />
     );

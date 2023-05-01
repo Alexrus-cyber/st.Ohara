@@ -8,17 +8,18 @@ import { instance } from "../API/API";
 const initialState = {
   items: [],
   loading: true,
+  error: "",
 };
 export const getMenuData = createAsyncThunk(
   "getMenuData",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`menu`)
         .then((response) => response.data);
       return response.data.items; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
@@ -48,7 +49,7 @@ export const addItemMenu = createAsyncThunk(
         .then((response) => response.data);
       dispatch(getMenuData());
     } catch (e) {
-      return prompt(rejectedWithValue(e));
+      return rejectedWithValue(e);
     }
   }
 );
@@ -77,26 +78,37 @@ export const menuSlice = createSlice({
   initialState,
   reducers: {
     clearData: (state) => {
-      state.images = [];
+      state.error = "";
     },
   },
   extraReducers: (builder) => {
     builder
       //здесь имитируем закгрузку
-      .addCase(getMenuData.pending, (state) => {
-        state.loading = true;
-      })
+
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getMenuData.fulfilled, (state, { payload }) => {
-        state.loading = false;
         console.log(payload);
         state.items = payload.sort(function (a, b) {
           return a.position - b.position;
         });
       })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(getMenuData.rejected, (state) => {
-        state.loading = false;
+
+      .addCase(getMenuData.rejected, (state, { payload }) => {
+        console.log(Math.floor(payload.response.status / 100));
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
+      })
+      .addCase(deleteItemMenu.rejected, (state, { error }) => {
+        state.error = error.name;
+      })
+      .addCase(swapItemMenu.rejected, (state, { error }) => {
+        state.error = error.name;
+      })
+      .addCase(addItemMenu.rejected, (state, { error }) => {
+        state.error = error.name;
       });
   },
 });

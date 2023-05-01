@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import cl from "classnames";
 import LazyLoadImage from "../../../../../../components/LazyLoadImage/LazyLoadImage";
 
-export const Content = ({ img, text2, text1, title, isLeftPosition }) => {
+export const Content = ({ img, text, title, isLeftPosition }) => {
   return (
     <>
       {!isLeftPosition ? (
@@ -23,8 +23,7 @@ export const Content = ({ img, text2, text1, title, isLeftPosition }) => {
           </div>
           <div className={styles.textContainer}>
             <h5 className={styles.title}>{title}</h5>
-            <p className={styles.text}>{text1}</p>
-            <p className={styles.text}>{text2}</p>
+            <p className={styles.text}>{text}</p>
           </div>
         </div>
       ) : (
@@ -38,8 +37,7 @@ export const Content = ({ img, text2, text1, title, isLeftPosition }) => {
           </div>
           <div className={styles.textContainer}>
             <h5 className={styles.title}>{title}</h5>
-            <p className={styles.text}>{text1}</p>
-            <p className={styles.text}>{text2}</p>
+            <p className={styles.text}>{text}</p>
             <div className={styles.buttonContainer}>
               <div className={styles.backButton}></div>
               <NavLink className={styles.button} to={"/menu"}>

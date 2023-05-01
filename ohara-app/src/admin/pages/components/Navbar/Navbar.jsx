@@ -89,6 +89,7 @@ const ContentNavbar = ({ handleDrawerClose, user }) => {
   const dispatch = useDispatch();
   const arr = [
     { id: 5, src: "/landingAdmin", text: "Главная" },
+    { id: 7, src: "/sliderAdmin", text: "Слайдер" },
     { id: 1, src: "/", text: "Меню" },
     { id: 2, src: "/newsAdmin", text: "Новости" },
     { id: 3, src: "/galleryAdmin", text: "Галерея" },
@@ -120,7 +121,6 @@ const ContentNavbar = ({ handleDrawerClose, user }) => {
         onClick={() => {
           handleDrawerClose;
           sessionStorage.clear();
-          console.log("dfsdfsd");
           dispatch(setUserNull());
         }}
         className={styles.buttonBack}

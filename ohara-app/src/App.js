@@ -8,6 +8,7 @@ import { LoaderPage } from "./components/LoaderPage/LoaderPage";
 import { getMe } from "./slices/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
 
+const SliderAdmin = lazy(() => import("./admin/pages/Slider/SliderAdmin"));
 const MenuAdmin = lazy(() => import("./admin/pages/Menu/MenuAdmin"));
 const GalleryAdmin = lazy(() => import("./admin/pages/Gallery/GalleryAdmin"));
 const NewsAdmin = lazy(() => import("./admin/pages/News/NewsAdmin"));
@@ -57,6 +58,7 @@ function App() {
               <Route path={"/newsAdmin"} element={<NewsAdmin />} />
               <Route path={"/menuAdmin"} element={<MenuAdmin />} />
               <Route path={"/landingAdmin"} element={<LandingAdmin />} />
+              <Route path={"/sliderAdmin"} element={<SliderAdmin />} />
               <Route
                 path={"/reservationAdmin"}
                 element={<ReservationAdmin />}

@@ -1,5 +1,5 @@
 import styles from "./AddModalCard.module.scss";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import {
   addNew,
   editNew,
@@ -8,7 +8,7 @@ import {
 } from "../../../../../slices/news";
 import { useDispatch, useSelector } from "react-redux";
 
-export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
+export const AddModalCard = memo(({ onClose, data, isEdit, setIsEdit }) => {
   const { header, description } = useSelector((state) => state.news);
   const [img, setImg] = useState(data.file);
   const [url, setUrl] = useState(data.idFile);
@@ -190,4 +190,4 @@ export const AddModalCard = ({ onClose, data, isEdit, setIsEdit }) => {
       {addNewsCard}
     </>
   );
-};
+});

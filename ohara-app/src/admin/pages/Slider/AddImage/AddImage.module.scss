@@ -1,0 +1,130 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  max-width: 401px;
+  width: 95%;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #1C675A;
+}
+
+.containerInput {
+  position: relative;
+  width: 100%;
+}
+
+.containerInput:hover {
+  color: cornflowerblue;
+}
+
+.containerInput:hover .titleText {
+  color: cornflowerblue;
+}
+
+.containerInput:hover .titleInput {
+  color: cornflowerblue;
+}
+
+.titleInput {
+  text-align: left;
+  font-size: 14px;
+  color: #1C675A;
+}
+
+.titleText {
+  text-align: left;
+  font-size: 14px;
+  color: #1C675A;
+}
+
+.text::-webkit-scrollbar {
+  width: 10px;
+}
+
+.text::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.text::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #367272;
+}
+
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+
+.delete {
+  padding: 5px 20px;
+  color: white;
+  background-color: #1C675A;
+  border-radius: 10px;
+  border: none;
+  font-size: 12px;
+  margin-top: 150px;
+  cursor: pointer;
+}
+
+.delete:hover {
+  background-color: #14463c;
+}
+
+.imgChanger {
+  background-color: gray;
+  border-radius: 20px;
+  max-width: 350px;
+  width: 250px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+
+.input[type=file] {
+  position: absolute;
+  opacity: 0;
+  display: block;
+  width: 0;
+  height: 0;
+  margin-top: 190px;
+  margin-left: 10px;
+}
+
+.label {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.imageEdit {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 190px;
+  border-radius: 0 0 10px 10px;
+  background-color: #1C675A;
+  color: white;
+  padding: 10px 70px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.imageEdit:hover {
+  background-color: #14463c;
+}

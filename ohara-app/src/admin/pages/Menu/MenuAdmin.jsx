@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ImageViewer from "react-simple-image-viewer";
 import {
   addItemMenu,
+  clearData,
   deleteItemMenu,
   getMenuData,
   swapItemMenu,
@@ -15,6 +16,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
 import { ReactSortable } from "react-sortablejs";
 import { DragModal } from "../components/DragModal/DragModal";
+import { Alert, Snackbar } from "@mui/material";
 
 const initialModalState = {
   src: null,
@@ -25,7 +27,7 @@ const MenuAdmin = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalState, setModalState] = useState(initialModalState);
-  const { items } = useSelector((state) => state.menu);
+  const { items, error } = useSelector((state) => state.menu);
   const [isOpenModal, setOpenModal] = useState(false);
   const [change, setChange] = useState(false);
   const [data, setData] = useState([]);
@@ -33,7 +35,7 @@ const MenuAdmin = memo(() => {
 
   useEffect(() => {
     dispatch(getMenuData());
-  }, [dispatch]);
+  }, []);
 
   const handleClickOpenNews = useCallback((menuData) => {
     setOpenModal(true);
@@ -90,6 +92,23 @@ const MenuAdmin = memo(() => {
   );
   return (
     <section className={styles.container}>
+      <Snackbar
+        open={error !== ""}
+        autoHideDuration={6000}
+        onClose={() => {
+          dispatch(clearData());
+        }}
+      >
+        <Alert
+          severity="error"
+          onClose={() => {
+            dispatch(clearData());
+          }}
+          sx={{ width: "100%" }}
+        >
+          {error}
+        </Alert>
+      </Snackbar>
       <h1 className={styles.title}>Меню</h1>
       <div className={styles.addContainer}>
         <AddCard addHandler={addItem} />

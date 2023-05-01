@@ -5,13 +5,12 @@ export const Atmosphere = ({ atmosphere }) => {
   return (
     <section className={styles.atmosphere}>
       <div className={styles.container}>
-        {atmosphere.content.map((a) => (
+        {atmosphere.map((a) => (
           <Content
             key={a.id}
-            img={a.img}
-            title={a.title}
-            text1={a.text1}
-            text2={a.text2}
+            img={a.urlFile}
+            title={a.header}
+            text={a.description}
             isLeftPosition={a.isLeftPosition}
           />
         ))}

@@ -6,6 +6,7 @@ import cl from "classnames";
 import { CloudUpload, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useDropzone } from "react-dropzone";
 import { MenuItem, TextField } from "@mui/material";
+import { setFile } from "../../../../../slices/landing";
 
 const currencies = [
   {
@@ -153,80 +154,84 @@ export const InputUI = memo(
   }
 );
 
-export const FilesInput = memo(
-  ({ name, setImageUrl, id, getFile, section, circle }) => {
-    const fileReader = new FileReader();
-    const dispatch = useDispatch();
-    const [isFileTooLarge, setIsFileTooLarge] = useState(false);
-    const maxSize = 1048576;
+export const FilesInput = memo(({ name, id, section, getFile, circle }) => {
+  const fileReader = new FileReader();
+  const dispatch = useDispatch();
+  const [isFileTooLarge, setIsFileTooLarge] = useState(false);
+  const maxSize = 1048576;
 
-    const onDrop = useCallback((acceptedFiles) => {
-      if (!acceptedFiles.length) {
-        setIsFileTooLarge(true);
-      }
-      if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
-        fileReader.readAsDataURL(acceptedFiles[0]);
-        fileReader.onloadend = () => {
-          setImageUrl(fileReader.result);
-          dispatch(getFile({ id, file: fileReader.result, section }));
-        };
-        setIsFileTooLarge(false);
-      }
-    }, []);
-    const { getRootProps, getInputProps, isDragActive, isDragReject } =
-      useDropzone({
-        onDrop,
-        accept: {
-          "image/jpeg": [],
-          "image/png": [],
-          "image/jpg": [],
-          "image/webp": [],
-          "image/gif": [],
-        },
-        minSize: 0,
-        maxSize,
-        multiple: false,
-      });
-    return (
-      <div
-        {...getRootProps()}
-        className={cl(styles.label, {
-          [styles.circle]: circle,
-        })}
-      >
-        <input
-          {...getInputProps()}
-          className={styles.file}
-          name={name}
-          onDrop={onDrop}
-        />
-        <span className={styles.span}>
-          <CloudUpload />
-          {isDragActive && !isDragReject && (
-            <p style={{ fontSize: 12 }}>Вы почти закинули файл 😍😍😍</p>
-          )}
-          {isDragReject && (
-            <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>
-              Нельзя закидывать такой файл 💀💀💀
-            </p>
-          )}
-          {!isDragActive && !isFileTooLarge && (
-            <p className={styles.p}>Загрузить</p>
-          )}
-          {isFileTooLarge && !isDragActive && (
-            <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>
-              Этот файл слишком большого размера <br />
-              или
-              <br />
-              Данный тип файла не поддерживается разработчиком
-              <br /> 💀💀💀
-            </p>
-          )}
-        </span>
-      </div>
-    );
-  }
-);
+  const onDrop = useCallback((acceptedFiles) => {
+    if (!acceptedFiles.length) {
+      setIsFileTooLarge(true);
+    }
+    if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
+      fileReader.readAsDataURL(acceptedFiles[0]);
+      fileReader.onloadend = () => {
+        dispatch(
+          getFile({
+            file: acceptedFiles[0],
+            callback: (result) => {
+              dispatch(setFile({ result, id, section }));
+            },
+          })
+        );
+      };
+      setIsFileTooLarge(false);
+    }
+  }, []);
+  const { getRootProps, getInputProps, isDragActive, isDragReject } =
+    useDropzone({
+      onDrop,
+      accept: {
+        "image/jpeg": [],
+        "image/png": [],
+        "image/jpg": [],
+        "image/webp": [],
+        "image/gif": [],
+      },
+      minSize: 0,
+      maxSize,
+      multiple: false,
+    });
+  return (
+    <div
+      {...getRootProps()}
+      className={cl(styles.label, {
+        [styles.circle]: circle,
+      })}
+    >
+      <input
+        {...getInputProps()}
+        className={styles.file}
+        name={name}
+        onDrop={onDrop}
+      />
+      <span className={styles.span}>
+        <CloudUpload />
+        {isDragActive && !isDragReject && (
+          <p style={{ fontSize: 12 }}>Вы почти закинули файл 😍😍😍</p>
+        )}
+        {isDragReject && (
+          <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>
+            Нельзя закидывать такой файл 💀💀💀
+          </p>
+        )}
+        {!isDragActive && !isFileTooLarge && (
+          <p className={styles.p}>Загрузить</p>
+        )}
+        {isFileTooLarge && !isDragActive && (
+          <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>
+            Этот файл слишком большого размера <br />
+            или
+            <br />
+            Данный тип файла не поддерживается разработчиком
+            <br /> 💀💀💀
+          </p>
+        )}
+      </span>
+    </div>
+  );
+});
 
 export const FieldCreator = (
   keyId,

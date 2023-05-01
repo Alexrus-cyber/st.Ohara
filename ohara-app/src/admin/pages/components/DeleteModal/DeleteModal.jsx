@@ -1,16 +1,16 @@
 import styles from "./DeleteModal.module.scss";
-import React from "react";
+import React, { memo } from "react";
 import { useDispatch } from "react-redux";
 
-export const DeleteModal = (props) => {
+export const DeleteModal = memo(({ onClose, id, ...props }) => {
   const dispatch = useDispatch();
 
   const deleteCard = (yes) => {
     if (yes) {
-      dispatch(props.delete(props.id));
-      props.onClose();
+      dispatch(props.delete(id));
+      onClose();
     } else {
-      props.onClose();
+      onClose();
     }
   };
 
@@ -27,4 +27,4 @@ export const DeleteModal = (props) => {
       </div>
     </div>
   );
-};
+});
