@@ -9,14 +9,13 @@ const initialState = {
   items: [],
   loading: true,
   error: "",
-  currentPage: 2,
 };
 export const getMenuData = createAsyncThunk(
   "getMenuData",
   async (currentPage, { rejectWithValue }) => {
     try {
       const response = await instance
-        .get(`menu?page=${currentPage}`)
+        .get(`menu`)
         .then((response) => response.data);
       return response.data; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {

@@ -27,15 +27,15 @@ const MenuAdmin = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalState, setModalState] = useState(initialModalState);
-  const { items, error, currentPage } = useSelector((state) => state.menu);
+  const { items, error } = useSelector((state) => state.menu);
   const [isOpenModal, setOpenModal] = useState(false);
   const [change, setChange] = useState(false);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMenuData(currentPage));
-  }, [currentPage]);
+    dispatch(getMenuData());
+  }, []);
 
   const handleClickOpenNews = useCallback((menuData) => {
     setOpenModal(true);
