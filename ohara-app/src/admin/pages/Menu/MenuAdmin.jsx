@@ -17,6 +17,7 @@ import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
 import { ReactSortable } from "react-sortablejs";
 import { DragModal } from "../components/DragModal/DragModal";
 import { Alert, Snackbar } from "@mui/material";
+import { LoaderPage } from "../../../components/LoaderPage/LoaderPage";
 
 const initialModalState = {
   src: null,
@@ -27,7 +28,7 @@ const MenuAdmin = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalState, setModalState] = useState(initialModalState);
-  const { items, error } = useSelector((state) => state.menu);
+  const { items, error, loading } = useSelector((state) => state.menu);
   const [isOpenModal, setOpenModal] = useState(false);
   const [change, setChange] = useState(false);
   const [data, setData] = useState([]);
@@ -90,6 +91,10 @@ const MenuAdmin = memo(() => {
     },
     [dispatch]
   );
+  if (loading) {
+    return <LoaderPage />;
+  }
+  console.log(items);
   return (
     <section className={styles.container}>
       <Snackbar

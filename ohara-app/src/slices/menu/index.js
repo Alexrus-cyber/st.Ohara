@@ -83,14 +83,14 @@ export const menuSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      //здесь имитируем закгрузку
-
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
+      .addCase(getMenuData.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(getMenuData.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.items = payload.items.sort(function (a, b) {
           return a.position - b.position;
         });
+        state.loading = false;
       })
 
       .addCase(getMenuData.rejected, (state, { payload }) => {
