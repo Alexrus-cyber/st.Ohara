@@ -5,11 +5,7 @@ import ImageViewer from "react-simple-image-viewer";
 import { DeleteModal } from "../components/DeleteModal/DeleteModal";
 import { Module } from "../../components/Module/Module";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteSliderItem,
-  editSlider,
-  getSlider,
-} from "../../../slices/landing";
+import { deleteSlider, getSlider } from "../../../slices/landing";
 import { Slider } from "../../../pages/Landing/sections/Slider/Slider";
 import { AddImage } from "./AddImage/AddImage";
 
@@ -68,7 +64,7 @@ const SliderAdmin = memo(() => {
         onClose={handleClickCloseModal}
       >
         <DeleteModal
-          delete={deleteSliderItem}
+          delete={deleteSlider}
           id={modalState.id}
           onClose={handleClickCloseModal}
         />
@@ -93,12 +89,6 @@ const SliderAdmin = memo(() => {
           }}
         >
           Добавить элемент
-        </button>
-        <button
-          className={styles.button}
-          onClick={() => dispatch(editSlider(slider))}
-        >
-          Сохранить
         </button>
       </div>
 

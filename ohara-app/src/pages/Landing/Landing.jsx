@@ -47,7 +47,10 @@ const Landing = memo(() => {
   return (
     <>
       {!landingList.aboutDto ? (
-        errorMessage
+        <div>
+          <LoaderPage />
+          {errorMessage}
+        </div>
       ) : (
         <>
           {errorMessage}

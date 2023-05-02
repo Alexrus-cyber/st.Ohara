@@ -11,7 +11,7 @@ export const Description = ({ text, img, title, isLeftPosition }) => {
           </div>
           <div className={styles.textContainer}>
             <p className={styles.subtitle}>{title}</p>
-            <p>{text}</p>
+            <p className={styles.text}>{text}</p>
           </div>
           <div className={styles.imgRight}>
             <LazyLoadImage custom={styles.custom} src={img} alt={"food"} />
@@ -24,7 +24,7 @@ export const Description = ({ text, img, title, isLeftPosition }) => {
           </div>
           <div className={styles.textContainer}>
             <p className={styles.subtitle}>{title}</p>
-            <p>{text}</p>
+            <p className={styles.text}>{text}</p>
           </div>
         </div>
       )}

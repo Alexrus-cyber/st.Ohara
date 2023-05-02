@@ -57,23 +57,12 @@ export const getFile = createAsyncThunk(
     }
   }
 );
-export const deleteSliderItem = createAsyncThunk(
-  "deleteItemMenu",
-  async (id, { rejectedWithValue }) => {
-    try {
-      return id;
-    } catch (e) {
-      return rejectedWithValue(e);
-    }
-  }
-);
 
 export const setFile = createAsyncThunk(
   "setFile",
   async (data, { rejectedWithValue }) => {
     try {
       const { result, id, section } = data;
-      console.log(data);
       return { result, id, section };
     } catch (e) {
       return rejectedWithValue(e);
@@ -105,6 +94,19 @@ export const editSlider = createAsyncThunk(
     }
   }
 );
+export const deleteSlider = createAsyncThunk(
+  "deleteSlider",
+  async (id, { rejectedWithValue, dispatch }) => {
+    try {
+      await instance
+        .delete(`lending/slider/${id}`)
+        .then((response) => response);
+      dispatch(getSlider());
+    } catch (e) {
+      return rejectedWithValue(e);
+    }
+  }
+);
 
 export const landingSlice = createSlice({
   name: "landing",
@@ -112,10 +114,6 @@ export const landingSlice = createSlice({
   reducers: {
     setTitle(state, { payload }) {
       state.header = payload;
-    },
-    setSlider(state, { payload }) {
-      state.slider = [...state.slider, payload];
-      state.header = "";
     },
     clearError(state) {
       state.error = "";
@@ -150,6 +148,7 @@ export const landingSlice = createSlice({
               ...state.landingList.bannerDto,
               header: state.landingList.bannerDto.header,
               idFile: payload.result.id,
+              urlFile: payload.result.file,
             },
           };
         }
@@ -183,11 +182,8 @@ export const landingSlice = createSlice({
       })
       .addCase(getSlider.fulfilled, (state, { payload }) => {
         state.slider = [...payload];
-      })
-      .addCase(deleteSliderItem.fulfilled, (state, { payload }) => {
-        state.slider = state.slider.filter((el) => el.id !== payload);
       });
   },
 });
-export const { setTitle, setSlider, clearError } = landingSlice.actions;
+export const { setTitle, clearError } = landingSlice.actions;
 export default landingSlice.reducer;

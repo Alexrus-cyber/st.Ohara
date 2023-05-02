@@ -46,23 +46,6 @@ export const getMe = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk(
-  "logout",
-  async (data, { rejectedWithValue }) => {
-    try {
-      const response = await instance
-        .get(`users/me`)
-        .then((response) => response.data);
-      return response.data;
-    } catch (e) {
-      if (e.response.status === 401) {
-        console.log("Пользователь не авторизован");
-      }
-      return rejectedWithValue(e);
-    }
-  }
-);
-
 export const authSlice = createSlice({
   name: "login",
   initialState,

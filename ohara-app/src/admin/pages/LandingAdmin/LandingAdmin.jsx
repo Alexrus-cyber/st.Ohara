@@ -43,7 +43,6 @@ const LandingAdmin = memo(() => {
     },
     [dispatch]
   );
-  console.log(landingList);
   return (
     <>
       {loading ? (

@@ -1,6 +1,6 @@
 import styles from "./AddImage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getFile, setSlider, setTitle } from "../../../../slices/landing";
+import { editSlider, getFile, setTitle } from "../../../../slices/landing";
 import { memo, useCallback, useState } from "react";
 import { ButtonUI } from "../../components/ButtonUI/ButtonUI";
 
@@ -65,11 +65,9 @@ export const AddImage = memo(({ onClose }) => {
       <ButtonUI
         onClick={() => {
           dispatch(
-            setSlider({
+            editSlider({
               header,
               idFile: img.id,
-              id: img.id,
-              urlFile: img.urlFile,
             })
           );
           onClose();

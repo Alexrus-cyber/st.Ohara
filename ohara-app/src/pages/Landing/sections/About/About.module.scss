@@ -72,6 +72,9 @@
   display: none;
 }
 
+.text {
+  word-break: break-word;
+}
 
 @media screen and (max-width: 720px) {
   .itemContainer {

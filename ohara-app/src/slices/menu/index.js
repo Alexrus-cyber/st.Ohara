@@ -9,15 +9,16 @@ const initialState = {
   items: [],
   loading: true,
   error: "",
+  currentPage: 2,
 };
 export const getMenuData = createAsyncThunk(
   "getMenuData",
-  async (data, { rejectWithValue }) => {
+  async (currentPage, { rejectWithValue }) => {
     try {
       const response = await instance
-        .get(`menu`)
+        .get(`menu?page=${currentPage}`)
         .then((response) => response.data);
-      return response.data.items; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      return response.data; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
       return rejectWithValue(e);
     }
@@ -88,7 +89,7 @@ export const menuSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getMenuData.fulfilled, (state, { payload }) => {
         console.log(payload);
-        state.items = payload.sort(function (a, b) {
+        state.items = payload.items.sort(function (a, b) {
           return a.position - b.position;
         });
       })
