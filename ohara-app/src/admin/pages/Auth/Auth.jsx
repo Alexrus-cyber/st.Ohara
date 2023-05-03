@@ -1,14 +1,13 @@
 import styles from "./Auth.module.scss";
 import { FieldCreator } from "./components/Form/FormCreators";
-import { Field, reduxForm } from "redux-form";
+import { reduxForm } from "redux-form";
 import { inputs } from "./components/Constant";
 import { ButtonUI } from "../components/ButtonUI/ButtonUI";
 import { memo } from "react";
 import { useDispatch } from "react-redux";
 import { loginMe } from "../../../slices/AuthApi";
-import { useNavigate } from "react-router-dom";
 
-const LoginForm = ({ handleSubmit }) => {
+const LoginForm = ({ handleSubmit, error }) => {
   return (
     <form onSubmit={handleSubmit}>
       {inputs.map((e) =>
@@ -23,10 +22,15 @@ const LoginForm = ({ handleSubmit }) => {
           e.typeInput
         )
       )}
-      <div className={styles.title}>
-        <Field name={"rememberMe"} component={"input"} type={"checkbox"} />{" "}
-        запомнить вход
-      </div>
+      {error && (
+        <div
+          style={{ display: "flex", justifyContent: "center", marginTop: 10 }}
+        >
+          <div className={styles.errorForm}>
+            <p>{error}</p>
+          </div>
+        </div>
+      )}
       <div className={styles.title}>
         <ButtonUI name={"Авторизоваться"} />
       </div>
@@ -36,11 +40,9 @@ const LoginForm = ({ handleSubmit }) => {
 
 const Auth = memo(() => {
   const dispatch = useDispatch();
-  let navigate = useNavigate();
 
   const onSubmit = (formData) => {
     dispatch(loginMe({ email: formData.email, password: formData.password }));
-    navigate("/");
   };
   return (
     <div className={styles.container}>

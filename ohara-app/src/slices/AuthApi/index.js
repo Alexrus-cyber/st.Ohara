@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instance, setAccessToken } from "../API/API";
+import { stopSubmit } from "redux-form";
 
 const initialState = {
   email: null,
@@ -10,7 +11,7 @@ const initialState = {
 
 export const loginMe = createAsyncThunk(
   "authLogin",
-  async ({ email, password }, { rejectedWithValue }) => {
+  async ({ email, password }, { rejectedWithValue, dispatch }) => {
     try {
       const response = await instance
         .post(`auth/login`, { email, password })
@@ -24,6 +25,14 @@ export const loginMe = createAsyncThunk(
         });
       return response.data;
     } catch (e) {
+      console.log(e);
+      if (e.response.status > 400) {
+        dispatch(
+          stopSubmit("login", {
+            _error: "Вы ввели не коректный пароль или логин",
+          })
+        );
+      }
       return rejectedWithValue(e);
     }
   }

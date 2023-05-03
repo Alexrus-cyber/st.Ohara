@@ -44,7 +44,7 @@ function App() {
     if (token) {
       dispatch(getMe());
     }
-  }, [dispatch]);
+  }, []);
 
   const routing = useMemo(() => {
     if (user !== null && user.id) {
