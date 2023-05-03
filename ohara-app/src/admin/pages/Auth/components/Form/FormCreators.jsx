@@ -47,7 +47,9 @@ export const InputUI = memo(
         })}
       >
         <div className={styles.containerInput}>
-          {value !== "" && <p className={styles.titleInput}>{title}</p>}
+          {value !== "" && typeInput !== "checkBox" && (
+            <p className={styles.titleInput}>{title}</p>
+          )}
           {typeInput === "text" && (
             <textarea
               placeholder={title}
@@ -74,6 +76,14 @@ export const InputUI = memo(
               variant={"standard"}
               label={placeholder}
               placeholder={placeholder}
+              {...input}
+              {...props}
+            />
+          )}
+          {typeInput === "checkBox" && (
+            <input
+              style={{ width: 20, height: 20 }}
+              type={"checkbox"}
               {...input}
               {...props}
             />

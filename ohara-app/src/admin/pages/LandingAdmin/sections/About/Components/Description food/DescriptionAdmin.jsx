@@ -10,7 +10,7 @@ import { getFile } from "../../../../../../../slices/landing";
 export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
   return (
     <>
-      {!isLeftPosition && (
+      {isLeftPosition && (
         <div className={styles.itemContainer}>
           <div className={styles.imgContainerLeftMobile}>
             <Field
@@ -37,6 +37,12 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
               title={"Текст"}
               typeInput={"text"}
             />
+            <Field
+              name={`aboutDto.${index}.isLeftPosition`}
+              component={InputUI}
+              typeInput={"checkBox"}
+              type={"checkbox"}
+            />
           </div>
           <div className={styles.imgContainerLeft}>
             <Field
@@ -52,7 +58,7 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
         </div>
       )}
 
-      {isLeftPosition && (
+      {!isLeftPosition && (
         <div className={styles.itemContainer}>
           <div className={styles.imgContainerRight}>
             <Field
@@ -77,6 +83,12 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
               component={InputUI}
               title={"Текст"}
               typeInput={"text"}
+            />
+            <Field
+              name={`aboutDto.${index}.isLeftPosition`}
+              component={InputUI}
+              typeInput={"checkBox"}
+              type={"checkbox"}
             />
           </div>
         </div>

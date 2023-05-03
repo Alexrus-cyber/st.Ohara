@@ -36,6 +36,12 @@ export const ContentAdmin = ({ img, index, isLeftPosition, id }) => {
               title={"Текст"}
               typeInput={"text"}
             />
+            <Field
+              name={`atmosphereDto.${index}.isLeftPosition`}
+              component={InputUI}
+              typeInput={"checkBox"}
+              type={"checkbox"}
+            />
           </div>
         </div>
       ) : (
@@ -67,6 +73,12 @@ export const ContentAdmin = ({ img, index, isLeftPosition, id }) => {
               component={InputUI}
               title={"Текст"}
               typeInput={"text"}
+            />
+            <Field
+              name={`atmosphereDto.${index}.isLeftPosition`}
+              component={InputUI}
+              typeInput={"checkBox"}
+              type={"checkbox"}
             />
           </div>
           <div className={styles.backContainerRight}>
