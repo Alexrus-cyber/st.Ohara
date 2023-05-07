@@ -1,11 +1,11 @@
 import styles from "./New.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect } from "react";
-import { getNew } from "../../../../slices/news";
+import { getNew, oneNewSelector } from "../../../../slices/news";
 import { useParams } from "react-router-dom";
 
 export const New = memo(() => {
-  const { oneNew } = useSelector((state) => state.news);
+  const oneNew = useSelector(oneNewSelector);
   const dispatch = useDispatch();
   const param = useParams();
   useEffect(() => {

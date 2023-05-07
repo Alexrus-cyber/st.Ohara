@@ -119,7 +119,7 @@ export const { clearData } = actions;
 
 const stateSelector = (state) => state?.menu;
 
-export const listImagesSelector = createSelector(
+export const listMenuSelector = createSelector(
   stateSelector,
   (state) => state.items
 );

@@ -37,7 +37,7 @@ export const Card = memo(
     return (
       <div
         style={{
-          background: `center / cover no-repeat, linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)), url("${data.file}")`,
+          background: `linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),center / cover no-repeat url("${data.file}")`,
         }}
         className={styles.card}
       >

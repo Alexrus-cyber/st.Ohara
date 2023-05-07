@@ -99,8 +99,8 @@ const ContentNavbar = ({ handleDrawerClose, user }) => {
 
   return (
     <>
-      <h1 className={styles.title}>St.O'hara</h1>
       <img className={styles.img} src={admin} alt={"admin"} />
+      <h1 className={styles.title}>St.O'hara</h1>
       <p className={styles.name}>{user.name}</p>
       <p>{user.roleEntity === "Admin" ? "Админ" : "Сотрудник"}</p>
       <div className={styles.links}>

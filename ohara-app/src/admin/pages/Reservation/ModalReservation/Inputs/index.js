@@ -44,6 +44,14 @@ export const reservationInputsRight = [
   },
   {
     id: 5,
+    name: "time",
+    placeholder: "Время",
+    validators: [Required, maxLength100],
+    typeButton: InputUI,
+    typeInput: "materialTime",
+  },
+  {
+    id: 6,
     name: "amount",
     placeholder: "Количество людей",
     validators: [Required, maxLength100],

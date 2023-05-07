@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
 import { instance } from "../API/API";
 
 const initialState = {
@@ -161,5 +165,18 @@ export const newsSlice = createSlice({
       });
   },
 });
+
+const stateSelector = (state) => state?.news;
+
+export const listNewsSelector = createSelector(
+  stateSelector,
+  (state) => state.items
+);
+
+export const oneNewSelector = createSelector(
+  stateSelector,
+  (state) => state.oneNew
+);
+
 export const { setSearchValue, setTitleR, setTextR, setId } = newsSlice.actions;
 export default newsSlice.reducer;

@@ -4,7 +4,11 @@ import { Search } from "../../components/Search/Search";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { Module } from "../../components/Module/Module";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewsData, setSearchValue } from "../../../slices/news";
+import {
+  getNewsData,
+  listNewsSelector,
+  setSearchValue,
+} from "../../../slices/news";
 import { AddModalCard } from "./component/AddModuleCard/AddModalCard";
 import { nanoid } from "@reduxjs/toolkit";
 import { UseDebounce } from "../../hoocks/UseDebounce";
@@ -21,7 +25,8 @@ export const NewsAdmin = memo(() => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [text, setText] = useState("");
-  const { items, searchValue } = useSelector((state) => state.news);
+  const items = useSelector(listNewsSelector);
+  const { searchValue } = useSelector((state) => state.news);
   const dispatch = useDispatch();
 
   useEffect(() => {

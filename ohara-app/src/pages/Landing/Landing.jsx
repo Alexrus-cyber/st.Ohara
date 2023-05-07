@@ -13,10 +13,8 @@ const Landing = memo(() => {
   const { landingList, slider, error } = useSelector((state) => state.landing);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!landingList.aboutDto) {
-      dispatch(getLandingData());
-      dispatch(getSlider());
-    }
+    dispatch(getLandingData());
+    dispatch(getSlider());
   }, []);
 
   useEffect(() => {

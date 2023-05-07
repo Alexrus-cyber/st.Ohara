@@ -8,6 +8,7 @@ import {
   clearData,
   deleteItemMenu,
   getMenuData,
+  listMenuSelector,
   swapItemMenu,
 } from "../../../slices/menu";
 import { Module } from "../../components/Module/Module";
@@ -18,6 +19,7 @@ import { ReactSortable } from "react-sortablejs";
 import { DragModal } from "../components/DragModal/DragModal";
 import { Alert, Snackbar } from "@mui/material";
 import { LoaderPage } from "../../../components/LoaderPage/LoaderPage";
+import { NavLink } from "react-router-dom";
 
 const initialModalState = {
   src: null,
@@ -28,7 +30,8 @@ const MenuAdmin = memo(() => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalState, setModalState] = useState(initialModalState);
-  const { items, error, loading } = useSelector((state) => state.menu);
+  const items = useSelector(listMenuSelector);
+  const { error, loading } = useSelector((state) => state.menu);
   const [isOpenModal, setOpenModal] = useState(false);
   const [change, setChange] = useState(false);
   const [data, setData] = useState([]);
@@ -115,6 +118,9 @@ const MenuAdmin = memo(() => {
         </Alert>
       </Snackbar>
       <h1 className={styles.title}>Меню</h1>
+      <div>
+        <NavLink to={"/"}></NavLink>
+      </div>
       <div className={styles.addContainer}>
         <AddCard addHandler={addItem} />
       </div>

@@ -4,10 +4,7 @@
   display: flex;
   height: 100vh;
   max-height: 100vh;
-  background-image: url("../../../../assets/hero.webp");
-  background-repeat: no-repeat;
   background-size: cover;
-  background-color: #222223;
   color: white;
 }
 
@@ -104,7 +101,7 @@
   }
 
   .title {
-    height: 300px;
+    height: 100%;
     line-height: 1.5;
   }
 }
@@ -119,7 +116,7 @@
   }
 
   .title {
-    height: 300px;
+    height: 100%;
     line-height: 1.5;
   }
 }

@@ -112,7 +112,17 @@ export const InputUI = memo(
           )}
           {typeInput === "materialDate" && (
             <input
-              type={"datetime-local"}
+              type={"date"}
+              className={cl(styles.datePicker, {
+                [styles.datePickerError]: showError,
+              })}
+              {...input}
+              {...props}
+            />
+          )}
+          {typeInput === "materialTime" && (
+            <input
+              type={"time"}
               className={cl(styles.datePicker, {
                 [styles.datePickerError]: showError,
               })}

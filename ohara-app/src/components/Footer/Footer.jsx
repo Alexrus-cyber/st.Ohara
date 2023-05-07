@@ -1,6 +1,7 @@
 import styles from "./Footer.module.scss";
 import logo from "../../assets/logo.png";
 import insta from "../../assets/insta.png";
+import telega from "../../assets/telegram.png";
 import vk from "../../assets/vk.png";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect } from "react";
@@ -24,23 +25,27 @@ const Footer = memo(() => {
           >
             <img className={styles.img} src={logo} alt={"stOhara"} />
           </NavLink>
-          <p className={styles.textLeft}>
-            Ammolite - The Lighthouse Restaurant Peter-Thumb-Straße 6 77977 Rust
-            Deutschland
-          </p>
+          <p className={styles.textLeft}>☘️Ирландский паб в центре Костромы</p>
           <div className={styles.icons}>
-            <img className={styles.icon} src={insta} alt={"stOhara"} />
-            <img className={styles.icon} src={vk} alt={"stOhara"} />
+            <NavLink to={"https://www.instagram.com/st.ohara_irishpub/"}>
+              <img className={styles.icon} src={insta} alt={"stOhara"} />
+            </NavLink>
+            <NavLink to={"https://vk.com/irishpubkostroma"}>
+              <img className={styles.icon} src={vk} alt={"stOhara"} />
+            </NavLink>
+            <NavLink to={"https://t.me/stohara"}>
+              <img className={styles.icon} src={telega} alt={"stOhara"} />
+            </NavLink>
           </div>
         </div>
         <div className={styles.center}>
           <div className={styles.info}>
-            <p>Telefon: +7(432)432-20-30</p>
-            <p>Telefon: +7(432)432-20-30</p>
+            <p>Телефон: +7(494)249-96-00</p>
+            <p>Резерв столиков по тел. 499-600</p>
           </div>
           <div className={styles.info}>
-            <p>Telefon: +7(432)432-20-30</p>
-            <p>Telefon: +7(432)432-20-30</p>
+            <p>Вс-чт: 12.00-0.00</p>
+            <p>Пт-сб: 12.00-1.00</p>
           </div>
         </div>
         <div className={styles.right}>
@@ -57,7 +62,7 @@ const Footer = memo(() => {
         </div>
       </div>
       <p className={styles.footerText}>
-        © 2022 Europa-Park St.O'Hara Irish Pub
+        © 2023 Europa-Park St.O'Hara Irish Pub
       </p>
     </footer>
   );

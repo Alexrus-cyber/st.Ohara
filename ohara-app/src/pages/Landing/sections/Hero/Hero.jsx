@@ -4,7 +4,9 @@ import arrows from "../../../../assets/down-arrow 1.png";
 export const Hero = ({ hero }) => {
   return (
     <section
-      style={{ backgroundImage: `url(${hero.urlFile})` }}
+      style={{
+        background: `linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),center / cover no-repeat url(${hero.urlFile})`,
+      }}
       className={styles.hero}
     >
       <div className={styles.container}>

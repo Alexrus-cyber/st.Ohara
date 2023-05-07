@@ -1,11 +1,11 @@
 import styles from "./News.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { useEffect } from "react";
-import { getNewsData } from "../../slices/news";
+import { memo, useEffect } from "react";
+import { getNewsData, listNewsSelector } from "../../slices/news";
 
-const News = () => {
-  const { items } = useSelector((state) => state.news);
+const News = memo(() => {
+  const items = useSelector(listNewsSelector);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewsData());
@@ -39,5 +39,5 @@ const News = () => {
       </div>
     </section>
   );
-};
+});
 export default News;
