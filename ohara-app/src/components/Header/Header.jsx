@@ -79,8 +79,8 @@ const Header = () => {
             )}
           </IconButton>
           <div className={styles.navbarSecret}>
-            <h1 className={styles.title}>St.O'hara</h1>
             <img className={styles.imgSecret} src={logo} alt={"admin"} />
+            <h1 className={styles.title}>St.O'hara</h1>
             <div className={styles.links}>
               {arr.map((e) => (
                 <NavLink

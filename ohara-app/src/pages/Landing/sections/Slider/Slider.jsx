@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import "react-slideshow-image/dist/styles.css";
 import styles from "./Slider.module.scss";
 import LazyLoadImage from "../../../../components/LazyLoadImage/LazyLoadImage";
 import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
