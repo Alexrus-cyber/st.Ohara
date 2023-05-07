@@ -14,8 +14,7 @@ const Header = () => {
     { id: 1, text: "Главная", path: "/" },
     { id: 2, text: "Меню", path: "/menu" },
     { id: 3, text: "Галерея", path: "/gallery" },
-    { id: 4, text: "Новости", path: "/news" },
-    { id: 5, text: "Бронирование", path: "/reservation" },
+    { id: 4, text: "Бронирование", path: "/reservation" },
   ];
   const theme = useTheme();
   const [open, setOpen] = useState(false);

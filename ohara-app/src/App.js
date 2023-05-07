@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 const SliderAdmin = lazy(() => import("./admin/pages/Slider/SliderAdmin"));
 const MenuAdmin = lazy(() => import("./admin/pages/Menu/MenuAdmin"));
 const GalleryAdmin = lazy(() => import("./admin/pages/Gallery/GalleryAdmin"));
-const NewsAdmin = lazy(() => import("./admin/pages/News/NewsAdmin"));
 const LandingAdmin = lazy(() =>
   import("./admin/pages/LandingAdmin/LandingAdmin")
 );
@@ -24,14 +23,12 @@ const Registration = lazy(() =>
 const Auth = lazy(() => import("./admin/pages/Auth/Auth"));
 const Menu = lazy(() => import("./pages/Menu/Menu"));
 const Reservation = lazy(() => import("./pages/Reservation/Reservation"));
-const New = lazy(() => import("./pages/News/components/New/New"));
 const Staff = lazy(() => import("./admin/pages/StaffEdit/Staff"));
 const EditStaff = lazy(() =>
   import("./admin/pages/StaffEdit/components/EditStaff/EditStaff")
 );
 const Footer = lazy(() => import("./components/Footer/Footer"));
 const Landing = lazy(() => import("./pages/Landing/Landing"));
-const News = lazy(() => import("./pages/News/News"));
 const Gallery = lazy(() => import("./pages/Gallery/Gallery"));
 const NotFound = lazy(() => import("./components/NotFound/NotFound"));
 
@@ -55,7 +52,6 @@ function App() {
             <Routes>
               <Route path={"/"} element={<MenuAdmin />} />
               <Route path={"/galleryAdmin"} element={<GalleryAdmin />} />
-              <Route path={"/newsAdmin"} element={<NewsAdmin />} />
               <Route path={"/menuAdmin"} element={<MenuAdmin />} />
               <Route path={"/landingAdmin"} element={<LandingAdmin />} />
               <Route path={"/sliderAdmin"} element={<SliderAdmin />} />
@@ -69,8 +65,6 @@ function App() {
               <Route path={"/*"} element={<NotFound />} />
               <Route path={"/menu"} element={<Menu />} />
               <Route path={"/gallery"} element={<Gallery />} />
-              <Route path={"/news"} element={<News />} />
-              <Route path={"/news/:id"} element={<New />} />
               <Route path={"/reservation"} element={<Reservation />} />
               <Route path={"/landing"} element={<Landing />} />
               <Route path={"/login"} element={<Auth />} />
@@ -88,8 +82,6 @@ function App() {
             <Route path={"/"} element={<Landing />} />
             <Route path={"/menu"} element={<Menu />} />
             <Route path={"/gallery"} element={<Gallery />} />
-            <Route path={"/news"} element={<News />} />
-            <Route path={"/news/:id"} element={<New />} />
             <Route path={"/reservation"} element={<Reservation />} />
             <Route path={"/*"} element={<NotFound />} />
           </Routes>

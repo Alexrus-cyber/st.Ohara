@@ -104,7 +104,7 @@ export const ChildrenAdminMenu = ({ getMenu, launch }) => {
   return (
     <>
       <div className={styles.addContainer}>
-        <AddCard addItem={addItem} launch={false} upload={upload} />
+        <AddCard addItem={addItem} launch={launch} upload={upload} />
       </div>
       <ReactSortable
         onEnd={reorder}

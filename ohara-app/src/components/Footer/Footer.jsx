@@ -3,17 +3,30 @@ import logo from "../../assets/logo.png";
 import insta from "../../assets/insta.png";
 import telega from "../../assets/telegram.png";
 import vk from "../../assets/vk.png";
-import { useDispatch, useSelector } from "react-redux";
-import { memo, useEffect } from "react";
-import { getNewsData } from "../../slices/news";
+import { memo } from "react";
 import { NavLink } from "react-router-dom";
 
 const Footer = memo(() => {
-  const { items } = useSelector((state) => state.news);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getNewsData());
-  }, [dispatch]);
+  const items = [
+    {
+      id: 1,
+      src: insta,
+      link: "https://www.instagram.com/st.ohara_irishpub/",
+      header: "В инстаграмме",
+    },
+    {
+      id: 2,
+      src: vk,
+      link: "https://vk.com/irishpubkostroma",
+      header: "Во вконтакте",
+    },
+    {
+      id: 3,
+      src: telega,
+      link: "https://t.me/stohara",
+      header: "В телеграмме",
+    },
+  ];
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -27,15 +40,11 @@ const Footer = memo(() => {
           </NavLink>
           <p className={styles.textLeft}>☘️Ирландский паб в центре Костромы</p>
           <div className={styles.icons}>
-            <NavLink to={"https://www.instagram.com/st.ohara_irishpub/"}>
-              <img className={styles.icon} src={insta} alt={"stOhara"} />
-            </NavLink>
-            <NavLink to={"https://vk.com/irishpubkostroma"}>
-              <img className={styles.icon} src={vk} alt={"stOhara"} />
-            </NavLink>
-            <NavLink to={"https://t.me/stohara"}>
-              <img className={styles.icon} src={telega} alt={"stOhara"} />
-            </NavLink>
+            {items.map((el) => (
+              <NavLink key={el.id} to={el.link}>
+                <img className={styles.icon} src={el.src} alt={"telegrams"} />
+              </NavLink>
+            ))}
           </div>
         </div>
         <div className={styles.center}>
@@ -50,12 +59,8 @@ const Footer = memo(() => {
         </div>
         <div className={styles.right}>
           <p className={styles.rightTitle}>АКТУАЛЬНЫЕ НОВОСТИ</p>
-          {items.slice(0, 3).map((el) => (
-            <NavLink
-              key={el.id}
-              to={`News/${el.id}`}
-              className={styles.rightText}
-            >
+          {items.map((el) => (
+            <NavLink key={el.id} to={el.link} className={styles.rightText}>
               {el.header}
             </NavLink>
           ))}

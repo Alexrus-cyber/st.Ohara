@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { useDispatch } from "react-redux";
 import { addItemMenu } from "../../../slices/menu";
 
-export const AddCard = ({ upload, launch }) => {
+export const AddCard = ({ upload, launch, addHandler }) => {
   const [isFileTooLarge, setIsFileTooLarge] = useState(false);
   const maxSize = 1048576;
   const dispatch = useDispatch();
@@ -14,12 +14,17 @@ export const AddCard = ({ upload, launch }) => {
       setIsFileTooLarge(true);
     }
     if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
-      upload({
-        files: acceptedFiles,
-        callback: (result) => {
-          dispatch(addItemMenu({ result, launch }));
-        },
-      });
+      if (upload) {
+        upload({
+          files: acceptedFiles,
+          callback: (result) => {
+            dispatch(addItemMenu({ result, launch }));
+          },
+        });
+      }
+      if (addHandler) {
+        addHandler(acceptedFiles);
+      }
       setIsFileTooLarge(false);
     }
   }, []);

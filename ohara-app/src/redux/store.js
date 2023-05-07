@@ -5,7 +5,6 @@ import {
 } from "@reduxjs/toolkit";
 import menuReducer from "../slices/menu";
 import galleryReducer from "../slices/gallery";
-import newsReducer from "../slices/news";
 import landingReducer from "../slices/landing";
 import staffReducer from "../slices/staff";
 import { persistReducer } from "redux-persist";
@@ -17,7 +16,6 @@ const rootReducer = combineReducers({
   menu: menuReducer,
   landing: landingReducer,
   gallery: galleryReducer,
-  news: newsReducer,
   staff: staffReducer,
   login: authReducer,
   form: formReducer,
@@ -31,7 +29,6 @@ const persistConfig = {
     "menu",
     "landing",
     "gallery",
-    "newsPage",
     "staff",
     "login",
   ],

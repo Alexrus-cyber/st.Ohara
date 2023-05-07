@@ -91,7 +91,6 @@ const ContentNavbar = ({ handleDrawerClose, user }) => {
     { id: 5, src: "/landingAdmin", text: "Главная" },
     { id: 7, src: "/sliderAdmin", text: "Слайдер" },
     { id: 1, src: "/", text: "Меню" },
-    { id: 2, src: "/newsAdmin", text: "Новости" },
     { id: 3, src: "/galleryAdmin", text: "Галерея" },
     { id: 4, src: "/reservationAdmin", text: "Бронирование" },
     { id: 6, src: "/staff", text: "Работники" },
