@@ -1,103 +1,26 @@
 import styles from "./MenuAdmin.module.scss";
-import { AddCard } from "../../components/AddCard/AddCard";
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ImageViewer from "react-simple-image-viewer";
 import {
-  addItemMenu,
   clearData,
-  deleteItemMenu,
-  getMenuData,
-  listMenuSelector,
-  swapItemMenu,
+  getMenuLaunchData,
+  getMenuMainData,
 } from "../../../slices/menu";
-import { Module } from "../../components/Module/Module";
-import { DeleteModal } from "../components/DeleteModal/DeleteModal";
-import { nanoid } from "@reduxjs/toolkit";
-import LazyLoadImage from "../../../components/LazyLoadImage/LazyLoadImage";
-import { ReactSortable } from "react-sortablejs";
-import { DragModal } from "../components/DragModal/DragModal";
 import { Alert, Snackbar } from "@mui/material";
-import { LoaderPage } from "../../../components/LoaderPage/LoaderPage";
-import { NavLink } from "react-router-dom";
-
-const initialModalState = {
-  src: null,
-  id: nanoid(5),
-};
+import { ChildrenAdminMenu } from "./Components/ChildrenAdminMenu";
 
 const MenuAdmin = memo(() => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
-  const [modalState, setModalState] = useState(initialModalState);
-  const items = useSelector(listMenuSelector);
-  const { error, loading } = useSelector((state) => state.menu);
-  const [isOpenModal, setOpenModal] = useState(false);
-  const [change, setChange] = useState(false);
-  const [data, setData] = useState([]);
+  const { error } = useSelector((state) => state.menu);
+  const [main, setMain] = useState(true);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getMenuData());
-  }, []);
+  const getMain = useMemo(() => {
+    return <ChildrenAdminMenu getMenu={getMenuMainData} launch={false} />;
+  }, [main]);
+  const getLaunch = useMemo(() => {
+    return <ChildrenAdminMenu getMenu={getMenuLaunchData} launch={true} />;
+  }, [main]);
 
-  const handleClickOpenNews = useCallback((menuData) => {
-    setOpenModal(true);
-    setModalState(menuData);
-  }, []);
-
-  const handleClickCloseModal = useCallback(() => {
-    setOpenModal(false);
-    setChange(false);
-    setModalState(initialModalState);
-  }, []);
-
-  const openImageViewer = useCallback((index) => {
-    setCurrentImage(index);
-    setIsViewerOpen(true);
-  }, []);
-
-  const closeImageViewer = () => {
-    setCurrentImage(0);
-    setIsViewerOpen(false);
-  };
-  const sortableOptions = {
-    animation: 250,
-    fallbackOnBody: true,
-    swapThreshold: 0.65,
-    ghostClass: "ghost",
-    group: "images",
-    forceFallback: true,
-  };
-
-  const listChangeHandler = useCallback(() => {
-    setOpenModal(true);
-    setChange(true);
-  }, []);
-
-  const addItem = useCallback(
-    (file) => {
-      dispatch(addItemMenu(file));
-    },
-    [dispatch]
-  );
-  const reorder = ({ oldIndex, newIndex }) => {
-    const result = Array.from(items);
-    result[oldIndex] = { ...result[oldIndex], position: newIndex };
-    result[newIndex] = { ...result[newIndex], position: oldIndex };
-    setData(result);
-  };
-
-  const acceptList = useCallback(
-    (newState) => {
-      dispatch(swapItemMenu(newState));
-    },
-    [dispatch]
-  );
-  if (loading) {
-    return <LoaderPage />;
-  }
-  console.log(items);
   return (
     <section className={styles.container}>
       <Snackbar
@@ -118,85 +41,31 @@ const MenuAdmin = memo(() => {
         </Alert>
       </Snackbar>
       <h1 className={styles.title}>Меню</h1>
-      <div>
-        <NavLink to={"/"}></NavLink>
-      </div>
-      <div className={styles.addContainer}>
-        <AddCard addHandler={addItem} />
-      </div>
-      <ReactSortable
-        onEnd={reorder}
-        className={styles.cardContainer}
-        list={items.map((element) => ({ ...element }))}
-        setList={(currentList, sortable, store) => {
-          if (
-            store.dragging &&
-            store.dragging.props &&
-            JSON.stringify(store.dragging.props.list) !==
-              JSON.stringify(currentList)
-          ) {
-            listChangeHandler(currentList);
-          }
-        }}
-        {...sortableOptions}
-      >
-        {items.map((element, index) => (
-          <div key={element.id} className={styles.closeContainer}>
-            <LazyLoadImage
-              custom={styles.custom}
-              imgStyle={styles.custom}
-              src={element.file}
-              onClick={() => openImageViewer(index)}
-              alt=""
-            />
-            <button
-              onClick={() => {
-                handleClickOpenNews(element);
-              }}
-              className={styles.close}
-            >
-              x
-            </button>
-          </div>
-        ))}
-      </ReactSortable>
-      {isViewerOpen && (
-        <ImageViewer
-          src={items.map((e) => e.file)}
-          currentIndex={currentImage}
-          disableScroll={true}
-          closeOnClickOutside={true}
-          onClose={closeImageViewer}
-        />
-      )}
-      {change && (
-        <Module
-          active={isOpenModal}
-          setActive={setOpenModal}
-          onClose={handleClickCloseModal}
-        >
-          <DragModal
-            title={"Вы уверены что хотите поменять местами данные карточки?"}
-            setOpenModal={setOpenModal}
-            setChange={setChange}
-            data={data}
-            acceptList={acceptList}
+      <div className={styles.links}>
+        <div onClick={() => setMain(true)} className={styles.formRadioBtn}>
+          <input
+            type="radio"
+            defaultChecked={true}
+            onChange={() => setMain(true)}
+            id="main1"
+            name="menu"
+            value="main"
           />
-        </Module>
-      )}
-      {!change && (
-        <Module
-          active={isOpenModal}
-          setActive={setOpenModal}
-          onClose={handleClickCloseModal}
-        >
-          <DeleteModal
-            delete={deleteItemMenu}
-            id={modalState.id}
-            onClose={handleClickCloseModal}
+          <label htmlFor={"main1"}>Основное</label>
+        </div>
+        <div onClick={() => setMain(false)} className={styles.formRadioBtn}>
+          <input
+            onChange={() => setMain(false)}
+            type="radio"
+            id="launch2"
+            name="menu"
+            value="launch"
           />
-        </Module>
-      )}
+          <label htmlFor={"launch2"}>Бизнес-ланчи</label>
+        </div>
+      </div>
+      {main && getMain}
+      {!main && getLaunch}
     </section>
   );
 });

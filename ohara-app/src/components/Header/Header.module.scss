@@ -102,6 +102,10 @@
 }
 
 @media screen and (max-width: 900px) {
+  .header {
+    height: 0;
+    max-height: 0;
+  }
   .container {
     justify-content: center;
     padding: 0;

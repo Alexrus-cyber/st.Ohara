@@ -1,17 +1,25 @@
 import styles from "./Card.module.scss";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { useDispatch } from "react-redux";
+import { addItemMenu } from "../../../slices/menu";
 
-export const AddCard = ({ addHandler }) => {
+export const AddCard = ({ upload, launch }) => {
   const [isFileTooLarge, setIsFileTooLarge] = useState(false);
   const maxSize = 1048576;
+  const dispatch = useDispatch();
 
   const onDrop = useCallback((acceptedFiles) => {
     if (!acceptedFiles.length) {
       setIsFileTooLarge(true);
     }
     if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
-      addHandler(acceptedFiles);
+      upload({
+        files: acceptedFiles,
+        callback: (result) => {
+          dispatch(addItemMenu({ result, launch }));
+        },
+      });
       setIsFileTooLarge(false);
     }
   }, []);

@@ -26,6 +26,42 @@
   padding: 50px 0 0 0;
 }
 
+.links {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.formRadioBtn {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.formRadioBtn input[type=radio] {
+  display: none;
+}
+
+.formRadioBtn label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0 15px;
+  line-height: 34px;
+  border: none;
+  border-radius: 6px;
+  user-select: none;
+  font-size: 20px;
+}
+
+.formRadioBtn input[type=radio]:checked + label {
+  background: #7d4a7d;
+}
+
+/* Hover */
+.formRadioBtn label:hover {
+  color: white;
+}
+
+
 .img {
   border-radius: 20px;
   cursor: pointer;

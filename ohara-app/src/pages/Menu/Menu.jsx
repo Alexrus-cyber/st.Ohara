@@ -1,58 +1,46 @@
-import React, { useState, useCallback, useEffect, memo } from "react";
-import ImageViewer from "react-simple-image-viewer";
+import React, { memo, useMemo, useState } from "react";
 import styles from "./Menu.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { getMenuData, listMenuSelector } from "../../slices/menu";
-import LazyLoadImage from "../../components/LazyLoadImage/LazyLoadImage";
+import { ChildrenMenu } from "./ChildrenMenu/ChildrenMenu";
+import { getMenuLaunchData, getMenuMainData } from "../../slices/menu";
 
 const Menu = memo(() => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
-  const items = useSelector(listMenuSelector);
-  const dispatch = useDispatch();
+  const [main, setMain] = useState(true);
 
-  //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
-  useEffect(() => {
-    dispatch(getMenuData());
-    window.scrollTo(0, 0);
-  }, [dispatch]);
-
-  const openImageViewer = useCallback((index) => {
-    setCurrentImage(index);
-    setIsViewerOpen(true);
-  }, []);
-
-  const closeImageViewer = () => {
-    setCurrentImage(0);
-    setIsViewerOpen(false);
-  };
-
+  const getMain = useMemo(() => {
+    return <ChildrenMenu getMenu={getMenuMainData} />;
+  }, [main]);
+  const getLaunch = useMemo(() => {
+    return <ChildrenMenu getMenu={getMenuLaunchData} />;
+  }, [main]);
   return (
     <section className={styles.menu}>
       <div className={styles.container}>
         <h1 className={styles.title}>Меню</h1>
-        <div className={styles.content}>
-          {items.map((i, index) => (
-            <div className={styles.img} key={i.id}>
-              <LazyLoadImage
-                src={i.file}
-                custom={styles.border}
-                imgStyle={styles.border}
-                onClick={() => openImageViewer(index)}
-                alt="menu"
-              />
-            </div>
-          ))}
-          {isViewerOpen && (
-            <ImageViewer
-              src={items.map((e) => e.file)}
-              currentIndex={currentImage}
-              disableScroll={true}
-              closeOnClickOutside={true}
-              onClose={closeImageViewer}
+        <div className={styles.links}>
+          <div onClick={() => setMain(true)} className={styles.formRadioBtn}>
+            <input
+              type="radio"
+              defaultChecked={true}
+              onChange={() => setMain(true)}
+              id="main1"
+              name="menu"
+              value="main"
             />
-          )}
+            <label htmlFor={"main1"}>Основное</label>
+          </div>
+          <div onClick={() => setMain(false)} className={styles.formRadioBtn}>
+            <input
+              onChange={() => setMain(false)}
+              type="radio"
+              id="launch2"
+              name="menu"
+              value="launch"
+            />
+            <label htmlFor={"launch2"}>Бизнес-ланчи</label>
+          </div>
         </div>
+        {main && getMain}
+        {!main && getLaunch}
       </div>
     </section>
   );

@@ -27,22 +27,36 @@
 .links {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
-.link {
-  font-size: 30px;
-  padding-right: 120px;
-  padding-left: 60px;
+.formRadioBtn {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.formRadioBtn input[type=radio] {
+  display: none;
+}
+
+.formRadioBtn label {
+  display: inline-block;
   cursor: pointer;
-  transition-duration: 0.5s;
+  padding: 0 15px;
+  line-height: 34px;
+  border: none;
+  border-radius: 6px;
+  user-select: none;
+  font-size: 20px;
 }
 
-.link:hover {
-  color: #1C675A;
+.formRadioBtn input[type=radio]:checked + label {
+  background: #7d4a7d;
 }
 
-.gallery {
-
+/* Hover */
+.formRadioBtn label:hover {
+  color: white;
 }
 
 .content {
@@ -116,6 +130,13 @@
   .img {
     margin: 20px 10px;
     width: 100%;
+  }
+  .links {
+    flex-direction: column;
+  }
+  .formRadioBtn {
+    margin-right: 0;
+    margin-bottom: 20px;
   }
 }
 

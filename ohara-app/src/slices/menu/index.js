@@ -10,12 +10,25 @@ const initialState = {
   loading: true,
   error: "",
 };
-export const getMenuData = createAsyncThunk(
-  "getMenuData",
+export const getMenuMainData = createAsyncThunk(
+  "getMenuMainData",
   async (currentPage, { rejectWithValue }) => {
     try {
       const response = await instance
-        .get(`menu`)
+        .get(`menu/main`)
+        .then((response) => response.data);
+      return response.data; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
+export const getMenuLaunchData = createAsyncThunk(
+  "getMenuLaunchData",
+  async (currentPage, { rejectWithValue }) => {
+    try {
+      const response = await instance
+        .get(`menu/lunch`)
         .then((response) => response.data);
       return response.data; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
@@ -25,10 +38,37 @@ export const getMenuData = createAsyncThunk(
 );
 export const deleteItemMenu = createAsyncThunk(
   "deleteItemMenu",
-  async (id, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
+      const { id, launch } = data;
       await instance.delete(`menu/${id}`).then((response) => response.data);
-      dispatch(getMenuData());
+      if (launch) {
+        dispatch(getMenuLaunchData());
+      } else {
+        dispatch(getMenuMainData());
+      }
+    } catch (e) {
+      return rejectedWithValue(e);
+    }
+  }
+);
+
+export const uploadMenu = createAsyncThunk(
+  "uploadMenu",
+  async (data, { rejectedWithValue }) => {
+    try {
+      const { files, callback } = data;
+      let formData = new FormData();
+      for (let file of files) {
+        formData.append("file", file);
+      }
+      const response = await instance
+        .post(`menu/upload`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((response) => response.data);
+      console.log(response.data);
+      callback(response.data);
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -38,16 +78,20 @@ export const addItemMenu = createAsyncThunk(
   "addItemMenu",
   async (data, { rejectedWithValue, dispatch }) => {
     try {
-      let formData = new FormData();
-      for (let file of data) {
-        formData.append("file", file);
-      }
+      const { result, launch } = data;
+      let idFile = result[0].id;
       await instance
-        .post(`menu`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
+        .post(
+          `menu`,
+          { idFile, launch },
+          { headers: { "Content-Type": "application/json" } }
+        )
         .then((response) => response.data);
-      dispatch(getMenuData());
+      if (launch) {
+        dispatch(getMenuLaunchData());
+      } else {
+        dispatch(getMenuMainData());
+      }
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -66,7 +110,8 @@ export const swapItemMenu = createAsyncThunk(
           },
         })
         .then((response) => response.data);
-      dispatch(getMenuData());
+      dispatch(getMenuLaunchData());
+      dispatch(getMenuMainData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -83,17 +128,35 @@ export const menuSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getMenuData.pending, (state) => {
+      .addCase(getMenuLaunchData.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getMenuData.fulfilled, (state, { payload }) => {
+      .addCase(getMenuLaunchData.fulfilled, (state, { payload }) => {
         state.items = payload.items.sort(function (a, b) {
           return a.position - b.position;
         });
         state.loading = false;
       })
 
-      .addCase(getMenuData.rejected, (state, { payload }) => {
+      .addCase(getMenuLaunchData.rejected, (state, { payload }) => {
+        console.log(Math.floor(payload.response.status / 100));
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
+      })
+      .addCase(getMenuMainData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getMenuMainData.fulfilled, (state, { payload }) => {
+        state.items = payload.items.sort(function (a, b) {
+          return a.position - b.position;
+        });
+        state.loading = false;
+      })
+
+      .addCase(getMenuMainData.rejected, (state, { payload }) => {
         console.log(Math.floor(payload.response.status / 100));
         if (Math.floor(payload.response.status / 100) === 4) {
           state.error = payload.response.statusText;
