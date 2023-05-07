@@ -17,10 +17,6 @@ const Landing = memo(() => {
     dispatch(getSlider());
   }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const errorMessage = useMemo(() => {
     return (
       <Snackbar

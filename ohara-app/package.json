@@ -32,6 +32,7 @@
     "sass": "^1.62.0",
     "save-dev": "^0.0.1-security",
     "sortablejs": "^1.15.0",
+    "swiper": "^9.2.4",
     "use-latest": "^1.2.1",
     "web-vitals": "^2.1.0"
   },
