@@ -123,6 +123,7 @@ export const InputUI = memo(
           {typeInput === "materialTime" && (
             <input
               type={"time"}
+              step={3600000}
               className={cl(styles.datePicker, {
                 [styles.datePickerError]: showError,
               })}

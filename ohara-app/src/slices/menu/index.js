@@ -55,43 +55,39 @@ export const deleteItemMenu = createAsyncThunk(
 
 export const uploadMenu = createAsyncThunk(
   "uploadMenu",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
-      const { files, callback } = data;
       let formData = new FormData();
-      for (let file of files) {
+      for (let file of data) {
         formData.append("file", file);
       }
       const response = await instance
-        .post(`menu/upload`, formData, {
+        .post(`menu/upload/main`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => response.data);
       console.log(response.data);
-      callback(response.data);
+      dispatch(getMenuMainData());
     } catch (e) {
       return rejectedWithValue(e);
     }
   }
 );
-export const addItemMenu = createAsyncThunk(
-  "addItemMenu",
+export const uploadMenuLaunch = createAsyncThunk(
+  "uploadMenuLaunch",
   async (data, { rejectedWithValue, dispatch }) => {
     try {
-      const { result, launch } = data;
-      let idFile = result[0].id;
-      await instance
-        .post(
-          `menu`,
-          { idFile, launch },
-          { headers: { "Content-Type": "application/json" } }
-        )
-        .then((response) => response.data);
-      if (launch) {
-        dispatch(getMenuLaunchData());
-      } else {
-        dispatch(getMenuMainData());
+      let formData = new FormData();
+      for (let file of data) {
+        formData.append("file", file);
       }
+      const response = await instance
+        .post(`menu/upload/lunch`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((response) => response.data);
+      console.log(response.data);
+      dispatch(getMenuLaunchData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -102,16 +98,20 @@ export const swapItemMenu = createAsyncThunk(
   "swapItemMenu",
   async (data, { rejectedWithValue, dispatch }) => {
     try {
+      const { obj, launch } = data;
       console.log(data);
       await instance
-        .put(`menu`, data, {
+        .put(`menu`, obj, {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then((response) => response.data);
-      dispatch(getMenuLaunchData());
-      dispatch(getMenuMainData());
+      if (launch) {
+        dispatch(getMenuLaunchData());
+      } else {
+        dispatch(getMenuMainData());
+      }
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -168,9 +168,6 @@ export const menuSlice = createSlice({
         state.error = error.name;
       })
       .addCase(swapItemMenu.rejected, (state, { error }) => {
-        state.error = error.name;
-      })
-      .addCase(addItemMenu.rejected, (state, { error }) => {
         state.error = error.name;
       });
   },

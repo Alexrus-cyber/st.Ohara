@@ -5,10 +5,11 @@ import { ButtonUI } from "../../components/ButtonUI/ButtonUI";
 import { reservationInputs, reservationInputsRight } from "./Inputs";
 import styles from "./ModalReservation.module.scss";
 
-const ModalReservation = memo(({ onClose }) => {
+const ModalReservation = memo(({ onClose, setSuccess }) => {
   const onSubmit = (formData) => {
     console.log(formData);
     onClose();
+    setSuccess(true);
   };
   return <ReservationReduxForm onSubmit={onSubmit} />;
 });

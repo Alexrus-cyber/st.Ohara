@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addItemMenu,
   deleteItemMenu,
   listMenuSelector,
   swapItemMenu,
   uploadMenu,
+  uploadMenuLaunch,
 } from "../../../../slices/menu";
 import { LoaderPage } from "../../../../components/LoaderPage/LoaderPage";
 import styles from "../MenuAdmin.module.scss";
@@ -71,16 +71,13 @@ export const ChildrenAdminMenu = ({ getMenu, launch }) => {
     setChange(true);
   }, []);
 
-  const addItem = useCallback(
-    (idFile, launch) => {
-      dispatch(addItemMenu({ idFile, launch }));
-    },
-    [dispatch]
-  );
-
   const upload = useCallback(
     (file) => {
-      dispatch(uploadMenu(file));
+      if (launch) {
+        dispatch(uploadMenuLaunch(file));
+      } else {
+        dispatch(uploadMenu(file));
+      }
     },
     [dispatch]
   );
@@ -93,7 +90,7 @@ export const ChildrenAdminMenu = ({ getMenu, launch }) => {
 
   const acceptList = useCallback(
     (newState) => {
-      dispatch(swapItemMenu(newState));
+      dispatch(swapItemMenu({ obj: newState, launch }));
     },
     [dispatch]
   );
@@ -104,7 +101,7 @@ export const ChildrenAdminMenu = ({ getMenu, launch }) => {
   return (
     <>
       <div className={styles.addContainer}>
-        <AddCard addItem={addItem} launch={launch} upload={upload} />
+        <AddCard launch={launch} upload={upload} />
       </div>
       <ReactSortable
         onEnd={reorder}
