@@ -6,9 +6,11 @@ import { memo, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { useDispatch } from "react-redux";
+import { setUserNull } from "../../../../slices/AuthApi";
 
 const drawerWidth = "100%";
-const Navbar = memo(({ setAdmin }) => {
+const Navbar = memo(({ setAdmin, user }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -70,23 +72,25 @@ const Navbar = memo(({ setAdmin }) => {
           <ContentNavbar
             setAdmin={setAdmin}
             handleDrawerClose={handleDrawerClose}
+            user={user}
           />
         </div>
       </Drawer>
       <div className={styles.navbar}>
         <div className={styles.navbarContainer}>
-          <ContentNavbar setAdmin={setAdmin} />
+          <ContentNavbar setAdmin={setAdmin} user={user} />
         </div>
       </div>
     </>
   );
 });
 
-const ContentNavbar = ({ handleDrawerClose, setAdmin }) => {
+const ContentNavbar = ({ handleDrawerClose, user }) => {
+  const dispatch = useDispatch();
   const arr = [
     { id: 5, src: "/landingAdmin", text: "Главная" },
+    { id: 7, src: "/sliderAdmin", text: "Слайдер" },
     { id: 1, src: "/", text: "Меню" },
-    { id: 2, src: "/newsAdmin", text: "Новости" },
     { id: 3, src: "/galleryAdmin", text: "Галерея" },
     { id: 4, src: "/reservationAdmin", text: "Бронирование" },
     { id: 6, src: "/staff", text: "Работники" },
@@ -94,9 +98,10 @@ const ContentNavbar = ({ handleDrawerClose, setAdmin }) => {
 
   return (
     <>
-      <h1 className={styles.title}>St.O'hara</h1>
       <img className={styles.img} src={admin} alt={"admin"} />
-      <p className={styles.name}>Анастасия Михайлова</p>
+      <h1 className={styles.title}>St.O'hara</h1>
+      <p className={styles.name}>{user.name}</p>
+      <p>{user.roleEntity === "Admin" ? "Админ" : "Сотрудник"}</p>
       <div className={styles.links}>
         {arr.map((e) => (
           <NavLink
@@ -113,8 +118,9 @@ const ContentNavbar = ({ handleDrawerClose, setAdmin }) => {
       </div>
       <button
         onClick={() => {
-          setAdmin(false);
           handleDrawerClose;
+          sessionStorage.clear();
+          dispatch(setUserNull());
         }}
         className={styles.buttonBack}
       >

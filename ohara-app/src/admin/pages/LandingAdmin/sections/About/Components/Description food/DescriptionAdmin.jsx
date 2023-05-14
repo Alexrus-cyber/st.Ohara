@@ -4,64 +4,65 @@ import {
   FilesInput,
   InputUI,
 } from "../../../../../Auth/components/Form/FormCreators";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { getFile } from "../../../../../../../slices/landing";
 
 export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
-  const [imageUrl, setImageUrl] = useState(img);
-
   return (
     <>
-      {!isLeftPosition && (
+      {isLeftPosition && (
         <div className={styles.itemContainer}>
           <div className={styles.imgContainerLeftMobile}>
             <Field
-              name={`about.items.${index}.img`}
-              setImageUrl={setImageUrl}
+              name={`image`}
               getFile={getFile}
               section={"about"}
               id={id}
               circle={true}
               component={FilesInput}
             />
-            <img className={styles.img} src={imageUrl} alt="food" />
+            <img className={styles.img} src={img} alt="food" />
           </div>
 
           <div className={styles.textContainer}>
             <Field
-              name={`about.items.${index}.title`}
+              name={`aboutDto.${index}.header`}
               title={"Заголовок"}
               component={InputUI}
               typeInput={"input"}
             />
             <Field
-              name={`about.items.${index}.text`}
+              name={`aboutDto.${index}.description`}
               component={InputUI}
               title={"Текст"}
               typeInput={"text"}
             />
+            <Field
+              name={`aboutDto.${index}.isLeftPosition`}
+              component={InputUI}
+              typeInput={"checkBox"}
+              type={"checkbox"}
+            />
           </div>
           <div className={styles.imgContainerLeft}>
             <Field
-              name={`about.items.${index}.img`}
-              setImageUrl={setImageUrl}
+              name={`image`}
               getFile={getFile}
               section={"about"}
               circle={true}
               id={id}
               component={FilesInput}
             />
-            <img className={styles.img} src={imageUrl} alt="food" />
+            <img className={styles.img} src={img} alt="food" />
           </div>
         </div>
       )}
 
-      {isLeftPosition && (
+      {!isLeftPosition && (
         <div className={styles.itemContainer}>
           <div className={styles.imgContainerRight}>
             <Field
               name={`about.items.${index}.img`}
-              setImageUrl={setImageUrl}
               getFile={getFile}
               section={"about"}
               circle={true}
@@ -72,16 +73,22 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
           </div>
           <div className={styles.textContainer}>
             <Field
-              name={`about.items.${index}.title`}
+              name={`aboutDto.${index}.header`}
               component={InputUI}
               title={"Заголовок"}
               typeInput={"input"}
             />
             <Field
-              name={`about.items.${index}.text`}
+              name={`aboutDto.${index}.description`}
               component={InputUI}
               title={"Текст"}
               typeInput={"text"}
+            />
+            <Field
+              name={`aboutDto.${index}.isLeftPosition`}
+              component={InputUI}
+              typeInput={"checkBox"}
+              type={"checkbox"}
             />
           </div>
         </div>

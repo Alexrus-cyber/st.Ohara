@@ -5,24 +5,21 @@ import { memo } from "react";
 export const AtmosphereAdmin = memo(({ atmosphere }) => {
   return (
     <section className={styles.atmosphere}>
-      <div className={styles.container}>
-        {renderContent(atmosphere.content)}
-      </div>
+      <div className={styles.container}>{renderContent(atmosphere)}</div>
     </section>
   );
 });
 
-const renderContent = (content) => {
-  return content.map((a, index) => {
+const renderContent = (atmosphere) => {
+  return atmosphere.map((a, index) => {
     return (
       <ContentAdmin
         id={a.id}
         index={index}
         key={a.id}
-        img={a.img}
-        title={a.title}
-        text1={a.text1}
-        text2={a.text2}
+        img={a.urlFile}
+        title={a.header}
+        text={a.description}
         isLeftPosition={a.isLeftPosition}
       />
     );

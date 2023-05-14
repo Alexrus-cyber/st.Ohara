@@ -6,12 +6,12 @@ export const About = ({ about }) => {
     <section className={styles.about}>
       <div className={styles.container}>
         <h1 className={styles.title}>Может быть о нас?</h1>
-        {about.items.map((a) => (
+        {about.map((a) => (
           <Description
             key={a.id}
-            text={a.text}
-            title={a.title}
-            img={a.img}
+            text={a.description}
+            title={a.header}
+            img={a.urlFile}
             isLeftPosition={a.isLeftPosition}
           />
         ))}

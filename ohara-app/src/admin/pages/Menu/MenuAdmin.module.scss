@@ -9,10 +9,11 @@
 
 .cardContainer {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
   max-width: 1200px;
   width: 95%;
-  flex-wrap: wrap;
 }
 
 .addContainer {
@@ -24,6 +25,43 @@
   font-size: 48px;
   padding: 50px 0 0 0;
 }
+
+.links {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.formRadioBtn {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.formRadioBtn input[type=radio] {
+  display: none;
+}
+
+.formRadioBtn label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0 15px;
+  line-height: 34px;
+  border: none;
+  border-radius: 6px;
+  user-select: none;
+  font-size: 20px;
+}
+
+.formRadioBtn input[type=radio]:checked + label {
+  background: #7d4a7d;
+}
+
+/* Hover */
+.formRadioBtn label:hover {
+  color: white;
+}
+
 
 .img {
   border-radius: 20px;
@@ -37,11 +75,12 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
-  max-width: 300px;
+  max-width: 250px;
   width: 100%;
-  max-height: 210px;
-  height: 210px;
+  max-height: 550px;
+  height: 550px;
   margin: 50px;
+  cursor: pointer;
 }
 
 .custom {

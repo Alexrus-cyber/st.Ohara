@@ -1,12 +1,12 @@
 import { HeroAdmin } from "./sections/Hero/HeroAdmin";
-import { AboutAdmin } from "./sections/About/AboutAdmin";
-import { AtmosphereAdmin } from "./sections/Atmosphere/AtmosphereAdmin";
-import { memo, useEffect } from "react";
+import { memo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getLandingData } from "../../../slices/landing";
+import { editLanding, getLandingData } from "../../../slices/landing";
 import styles from "./LandingAdmin.module.scss";
 import { ButtonUI } from "../components/ButtonUI/ButtonUI";
 import { reduxForm } from "redux-form";
+import { AboutAdmin } from "./sections/About/AboutAdmin";
+import { AtmosphereAdmin } from "./sections/Atmosphere/AtmosphereAdmin";
 
 const LandingForm = memo(({ handleSubmit, data }) => {
   const customButton = {
@@ -17,28 +17,32 @@ const LandingForm = memo(({ handleSubmit, data }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.container}>
-      <HeroAdmin hero={data.hero} />
-      <AboutAdmin about={data.about} />
-      <AtmosphereAdmin atmosphere={data.atmosphere} />
-      <ButtonUI style={customButton} name={"Сохранить"} />
-    </form>
+    <>
+      <form onSubmit={handleSubmit} className={styles.container}>
+        <HeroAdmin hero={data.bannerDto} />
+        <AboutAdmin about={data.aboutDto} />
+        <AtmosphereAdmin atmosphere={data.atmosphereDto} />
+        <ButtonUI style={customButton} name={"Сохранить"} />
+      </form>
+    </>
   );
 });
 
 const LandingAdmin = memo(() => {
-  const { loading } = useSelector((state) => state.landing);
-  const { landingList } = useSelector((state) => state.landing);
+  const { landingList, loading } = useSelector((state) => state.landing);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getLandingData());
-  }, [dispatch]);
+  }, []);
 
-  const onSubmit = (formData) => {
-    console.log(formData);
-  };
-
+  const onSubmit = useCallback(
+    (formData) => {
+      console.log(formData);
+      dispatch(editLanding(formData));
+    },
+    [dispatch]
+  );
   return (
     <>
       {loading ? (

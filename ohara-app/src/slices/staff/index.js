@@ -1,17 +1,54 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { staffList } from "./mocks";
+import { instance } from "../API/API";
+import { getMe } from "../AuthApi";
 
 const initialState = {
   staffList: [],
   searchValue: "",
   loading: true,
 };
-
 export const getStaffData = createAsyncThunk(
   "getStaffData",
   async (data, { rejectedWithValue }) => {
     try {
-      return staffList; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      const response = await instance
+        .get(`users`)
+        .then((response) => response.data);
+      return response.data.items;
+    } catch (e) {
+      return rejectedWithValue(e);
+    }
+  }
+);
+export const addStaff = createAsyncThunk(
+  "addStaff",
+  async (data, { rejectedWithValue, dispatch }) => {
+    try {
+      await instance
+        .post(`user`, data, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((response) => response.data);
+      dispatch(getStaffData());
+    } catch (e) {
+      return rejectedWithValue(e);
+    }
+  }
+);
+
+export const editStaff = createAsyncThunk(
+  "editStaff",
+  async (data, { rejectedWithValue, dispatch }) => {
+    try {
+      const { id, password, ...rest } = data;
+      console.log(password);
+      await instance
+        .put(`user/${id}`, rest, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((response) => response.data);
+      await dispatch(getMe());
+      dispatch(getStaffData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -20,9 +57,10 @@ export const getStaffData = createAsyncThunk(
 
 export const deleteStaff = createAsyncThunk(
   "deleteStaff",
-  async (id, { rejectedWithValue }) => {
+  async (id, { rejectedWithValue, dispatch }) => {
     try {
-      return id; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      await instance.delete(`user/${id}`).then((response) => response.data);
+      dispatch(getStaffData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -46,23 +84,11 @@ export const staffSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getStaffData.fulfilled, (state, { payload }) => {
         state.loading = false;
+        console.log(payload);
         state.staffList = payload;
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getStaffData.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(deleteStaff.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(deleteStaff.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.staffList = state.staffList.filter((el) => el.id !== payload);
-        console.log(payload);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(deleteStaff.rejected, (state) => {
         state.loading = false;
       });
   },

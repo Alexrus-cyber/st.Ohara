@@ -73,16 +73,19 @@
   max-width: 785px;
   width: 100%;
   padding: 30px;
+  white-space: pre-line;
 }
 
 .title {
   color: #7D4A7D;
   font-size: 48px;
   font-weight: 700;
+  line-height: 1;
 }
 
 .text {
   padding-bottom: 65px;
+  word-break: break-word;
 }
 
 .backContainer {

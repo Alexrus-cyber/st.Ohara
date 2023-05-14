@@ -54,7 +54,7 @@ export const ItemStaff = memo(({ data }) => {
     <div className={styles.listItem}>
       <div className={styles.content}>
         <p className={styles.padding}>
-          ФИО: {data.firstName} {data.secondName.substring(0, 1).toUpperCase()}.
+          ФИО: {data.name} {data.surname.substring(0, 1).toUpperCase()}.
         </p>
         <p className={styles.padding}>Почта: {data.email}</p>
       </div>

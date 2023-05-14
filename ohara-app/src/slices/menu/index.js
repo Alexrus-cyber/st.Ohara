@@ -3,37 +3,91 @@ import {
   createSelector,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
-import { mockListMenu } from "./mocks/menu";
+import { instance } from "../API/API";
 
 const initialState = {
-  images: [],
+  items: [],
   loading: true,
+  error: "",
 };
-export const getMenuData = createAsyncThunk(
-  "getMenuData",
-  async (data, { rejectedWithValue }) => {
+export const getMenuMainData = createAsyncThunk(
+  "getMenuMainData",
+  async (currentPage, { rejectWithValue }) => {
     try {
-      return mockListMenu; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      const response = await instance
+        .get(`menu/main`)
+        .then((response) => response.data);
+      return response.data; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
+    }
+  }
+);
+export const getMenuLaunchData = createAsyncThunk(
+  "getMenuLaunchData",
+  async (currentPage, { rejectWithValue }) => {
+    try {
+      const response = await instance
+        .get(`menu/lunch`)
+        .then((response) => response.data);
+      return response.data; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+    } catch (e) {
+      return rejectWithValue(e);
     }
   }
 );
 export const deleteItemMenu = createAsyncThunk(
   "deleteItemMenu",
-  async (id, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
-      return id; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
+      const { id, launch } = data;
+      await instance.delete(`menu/${id}`).then((response) => response.data);
+      if (launch) {
+        dispatch(getMenuLaunchData());
+      } else {
+        dispatch(getMenuMainData());
+      }
     } catch (e) {
       return rejectedWithValue(e);
     }
   }
 );
-export const addItemMenu = createAsyncThunk(
-  "addItemMenu",
-  async (data, { rejectedWithValue }) => {
+
+export const uploadMenu = createAsyncThunk(
+  "uploadMenu",
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
-      return data;
+      let formData = new FormData();
+      for (let file of data) {
+        formData.append("file", file);
+      }
+      const response = await instance
+        .post(`menu/upload/main`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((response) => response.data);
+      console.log(response.data);
+      dispatch(getMenuMainData());
+    } catch (e) {
+      return rejectedWithValue(e);
+    }
+  }
+);
+export const uploadMenuLaunch = createAsyncThunk(
+  "uploadMenuLaunch",
+  async (data, { rejectedWithValue, dispatch }) => {
+    try {
+      let formData = new FormData();
+      for (let file of data) {
+        formData.append("file", file);
+      }
+      const response = await instance
+        .post(`menu/upload/lunch`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((response) => response.data);
+      console.log(response.data);
+      dispatch(getMenuLaunchData());
     } catch (e) {
       return rejectedWithValue(e);
     }
@@ -42,73 +96,79 @@ export const addItemMenu = createAsyncThunk(
 
 export const swapItemMenu = createAsyncThunk(
   "swapItemMenu",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectedWithValue, dispatch }) => {
     try {
-      return data;
+      const { obj, launch } = data;
+      console.log(data);
+      await instance
+        .put(`menu`, obj, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => response.data);
+      if (launch) {
+        dispatch(getMenuLaunchData());
+      } else {
+        dispatch(getMenuMainData());
+      }
     } catch (e) {
       return rejectedWithValue(e);
     }
   }
 );
 
-/*const menuAdapter = createEntityAdapter();*/
-
 export const menuSlice = createSlice({
   name: "menu",
   initialState,
   reducers: {
     clearData: (state) => {
-      state.images = [];
+      state.error = "";
     },
   },
   extraReducers: (builder) => {
     builder
-      //здесь имитируем закгрузку
-      .addCase(getMenuData.pending, (state) => {
+      .addCase(getMenuLaunchData.pending, (state) => {
         state.loading = true;
       })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(getMenuData.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.images = payload;
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(getMenuData.rejected, (state) => {
+      .addCase(getMenuLaunchData.fulfilled, (state, { payload }) => {
+        state.items = payload.items.sort(function (a, b) {
+          return a.position - b.position;
+        });
         state.loading = false;
       })
-      .addCase(deleteItemMenu.pending, (state) => {
+
+      .addCase(getMenuLaunchData.rejected, (state, { payload }) => {
+        console.log(Math.floor(payload.response.status / 100));
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
+      })
+      .addCase(getMenuMainData.pending, (state) => {
         state.loading = true;
       })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(deleteItemMenu.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.images = state.images.filter((el) => el.id !== payload);
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(deleteItemMenu.rejected, (state) => {
+      .addCase(getMenuMainData.fulfilled, (state, { payload }) => {
+        state.items = payload.items.sort(function (a, b) {
+          return a.position - b.position;
+        });
         state.loading = false;
       })
-      .addCase(addItemMenu.pending, (state) => {
-        state.loading = true;
+
+      .addCase(getMenuMainData.rejected, (state, { payload }) => {
+        console.log(Math.floor(payload.response.status / 100));
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
       })
-      .addCase(addItemMenu.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.images = [payload, ...state.images];
+      .addCase(deleteItemMenu.rejected, (state, { error }) => {
+        state.error = error.name;
       })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(addItemMenu.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(swapItemMenu.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(swapItemMenu.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.images = payload;
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(swapItemMenu.rejected, (state) => {
-        state.loading = false;
+      .addCase(swapItemMenu.rejected, (state, { error }) => {
+        state.error = error.name;
       });
   },
 });
@@ -119,8 +179,8 @@ export const { clearData } = actions;
 
 const stateSelector = (state) => state?.menu;
 
-export const listImagesSelector = createSelector(
+export const listMenuSelector = createSelector(
   stateSelector,
-  (state) => state.images
+  (state) => state.items
 );
 export default reducer;

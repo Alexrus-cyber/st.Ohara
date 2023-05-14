@@ -4,14 +4,18 @@ import { FieldCreator } from "../../../Auth/components/Form/FormCreators";
 import { ButtonUI } from "../../../components/ButtonUI/ButtonUI";
 import { inputsRegister } from "../../../Auth/components/Constant";
 import { memo } from "react";
+import { useDispatch } from "react-redux";
+import { editStaff } from "../../../../../slices/staff";
 
-const EditStaff = memo(({ user }) => {
+const EditStaff = memo(({ user, onClose }) => {
+  const dispatch = useDispatch();
   const onSubmit = (formData) => {
-    console.log(formData);
+    dispatch(editStaff(formData));
+    onClose();
   };
   return (
     <div className={styles.color}>
-      <h1>Админ №{user.id}</h1>
+      <h1>Админ {user.name}</h1>
       <RegisterReduxForm initialValues={user} onSubmit={onSubmit} />
     </div>
   );
@@ -42,4 +46,4 @@ const RegisterForm = ({ handleSubmit }) => {
   );
 };
 export default EditStaff;
-const RegisterReduxForm = reduxForm({ form: "registration" })(RegisterForm);
+const RegisterReduxForm = reduxForm({ form: "editForm" })(RegisterForm);

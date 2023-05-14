@@ -53,8 +53,8 @@ const Staff = memo(() => {
                 <ItemStaff
                   data={element}
                   email={element.email}
-                  firstName={element.firstName}
-                  secondName={element.secondName}
+                  name={element.name}
+                  surname={element.surname}
                   id={element.id}
                   key={element.id}
                 />

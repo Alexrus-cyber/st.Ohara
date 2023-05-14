@@ -1,11 +1,9 @@
 import styles from "./Card.module.scss";
-import { useDispatch } from "react-redux";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export const AddCard = ({ addHandler }) => {
+export const AddCard = ({ upload, addHandler }) => {
   const [isFileTooLarge, setIsFileTooLarge] = useState(false);
-  const dispatch = useDispatch();
   const maxSize = 1048576;
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -13,7 +11,12 @@ export const AddCard = ({ addHandler }) => {
       setIsFileTooLarge(true);
     }
     if (acceptedFiles[0].size < maxSize || acceptedFiles.length > 0) {
-      dispatch(addHandler(acceptedFiles));
+      if (upload) {
+        upload(acceptedFiles);
+      }
+      if (addHandler) {
+        addHandler(acceptedFiles);
+      }
       setIsFileTooLarge(false);
     }
   }, []);
@@ -29,7 +32,7 @@ export const AddCard = ({ addHandler }) => {
       },
       minSize: 0,
       maxSize,
-      multiple: false,
+      multiple: true,
     });
   return (
     <div className={styles.card} {...getRootProps()}>

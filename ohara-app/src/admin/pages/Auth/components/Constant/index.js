@@ -9,7 +9,7 @@ export const maxLength100 = maxLength(100);
 export const inputs = [
   {
     id: 1,
-    name: "Email",
+    name: "email",
     placeholder: "email",
     validators: [Required, maxLength25],
     typeButton: InputUI,
@@ -18,7 +18,7 @@ export const inputs = [
   },
   {
     id: 2,
-    name: "Password",
+    name: "password",
     placeholder: "password",
     validators: [Required, maxLength20],
     typeButton: InputUI,
@@ -48,7 +48,7 @@ export const inputsRegister = [
   },
   {
     id: 3,
-    name: "firstName",
+    name: "name",
     placeholder: "Имя",
     validators: [Required, maxLength25],
     typeButton: InputUI,
@@ -56,7 +56,7 @@ export const inputsRegister = [
   },
   {
     id: 4,
-    name: "secondName",
+    name: "surname",
     placeholder: "Фамилия",
     validators: [Required, maxLength20],
     typeButton: InputUI,
@@ -64,7 +64,7 @@ export const inputsRegister = [
   },
   {
     id: 5,
-    name: "lastName",
+    name: "patronymic",
     placeholder: "Отчество",
     validators: [Required, maxLength20],
     typeButton: InputUI,
@@ -77,5 +77,13 @@ export const inputsRegister = [
     validators: [Required, maxLength20],
     typeButton: InputUI,
     typeInput: "reg",
+  },
+  {
+    id: 7,
+    name: "roleEntity",
+    placeholder: "Выберите должность",
+    validators: [Required, maxLength20],
+    typeButton: InputUI,
+    typeInput: "select",
   },
 ];
