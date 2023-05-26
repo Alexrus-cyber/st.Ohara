@@ -1,39 +1,32 @@
-import { useCallback, useState } from "react";
-import { Module } from "../../components/Module/Module";
-import ModalReservation from "./ModalReservation/ModalReservation";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getBarSelector,
+  getSchemeBar,
+  getTablesBar,
+} from "../../../slices/booking";
+import { Tables } from "./Tables/Tables";
+import { useCallback, useEffect } from "react";
 import styles from "./Reservation.module.scss";
-import cl from "classnames";
 
 const ReservationAdmin = () => {
-  const [active, setActive] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const handleClickCloseModal = useCallback(() => {
-    setActive(false);
+  const items = useSelector(getBarSelector);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTablesBar());
+  }, []);
+  const getScheme = useCallback(() => {
+    dispatch(getSchemeBar());
   }, []);
   return (
-    <div>
-      <button
-        disabled={active && true}
-        className={cl(styles.formBtn, {
-          [styles.inProgress]: active,
-          [styles.success]: success,
-        })}
-        onClick={() => setActive(!active)}
-      >
-        1<br />
-        {success && `13:00`}
-      </button>
-      <Module
-        title={"Бронирование"}
-        active={active}
-        onClose={handleClickCloseModal}
-      >
-        <ModalReservation
-          setSuccess={setSuccess}
-          onClose={handleClickCloseModal}
-        />
-      </Module>
+    <div className={styles.flex}>
+      <div>
+        {items.map((el) => (
+          <Tables table={el} key={el.id} />
+        ))}
+      </div>
+      <div>
+        <button onClick={getScheme}>Обновить схему столов</button>
+      </div>
     </div>
   );
 };

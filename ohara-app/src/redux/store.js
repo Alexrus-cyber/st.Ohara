@@ -11,6 +11,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { reducer as formReducer } from "redux-form";
 import authReducer from "../slices/AuthApi";
+import bookingReducer from "../slices/booking";
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   gallery: galleryReducer,
   staff: staffReducer,
   login: authReducer,
+  booking: bookingReducer,
   form: formReducer,
 });
 

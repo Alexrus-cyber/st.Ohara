@@ -61,7 +61,7 @@ export const reservationInputsRight = [
   },
   {
     id: 7,
-    name: "amount",
+    name: "numberOfPeople",
     placeholder: "Количество людей",
     validators: [Required, maxLength100],
     typeButton: InputUI,
@@ -69,7 +69,7 @@ export const reservationInputsRight = [
   },
   {
     id: 8,
-    name: "phoneNumber",
+    name: "phone",
     placeholder: "Номер телефона",
     validators: [Required, maxLength12, minLength(11)],
     typeButton: InputUI,
