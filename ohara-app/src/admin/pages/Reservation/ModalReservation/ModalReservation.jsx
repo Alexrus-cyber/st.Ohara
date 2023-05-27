@@ -6,7 +6,6 @@ import { reservationInputs, reservationInputsRight } from "./Inputs";
 import styles from "./ModalReservation.module.scss";
 import { useDispatch } from "react-redux";
 import { createBooking } from "../../../../slices/booking";
-import { redirect } from "react-router-dom";
 
 const ModalReservation = memo(({ onClose, table }) => {
   const dispatch = useDispatch();
@@ -17,15 +16,15 @@ const ModalReservation = memo(({ onClose, table }) => {
       createBooking({
         data: formData,
         callback: (result) => {
-          redirect(result);
+          window.location.href = result;
         },
       })
     );
   };
 
   const tables = {
-    price: 3000,
-    hall: table.number,
+    price: "3000",
+    hall: table.hall,
     tableNumber: table.number,
   };
   return (
