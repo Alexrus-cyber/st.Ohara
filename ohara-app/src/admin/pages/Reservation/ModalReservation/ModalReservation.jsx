@@ -8,6 +8,9 @@ import { useDispatch } from "react-redux";
 import { createBooking } from "../../../../slices/booking";
 
 const ModalReservation = memo(({ onClose, table }) => {
+  if (table.reserve && table.reserve.status === "Progress") {
+    onClose();
+  }
   const dispatch = useDispatch();
   const onSubmit = (formData) => {
     console.log(formData);
@@ -21,25 +24,26 @@ const ModalReservation = memo(({ onClose, table }) => {
       })
     );
   };
-
   const tables = {
-    price: "3000",
-    hall: table.hall,
-    tableNumber: table.number,
+    price: 3000,
+    tableIds: [table.id],
+    durationInMinutes: 120,
   };
   return (
-    <ReservationReduxForm
-      initialValues={tables}
-      table={tables}
-      onSubmit={onSubmit}
-    />
+    <div>
+      <h1>Стол №{table.number}</h1>
+      <ReservationReduxForm
+        initialValues={tables}
+        table={tables}
+        onSubmit={onSubmit}
+      />
+    </div>
   );
 });
 
-const ReservationForm = ({ handleSubmit, table }) => {
+const ReservationForm = ({ handleSubmit }) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1>Стол №{table.tableNumber}</h1>
       <div className={styles.container}>
         <div>
           {reservationInputs.map((e) => (

@@ -121,4 +121,11 @@
   .closeContainer {
     margin: 25px 0;
   }
+  .links {
+    flex-direction: column;
+  }
+  .formRadioBtn {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 }

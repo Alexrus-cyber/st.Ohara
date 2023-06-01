@@ -12,9 +12,11 @@ export const Tables = memo(({ table }) => {
   return (
     <div>
       <button
-        disabled={active && true}
+        disabled={table.reserve && table.reserve.status === "Progress" && true}
         className={cl(styles.formBtn, {
-          [styles.inProgress]: active,
+          [styles.inProgress]:
+            table.reserve && table.reserve.status === "Progress",
+          [styles.success]: table.reserve && table.reserve.status === "Success",
         })}
         onClick={() => setActive(!active)}
       >

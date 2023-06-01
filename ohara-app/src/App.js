@@ -22,7 +22,6 @@ const Registration = lazy(() =>
 );
 const Auth = lazy(() => import("./admin/pages/Auth/Auth"));
 const Menu = lazy(() => import("./pages/Menu/Menu"));
-const Reservation = lazy(() => import("./pages/Reservation/Reservation"));
 const Staff = lazy(() => import("./admin/pages/StaffEdit/Staff"));
 const EditStaff = lazy(() =>
   import("./admin/pages/StaffEdit/components/EditStaff/EditStaff")
@@ -57,7 +56,7 @@ function App() {
               <Route path={"/sliderAdmin"} element={<SliderAdmin />} />
               <Route
                 path={"/reservationAdmin"}
-                element={<ReservationAdmin />}
+                element={<ReservationAdmin user={true} />}
               />
               <Route path={"/registration"} element={<Registration />} />
               <Route path={"/staff"} element={<Staff />} />
@@ -65,7 +64,6 @@ function App() {
               <Route path={"/*"} element={<NotFound />} />
               <Route path={"/menu"} element={<Menu />} />
               <Route path={"/gallery"} element={<Gallery />} />
-              <Route path={"/reservation"} element={<Reservation />} />
               <Route path={"/landing"} element={<Landing />} />
               <Route path={"/login"} element={<Auth />} />
             </Routes>
@@ -82,7 +80,10 @@ function App() {
             <Route path={"/"} element={<Landing />} />
             <Route path={"/menu"} element={<Menu />} />
             <Route path={"/gallery"} element={<Gallery />} />
-            <Route path={"/reservation"} element={<Reservation />} />
+            <Route
+              path={"/reservation"}
+              element={<ReservationAdmin user={false} />}
+            />
             <Route path={"/*"} element={<NotFound />} />
           </Routes>
         </Suspense>
