@@ -1,46 +1,43 @@
 import styles from "./Module.module.scss";
+import { memo } from "react";
 
-export const Module = ({
-  active,
-  children,
-  onClose,
-  title = "",
-  setIsEdit,
-}) => {
-  if (active) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+export const Module = memo(
+  ({ active, children, onClose, title = "", setIsEdit }) => {
+    if (active) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-  return (
-    <div
-      className={active ? styles.active : styles.module}
-      onClick={() => {
-        onClose();
-        setIsEdit && setIsEdit(false);
-      }}
-    >
+    return (
       <div
-        className={active ? styles.moduleContentActive : styles.moduleContent}
-        onClick={(e) => e.stopPropagation()}
+        className={active ? styles.active : styles.module}
+        onClick={() => {
+          onClose();
+          setIsEdit && setIsEdit(false);
+        }}
       >
-        <div className={styles.titleContainer}>
-          <h1 className={styles.title}>{title}</h1>
-          <button
-            onClick={() => {
-              onClose();
-              if (setIsEdit) {
-                setIsEdit(false);
-              }
-            }}
-            className={styles.close}
-          >
-            X
-          </button>
+        <div
+          className={active ? styles.moduleContentActive : styles.moduleContent}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={styles.titleContainer}>
+            <h1 className={styles.title}>{title}</h1>
+            <button
+              onClick={() => {
+                onClose();
+                if (setIsEdit) {
+                  setIsEdit(false);
+                }
+              }}
+              className={styles.close}
+            >
+              X
+            </button>
+          </div>
+          {children}
         </div>
-        {children}
       </div>
-    </div>
-  );
-};
+    );
+  }
+);

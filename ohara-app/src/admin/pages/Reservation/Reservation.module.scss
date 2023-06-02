@@ -1,3 +1,16 @@
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main2 {
+  @extend .main;
+  padding: 100px 0;
+}
+
 .formBtn {
   border-radius: 50%;
   max-width: 100px;
@@ -11,6 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 20px;
   transition-duration: 0.5s;
 }
 
@@ -30,4 +44,84 @@
   border: 2px solid green;
   color: white;
   background: green;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 48px;
+  padding: 50px 0 0 0;
+  color: white;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.img {
+  max-width: 900px;
+  width: 95%;
+}
+
+.links {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  max-width: 300px;
+  width: 100%;
+  padding: 20px 0;
+  color: white;
+}
+
+.formRadioBtn {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.formRadioBtn input[type=radio] {
+  display: none;
+}
+
+.formRadioBtn label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0 15px;
+  line-height: 34px;
+  border: none;
+  border-radius: 6px;
+  user-select: none;
+  font-size: 20px;
+}
+
+.formRadioBtn input[type=radio]:checked + label {
+  background: #7d4a7d;
+}
+
+/* Hover */
+.formRadioBtn label:hover {
+  color: white;
+}
+
+@media screen and (max-width: 900px) {
+  .main2 {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .title {
+    font-size: 28px;
+  }
+  .links {
+    flex-wrap: wrap;
+  }
 }

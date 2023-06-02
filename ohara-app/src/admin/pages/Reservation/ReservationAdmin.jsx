@@ -1,39 +1,66 @@
-import { useCallback, useState } from "react";
-import { Module } from "../../components/Module/Module";
-import ModalReservation from "./ModalReservation/ModalReservation";
+import {
+  getTablesHall,
+  getTablesLaunge,
+  getTablesStreet,
+} from "../../../slices/booking";
+import React, { useMemo, useState } from "react";
 import styles from "./Reservation.module.scss";
-import cl from "classnames";
+import { Scheme } from "./MainChildren/Scheme";
+import schemaHall from "../../../assets/Hall.png";
+import scheme from "../../../assets/Veranda.png";
 
-const ReservationAdmin = () => {
-  const [active, setActive] = useState(false);
-  const [success, setSuccess] = useState(false);
+const ReservationAdmin = ({ user }) => {
+  const [main, setMain] = useState(1);
 
-  const handleClickCloseModal = useCallback(() => {
-    setActive(false);
-  }, []);
+  const getLaunge = useMemo(() => {
+    return <Scheme main={main} getScheme={getTablesLaunge} />;
+  }, [main]);
+  const getStreet = useMemo(() => {
+    return <Scheme main={main} img={scheme} getScheme={getTablesStreet} />;
+  }, [main]);
+  const getHall = useMemo(() => {
+    return <Scheme main={main} img={schemaHall} getScheme={getTablesHall} />;
+  }, [main]);
+
   return (
-    <div>
-      <button
-        disabled={active && true}
-        className={cl(styles.formBtn, {
-          [styles.inProgress]: active,
-          [styles.success]: success,
-        })}
-        onClick={() => setActive(!active)}
-      >
-        1<br />
-        {success && `13:00`}
-      </button>
-      <Module
-        title={"Бронирование"}
-        active={active}
-        onClose={handleClickCloseModal}
-      >
-        <ModalReservation
-          setSuccess={setSuccess}
-          onClose={handleClickCloseModal}
-        />
-      </Module>
+    <div className={user ? styles.main : styles.main2}>
+      <h1 className={styles.title}>Бронирование</h1>
+      <div className={styles.links}>
+        <div className={styles.formRadioBtn}>
+          <input
+            onChange={() => setMain(1)}
+            type="radio"
+            id="launge"
+            name="menu"
+            defaultChecked={true}
+            value="1"
+          />
+          <label htmlFor={"launge"}>Лаунж</label>
+        </div>
+        <div className={styles.formRadioBtn}>
+          <input
+            onChange={() => setMain(2)}
+            type="radio"
+            id="street"
+            name="menu"
+            value="2"
+          />
+          <label htmlFor={"street"}>Веранда</label>
+        </div>
+        <div className={styles.formRadioBtn}>
+          <input
+            onChange={() => setMain(3)}
+            type="radio"
+            id="hall"
+            name="menu"
+            value="3"
+          />
+          <label htmlFor={"hall"}>Зал</label>
+        </div>
+      </div>
+      {main === 1 && getLaunge}
+      {main === 2 && getStreet}
+      {main === 3 && getHall}
     </div>
   );
 };

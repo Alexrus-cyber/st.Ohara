@@ -4,20 +4,46 @@ import { FieldCreator, InputUI } from "../../Auth/components/Form/FormCreators";
 import { ButtonUI } from "../../components/ButtonUI/ButtonUI";
 import { reservationInputs, reservationInputsRight } from "./Inputs";
 import styles from "./ModalReservation.module.scss";
+import { useDispatch } from "react-redux";
+import { createBooking } from "../../../../slices/booking";
 
-const ModalReservation = memo(({ onClose, setSuccess }) => {
+const ModalReservation = memo(({ onClose, table }) => {
+  if (table.reserve && table.reserve.status === "Progress") {
+    onClose();
+  }
+  const dispatch = useDispatch();
   const onSubmit = (formData) => {
     console.log(formData);
     onClose();
-    setSuccess(true);
+    dispatch(
+      createBooking({
+        data: formData,
+        callback: (result) => {
+          window.location.href = result;
+        },
+      })
+    );
   };
-  return <ReservationReduxForm onSubmit={onSubmit} />;
+  const tables = {
+    price: 3000,
+    tableIds: [table.id],
+    durationInMinutes: 120,
+  };
+  return (
+    <div>
+      <h1>Стол №{table.number}</h1>
+      <ReservationReduxForm
+        initialValues={tables}
+        table={tables}
+        onSubmit={onSubmit}
+      />
+    </div>
+  );
 });
 
 const ReservationForm = ({ handleSubmit }) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1>Стол №1</h1>
       <div className={styles.container}>
         <div>
           {reservationInputs.map((e) => (
