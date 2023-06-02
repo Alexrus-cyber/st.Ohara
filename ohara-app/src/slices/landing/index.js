@@ -11,21 +11,21 @@ const initialState = {
 };
 export const getLandingData = createAsyncThunk(
   "getLandingData",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`lending`)
         .then((response) => response);
       return response.data;
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const editLanding = createAsyncThunk(
   "editLanding",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       await instance
         .post(`lending`, data, {
@@ -34,13 +34,13 @@ export const editLanding = createAsyncThunk(
         .then((response) => response);
       dispatch(getLandingData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 export const getFile = createAsyncThunk(
   "getFile",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       console.log(data);
       const { file, callback } = data;
@@ -53,57 +53,57 @@ export const getFile = createAsyncThunk(
         .then((response) => response.data);
       callback(response.data);
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const setFile = createAsyncThunk(
   "setFile",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const { result, id, section } = data;
       return { result, id, section };
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const getSlider = createAsyncThunk(
   "getSlider",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`lending/slider`)
         .then((response) => response);
       return response.data;
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 export const editSlider = createAsyncThunk(
   "editSlider",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       await instance.post(`lending/slider`, data).then((response) => response);
       dispatch(getSlider());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 export const deleteSlider = createAsyncThunk(
   "deleteSlider",
-  async (id, { rejectedWithValue, dispatch }) => {
+  async (id, { rejectWithValue, dispatch }) => {
     try {
       await instance
         .delete(`lending/slider/${id}`)
         .then((response) => response);
       dispatch(getSlider());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );

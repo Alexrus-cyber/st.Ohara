@@ -3,13 +3,13 @@ import {
   getTablesLaunge,
   getTablesStreet,
 } from "../../../slices/booking";
-import React, { useMemo, useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import styles from "./Reservation.module.scss";
 import { Scheme } from "./MainChildren/Scheme";
 import schemaHall from "../../../assets/Hall.png";
 import scheme from "../../../assets/Veranda.png";
 
-const ReservationAdmin = ({ user }) => {
+const ReservationAdmin = memo(({ user }) => {
   const [main, setMain] = useState(1);
 
   const getLaunge = useMemo(() => {
@@ -63,5 +63,5 @@ const ReservationAdmin = ({ user }) => {
       {main === 3 && getHall}
     </div>
   );
-};
+});
 export default ReservationAdmin;

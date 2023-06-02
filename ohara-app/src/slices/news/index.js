@@ -17,46 +17,46 @@ const initialState = {
 };
 export const getNewsData = createAsyncThunk(
   "getNewsData",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`news`)
         .then((response) => response.data);
       return response.data.items;
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const getNew = createAsyncThunk(
   "getNew",
-  async (id, { rejectedWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`news/${id}`)
         .then((response) => response.data);
       return response.data;
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const deleteNew = createAsyncThunk(
   "deleteNew",
-  async (id, { rejectedWithValue, dispatch }) => {
+  async (id, { rejectWithValue, dispatch }) => {
     try {
       await instance.delete(`news/${id}`).then((response) => response.data);
       dispatch(getNewsData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 export const addNew = createAsyncThunk(
   "addNew",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const { header, description, file } = data;
       let formData = new FormData();
@@ -78,14 +78,14 @@ export const addNew = createAsyncThunk(
       }
       dispatch(getNewsData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const editNew = createAsyncThunk(
   "editNew",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       let { id, header, description, file, idFile } = data;
       console.log(idFile);
@@ -118,7 +118,7 @@ export const editNew = createAsyncThunk(
       }
       dispatch(getNewsData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );

@@ -11,7 +11,7 @@ const initialState = {
 
 export const loginMe = createAsyncThunk(
   "authLogin",
-  async ({ email, password }, { rejectedWithValue, dispatch }) => {
+  async ({ email, password }, { rejectWithValue, dispatch }) => {
     try {
       const response = await instance
         .post(`auth/login`, { email, password })
@@ -33,14 +33,14 @@ export const loginMe = createAsyncThunk(
           })
         );
       }
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const getMe = createAsyncThunk(
   "getMe",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`users/me`)
@@ -50,7 +50,7 @@ export const getMe = createAsyncThunk(
       if (e.response.status === 401) {
         console.log("Пользователь не авторизован");
       }
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );

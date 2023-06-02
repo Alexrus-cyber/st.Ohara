@@ -9,20 +9,20 @@ const initialState = {
 };
 export const getStaffData = createAsyncThunk(
   "getStaffData",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`users`)
         .then((response) => response.data);
       return response.data.items;
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 export const addStaff = createAsyncThunk(
   "addStaff",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       await instance
         .post(`user`, data, {
@@ -31,14 +31,14 @@ export const addStaff = createAsyncThunk(
         .then((response) => response.data);
       dispatch(getStaffData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const editStaff = createAsyncThunk(
   "editStaff",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const { id, password, ...rest } = data;
       console.log(password);
@@ -50,19 +50,19 @@ export const editStaff = createAsyncThunk(
       await dispatch(getMe());
       dispatch(getStaffData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const deleteStaff = createAsyncThunk(
   "deleteStaff",
-  async (id, { rejectedWithValue, dispatch }) => {
+  async (id, { rejectWithValue, dispatch }) => {
     try {
       await instance.delete(`user/${id}`).then((response) => response.data);
       dispatch(getStaffData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );

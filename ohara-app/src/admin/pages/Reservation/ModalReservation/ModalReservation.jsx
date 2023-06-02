@@ -17,6 +17,7 @@ const ModalReservation = memo(({ onClose, table }) => {
     onClose();
     dispatch(
       createBooking({
+        id: table.id,
         data: formData,
         callback: (result) => {
           window.location.href = result;
@@ -24,19 +25,10 @@ const ModalReservation = memo(({ onClose, table }) => {
       })
     );
   };
-  const tables = {
-    price: 3000,
-    tableIds: [table.id],
-    durationInMinutes: 120,
-  };
   return (
     <div>
       <h1>Стол №{table.number}</h1>
-      <ReservationReduxForm
-        initialValues={tables}
-        table={tables}
-        onSubmit={onSubmit}
-      />
+      <ReservationReduxForm onSubmit={onSubmit} />
     </div>
   );
 });

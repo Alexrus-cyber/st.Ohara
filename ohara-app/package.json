@@ -5,6 +5,7 @@
   "proxy": "http://185.221.196.50:7952",
   "dependencies": {
     "@babel/eslint-parser": "^7.21.3",
+    "@babel/runtime": "^7.22.3",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.15",

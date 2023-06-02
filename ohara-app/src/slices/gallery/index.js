@@ -8,33 +8,33 @@ const initialState = {
 };
 export const getGalleryData = createAsyncThunk(
   "getGalleryData",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`gallery`)
         .then((response) => response.data);
       return response.data.items; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
-      return prompt(rejectedWithValue(e));
+      return prompt(rejectWithValue(e));
     }
   }
 );
 
 export const deleteItemGallery = createAsyncThunk(
   "deleteItemGallery",
-  async (id, { rejectedWithValue, dispatch }) => {
+  async (id, { rejectWithValue, dispatch }) => {
     try {
       await instance.delete(`gallery/${id}`).then((response) => response.data);
       dispatch(getGalleryData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const addItemGallery = createAsyncThunk(
   "addItemGallery",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       let formData = new FormData();
       for (let file of data) {
@@ -47,17 +47,17 @@ export const addItemGallery = createAsyncThunk(
         .then((response) => response.data);
       dispatch(getGalleryData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 export const swapItemGallery = createAsyncThunk(
   "swapItemGallery",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       return data; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );

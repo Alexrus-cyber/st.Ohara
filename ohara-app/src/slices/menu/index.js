@@ -38,7 +38,7 @@ export const getMenuLaunchData = createAsyncThunk(
 );
 export const deleteItemMenu = createAsyncThunk(
   "deleteItemMenu",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const { id, launch } = data;
       await instance.delete(`menu/${id}`).then((response) => response.data);
@@ -48,14 +48,14 @@ export const deleteItemMenu = createAsyncThunk(
         dispatch(getMenuMainData());
       }
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const uploadMenu = createAsyncThunk(
   "uploadMenu",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       let formData = new FormData();
       for (let file of data) {
@@ -69,13 +69,13 @@ export const uploadMenu = createAsyncThunk(
       console.log(response.data);
       dispatch(getMenuMainData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 export const uploadMenuLaunch = createAsyncThunk(
   "uploadMenuLaunch",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       let formData = new FormData();
       for (let file of data) {
@@ -89,14 +89,14 @@ export const uploadMenuLaunch = createAsyncThunk(
       console.log(response.data);
       dispatch(getMenuLaunchData());
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
 
 export const swapItemMenu = createAsyncThunk(
   "swapItemMenu",
-  async (data, { rejectedWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const { obj, launch } = data;
       console.log(data);
@@ -113,7 +113,7 @@ export const swapItemMenu = createAsyncThunk(
         dispatch(getMenuMainData());
       }
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );

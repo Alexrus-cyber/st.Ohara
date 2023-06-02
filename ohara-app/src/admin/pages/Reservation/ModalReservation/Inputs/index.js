@@ -6,7 +6,7 @@ import {
 import { InputUI } from "../../../Auth/components/Form/FormCreators";
 
 export const maxLength100 = maxLength(100);
-export const maxLength12 = maxLength(11);
+export const maxLength12 = maxLength(12);
 
 export const reservationInputs = [
   {
@@ -71,8 +71,8 @@ export const reservationInputsRight = [
     id: 7,
     name: "phone",
     placeholder: "Номер телефона",
-    validators: [Required, maxLength12, minLength(11)],
+    validators: [Required, maxLength12, minLength(0)],
     typeButton: InputUI,
-    typeInput: "material",
+    typeInput: "materialPhone",
   },
 ];

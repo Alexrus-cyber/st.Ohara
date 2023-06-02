@@ -15,7 +15,7 @@ const initialState = {
 };
 export const getTablesLaunge = createAsyncThunk(
   "getTablesLaunge",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`table/launge`)
@@ -23,13 +23,13 @@ export const getTablesLaunge = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectedWithValue(e));
+      return prompt(rejectWithValue(e));
     }
   }
 );
 export const getTablesBar = createAsyncThunk(
   "getTablesBar",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`table/bar`)
@@ -37,13 +37,13 @@ export const getTablesBar = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectedWithValue(e));
+      return prompt(rejectWithValue(e));
     }
   }
 );
 export const getTablesStreet = createAsyncThunk(
   "getTablesStreet",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`table/street`)
@@ -51,13 +51,13 @@ export const getTablesStreet = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectedWithValue(e));
+      return prompt(rejectWithValue(e));
     }
   }
 );
 export const getTablesHall = createAsyncThunk(
   "getTablesHall",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await instance
         .get(`table/hall`)
@@ -65,36 +65,41 @@ export const getTablesHall = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectedWithValue(e));
+      return prompt(rejectWithValue(e));
     }
   }
 );
 
 export const getSchemeBar = createAsyncThunk(
   "getSchemeBar",
-  async (data, { rejectedWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       await instance.get(`bookingTable`).then((response) => response.data);
     } catch (e) {
-      return prompt(rejectedWithValue(e));
+      return prompt(rejectWithValue(e));
     }
   }
 );
 
 export const createBooking = createAsyncThunk(
   "createBooking",
-  async (book, { rejectedWithValue }) => {
+  async (book, { rejectWithValue }) => {
     try {
-      const { data, callback } = book;
-      console.log(data);
+      const { id, data, callback } = book;
+      const table = {
+        ...data,
+        tableIds: [id],
+        durationInMinutes: 120,
+      };
+      console.log(table);
       const response = await instance
-        .post(`booking`, data, {
+        .post(`booking`, table, {
           headers: { "Content-Type": "application/json" },
         })
         .then((response) => response.data);
       callback(response.data);
     } catch (e) {
-      return rejectedWithValue(e);
+      return rejectWithValue(e);
     }
   }
 );
@@ -158,6 +163,11 @@ export const bookingSlice = createSlice({
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getTablesHall.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(createBooking.rejected, (state, payload) => {
+        console.log(payload);
+        state.error = "";
         state.loading = false;
       });
   },
