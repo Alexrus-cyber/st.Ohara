@@ -9,6 +9,9 @@ export const Tables = memo(({ table }) => {
   const handleClickCloseModal = useCallback(() => {
     setActive(false);
   }, []);
+  const separator =
+    table.reserve && table.reserve.estimatedStartTime.split("T");
+  const time = separator && separator[1].split(":");
   return (
     <div>
       <button
@@ -22,6 +25,7 @@ export const Tables = memo(({ table }) => {
       >
         {table.number}
         <br />
+        {table.reserve && time[0] + ":" + time[1]}
       </button>
       <Module
         title={"Бронирование"}
