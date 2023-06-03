@@ -15,7 +15,7 @@ export const getGalleryData = createAsyncThunk(
         .then((response) => response.data);
       return response.data.items; //картинки замоканные у нас на фронте обычно здесь запрос выполняется и данные получаешь
     } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );

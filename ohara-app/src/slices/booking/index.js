@@ -23,7 +23,7 @@ export const getTablesLaunge = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );
@@ -37,7 +37,7 @@ export const getTablesBar = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );
@@ -51,7 +51,7 @@ export const getTablesStreet = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );
@@ -65,7 +65,7 @@ export const getTablesHall = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );
@@ -76,7 +76,7 @@ export const getSchemeBar = createAsyncThunk(
     try {
       await instance.get(`bookingTable`).then((response) => response.data);
     } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );
