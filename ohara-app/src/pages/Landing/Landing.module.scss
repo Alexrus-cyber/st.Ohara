@@ -1,0 +1,23 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 500px;
+  width: 100%;
+}
+
+.h {
+  font-size: 60px;
+  color: red;
+}
+
+.p {
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+.small {
+  font-size: 12px;
+  padding-bottom: 40px;
+}

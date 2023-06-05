@@ -8,6 +8,7 @@ const initialState = {
   slider: [],
   header: "",
   error: "",
+  active: true,
 };
 export const getLandingData = createAsyncThunk(
   "getLandingData",
@@ -118,6 +119,9 @@ export const landingSlice = createSlice({
     clearError(state) {
       state.error = "";
     },
+    activesFalse(state) {
+      state.active = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -189,5 +193,5 @@ export const landingSlice = createSlice({
       });
   },
 });
-export const { setTitle, clearError } = landingSlice.actions;
+export const { setTitle, clearError, activesFalse } = landingSlice.actions;
 export default landingSlice.reducer;

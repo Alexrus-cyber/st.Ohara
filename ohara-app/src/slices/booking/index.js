@@ -15,6 +15,7 @@ const initialState = {
   paymentID: "",
   status: "",
   statusPay: "",
+  bookingOpen: false,
 };
 export const getTablesLaunge = createAsyncThunk(
   "getTablesLaunge",
@@ -152,6 +153,9 @@ export const bookingSlice = createSlice({
     clearData: (state) => {
       state.error = "";
     },
+    bookingStart: (state) => {
+      state.bookingOpen = true;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -274,5 +278,5 @@ export const getHallSelector = createSelector(
   stateSelector,
   (state) => state.hall
 );
-export const { clearData } = bookingSlice.actions;
+export const { clearData, bookingStart } = bookingSlice.actions;
 export default bookingSlice.reducer;

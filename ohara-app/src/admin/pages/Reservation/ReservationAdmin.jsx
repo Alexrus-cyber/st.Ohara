@@ -13,7 +13,7 @@ import schemaHall from "../../../assets/Hall.png";
 import scheme from "../../../assets/Veranda.png";
 import cl from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { NotFoundReservation } from "./Not/NotFoundReservation";
+import { NotFoundReservation } from "./NotFound/NotFoundReservation";
 
 const ReservationAdmin = memo(({ user }) => {
   const { status } = useSelector((state) => state.booking);
