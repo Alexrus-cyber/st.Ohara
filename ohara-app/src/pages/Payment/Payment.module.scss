@@ -1,0 +1,39 @@
+.page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  color: white;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 1200px;
+  width: 95%;
+  height: 60vh;
+  border: 1px solid white;
+}
+
+.h1 {
+  font-size: 50px;
+}
+
+.img {
+  max-width: 100px;
+  width: 100%;
+}
+
+@media screen and (max-width: 420px) {
+  .h1 {
+    font-size: 40px;
+  }
+  .img {
+    max-width: 70px;
+  }
+}

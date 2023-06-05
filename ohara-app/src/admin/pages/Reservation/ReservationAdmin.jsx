@@ -1,17 +1,38 @@
 import {
+  checkStatus,
   getTablesHall,
   getTablesLaunge,
   getTablesStreet,
+  stopBooking,
+  wakeBooking,
 } from "../../../slices/booking";
-import React, { memo, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import styles from "./Reservation.module.scss";
 import { Scheme } from "./MainChildren/Scheme";
 import schemaHall from "../../../assets/Hall.png";
 import scheme from "../../../assets/Veranda.png";
+import cl from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import { NotFoundReservation } from "./Not/NotFoundReservation";
 
 const ReservationAdmin = memo(({ user }) => {
+  const { status } = useSelector((state) => state.booking);
   const [main, setMain] = useState(1);
+  const dispatch = useDispatch();
+  let st = false;
 
+  useEffect(() => {
+    dispatch(checkStatus());
+  }, []);
+
+  if (status) {
+    if (status === "False") {
+      st = false;
+    } else {
+      st = true;
+    }
+  }
+  console.log(status);
   const getLaunge = useMemo(() => {
     return <Scheme main={main} getScheme={getTablesLaunge} />;
   }, [main]);
@@ -22,8 +43,27 @@ const ReservationAdmin = memo(({ user }) => {
     return <Scheme main={main} img={schemaHall} getScheme={getTablesHall} />;
   }, [main]);
 
+  if (st && !user) {
+    return <NotFoundReservation />;
+  }
   return (
     <div className={user ? styles.main : styles.main2}>
+      {user && (
+        <div>
+          <button
+            className={cl(styles.btn)}
+            onClick={() => dispatch(stopBooking())}
+          >
+            Скрыть бронь
+          </button>
+          <button
+            className={cl(styles.trueBtn)}
+            onClick={() => dispatch(wakeBooking())}
+          >
+            Показать бронь
+          </button>
+        </div>
+      )}
       <h1 className={styles.title}>Бронирование</h1>
       <div className={styles.links}>
         <div className={styles.formRadioBtn}>
