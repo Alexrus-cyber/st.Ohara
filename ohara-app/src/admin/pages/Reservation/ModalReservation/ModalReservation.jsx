@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import { FieldCreator, InputUI } from "../../Auth/components/Form/FormCreators";
 import { ButtonUI } from "../../components/ButtonUI/ButtonUI";
@@ -34,6 +34,7 @@ const ModalReservation = memo(({ onClose, table }) => {
 });
 
 const ReservationForm = ({ handleSubmit }) => {
+  const [disabled, setDisabled] = useState(false);
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.container}>
@@ -78,9 +79,12 @@ const ReservationForm = ({ handleSubmit }) => {
           typeInput={"text"}
         />
       </div>
-
+      <div className={styles.display}>
+        <input type={"checkbox"} onChange={() => setDisabled(!disabled)} />
+        <p>Вы согласны на обработку персональных данных</p>
+      </div>
       <div className={styles.padding}>
-        <ButtonUI name={"Забронировать"} />
+        <ButtonUI disabled={!disabled && true} name={"Забронировать"} />
       </div>
     </form>
   );

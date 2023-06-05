@@ -8,6 +8,7 @@ const initialState = {
   slider: [],
   header: "",
   error: "",
+  active: true,
 };
 export const getLandingData = createAsyncThunk(
   "getLandingData",
@@ -118,6 +119,9 @@ export const landingSlice = createSlice({
     clearError(state) {
       state.error = "";
     },
+    activesFalse(state) {
+      state.active = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -132,9 +136,13 @@ export const landingSlice = createSlice({
         console.log("Получил");
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(getLandingData.rejected, (state, { error }) => {
+      .addCase(getLandingData.rejected, (state, { payload }) => {
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
         state.loading = false;
-        state.error = error.name;
       })
       .addCase(setFile.pending, (state) => {
         state.loading = true;
@@ -185,5 +193,5 @@ export const landingSlice = createSlice({
       });
   },
 });
-export const { setTitle, clearError } = landingSlice.actions;
+export const { setTitle, clearError, activesFalse } = landingSlice.actions;
 export default landingSlice.reducer;

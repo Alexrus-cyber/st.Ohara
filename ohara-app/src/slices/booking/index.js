@@ -12,32 +12,22 @@ const initialState = {
   hall: [],
   loading: true,
   error: "",
+  paymentID: "",
+  status: "",
+  statusPay: "",
+  bookingOpen: false,
 };
 export const getTablesLaunge = createAsyncThunk(
   "getTablesLaunge",
   async (data, { rejectWithValue }) => {
     try {
       const response = await instance
-        .get(`table/launge`)
+        .get(`booking/table/launge`)
         .then((response) => response.data);
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectWithValue(e));
-    }
-  }
-);
-export const getTablesBar = createAsyncThunk(
-  "getTablesBar",
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await instance
-        .get(`table/bar`)
-        .then((response) => response.data);
-      console.log(response.data);
-      return response.data;
-    } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );
@@ -46,12 +36,12 @@ export const getTablesStreet = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await instance
-        .get(`table/street`)
+        .get(`booking/table/street`)
         .then((response) => response.data);
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );
@@ -60,27 +50,28 @@ export const getTablesHall = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await instance
-        .get(`table/hall`)
+        .get(`booking/table/hall`)
         .then((response) => response.data);
       console.log(response.data);
       return response.data;
     } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );
-
-export const getSchemeBar = createAsyncThunk(
-  "getSchemeBar",
+export const checkStatus = createAsyncThunk(
+  "checkStatus",
   async (data, { rejectWithValue }) => {
     try {
-      await instance.get(`bookingTable`).then((response) => response.data);
+      const response = await instance
+        .get(`check`)
+        .then((response) => response.data);
+      return response.data;
     } catch (e) {
-      return prompt(rejectWithValue(e));
+      return rejectWithValue(e);
     }
   }
 );
-
 export const createBooking = createAsyncThunk(
   "createBooking",
   async (book, { rejectWithValue }) => {
@@ -103,11 +94,69 @@ export const createBooking = createAsyncThunk(
     }
   }
 );
+export const stopBooking = createAsyncThunk(
+  "stopBooking",
+  async (book, { rejectWithValue }) => {
+    try {
+      await instance
+        .put(
+          `check/true`,
+          {},
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((response) => response.data);
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
+export const wakeBooking = createAsyncThunk(
+  "wakeBooking",
+  async (book, { rejectWithValue, dispatch }) => {
+    try {
+      await instance
+        .put(
+          `check/false`,
+          {},
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((response) => response.data);
+      dispatch(clearData());
+      dispatch(getTablesLaunge());
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
+export const getStatusBooking = createAsyncThunk(
+  "getStatusBooking",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await instance
+        .get(`booking/${id}`)
+        .then((response) => response.data);
+      return response.status;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
 
 export const bookingSlice = createSlice({
   name: "booking",
   initialState,
-  reducers: {},
+  reducers: {
+    clearData: (state) => {
+      state.error = "";
+    },
+    bookingStart: (state) => {
+      state.bookingOpen = true;
+    },
+  },
   extraReducers: (builder) => {
     builder
       //здесь имитируем закгрузку
@@ -120,22 +169,13 @@ export const bookingSlice = createSlice({
         state.launge = payload;
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(getTablesLaunge.rejected, (state) => {
+      .addCase(getTablesLaunge.rejected, (state, { payload }) => {
         state.loading = false;
-      })
-      .addCase(getTablesBar.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(getTablesBar.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.bar = payload.sort(function (a, b) {
-          return a.number - b.number;
-        });
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(getTablesBar.rejected, (state) => {
-        state.loading = false;
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
       })
       .addCase(getTablesStreet.pending, (state) => {
         state.loading = true;
@@ -148,8 +188,13 @@ export const bookingSlice = createSlice({
         });
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(getTablesStreet.rejected, (state) => {
+      .addCase(getTablesStreet.rejected, (state, { payload }) => {
         state.loading = false;
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
       })
       .addCase(getTablesHall.pending, (state) => {
         state.loading = true;
@@ -162,12 +207,55 @@ export const bookingSlice = createSlice({
         });
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(getTablesHall.rejected, (state) => {
+      .addCase(getTablesHall.rejected, (state, { payload }) => {
         state.loading = false;
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
       })
-      .addCase(createBooking.rejected, (state, payload) => {
+      .addCase(getStatusBooking.pending, (state) => {
+        state.loading = true;
+      })
+      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
+      .addCase(getStatusBooking.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.statusPay = payload;
+      })
+      //здесь можно обрабатывать ошибки. так же прерываем загрузку
+      .addCase(getStatusBooking.rejected, (state, { payload }) => {
+        state.loading = false;
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
+      })
+      .addCase(checkStatus.pending, (state) => {
+        state.loading = true;
+      })
+      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
+      .addCase(checkStatus.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.status = payload;
+      })
+      //здесь можно обрабатывать ошибки. так же прерываем загрузку
+      .addCase(checkStatus.rejected, (state, { payload }) => {
+        state.loading = false;
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
+      })
+      .addCase(createBooking.rejected, (state, { payload }) => {
         console.log(payload);
-        state.error = "";
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = payload.response.data.data;
+        }
         state.loading = false;
       });
   },
@@ -190,5 +278,5 @@ export const getHallSelector = createSelector(
   stateSelector,
   (state) => state.hall
 );
-
+export const { clearData, bookingStart } = bookingSlice.actions;
 export default bookingSlice.reducer;

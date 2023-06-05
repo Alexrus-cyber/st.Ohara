@@ -8,6 +8,7 @@ import { LoaderPage } from "./components/LoaderPage/LoaderPage";
 import { getMe } from "./slices/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
 
+const Payment = lazy(() => import("./pages/Payment/Payment"));
 const SliderAdmin = lazy(() => import("./admin/pages/Slider/SliderAdmin"));
 const MenuAdmin = lazy(() => import("./admin/pages/Menu/MenuAdmin"));
 const GalleryAdmin = lazy(() => import("./admin/pages/Gallery/GalleryAdmin"));
@@ -66,6 +67,8 @@ function App() {
               <Route path={"/gallery"} element={<Gallery />} />
               <Route path={"/landing"} element={<Landing />} />
               <Route path={"/login"} element={<Auth />} />
+              <Route path={"/payment"} element={<Payment />} />
+              <Route path={"/payment/:paymentId"} element={<Payment />} />
             </Routes>
           </Suspense>
         </div>
@@ -84,6 +87,8 @@ function App() {
               path={"/reservation"}
               element={<ReservationAdmin user={false} />}
             />
+            <Route path={"/payment"} element={<Payment />} />
+            <Route path={"/payment/:paymentId"} element={<Payment />} />
             <Route path={"/*"} element={<NotFound />} />
           </Routes>
         </Suspense>
