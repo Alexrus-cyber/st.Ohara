@@ -7,11 +7,11 @@ export const PaymentSuccess = ({ status }) => {
     <div className={styles.page}>
       <div className={styles.container}>
         <h1 className={styles.h1}>
-          {status === "success"
+          {status === "Success"
             ? "Платеж был успешно произведен"
             : "Платеж был отменен по причине истекло время принятия"}{" "}
         </h1>
-        {status === "success" ? (
+        {status === "Success" ? (
           <img className={styles.img} src={success} alt={"success"} />
         ) : (
           <img className={styles.img} src={cancel} alt={"success"} />

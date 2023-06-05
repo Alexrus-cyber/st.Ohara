@@ -67,6 +67,8 @@ function App() {
               <Route path={"/gallery"} element={<Gallery />} />
               <Route path={"/landing"} element={<Landing />} />
               <Route path={"/login"} element={<Auth />} />
+              <Route path={"/payment"} element={<Payment />} />
+              <Route path={"/payment/:paymentId"} element={<Payment />} />
             </Routes>
           </Suspense>
         </div>
@@ -86,6 +88,7 @@ function App() {
               element={<ReservationAdmin user={false} />}
             />
             <Route path={"/payment"} element={<Payment />} />
+            <Route path={"/payment/:paymentId"} element={<Payment />} />
             <Route path={"/*"} element={<NotFound />} />
           </Routes>
         </Suspense>

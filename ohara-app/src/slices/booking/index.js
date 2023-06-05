@@ -14,6 +14,7 @@ const initialState = {
   error: "",
   paymentID: "",
   status: "",
+  statusPay: "",
 };
 export const getTablesLaunge = createAsyncThunk(
   "getTablesLaunge",
@@ -130,6 +131,19 @@ export const wakeBooking = createAsyncThunk(
     }
   }
 );
+export const getStatusBooking = createAsyncThunk(
+  "getStatusBooking",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await instance
+        .get(`booking/${id}`)
+        .then((response) => response.data);
+      return response.status;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
 
 export const bookingSlice = createSlice({
   name: "booking",
@@ -190,6 +204,23 @@ export const bookingSlice = createSlice({
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getTablesHall.rejected, (state, { payload }) => {
+        state.loading = false;
+        if (Math.floor(payload.response.status / 100) === 4) {
+          state.error = payload.response.statusText;
+        } else {
+          state.error = "Ошибка сервера";
+        }
+      })
+      .addCase(getStatusBooking.pending, (state) => {
+        state.loading = true;
+      })
+      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
+      .addCase(getStatusBooking.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.statusPay = payload;
+      })
+      //здесь можно обрабатывать ошибки. так же прерываем загрузку
+      .addCase(getStatusBooking.rejected, (state, { payload }) => {
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
           state.error = payload.response.statusText;
