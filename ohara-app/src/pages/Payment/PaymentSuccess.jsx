@@ -9,7 +9,7 @@ export const PaymentSuccess = ({ status }) => {
         <h1 className={styles.h1}>
           {status === "Success"
             ? "Платеж был успешно произведен"
-            : "Платеж был отменен по причине истекло время принятия"}{" "}
+            : "Платеж был отменен по причине: истечения времени на оплату"}
         </h1>
         {status === "Success" ? (
           <img className={styles.img} src={success} alt={"success"} />
