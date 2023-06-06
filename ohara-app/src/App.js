@@ -8,6 +8,7 @@ import { LoaderPage } from "./components/LoaderPage/LoaderPage";
 import { getMe } from "./slices/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccessToken } from "./slices/API/API";
+import { ArrowUpwardOutlined } from "@mui/icons-material";
 
 const Payment = lazy(() => import("./pages/Payment/Payment"));
 const SliderAdmin = lazy(() => import("./admin/pages/Slider/SliderAdmin"));
@@ -80,6 +81,12 @@ function App() {
     return (
       <div>
         <Header />
+        <ArrowUpwardOutlined
+          className={styles.arrow}
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+        />
         <Suspense fallback={<LoaderPage />}>
           <Routes>
             <Route path={"/login"} element={<Auth />} />

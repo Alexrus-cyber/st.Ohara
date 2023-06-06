@@ -51,14 +51,6 @@ export const reservationInputsRight = [
     typeButton: InputUI,
     typeInput: "materialDate",
   },
-  /*  {
-      id: 6,
-      name: "time",
-      placeholder: "Время",
-      validators: [Required, maxLength100],
-      typeButton: InputUI,
-      typeInput: "materialTime",
-    },*/
   {
     id: 6,
     name: "guestsCount",
@@ -71,7 +63,7 @@ export const reservationInputsRight = [
     id: 7,
     name: "phone",
     placeholder: "Номер телефона",
-    validators: [Required, maxLength12, minLength(0)],
+    validators: [Required, maxLength12, minLength(2)],
     typeButton: InputUI,
     typeInput: "materialPhone",
   },

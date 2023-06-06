@@ -13,7 +13,6 @@ const Gallery = memo(() => {
   //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
   useEffect(() => {
     dispatch(getGalleryData());
-    window.scrollTo(0, 0);
   }, [dispatch]);
 
   const { items } = useSelector((state) => state.gallery);
