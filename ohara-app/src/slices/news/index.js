@@ -88,7 +88,6 @@ export const editNew = createAsyncThunk(
   async (data, { rejectWithValue, dispatch }) => {
     try {
       let { id, header, description, file, idFile } = data;
-      console.log(idFile);
       if (!idFile) {
         let formData = new FormData();
         formData.append("file", file);
@@ -99,7 +98,6 @@ export const editNew = createAsyncThunk(
           .then((response) => response.data);
 
         idFile = [response.data[0].id];
-        console.log(idFile);
         await instance
           .put(
             `news/${id}`,

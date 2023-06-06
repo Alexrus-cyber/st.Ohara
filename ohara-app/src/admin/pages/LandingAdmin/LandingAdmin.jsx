@@ -38,7 +38,6 @@ const LandingAdmin = memo(() => {
 
   const onSubmit = useCallback(
     (formData) => {
-      console.log(formData);
       dispatch(editLanding(formData));
     },
     [dispatch]

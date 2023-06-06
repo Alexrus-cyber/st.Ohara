@@ -8,8 +8,6 @@ const Payment = () => {
   const { paymentId } = useParams();
   const dispatch = useDispatch();
   const { statusPay } = useSelector((state) => state.booking);
-  console.log(paymentId);
-  console.log(statusPay);
   useEffect(() => {
     dispatch(getStatusBooking(paymentId));
   }, []);

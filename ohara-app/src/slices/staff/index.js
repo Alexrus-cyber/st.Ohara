@@ -84,7 +84,6 @@ export const staffSlice = createSlice({
       //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
       .addCase(getStaffData.fulfilled, (state, { payload }) => {
         state.loading = false;
-        console.log(payload);
         state.staffList = payload;
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку

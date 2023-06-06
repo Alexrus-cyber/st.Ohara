@@ -5,7 +5,7 @@ import { stopSubmit } from "redux-form";
 const initialState = {
   email: null,
   password: null,
-  token: null,
+  token1: null,
   user: {},
 };
 
@@ -15,17 +15,11 @@ export const loginMe = createAsyncThunk(
     try {
       const response = await instance
         .post(`auth/login`, { email, password })
-        .then((response) => {
-          response.data;
-          sessionStorage.setItem("token", response.data.data);
-          setAccessToken(response.data.data);
-          console.log(response.data);
-          window.location.reload();
-          console.log("hello");
-        });
+        .then((response) => response.data);
+      sessionStorage.setItem("token", response.data);
+      setAccessToken(response.data);
       return response.data;
     } catch (e) {
-      console.log(e);
       if (e.response.status > 400) {
         dispatch(
           stopSubmit("login", {
@@ -70,7 +64,7 @@ export const authSlice = createSlice({
       })
       .addCase(loginMe.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.token = payload;
+        state.token1 = payload;
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(loginMe.rejected, (state) => {

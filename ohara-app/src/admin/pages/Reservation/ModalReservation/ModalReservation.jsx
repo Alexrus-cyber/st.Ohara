@@ -13,7 +13,6 @@ const ModalReservation = memo(({ onClose, table }) => {
   }
   const dispatch = useDispatch();
   const onSubmit = (formData) => {
-    console.log(formData);
     onClose();
     dispatch(
       createBooking({

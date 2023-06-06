@@ -43,7 +43,6 @@ export const getFile = createAsyncThunk(
   "getFile",
   async (data, { rejectWithValue }) => {
     try {
-      console.log(data);
       const { file, callback } = data;
       let formData = new FormData();
       formData.append("file", file);
@@ -121,6 +120,7 @@ export const landingSlice = createSlice({
     },
     activesFalse(state) {
       state.active = false;
+      localStorage.setItem("activeLanding", false);
     },
   },
   extraReducers: (builder) => {
@@ -133,7 +133,6 @@ export const landingSlice = createSlice({
       .addCase(getLandingData.fulfilled, (state, { payload }) => {
         state.landingList = { ...payload };
         state.loading = false;
-        console.log("Получил");
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getLandingData.rejected, (state, { payload }) => {

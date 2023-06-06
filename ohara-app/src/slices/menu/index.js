@@ -61,12 +61,11 @@ export const uploadMenu = createAsyncThunk(
       for (let file of data) {
         formData.append("file", file);
       }
-      const response = await instance
+      await instance
         .post(`menu/upload/main`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => response.data);
-      console.log(response.data);
       dispatch(getMenuMainData());
     } catch (e) {
       return rejectWithValue(e);
@@ -81,12 +80,11 @@ export const uploadMenuLaunch = createAsyncThunk(
       for (let file of data) {
         formData.append("file", file);
       }
-      const response = await instance
+      await instance
         .post(`menu/upload/lunch`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => response.data);
-      console.log(response.data);
       dispatch(getMenuLaunchData());
     } catch (e) {
       return rejectWithValue(e);
@@ -99,7 +97,6 @@ export const swapItemMenu = createAsyncThunk(
   async (data, { rejectWithValue, dispatch }) => {
     try {
       const { obj, launch } = data;
-      console.log(data);
       await instance
         .put(`menu`, obj, {
           headers: {
@@ -139,7 +136,6 @@ export const menuSlice = createSlice({
       })
 
       .addCase(getMenuLaunchData.rejected, (state, { payload }) => {
-        console.log(Math.floor(payload.response.status / 100));
         if (Math.floor(payload.response.status / 100) === 4) {
           state.error = payload.response.statusText;
         } else {
@@ -157,7 +153,6 @@ export const menuSlice = createSlice({
       })
 
       .addCase(getMenuMainData.rejected, (state, { payload }) => {
-        console.log(Math.floor(payload.response.status / 100));
         if (Math.floor(payload.response.status / 100) === 4) {
           state.error = payload.response.statusText;
         } else {

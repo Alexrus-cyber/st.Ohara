@@ -24,7 +24,6 @@ export const getTablesLaunge = createAsyncThunk(
       const response = await instance
         .get(`booking/table/launge`)
         .then((response) => response.data);
-      console.log(response.data);
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -38,7 +37,6 @@ export const getTablesStreet = createAsyncThunk(
       const response = await instance
         .get(`booking/table/street`)
         .then((response) => response.data);
-      console.log(response.data);
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -52,7 +50,6 @@ export const getTablesHall = createAsyncThunk(
       const response = await instance
         .get(`booking/table/hall`)
         .then((response) => response.data);
-      console.log(response.data);
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -82,7 +79,6 @@ export const createBooking = createAsyncThunk(
         tableIds: [id],
         durationInMinutes: 120,
       };
-      console.log(table);
       const response = await instance
         .post(`booking`, table, {
           headers: { "Content-Type": "application/json" },
@@ -250,7 +246,6 @@ export const bookingSlice = createSlice({
         }
       })
       .addCase(createBooking.rejected, (state, { payload }) => {
-        console.log(payload);
         if (Math.floor(payload.response.status / 100) === 4) {
           state.error = payload.response.statusText;
         } else {

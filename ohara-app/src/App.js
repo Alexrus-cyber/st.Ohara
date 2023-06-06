@@ -7,6 +7,7 @@ import { lazy, Suspense, useEffect, useMemo } from "react";
 import { LoaderPage } from "./components/LoaderPage/LoaderPage";
 import { getMe } from "./slices/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
+import { setAccessToken } from "./slices/API/API";
 
 const Payment = lazy(() => import("./pages/Payment/Payment"));
 const SliderAdmin = lazy(() => import("./admin/pages/Slider/SliderAdmin"));
@@ -33,15 +34,17 @@ const Gallery = lazy(() => import("./pages/Gallery/Gallery"));
 const NotFound = lazy(() => import("./components/NotFound/NotFound"));
 
 function App() {
-  const { user } = useSelector((state) => state.login);
+  const { user, token1 } = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
+  const token = sessionStorage.getItem("token");
+  setAccessToken(token);
+
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
     if (token) {
       dispatch(getMe());
     }
-  }, []);
+  }, [token1]);
 
   const routing = useMemo(() => {
     if (user !== null && user.id) {

@@ -14,7 +14,6 @@ export const AboutAdmin = memo(({ about }) => {
 });
 
 const renderItems = (about) => {
-  console.log(about);
   return about.map((a, index) => {
     return (
       <DescriptionAdmin

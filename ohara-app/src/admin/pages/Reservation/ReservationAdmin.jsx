@@ -32,7 +32,6 @@ const ReservationAdmin = memo(({ user }) => {
       st = true;
     }
   }
-  console.log(status);
   const getLaunge = useMemo(() => {
     return <Scheme main={main} getScheme={getTablesLaunge} />;
   }, [main]);

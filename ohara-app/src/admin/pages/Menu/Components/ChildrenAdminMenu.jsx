@@ -97,7 +97,6 @@ export const ChildrenAdminMenu = ({ getMenu, launch }) => {
   if (loading) {
     return <LoaderPage />;
   }
-  console.log(items);
   return (
     <>
       <div className={styles.addContainer}>
