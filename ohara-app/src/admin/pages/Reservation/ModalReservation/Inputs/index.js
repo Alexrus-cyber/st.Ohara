@@ -63,7 +63,7 @@ export const reservationInputsRight = [
     id: 7,
     name: "phone",
     placeholder: "Номер телефона",
-    validators: [Required, maxLength12, minLength(2)],
+    validators: [Required, maxLength12, minLength(12)],
     typeButton: InputUI,
     typeInput: "materialPhone",
   },

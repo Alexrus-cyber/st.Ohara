@@ -9,7 +9,7 @@ export const NotFoundReservation = () => {
           <h1 className={styles.title}>
             Извините, бронирование на данный момент отключено
             <br />
-            Резерв столиков по тел. 499-600
+            Резерв столиков по тел. (4942)499-600
           </h1>
         </div>
         <NavLink className={styles.link} to={"/"}>

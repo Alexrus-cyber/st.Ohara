@@ -85,19 +85,20 @@ export const InputUI = memo(
               style={{ width: "220px" }}
               variant={"standard"}
               placeholder={placeholder}
+              type={"text"}
               label={placeholder}
               onClick={() => {
-                if (value === "") {
+                if (value.length < 2) {
                   onChange((value = "+7"));
                 }
               }}
               onMouseLeave={() => {
-                if (value === "") {
+                if (value.length < 2) {
                   onChange((value = "+7"));
                 }
               }}
               onMouseOver={() => {
-                if (value === "") {
+                if (value.length < 2) {
                   onChange((value = "+7"));
                 }
               }}

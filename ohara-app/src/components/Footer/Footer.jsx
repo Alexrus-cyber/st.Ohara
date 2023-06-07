@@ -50,7 +50,7 @@ const Footer = memo(() => {
         <div className={styles.center}>
           <div className={styles.info}>
             <p>Телефон: +7(494)249-96-00</p>
-            <p>Резерв столиков по тел. 499-600</p>
+            <p>Резерв столиков по тел. (4942)499-600</p>
           </div>
           <div className={styles.info}>
             <p>Вс-чт: 12.00-0.00</p>
