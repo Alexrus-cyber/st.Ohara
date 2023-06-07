@@ -8,14 +8,10 @@ import React, {
   lazy,
   useMemo,
   useCallback,
+  useState,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  activesFalse,
-  clearError,
-  getLandingData,
-  getSlider,
-} from "../../slices/landing";
+import { clearError, getLandingData, getSlider } from "../../slices/landing";
 import { LoaderPage } from "../../components/LoaderPage/LoaderPage";
 import { Slider } from "./sections/Slider/Slider";
 import { Alert, Snackbar } from "@mui/material";
@@ -27,13 +23,19 @@ const Map = lazy(() => import("./sections/Map/Map"));
 
 const Landing = memo(() => {
   const { landingList, slider, error } = useSelector((state) => state.landing);
+  const [active, setActive] = useState(false);
   const handleClickCloseModal = useCallback(() => {
-    dispatch(activesFalse());
+    localStorage.setItem("activeLanding", new Date().getTime());
+    setActive(false);
   }, []);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getLandingData());
     dispatch(getSlider());
+  }, []);
+  useEffect(() => {
+    const time = parseInt(localStorage.getItem("activeLanding") || 0);
+    setActive(new Date().getTime() - time > 60 * 1000 * 60 * 24 * 3);
   }, []);
 
   const errorMessage = useMemo(() => {
@@ -76,7 +78,7 @@ const Landing = memo(() => {
           <Suspense fallback={<div>Loading...</div>}>
             <Map />
           </Suspense>
-          <ModalLending active={!localStorage.getItem("activeLanding") && true}>
+          <ModalLending active={active}>
             <div className={styles.center}>
               <h1 className={styles.h}>18+</h1>
               <p className={styles.p}>

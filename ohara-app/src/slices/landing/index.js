@@ -120,7 +120,6 @@ export const landingSlice = createSlice({
     },
     activesFalse(state) {
       state.active = false;
-      localStorage.setItem("activeLanding", false);
     },
   },
   extraReducers: (builder) => {

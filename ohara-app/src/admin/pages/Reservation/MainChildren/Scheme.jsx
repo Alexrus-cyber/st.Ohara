@@ -1,6 +1,6 @@
 import styles from "../Reservation.module.scss";
 import { Tables } from "../Tables/Tables";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearData,
@@ -10,12 +10,19 @@ import {
   getStreetSelector,
 } from "../../../../slices/booking";
 import { Alert, Snackbar } from "@mui/material";
+import { Module } from "../../../components/Module/Module";
+import ModalReservation from "../ModalReservation/ModalReservation";
 
 export const Scheme = ({ main, getScheme, img }) => {
   const [time, setTime] = useState(0);
   let items = useSelector(getBarSelector);
   let { error } = useSelector((state) => state.booking);
   const dispatch = useDispatch();
+  const [active, setActive] = useState(false);
+  const handleClickCloseModal = useCallback(() => {
+    setActive(false);
+  }, []);
+  const [modalState, setModalState] = useState("");
   switch (main) {
     case 1: {
       items = useSelector(getLaungeSelector);
@@ -38,6 +45,10 @@ export const Scheme = ({ main, getScheme, img }) => {
   }, [time]);
 
   useEffect(() => {}, [error]);
+  const handleOpen = (table) => {
+    setActive(true);
+    setModalState(table);
+  };
 
   return (
     <div>
@@ -60,12 +71,21 @@ export const Scheme = ({ main, getScheme, img }) => {
       </Snackbar>
       {main !== 1 && <img className={styles.img} src={img} alt={"scheme"} />}
       <div className={styles.container}>
-        {items
-          .filter((el) => el.number < 14)
-          .map((el) => (
-            <Tables table={el} key={el.id} />
-          ))}
+        {items.map((el) => (
+          <Tables open={() => handleOpen(el)} table={el} key={el.id} />
+        ))}
       </div>
+      <Module
+        title={"Бронирование"}
+        active={active}
+        onClose={handleClickCloseModal}
+      >
+        <ModalReservation
+          active={active}
+          table={modalState}
+          onClose={handleClickCloseModal}
+        />
+      </Module>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import {
 } from "../../../Auth/components/Validators/Validators";
 import { InputUI } from "../../../Auth/components/Form/FormCreators";
 
-export const maxLength100 = maxLength(100);
+export const maxLength100 = maxLength(40);
 export const maxLength12 = maxLength(12);
 
 export const reservationInputs = [
@@ -53,18 +53,16 @@ export const reservationInputsRight = [
   },
   {
     id: 6,
-    name: "guestsCount",
-    placeholder: "Количество людей",
-    validators: [Required, maxLength100],
-    typeButton: InputUI,
-    typeInput: "materialPicker",
-  },
-  {
-    id: 7,
     name: "phone",
     placeholder: "Номер телефона",
     validators: [Required, maxLength12, minLength(12)],
     typeButton: InputUI,
     typeInput: "materialPhone",
+    normalize: (value) => {
+      if (value.length < 2) {
+        return "+7";
+      }
+      return value;
+    },
   },
 ];

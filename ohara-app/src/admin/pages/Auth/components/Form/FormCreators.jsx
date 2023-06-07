@@ -10,20 +10,36 @@ import { setFile } from "../../../../../slices/landing";
 
 const currencies = [
   {
-    value: 1,
-    label: "1",
-  },
-  {
-    value: 2,
-    label: "2",
-  },
-  {
     value: 3,
     label: "3",
   },
   {
     value: 4,
     label: "4",
+  },
+];
+const currencies2 = [
+  {
+    value: 5,
+    label: "5",
+  },
+  {
+    value: 6,
+    label: "6",
+  },
+  {
+    value: 7,
+    label: "7",
+  },
+];
+const currencies3 = [
+  {
+    value: 1,
+    label: "1",
+  },
+  {
+    value: 2,
+    label: "2",
   },
 ];
 
@@ -36,10 +52,12 @@ export const InputUI = memo(
     title,
     typeInput,
     type,
+    number,
     ...props
   }) => {
     const showError = touched && error;
     const [visible, setVisible] = useState(false);
+
     return (
       <div
         className={cl({
@@ -85,7 +103,7 @@ export const InputUI = memo(
               style={{ width: "220px" }}
               variant={"standard"}
               placeholder={placeholder}
-              type={"text"}
+              type={"tel"}
               label={placeholder}
               onClick={() => {
                 if (value.length < 2) {
@@ -119,21 +137,44 @@ export const InputUI = memo(
               style={{ width: "220px", zIndex: 20000000 }}
               variant={"standard"}
               select
-              defaultValue={1}
               label={placeholder}
               placeholder={placeholder}
               {...input}
               {...props}
             >
-              {currencies.map((option) => (
-                <MenuItem
-                  style={{ zIndex: 20000000 }}
-                  key={option.value}
-                  value={option.value}
-                >
-                  {option.label}
-                </MenuItem>
-              ))}
+              {(number === 1 || number === 8 || number === 2) &&
+                currencies.map((option, index) => (
+                  <MenuItem
+                    selected={true}
+                    style={{ zIndex: 20000000 }}
+                    key={index}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              {(number === 3 || number === 4) &&
+                currencies2.map((option, index) => (
+                  <MenuItem
+                    selected={true}
+                    style={{ zIndex: 20000000 }}
+                    key={index}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              {(number === 5 || number === 6 || number === 7) &&
+                currencies3.map((option, index) => (
+                  <MenuItem
+                    selected={true}
+                    style={{ zIndex: 20000000 }}
+                    key={index}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
             </TextField>
           )}
           {typeInput === "materialDate" && (
@@ -288,7 +329,8 @@ export const FieldCreator = (
   component,
   className,
   type,
-  typeInput
+  typeInput,
+  normalize
 ) => {
   return (
     <div
@@ -298,6 +340,7 @@ export const FieldCreator = (
       })}
     >
       <Field
+        normalize={normalize}
         name={name}
         placeholder={placeholder}
         validate={validators}

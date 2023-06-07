@@ -15,7 +15,7 @@ import { NotFoundReservation } from "./NotFound/NotFoundReservation";
 
 const ReservationAdmin = memo(({ user }) => {
   const { status } = useSelector((state) => state.booking);
-  const [main, setMain] = useState(1);
+  const [main, setMain] = useState(3);
   const [session, setSession] = useState(false);
   const dispatch = useDispatch();
   let st = false;
@@ -55,6 +55,7 @@ const ReservationAdmin = memo(({ user }) => {
         <button
           className={styles.buttonAccept}
           onClick={() => {
+            document.cookie = "activeBooking=true";
             sessionStorage.setItem("activeBooking", true);
             setSession(true);
           }}
@@ -92,17 +93,7 @@ const ReservationAdmin = memo(({ user }) => {
         <div className={styles.links}>
           <div className={styles.formRadioBtn}>
             <input
-              onChange={() => setMain(1)}
-              type="radio"
-              id="launge"
-              name="menu"
               defaultChecked={true}
-              value="1"
-            />
-            <label htmlFor={"launge"}>Лаунж</label>
-          </div>
-          <div className={styles.formRadioBtn}>
-            <input
               onChange={() => setMain(3)}
               type="radio"
               id="hall"
@@ -110,6 +101,16 @@ const ReservationAdmin = memo(({ user }) => {
               value="3"
             />
             <label htmlFor={"hall"}>Зал</label>
+          </div>
+          <div className={styles.formRadioBtn}>
+            <input
+              onChange={() => setMain(1)}
+              type="radio"
+              id="launge"
+              name="menu"
+              value="1"
+            />
+            <label htmlFor={"launge"}>Лаунж</label>
           </div>
         </div>
       )}

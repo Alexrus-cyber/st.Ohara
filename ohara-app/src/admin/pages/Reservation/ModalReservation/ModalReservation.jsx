@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import { FieldCreator, InputUI } from "../../Auth/components/Form/FormCreators";
 import { ButtonUI } from "../../components/ButtonUI/ButtonUI";
@@ -6,8 +6,12 @@ import { reservationInputs, reservationInputsRight } from "./Inputs";
 import styles from "./ModalReservation.module.scss";
 import { useDispatch } from "react-redux";
 import { createBooking } from "../../../../slices/booking";
+import {
+  maxLength,
+  Required,
+} from "../../Auth/components/Validators/Validators";
 
-const ModalReservation = memo(({ onClose, table }) => {
+const ModalReservation = memo(({ onClose, table, active }) => {
   if (table.reserve && table.reserve.status === "Progress") {
     onClose();
   }
@@ -27,13 +31,21 @@ const ModalReservation = memo(({ onClose, table }) => {
   return (
     <div>
       <h1>Стол №{table.number}</h1>
-      <ReservationReduxForm onSubmit={onSubmit} />
+      <ReservationReduxForm
+        active={active}
+        number={table.number}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 });
 
-const ReservationForm = ({ handleSubmit }) => {
+const ReservationForm = ({ handleSubmit, number, active, reset }) => {
   const [disabled, setDisabled] = useState(false);
+  useEffect(() => {
+    reset();
+  }, [active]);
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.container}>
@@ -64,18 +76,28 @@ const ReservationForm = ({ handleSubmit }) => {
                 e.typeButton,
                 e.style,
                 e.type,
-                e.typeInput
+                e.typeInput,
+                e.normalize
               )}
             </div>
           ))}
+          <Field
+            name={`guestsCount`}
+            component={InputUI}
+            placeholder={"Количество людей"}
+            typeInput={"materialPicker"}
+            validate={[Required, maxLength(100)]}
+            number={number}
+          />
         </div>
       </div>
       <div className={styles.message}>
         <Field
           name={`message`}
           component={InputUI}
-          title={"Сообщение"}
+          title={"Сообщение указываете на кого бронь"}
           typeInput={"text"}
+          validate={[Required, maxLength(100)]}
         />
       </div>
       <div className={styles.display}>

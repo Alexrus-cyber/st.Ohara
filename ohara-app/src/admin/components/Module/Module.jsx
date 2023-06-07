@@ -8,7 +8,6 @@ export const Module = memo(
     } else {
       document.body.style.overflow = "auto";
     }
-
     return (
       <div
         className={active ? styles.active : styles.module}

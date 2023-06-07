@@ -30,19 +30,6 @@ export const getTablesLaunge = createAsyncThunk(
     }
   }
 );
-export const getTablesStreet = createAsyncThunk(
-  "getTablesStreet",
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await instance
-        .get(`booking/table/street`)
-        .then((response) => response.data);
-      return response.data;
-    } catch (e) {
-      return rejectWithValue(e);
-    }
-  }
-);
 export const getTablesHall = createAsyncThunk(
   "getTablesHall",
   async (data, { rejectWithValue }) => {
@@ -163,28 +150,10 @@ export const bookingSlice = createSlice({
       .addCase(getTablesLaunge.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.launge = payload;
+        console.log(state.launge);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getTablesLaunge.rejected, (state, { payload }) => {
-        state.loading = false;
-        if (Math.floor(payload.response.status / 100) === 4) {
-          state.error = payload.response.statusText;
-        } else {
-          state.error = "Ошибка сервера";
-        }
-      })
-      .addCase(getTablesStreet.pending, (state) => {
-        state.loading = true;
-      })
-      //полученные данные из запроса мы кладем в стор редакса. прерываем загрузку
-      .addCase(getTablesStreet.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.street = payload.sort(function (a, b) {
-          return a.number - b.number;
-        });
-      })
-      //здесь можно обрабатывать ошибки. так же прерываем загрузку
-      .addCase(getTablesStreet.rejected, (state, { payload }) => {
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
           state.error = payload.response.statusText;
@@ -201,6 +170,7 @@ export const bookingSlice = createSlice({
         state.hall = payload.sort(function (a, b) {
           return a.number - b.number;
         });
+        console.log(state.hall);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getTablesHall.rejected, (state, { payload }) => {
