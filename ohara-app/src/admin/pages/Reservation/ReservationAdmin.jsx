@@ -9,6 +9,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./Reservation.module.scss";
 import { Scheme } from "./MainChildren/Scheme";
 import schemaHall from "../../../assets/Hall.png";
+import schemaLaunge from "../../../assets/Launge.png";
 import cl from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { NotFoundReservation } from "./NotFound/NotFoundReservation";
@@ -42,11 +43,14 @@ const ReservationAdmin = memo(({ user }) => {
   }, [status1]);
 
   const getLaunge = useMemo(() => {
-    return <Scheme main={main} getScheme={getTablesLaunge} />;
+    return (
+      <Scheme main={main} img={schemaLaunge} getScheme={getTablesLaunge} />
+    );
   }, [main]);
   const getHall = useMemo(() => {
     return <Scheme main={main} img={schemaHall} getScheme={getTablesHall} />;
   }, [main]);
+
   const Message = useMemo(() => {
     return (
       <div className={styles.border}>
@@ -80,6 +84,7 @@ const ReservationAdmin = memo(({ user }) => {
   if (status === "True" && !user) {
     return <NotFoundReservation />;
   }
+
   return (
     <div className={user ? styles.main : styles.main2}>
       {user && (

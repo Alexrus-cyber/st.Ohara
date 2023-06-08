@@ -1,7 +1,8 @@
 import styles from "./LoaderPage.module.scss";
 import { useEffect, useState } from "react";
+import cl from "classnames";
 
-export const LoaderPage = () => {
+export const LoaderPage = ({ height }) => {
   const [loopNum, setLoopName] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const toRotate = ["...", "..", "."];
@@ -39,7 +40,11 @@ export const LoaderPage = () => {
     }
   };
   return (
-    <div className={styles.loader}>
+    <div
+      className={cl(styles.loader, {
+        [styles.loaderMin]: height,
+      })}
+    >
       <div className={styles.container}>
         <h1 className={styles.loading}>
           Loading <span>{text}</span>

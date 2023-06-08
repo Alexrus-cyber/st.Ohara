@@ -13,11 +13,12 @@ import { Alert, Snackbar } from "@mui/material";
 import { Module } from "../../../components/Module/Module";
 import ModalReservation from "../ModalReservation/ModalReservation";
 import { reset } from "redux-form";
+import { LoaderPage } from "../../../../components/LoaderPage/LoaderPage";
 
 export const Scheme = ({ main, getScheme, img }) => {
   const [time, setTime] = useState(0);
   let items = useSelector(getBarSelector);
-  let { error } = useSelector((state) => state.booking);
+  let { error, loading } = useSelector((state) => state.booking);
   const dispatch = useDispatch();
   const [active, setActive] = useState(false);
   const [modalState, setModalState] = useState("");
@@ -38,7 +39,7 @@ export const Scheme = ({ main, getScheme, img }) => {
   useEffect(() => {
     setTimeout(() => {
       setTime(time + 1);
-    }, 10000);
+    }, 7000);
     dispatch(getScheme());
   }, [time]);
 
@@ -55,7 +56,11 @@ export const Scheme = ({ main, getScheme, img }) => {
     setActive(true);
     setModalState(table);
   }, []);
-
+  if (time < 1) {
+    if (loading) {
+      return <LoaderPage height={true} />;
+    }
+  }
   return (
     <div>
       <Snackbar
@@ -75,7 +80,7 @@ export const Scheme = ({ main, getScheme, img }) => {
           {error}
         </Alert>
       </Snackbar>
-      {main !== 1 && <img className={styles.img} src={img} alt={"scheme"} />}
+      <img className={styles.img} src={img} alt={"scheme"} />
       <div className={styles.container}>
         {items.map((el) => (
           <Tables open={() => handleOpen(el)} table={el} key={el.id} />
