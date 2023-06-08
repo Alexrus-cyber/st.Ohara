@@ -47,7 +47,7 @@ export const LoaderPage = ({ height }) => {
     >
       <div className={styles.container}>
         <h1 className={styles.loading}>
-          Loading <span>{text}</span>
+          Загрузка <span>{text}</span>
         </h1>
       </div>
     </div>
