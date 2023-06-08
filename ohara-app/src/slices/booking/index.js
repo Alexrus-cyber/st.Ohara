@@ -157,6 +157,9 @@ export const bookingSlice = createSlice({
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
           state.error = payload.response.statusText;
+          if (state.error === "Not Found") {
+            state.error = "Нет доступа к контенту, \n перезагрузите страницу";
+          }
         } else {
           state.error = "Ошибка сервера";
         }
@@ -177,6 +180,9 @@ export const bookingSlice = createSlice({
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
           state.error = payload.response.statusText;
+          if (state.error === "Not Found") {
+            state.error = "Нет доступа к контенту, \n перезагрузите страницу";
+          }
         } else {
           state.error = "Ошибка сервера";
         }

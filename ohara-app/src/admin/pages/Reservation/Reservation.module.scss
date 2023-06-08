@@ -55,25 +55,48 @@
 
 .title {
   font-size: 48px;
-  padding: 50px 0 0 0;
   color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.titleAdmin {
+  @extend .title;
+  padding: 50px 0 0 0;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
 }
 
 .btn {
-  margin-top: 50px;
-  background: red;
+  background: #7d4a7d;
   border: 0;
   padding: 10px;
   color: white;
   font-size: 24px;
   border-radius: 20px;
   cursor: pointer;
+  transition: 0.5s;
+  margin-bottom: 20px;
+}
+
+.btn:hover {
+  background: #563356;
 }
 
 .trueBtn {
   @extend .btn;
-  background: green;
+  background: #1C675A;
 }
+
+.trueBtn:hover {
+  background: #1e3a1b;
+}
+
 
 .container {
   display: flex;

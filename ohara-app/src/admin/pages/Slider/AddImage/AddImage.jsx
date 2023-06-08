@@ -13,7 +13,9 @@ export const AddImage = memo(({ onClose }) => {
 
   const titleChange = useCallback(
     (e) => {
-      dispatch(setTitle(e.target.value));
+      if (e.target.value.length >= 0 || e.target.value.length <= 10) {
+        dispatch(setTitle(e.target.value));
+      }
     },
     [header]
   );
@@ -43,6 +45,7 @@ export const AddImage = memo(({ onClose }) => {
             placeholder={"Заголовок"}
             className={styles.title}
             value={header}
+            maxLength={40}
             onChange={titleChange}
           ></input>
         </label>

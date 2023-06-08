@@ -16,7 +16,7 @@ export const DeleteModalMenu = memo(({ onClose, id, ...props }) => {
 
   return (
     <div className={styles.deleteModule}>
-      <h1 className={styles.titleModule}>Вы уверены что хотите удалить?</h1>
+      <h1 className={styles.titleModule}>Удалить?</h1>
       <div className={styles.buttonContainerM}>
         <button className={styles.yes} onClick={() => deleteCard(true)}>
           Да

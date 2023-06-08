@@ -12,14 +12,6 @@ export const minLength12 = minLength(12);
 export const reservationInputs = [
   {
     id: 1,
-    name: "email",
-    placeholder: "Почта",
-    validators: [Required, maxLength100],
-    typeButton: InputUI,
-    typeInput: "material",
-  },
-  {
-    id: 2,
     name: "name",
     placeholder: "Имя",
     validators: [Required, maxLength100],
@@ -27,7 +19,7 @@ export const reservationInputs = [
     typeInput: "material",
   },
   {
-    id: 3,
+    id: 2,
     name: "surname",
     placeholder: "Фамилия",
     validators: [Required, maxLength100],
@@ -35,7 +27,7 @@ export const reservationInputs = [
     typeInput: "material",
   },
   {
-    id: 4,
+    id: 3,
     name: "patronymic",
     placeholder: "Отчество",
     validators: [Required, maxLength100],
@@ -45,7 +37,7 @@ export const reservationInputs = [
 ];
 export const reservationInputsRight = [
   {
-    id: 5,
+    id: 4,
     name: "estimatedStartTime",
     placeholder: "Дата",
     validators: [Required, maxLength100],
@@ -53,7 +45,7 @@ export const reservationInputsRight = [
     typeInput: "materialDate",
   },
   {
-    id: 6,
+    id: 5,
     name: "phone",
     placeholder: "Номер телефона",
     validators: [Required, maxLength12, minLength12],

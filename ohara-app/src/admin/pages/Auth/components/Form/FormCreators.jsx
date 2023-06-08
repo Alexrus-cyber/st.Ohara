@@ -282,7 +282,7 @@ export const FilesInput = memo(({ name, id, section, getFile, circle }) => {
       <span className={styles.span}>
         <CloudUpload />
         {isDragActive && !isDragReject && (
-          <p style={{ fontSize: 12 }}>Вы почти закинули файл 😍😍😍</p>
+          <p style={{ fontSize: 12 }}>В процессе 😍😍😍</p>
         )}
         {isDragReject && (
           <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>
@@ -297,7 +297,7 @@ export const FilesInput = memo(({ name, id, section, getFile, circle }) => {
             Этот файл слишком большого размера <br />
             или
             <br />
-            Данный тип файла не поддерживается разработчиком
+            Данный тип файла не поддерживается сайтом
             <br /> 💀💀💀
           </p>
         )}

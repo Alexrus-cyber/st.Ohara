@@ -23,7 +23,7 @@ export const loginMe = createAsyncThunk(
       if (e.response.status > 400) {
         dispatch(
           stopSubmit("login", {
-            _error: "Вы ввели не коректный пароль или логин",
+            _error: "Неправильный логин или пароль",
           })
         );
       }

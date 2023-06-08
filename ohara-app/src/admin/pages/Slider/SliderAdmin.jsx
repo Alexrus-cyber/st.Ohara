@@ -88,7 +88,7 @@ const SliderAdmin = memo(() => {
             setIsEdit(true);
           }}
         >
-          Добавить элемент
+          Добавить
         </button>
       </div>
 

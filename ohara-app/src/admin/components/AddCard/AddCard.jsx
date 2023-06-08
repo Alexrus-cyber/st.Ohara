@@ -1,6 +1,7 @@
 import styles from "./Card.module.scss";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { CloudUpload } from "@mui/icons-material";
 
 export const AddCard = ({ upload, addHandler }) => {
   const [isFileTooLarge, setIsFileTooLarge] = useState(false);
@@ -37,27 +38,29 @@ export const AddCard = ({ upload, addHandler }) => {
   return (
     <div className={styles.card} {...getRootProps()}>
       <input onDrop={onDrop} {...getInputProps()} />
-      {isDragActive && !isDragReject && <h1>Вы почти закинули файл 😍😍😍</h1>}
-      {!isDragActive && !isFileTooLarge && (
-        <h1>
-          Вы можете закинуть картинку или кликнуть на данную область чтобы
-          выбрать файл
-          <br />
-          ...
-        </h1>
-      )}
-      {isDragReject && <h1>Нельзя закидывать такой файл 💀💀💀</h1>}
-      <div className={styles.error}>
+      <span className={styles.span}>
+        <CloudUpload />
+        {isDragActive && !isDragReject && (
+          <p style={{ fontSize: 12 }}>В процессе 😍😍😍</p>
+        )}
+        {isDragReject && (
+          <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>
+            Нельзя закидывать такой файл 💀💀💀
+          </p>
+        )}
+        {!isDragActive && !isFileTooLarge && (
+          <p className={styles.p}>Загрузить</p>
+        )}
         {isFileTooLarge && !isDragActive && (
-          <h1 style={{ color: "red" }}>
+          <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>
             Этот файл слишком большого размера <br />
             или
             <br />
-            Данный тип файла не поддерживается разработчиком
+            Данный тип файла не поддерживается сайтом
             <br /> 💀💀💀
-          </h1>
+          </p>
         )}
-      </div>
+      </span>
     </div>
   );
 };

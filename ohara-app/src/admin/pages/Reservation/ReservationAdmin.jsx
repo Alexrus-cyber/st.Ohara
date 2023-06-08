@@ -5,7 +5,7 @@ import {
   stopBooking,
   wakeBooking,
 } from "../../../slices/booking";
-import React, { memo, useEffect, useMemo, useState } from "react";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./Reservation.module.scss";
 import { Scheme } from "./MainChildren/Scheme";
 import schemaHall from "../../../assets/Hall.png";
@@ -17,26 +17,36 @@ const ReservationAdmin = memo(({ user }) => {
   const { status } = useSelector((state) => state.booking);
   const [main, setMain] = useState(3);
   const [session, setSession] = useState(false);
+  const [status1, setStatus] = useState("");
   const dispatch = useDispatch();
-  let st = false;
+
   useEffect(() => {
-    dispatch(checkStatus());
+    if (status === "") {
+      dispatch(checkStatus());
+    }
   }, []);
 
-  if (status) {
-    if (status === "False") {
-      st = false;
-    } else {
-      st = true;
+  useEffect(() => {
+    if (status !== "") {
+      setStatus(status);
     }
-  }
+  }, [status]);
+
+  const wake = useCallback(() => {
+    setStatus("False");
+    dispatch(wakeBooking());
+  }, [status1]);
+  const stop = useCallback(() => {
+    setStatus("True");
+    dispatch(stopBooking());
+  }, [status1]);
+
   const getLaunge = useMemo(() => {
     return <Scheme main={main} getScheme={getTablesLaunge} />;
   }, [main]);
   const getHall = useMemo(() => {
     return <Scheme main={main} img={schemaHall} getScheme={getTablesHall} />;
   }, [main]);
-
   const Message = useMemo(() => {
     return (
       <div className={styles.border}>
@@ -67,28 +77,28 @@ const ReservationAdmin = memo(({ user }) => {
     );
   }, [session]);
 
-  if (st && !user) {
+  if (status === "True" && !user) {
     return <NotFoundReservation />;
   }
   return (
     <div className={user ? styles.main : styles.main2}>
       {user && (
-        <div>
-          <button
-            className={cl(styles.btn)}
-            onClick={() => dispatch(stopBooking())}
-          >
-            Скрыть бронь
+        <div className={styles.btnContainer}>
+          <button className={cl(styles.btn)} onClick={stop}>
+            Заблокировать бронирование
           </button>
-          <button
-            className={cl(styles.trueBtn)}
-            onClick={() => dispatch(wakeBooking())}
-          >
-            Показать бронь
+          <button className={cl(styles.trueBtn)} onClick={wake}>
+            Показать бронирование
           </button>
         </div>
       )}
-      <h1 className={styles.title}>Бронирование</h1>
+      <h1
+        className={cl(styles.title, {
+          [styles.titleAdmin]: !user,
+        })}
+      >
+        Бронирование
+      </h1>
       {!sessionStorage.getItem("activeBooking") && !user && Message}
       {(sessionStorage.getItem("activeBooking") || user) && (
         <div className={styles.links}>
@@ -117,9 +127,11 @@ const ReservationAdmin = memo(({ user }) => {
       )}
       {main === 1 &&
         (sessionStorage.getItem("activeBooking") || user) &&
+        status1 === "False" &&
         getLaunge}
       {main === 3 &&
         (sessionStorage.getItem("activeBooking") || user) &&
+        status1 === "False" &&
         getHall}
     </div>
   );

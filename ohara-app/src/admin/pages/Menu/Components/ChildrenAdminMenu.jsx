@@ -154,7 +154,7 @@ export const ChildrenAdminMenu = ({ getMenu, launch }) => {
           onClose={handleClickCloseModal}
         >
           <DragModal
-            title={"Вы уверены что хотите поменять местами данные карточки?"}
+            title={"Поменять местами данные карточки?"}
             setOpenModal={setOpenModal}
             setChange={setChange}
             data={data}
