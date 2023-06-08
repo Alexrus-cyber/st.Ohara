@@ -144,34 +144,19 @@ export const InputUI = memo(
             >
               {(number === 1 || number === 8 || number === 2) &&
                 currencies.map((option, index) => (
-                  <MenuItem
-                    selected={true}
-                    style={{ zIndex: 20000000 }}
-                    key={index}
-                    value={option.value}
-                  >
+                  <MenuItem selected={true} key={index} value={option.value}>
                     {option.label}
                   </MenuItem>
                 ))}
               {(number === 3 || number === 4) &&
                 currencies2.map((option, index) => (
-                  <MenuItem
-                    selected={true}
-                    style={{ zIndex: 20000000 }}
-                    key={index}
-                    value={option.value}
-                  >
+                  <MenuItem selected={true} key={index} value={option.value}>
                     {option.label}
                   </MenuItem>
                 ))}
               {(number === 5 || number === 6 || number === 7) &&
                 currencies3.map((option, index) => (
-                  <MenuItem
-                    selected={true}
-                    style={{ zIndex: 20000000 }}
-                    key={index}
-                    value={option.value}
-                  >
+                  <MenuItem selected={true} key={index} value={option.value}>
                     {option.label}
                   </MenuItem>
                 ))}

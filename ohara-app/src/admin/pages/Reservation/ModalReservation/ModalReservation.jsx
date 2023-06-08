@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import { FieldCreator, InputUI } from "../../Auth/components/Form/FormCreators";
 import { ButtonUI } from "../../components/ButtonUI/ButtonUI";
@@ -11,11 +11,14 @@ import {
   Required,
 } from "../../Auth/components/Validators/Validators";
 
-const ModalReservation = memo(({ onClose, table, active }) => {
+const maxLength100 = maxLength(150);
+
+const ModalReservation = memo(({ onClose, table }) => {
   if (table.reserve && table.reserve.status === "Progress") {
     onClose();
   }
   const dispatch = useDispatch();
+
   const onSubmit = (formData) => {
     onClose();
     dispatch(
@@ -31,21 +34,13 @@ const ModalReservation = memo(({ onClose, table, active }) => {
   return (
     <div>
       <h1>Стол №{table.number}</h1>
-      <ReservationReduxForm
-        active={active}
-        number={table.number}
-        onSubmit={onSubmit}
-      />
+      <ReservationReduxForm number={table.number} onSubmit={onSubmit} />
     </div>
   );
 });
 
-const ReservationForm = ({ handleSubmit, number, active, reset }) => {
+const ReservationForm = ({ handleSubmit, number }) => {
   const [disabled, setDisabled] = useState(false);
-  useEffect(() => {
-    reset();
-  }, [active]);
-
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.container}>
@@ -86,7 +81,7 @@ const ReservationForm = ({ handleSubmit, number, active, reset }) => {
             component={InputUI}
             placeholder={"Количество людей"}
             typeInput={"materialPicker"}
-            validate={[Required, maxLength(100)]}
+            validate={[Required]}
             number={number}
           />
         </div>
@@ -95,9 +90,9 @@ const ReservationForm = ({ handleSubmit, number, active, reset }) => {
         <Field
           name={`message`}
           component={InputUI}
-          title={"Сообщение указываете на кого бронь"}
+          title={"Сообщение на кого бронь"}
           typeInput={"text"}
-          validate={[Required, maxLength(100)]}
+          validate={[Required, maxLength100]}
         />
       </div>
       <div className={styles.display}>

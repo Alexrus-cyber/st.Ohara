@@ -12,6 +12,7 @@ import {
 import { Alert, Snackbar } from "@mui/material";
 import { Module } from "../../../components/Module/Module";
 import ModalReservation from "../ModalReservation/ModalReservation";
+import { reset } from "redux-form";
 
 export const Scheme = ({ main, getScheme, img }) => {
   const [time, setTime] = useState(0);
@@ -19,9 +20,6 @@ export const Scheme = ({ main, getScheme, img }) => {
   let { error } = useSelector((state) => state.booking);
   const dispatch = useDispatch();
   const [active, setActive] = useState(false);
-  const handleClickCloseModal = useCallback(() => {
-    setActive(false);
-  }, []);
   const [modalState, setModalState] = useState("");
   switch (main) {
     case 1: {
@@ -40,15 +38,23 @@ export const Scheme = ({ main, getScheme, img }) => {
   useEffect(() => {
     setTimeout(() => {
       setTime(time + 1);
-    }, 5000);
+    }, 10000);
     dispatch(getScheme());
   }, [time]);
 
   useEffect(() => {}, [error]);
-  const handleOpen = (table) => {
+  useEffect(() => {
+    dispatch(reset("reservation"));
+  }, [active]);
+
+  const handleClickCloseModal = useCallback(() => {
+    setActive(false);
+    dispatch(reset("reservation"));
+  }, []);
+  const handleOpen = useCallback((table) => {
     setActive(true);
     setModalState(table);
-  };
+  }, []);
 
   return (
     <div>

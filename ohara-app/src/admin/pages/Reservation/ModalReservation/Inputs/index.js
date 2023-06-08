@@ -7,6 +7,7 @@ import { InputUI } from "../../../Auth/components/Form/FormCreators";
 
 export const maxLength100 = maxLength(40);
 export const maxLength12 = maxLength(12);
+export const minLength12 = minLength(12);
 
 export const reservationInputs = [
   {
@@ -55,14 +56,15 @@ export const reservationInputsRight = [
     id: 6,
     name: "phone",
     placeholder: "Номер телефона",
-    validators: [Required, maxLength12, minLength(12)],
+    validators: [Required, maxLength12, minLength12],
     typeButton: InputUI,
     typeInput: "materialPhone",
     normalize: (value) => {
-      if (value.length < 2) {
+      if (value.length < 2 || !value.startsWith("+7")) {
         return "+7";
       }
-      return value;
+      value = value.replace(/[A-Za-zА-Яа-яЁё,=,;,/,-]/, "");
+      return value.substring(0, 12);
     },
   },
 ];
