@@ -26,7 +26,7 @@ export const HeroAdmin = ({ hero }) => {
           />
           <div className={styles.imgContainer}>
             <Field
-              name={`image1`}
+              name={`bannerDto.urlFile`}
               getFile={getFile}
               section={"hero"}
               component={FilesInput}

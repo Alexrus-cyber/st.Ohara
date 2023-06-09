@@ -14,7 +14,7 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
         <div className={styles.itemContainer}>
           <div className={styles.imgContainerLeftMobile}>
             <Field
-              name={`image`}
+              name={`aboutDto.${index}.idFile`}
               getFile={getFile}
               section={"about"}
               id={id}
@@ -62,7 +62,7 @@ export const DescriptionAdmin = memo(({ img, isLeftPosition, index, id }) => {
         <div className={styles.itemContainer}>
           <div className={styles.imgContainerRight}>
             <Field
-              name={`about.items.${index}.img`}
+              name={`aboutDto.${index}.idFile`}
               getFile={getFile}
               section={"about"}
               circle={true}

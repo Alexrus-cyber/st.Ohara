@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
 import { instance } from "../API/API";
 import { updateObjectInArray } from "./Helper/helper";
 
@@ -51,6 +55,7 @@ export const getFile = createAsyncThunk(
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => response.data);
+      console.log(response.data);
       callback(response.data);
     } catch (e) {
       return rejectWithValue(e);
@@ -191,5 +196,12 @@ export const landingSlice = createSlice({
       });
   },
 });
+
+const stateSelector = (state) => state?.landing;
+export const listLanding = createSelector(
+  stateSelector,
+  (state) => state.landingList
+);
+
 export const { setTitle, clearError, activesFalse } = landingSlice.actions;
 export default landingSlice.reducer;
