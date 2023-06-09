@@ -156,7 +156,7 @@ export const bookingSlice = createSlice({
       .addCase(getTablesLaunge.rejected, (state, { payload }) => {
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
-          state.error = payload.response.statusText;
+          state.error = payload.response.data.data;
           if (state.error === "Not Found") {
             state.error = "Нет доступа к контенту, \n перезагрузите страницу";
           }
@@ -179,7 +179,7 @@ export const bookingSlice = createSlice({
       .addCase(getTablesHall.rejected, (state, { payload }) => {
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
-          state.error = payload.response.statusText;
+          state.error = payload.response.data.data;
           if (state.error === "Not Found") {
             state.error = "Нет доступа к контенту, \n перезагрузите страницу";
           }
@@ -199,7 +199,7 @@ export const bookingSlice = createSlice({
       .addCase(getStatusBooking.rejected, (state, { payload }) => {
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
-          state.error = payload.response.statusText;
+          state.error = payload.response.data.data;
         } else {
           state.error = "Ошибка сервера";
         }
@@ -216,14 +216,14 @@ export const bookingSlice = createSlice({
       .addCase(checkStatus.rejected, (state, { payload }) => {
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
-          state.error = payload.response.statusText;
+          state.error = payload.response.data.data;
         } else {
           state.error = "Ошибка сервера";
         }
       })
       .addCase(createBooking.rejected, (state, { payload }) => {
         if (Math.floor(payload.response.status / 100) === 4) {
-          state.error = payload.response.statusText;
+          state.error = payload.response.data.data;
         } else {
           state.error = payload.response.data.data;
         }

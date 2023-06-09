@@ -75,7 +75,7 @@ export const AddImage = memo(({ onClose }) => {
           );
           onClose();
         }}
-        name={"Создать"}
+        name={"Добавить"}
       />
     </div>
   );

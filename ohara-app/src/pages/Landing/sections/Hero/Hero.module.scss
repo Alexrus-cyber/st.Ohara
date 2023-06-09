@@ -10,8 +10,7 @@
 
 .container {
   max-width: 1500px;
-  width: 100%;
-  padding: 0 50px 0 50px;
+  width: 95%;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -21,6 +20,7 @@
 .text {
   max-width: 1200px;
   width: 100%;
+  overflow-wrap: break-word;
   display: flex;
   justify-content: center;
   align-content: center;
