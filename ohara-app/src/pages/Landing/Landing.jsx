@@ -9,6 +9,7 @@ import React, {
   useMemo,
   useCallback,
   useState,
+  useRef,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -30,6 +31,7 @@ const Landing = memo(() => {
   const { slider, error } = useSelector((state) => state.landing);
   const landingList = useSelector(listLanding);
   const [active, setActive] = useState(false);
+  const ref = useRef(null);
   const handleClickCloseModal = useCallback(() => {
     localStorage.setItem("activeLanding", new Date().getTime());
     setActive(false);
@@ -42,6 +44,9 @@ const Landing = memo(() => {
   useEffect(() => {
     const time = parseInt(localStorage.getItem("activeLanding") || 0);
     setActive(new Date().getTime() - time > 60 * 1000 * 60 * 24 * 3);
+  }, []);
+  const scrollClick = useCallback(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
   const errorMessage = useMemo(() => {
@@ -75,8 +80,8 @@ const Landing = memo(() => {
       ) : (
         <>
           {errorMessage}
-          <Hero hero={landingList.bannerDto} />
-          <About about={landingList.aboutDto} />
+          <Hero handleClick={scrollClick} hero={landingList.bannerDto} />
+          <About ref={ref} about={landingList.aboutDto} />
           <Suspense fallback={<LoaderPage />}>
             <Slider slider={slider} />
           </Suspense>

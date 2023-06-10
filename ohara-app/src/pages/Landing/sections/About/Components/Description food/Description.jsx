@@ -12,7 +12,6 @@ export const Description = memo(({ text, img, title, isLeftPosition }) => {
   useEffect(() => {
     if (inView) {
       setIsLoaded(true);
-      console.log(text);
     }
   }, [inView]);
   return (

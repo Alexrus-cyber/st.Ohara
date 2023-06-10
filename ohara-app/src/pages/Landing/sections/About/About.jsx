@@ -1,12 +1,14 @@
 import styles from "./About.module.scss";
 import { Description } from "./Components/Description food/Description";
-import { memo } from "react";
+import { forwardRef } from "react";
 
-export const About = memo(({ about }) => {
+export const About = forwardRef(({ about }, ref) => {
   return (
     <section className={styles.about}>
       <div className={styles.container}>
-        <h1 className={styles.title}>О нас</h1>
+        <h1 ref={ref} className={styles.title}>
+          О нас
+        </h1>
         {about.map((a) => (
           <Description
             key={a.id}

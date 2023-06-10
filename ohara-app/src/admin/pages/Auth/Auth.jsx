@@ -6,6 +6,7 @@ import { ButtonUI } from "../components/ButtonUI/ButtonUI";
 import { memo } from "react";
 import { useDispatch } from "react-redux";
 import { loginMe } from "../../../slices/AuthApi";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ handleSubmit, error }) => {
   return (
@@ -40,9 +41,12 @@ const LoginForm = ({ handleSubmit, error }) => {
 
 const Auth = memo(() => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
 
   const onSubmit = (formData) => {
-    dispatch(loginMe({ email: formData.email, password: formData.password }));
+    dispatch(
+      loginMe({ email: formData.email, password: formData.password })
+    ).then(() => nav("/landingAdmin"));
   };
   return (
     <div className={styles.container}>
