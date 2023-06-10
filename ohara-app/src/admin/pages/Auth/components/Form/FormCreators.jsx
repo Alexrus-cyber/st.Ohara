@@ -53,6 +53,7 @@ export const InputUI = memo(
     typeInput,
     type,
     number,
+    hall,
     ...props
   }) => {
     const showError = touched && error;
@@ -148,7 +149,7 @@ export const InputUI = memo(
                     {option.label}
                   </MenuItem>
                 ))}
-              {(number === 3 || number === 4) &&
+              {(number === 3 || number === 4 || hall === "Лаунж") &&
                 currencies2.map((option, index) => (
                   <MenuItem selected={true} key={index} value={option.value}>
                     {option.label}

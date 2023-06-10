@@ -150,16 +150,12 @@ export const bookingSlice = createSlice({
       .addCase(getTablesLaunge.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.launge = payload;
-        console.log(state.launge);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getTablesLaunge.rejected, (state, { payload }) => {
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
-          state.error = payload.response.data.data;
-          if (state.error === "Not Found") {
-            state.error = "Нет доступа к контенту, \n перезагрузите страницу";
-          }
+          state.error = "Нет доступа к контенту, \n перезагрузите страницу";
         } else {
           state.error = "Ошибка сервера";
         }
@@ -173,16 +169,12 @@ export const bookingSlice = createSlice({
         state.hall = payload.sort(function (a, b) {
           return a.number - b.number;
         });
-        console.log(state.hall);
       })
       //здесь можно обрабатывать ошибки. так же прерываем загрузку
       .addCase(getTablesHall.rejected, (state, { payload }) => {
         state.loading = false;
         if (Math.floor(payload.response.status / 100) === 4) {
-          state.error = payload.response.data.data;
-          if (state.error === "Not Found") {
-            state.error = "Нет доступа к контенту, \n перезагрузите страницу";
-          }
+          state.error = "Нет доступа к контенту, \n перезагрузите страницу";
         } else {
           state.error = "Ошибка сервера";
         }

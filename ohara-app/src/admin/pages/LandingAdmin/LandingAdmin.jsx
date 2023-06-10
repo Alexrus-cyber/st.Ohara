@@ -73,7 +73,6 @@ const LandingForm = memo(({ handleSubmit, initialValues }) => {
     fontSize: 26,
   };
 
-  console.log(initialValues);
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.container}>

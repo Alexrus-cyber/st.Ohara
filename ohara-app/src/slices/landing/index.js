@@ -55,7 +55,6 @@ export const getFile = createAsyncThunk(
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => response.data);
-      console.log(response.data);
       callback(response.data);
     } catch (e) {
       return rejectWithValue(e);

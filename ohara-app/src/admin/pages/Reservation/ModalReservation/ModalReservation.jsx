@@ -34,12 +34,16 @@ const ModalReservation = memo(({ onClose, table }) => {
   return (
     <div>
       <h1>Стол №{table.number}</h1>
-      <ReservationReduxForm number={table.number} onSubmit={onSubmit} />
+      <ReservationReduxForm
+        hall={table.hall}
+        number={table.number}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 });
 
-const ReservationForm = ({ handleSubmit, number }) => {
+const ReservationForm = ({ handleSubmit, number, hall }) => {
   const [disabled, setDisabled] = useState(false);
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -83,6 +87,7 @@ const ReservationForm = ({ handleSubmit, number }) => {
             typeInput={"materialPicker"}
             validate={[Required]}
             number={number}
+            hall={hall}
           />
         </div>
       </div>
