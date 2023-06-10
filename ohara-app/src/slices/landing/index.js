@@ -21,6 +21,7 @@ export const getLandingData = createAsyncThunk(
       const response = await instance
         .get(`lending`)
         .then((response) => response);
+      console.log(response.data);
       return response.data;
     } catch (e) {
       return rejectWithValue(e);
@@ -32,11 +33,9 @@ export const editLanding = createAsyncThunk(
   "editLanding",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      await instance
-        .post(`lending`, data, {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((response) => response);
+      await instance.post(`lending`, data, {
+        headers: { "Content-Type": "application/json" },
+      });
       dispatch(getLandingData());
     } catch (e) {
       return rejectWithValue(e);
