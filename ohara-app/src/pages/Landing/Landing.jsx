@@ -11,7 +11,12 @@ import React, {
   useState,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, getLandingData, getSlider } from "../../slices/landing";
+import {
+  clearError,
+  getLandingData,
+  getSlider,
+  listLanding,
+} from "../../slices/landing";
 import { LoaderPage } from "../../components/LoaderPage/LoaderPage";
 import { Slider } from "./sections/Slider/Slider";
 import { Alert, Snackbar } from "@mui/material";
@@ -22,7 +27,8 @@ import { ModalLending } from "./Modale/ModalLending";
 const Map = lazy(() => import("./sections/Map/Map"));
 
 const Landing = memo(() => {
-  const { landingList, slider, error } = useSelector((state) => state.landing);
+  const { slider, error } = useSelector((state) => state.landing);
+  const landingList = useSelector(listLanding);
   const [active, setActive] = useState(false);
   const handleClickCloseModal = useCallback(() => {
     localStorage.setItem("activeLanding", new Date().getTime());

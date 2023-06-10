@@ -1,11 +1,29 @@
 import styles from "../../About.module.scss";
 import LazyLoadImage from "../../../../../../components/LazyLoadImage/LazyLoadImage";
+import cl from "classnames";
+import { memo, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
-export const Description = ({ text, img, title, isLeftPosition }) => {
+export const Description = memo(({ text, img, title, isLeftPosition }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+  });
+  useEffect(() => {
+    if (inView) {
+      setIsLoaded(true);
+      console.log(text);
+    }
+  }, [inView]);
   return (
     <>
-      {isLeftPosition ? (
-        <div className={styles.itemContainer}>
+      {isLeftPosition && (
+        <div
+          ref={ref}
+          className={cl(styles.itemContainer, {
+            [styles.itemContainerLoad]: isLoaded,
+          })}
+        >
           <div className={styles.imgMobile}>
             <LazyLoadImage src={img} alt={"food"} custom={styles.custom} />
           </div>
@@ -17,8 +35,14 @@ export const Description = ({ text, img, title, isLeftPosition }) => {
             <LazyLoadImage custom={styles.custom} src={img} alt={"food"} />
           </div>
         </div>
-      ) : (
-        <div className={styles.itemContainer}>
+      )}{" "}
+      {!isLeftPosition && (
+        <div
+          ref={ref}
+          className={cl(styles.itemContainer, {
+            [styles.itemContainerLoad]: isLoaded,
+          })}
+        >
           <div className={styles.img}>
             <LazyLoadImage src={img} custom={styles.custom} />
           </div>
@@ -30,4 +54,4 @@ export const Description = ({ text, img, title, isLeftPosition }) => {
       )}
     </>
   );
-};
+});

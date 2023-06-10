@@ -27,6 +27,14 @@
   column-gap: 40px;
   align-items: center;
   padding-bottom: 140px;
+  opacity: 0;
+  transition: 1s ease-in-out;
+  transform: translateX(-50%);
+}
+
+.itemContainerLoad {
+  opacity: 1;
+  transform: translateX(0%);
 }
 
 .img {

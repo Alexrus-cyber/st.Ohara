@@ -1,11 +1,12 @@
 import styles from "./About.module.scss";
 import { Description } from "./Components/Description food/Description";
+import { memo } from "react";
 
-export const About = ({ about }) => {
+export const About = memo(({ about }) => {
   return (
     <section className={styles.about}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Может быть о нас?</h1>
+        <h1 className={styles.title}>О нас</h1>
         {about.map((a) => (
           <Description
             key={a.id}
@@ -18,4 +19,4 @@ export const About = ({ about }) => {
       </div>
     </section>
   );
-};
+});

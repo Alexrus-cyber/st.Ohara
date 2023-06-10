@@ -12,7 +12,7 @@ const LazyLoadImage = ({ src, alt, onClick, custom, imgStyle, slider }) => {
   const [isVisible, setIsVisible] = useState(false);
   const imageRef = useRef(null);
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0.1,
   });
 
   useEffect(() => {
