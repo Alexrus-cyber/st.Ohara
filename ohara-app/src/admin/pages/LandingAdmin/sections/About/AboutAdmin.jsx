@@ -6,7 +6,7 @@ export const AboutAdmin = memo(({ about }) => {
   return (
     <section className={styles.about}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Может быть о нас?</h1>
+        <h1 className={styles.title}>О нас</h1>
         {renderItems(about)}
       </div>
     </section>
