@@ -4,11 +4,13 @@ import ImageViewer from "react-simple-image-viewer";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listMenuSelector } from "../../../slices/menu";
+import { LoaderPage } from "../../../components/LoaderPage/LoaderPage";
 
 export const ChildrenMenu = ({ getMenu }) => {
+  const items = useSelector(listMenuSelector);
+  const { loading } = useSelector((state) => state.menu);
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
-  const items = useSelector(listMenuSelector);
   const dispatch = useDispatch();
 
   //делаем запрос на получение файлов в нашем случае картинки из моков вытаскиваем
@@ -26,6 +28,9 @@ export const ChildrenMenu = ({ getMenu }) => {
     setCurrentImage(0);
     setIsViewerOpen(false);
   };
+  if (loading) {
+    return <LoaderPage height={true} />;
+  }
 
   return (
     <div className={styles.content}>

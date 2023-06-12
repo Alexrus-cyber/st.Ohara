@@ -1,7 +1,15 @@
 import styles from "./Navbar.module.scss";
 import admin from "../../../../assets/logotest.webp";
 import { NavLink } from "react-router-dom";
-import { AppBar, Drawer, IconButton, Toolbar, useTheme } from "@mui/material";
+import {
+  AppBar,
+  createTheme,
+  Drawer,
+  IconButton,
+  ThemeProvider,
+  Toolbar,
+  useTheme,
+} from "@mui/material";
 import { memo, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -10,6 +18,18 @@ import { useDispatch } from "react-redux";
 import { setUserNull } from "../../../../slices/AuthApi";
 
 const drawerWidth = "100%";
+const BreakPointTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 500,
+      md: 600,
+      bg: 900,
+      lg: 1200,
+    },
+  },
+});
+
 const Navbar = memo(({ setAdmin, user }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -48,34 +68,42 @@ const Navbar = memo(({ setAdmin, user }) => {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer
-        className={styles.secret}
-        sx={{
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "ltr" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
-        </IconButton>
-        <div className={styles.navbarSecret}>
-          <ContentNavbar
-            setAdmin={setAdmin}
-            handleDrawerClose={handleDrawerClose}
-            user={user}
-          />
-        </div>
-      </Drawer>
+      <ThemeProvider theme={BreakPointTheme}>
+        <Drawer
+          className={styles.secret}
+          sx={{
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: {
+                xs: drawerWidth,
+                sm: drawerWidth,
+                md: 420,
+                bg: 420,
+                lg: 420,
+              },
+              boxSizing: "border-box",
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+          <div className={styles.navbarSecret}>
+            <ContentNavbar
+              setAdmin={setAdmin}
+              handleDrawerClose={handleDrawerClose}
+              user={user}
+            />
+          </div>
+        </Drawer>
+      </ThemeProvider>
       <div className={styles.navbar}>
         <div className={styles.navbarContainer}>
           <ContentNavbar setAdmin={setAdmin} user={user} />

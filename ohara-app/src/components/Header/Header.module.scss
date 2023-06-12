@@ -90,6 +90,9 @@
   position: relative;
 }
 
+.title {
+  font-size: 40px;
+}
 
 @media screen and (max-width: 1120px) {
   .middle {
@@ -119,6 +122,7 @@
   }
   .title {
     position: unset;
+    font-size: 36px;
     padding: 0;
   }
   .secret {
@@ -129,7 +133,7 @@
     z-index: 100000;
   }
   .links {
-    font-size: 36px;
+    font-size: 30px;
     position: unset;
     max-width: 100%;
     padding: 0;
@@ -215,7 +219,7 @@
     z-index: 100000;
   }
   .links {
-    font-size: 36px;
+    font-size: 30px;
     position: unset;
     max-width: 100%;
     padding: 0;

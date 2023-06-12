@@ -2,12 +2,28 @@ import styles from "../../Atmosphere.module.scss";
 import { NavLink } from "react-router-dom";
 import cl from "classnames";
 import LazyLoadImage from "../../../../../../components/LazyLoadImage/LazyLoadImage";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 export const Content = ({ img, text, title, isLeftPosition }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+  });
+  useEffect(() => {
+    if (inView) {
+      setIsLoaded(true);
+    }
+  }, [inView]);
   return (
     <>
       {!isLeftPosition ? (
-        <div className={styles.itemContainer}>
+        <div
+          ref={ref}
+          className={cl(styles.itemContainer, {
+            [styles.itemContainerLoad]: isLoaded,
+          })}
+        >
           <div className={styles.imgMobile}>
             <LazyLoadImage
               custom={styles.customMobile}
@@ -27,7 +43,12 @@ export const Content = ({ img, text, title, isLeftPosition }) => {
           </div>
         </div>
       ) : (
-        <div className={styles.itemContainer}>
+        <div
+          ref={ref}
+          className={cl(styles.itemContainer, {
+            [styles.itemContainerLoad]: isLoaded,
+          })}
+        >
           <div className={styles.imgMobile}>
             <LazyLoadImage
               custom={styles.customMobile}

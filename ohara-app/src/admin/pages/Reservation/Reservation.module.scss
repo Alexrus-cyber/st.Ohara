@@ -54,6 +54,7 @@
 }
 
 .title {
+  font-family: Montserrat, Serif;
   font-size: 48px;
   color: white;
   padding: 0;
@@ -153,11 +154,16 @@
 
 
 .border {
+  text-align: left;
   border: 1px solid white;
   padding: 20px;
   color: white;
   margin: 10px;
   font-size: 18px;
+}
+
+.p {
+  padding: 0 0 10px 0;
 }
 
 .buttonAccept {
