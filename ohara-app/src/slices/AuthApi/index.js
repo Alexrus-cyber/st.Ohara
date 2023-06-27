@@ -11,16 +11,17 @@ const initialState = {
 
 export const loginMe = createAsyncThunk(
   "authLogin",
-  async ({ email, password }, { rejectWithValue, dispatch }) => {
+  async ({ email, password, callback }, { rejectWithValue, dispatch }) => {
     try {
       const response = await instance
         .post(`auth/login`, { email, password })
         .then((response) => response.data);
       sessionStorage.setItem("token", response.data);
       setAccessToken(response.data);
+      callback(true);
       return response.data;
     } catch (e) {
-      if (e.response.status > 400) {
+      if (e.response.status > 200) {
         dispatch(
           stopSubmit("login", {
             _error: "Неправильный логин или пароль",

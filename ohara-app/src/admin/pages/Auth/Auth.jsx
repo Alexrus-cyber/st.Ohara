@@ -45,8 +45,16 @@ const Auth = memo(() => {
 
   const onSubmit = (formData) => {
     dispatch(
-      loginMe({ email: formData.email, password: formData.password })
-    ).then(() => nav("/landingAdmin"));
+      loginMe({
+        email: formData.email,
+        password: formData.password,
+        callback: (result) => {
+          if (result) {
+            nav("/landingAdmin");
+          }
+        },
+      })
+    );
   };
   return (
     <div className={styles.container}>
