@@ -121,7 +121,6 @@ const ContentNavbar = ({ handleDrawerClose, user }) => {
     { id: 1, src: "/", text: "Меню" },
     { id: 3, src: "/galleryAdmin", text: "Галерея" },
     { id: 4, src: "/reservationAdmin", text: "Бронирование" },
-    { id: 6, src: "/staff", text: "Работники" },
   ];
 
   return (
@@ -143,6 +142,17 @@ const ContentNavbar = ({ handleDrawerClose, user }) => {
             {e.text}
           </NavLink>
         ))}
+        {user.roleEntity === "Admin" && (
+          <NavLink
+            to={"/staff"}
+            onClick={handleDrawerClose}
+            className={({ isActive }) =>
+              isActive ? styles.active : styles.link
+            }
+          >
+            Работники
+          </NavLink>
+        )}
       </div>
       <button
         onClick={() => {
