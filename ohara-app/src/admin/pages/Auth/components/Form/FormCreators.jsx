@@ -213,8 +213,9 @@ export const InputUI = memo(
               {...input}
               {...props}
             >
-              <option>Admin</option>
-              <option>Employee</option>
+              <option></option>
+              <option className={styles.optionSelect}>Admin</option>
+              <option className={styles.optionSelect}>Сотрудник</option>
             </select>
           )}
         </div>

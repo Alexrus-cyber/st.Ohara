@@ -40,8 +40,7 @@ export const editStaff = createAsyncThunk(
   "editStaff",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      const { id, password, ...rest } = data;
-      console.log(password);
+      const { id, ...rest } = data;
       await instance
         .put(`user/${id}`, rest, {
           headers: { "Content-Type": "application/json" },

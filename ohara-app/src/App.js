@@ -9,6 +9,7 @@ import { getMe } from "./slices/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccessToken } from "./slices/API/API";
 import { ArrowUpwardOutlined } from "@mui/icons-material";
+import { AcceptReservation } from "./admin/pages/Reservation/AcceptReservation/AcceptReservation";
 
 const Payment = lazy(() => import("./pages/Payment/Payment"));
 const SliderAdmin = lazy(() => import("./admin/pages/Slider/SliderAdmin"));
@@ -64,8 +65,12 @@ function App() {
                 element={<ReservationAdmin user={true} />}
               />
               <Route path={"/registration"} element={<Registration />} />
-              <Route path={"/staff"} element={<Staff />} />
-              <Route path={"/editStaff"} element={<EditStaff />} />
+              {user.roleEntity === "Admin" && (
+                <Route path={"/staff"} element={<Staff />} />
+              )}
+              {user.roleEntity === "Admin" && (
+                <Route path={"/editStaff"} element={<EditStaff />} />
+              )}
               <Route path={"/*"} element={<NotFound />} />
               <Route path={"/menu"} element={<Menu />} />
               <Route path={"/gallery"} element={<Gallery />} />
@@ -73,6 +78,7 @@ function App() {
               <Route path={"/login"} element={<Auth />} />
               <Route path={"/payment"} element={<Payment />} />
               <Route path={"/payment/:paymentId"} element={<Payment />} />
+              <Route path={"/acceptReserve"} element={<AcceptReservation />} />
             </Routes>
           </Suspense>
         </div>
@@ -99,6 +105,7 @@ function App() {
             />
             <Route path={"/payment"} element={<Payment />} />
             <Route path={"/payment/:paymentId"} element={<Payment />} />
+            <Route path={"/acceptReserve"} element={<AcceptReservation />} />
             <Route path={"/*"} element={<NotFound />} />
           </Routes>
         </Suspense>

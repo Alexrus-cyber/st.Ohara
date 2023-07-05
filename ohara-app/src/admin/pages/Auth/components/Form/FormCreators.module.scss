@@ -29,6 +29,11 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
   background: white;
 }
 
+.optionSelect {
+  font-size: 20px;
+  height: 40px;
+}
+
 .warning {
   color: yellow;
 }
@@ -79,6 +84,7 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
     padding: 0 0 0 10px;
     border: 1px solid gray;
     position: relative;
+    font-size: 18px;
   }
 
   .inputError {
@@ -241,4 +247,10 @@ $textAreaConfig: '' (1px solid #1C675A), 'AreaError' (1px solid #d30e0e);
   .inputTitle {
     max-width: 405px;
   }
+  .containerInput {
+    .input {
+      font-size: 14px;
+    }
+  }
+
 }

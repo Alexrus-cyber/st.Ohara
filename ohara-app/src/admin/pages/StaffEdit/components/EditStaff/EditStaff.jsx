@@ -15,7 +15,7 @@ const EditStaff = memo(({ user, onClose }) => {
   };
   return (
     <div className={styles.color}>
-      <h1>Админ {user.name}</h1>
+      <h1>{user.name}</h1>
       <RegisterReduxForm initialValues={user} onSubmit={onSubmit} />
     </div>
   );
