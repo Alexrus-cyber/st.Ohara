@@ -10,3 +10,6 @@ export const minLength = (min) => (value) =>
   value && value.length < min
     ? `Вы не можете ввести меньше ${min} символов`
     : undefined;
+
+export const mailChecked = (value) =>
+  !value.includes("@") ? `Введите корректную почту` : undefined;

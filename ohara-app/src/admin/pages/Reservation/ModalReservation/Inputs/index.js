@@ -1,4 +1,5 @@
 import {
+  mailChecked,
   maxLength,
   minLength,
   Required,
@@ -10,6 +11,14 @@ export const maxLength12 = maxLength(12);
 export const minLength12 = minLength(12);
 
 export const reservationInputs = [
+  {
+    id: 4,
+    name: "email",
+    placeholder: "Почта",
+    validators: [Required, maxLength100, mailChecked],
+    typeButton: InputUI,
+    typeInput: "material",
+  },
   {
     id: 1,
     name: "name",
@@ -37,7 +46,7 @@ export const reservationInputs = [
 ];
 export const reservationInputsRight = [
   {
-    id: 4,
+    id: 5,
     name: "estimatedStartTime",
     placeholder: "Дата",
     validators: [Required, maxLength100],
@@ -45,7 +54,7 @@ export const reservationInputsRight = [
     typeInput: "materialDate",
   },
   {
-    id: 5,
+    id: 6,
     name: "phone",
     placeholder: "Номер телефона",
     validators: [Required, maxLength12, minLength12],

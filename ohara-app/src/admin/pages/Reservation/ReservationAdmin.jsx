@@ -13,9 +13,10 @@ import schemaLaunge from "../../../assets/Launge.png";
 import cl from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { NotFoundReservation } from "./NotFound/NotFoundReservation";
+import { LoaderPage } from "../../../components/LoaderPage/LoaderPage";
 
 const ReservationAdmin = memo(({ user }) => {
-  const { status } = useSelector((state) => state.booking);
+  const { status, loading } = useSelector((state) => state.booking);
   const [main, setMain] = useState(3);
   const [session, setSession] = useState(false);
   const [status1, setStatus] = useState("");
@@ -41,7 +42,6 @@ const ReservationAdmin = memo(({ user }) => {
     setStatus("True");
     dispatch(stopBooking());
   }, [status1]);
-
   const getLaunge = useMemo(() => {
     return (
       <Scheme main={main} img={schemaLaunge} getScheme={getTablesLaunge} />
@@ -58,7 +58,8 @@ const ReservationAdmin = memo(({ user }) => {
           1. Бронирование на пятницу и субботу после 18:00 платная
         </p>
         <p className={styles.p}>
-          2. Предоплата в зависимости от количества людей и выбранного столика
+          2. На сумму предоплаты влияет выбранный стол (маленькие - 3000,
+          большие - 6000)
         </p>
         <p className={styles.p}>
           3. Данная предоплата является также вашим депозитом, вы можете
@@ -69,7 +70,12 @@ const ReservationAdmin = memo(({ user }) => {
           5. Вы согласны на обработку персональных данных
         </p>
         <p className={styles.p}>
-          6. Подробную информацию можно узнать по номеру телефона: (4942)499-600
+          6. После оплаты или бронирования столика, вам придет письмо на почту,
+          <br />
+          которое нужно будет предъявить офицанту при входе в заведение.
+        </p>
+        <p className={styles.p}>
+          7. Подробную информацию можно узнать по номеру телефона: (4942)499-600
         </p>
         <button
           className={styles.buttonAccept}
@@ -84,11 +90,9 @@ const ReservationAdmin = memo(({ user }) => {
       </div>
     );
   }, [session]);
-
   if (status === "True" && !user) {
     return <NotFoundReservation />;
   }
-
   return (
     <div className={user ? styles.main : styles.main2}>
       {user && (
@@ -101,14 +105,19 @@ const ReservationAdmin = memo(({ user }) => {
           </button>
         </div>
       )}
-      <h1
-        className={cl(styles.title, {
-          [styles.titleAdmin]: !user,
-        })}
-      >
-        Бронирование
-      </h1>
-      {!sessionStorage.getItem("activeBooking") && !user && Message}
+      {status === "" ? (
+        <LoaderPage />
+      ) : (
+        <h1
+          className={cl(styles.title, {
+            [styles.titleAdmin]: !user,
+          })}
+        >
+          Бронирование
+        </h1>
+      )}
+
+      {!sessionStorage.getItem("activeBooking") && !user && !loading && Message}
       {(sessionStorage.getItem("activeBooking") || user) && (
         <div className={styles.links}>
           <div className={styles.formRadioBtn}>

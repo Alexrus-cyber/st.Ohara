@@ -8,7 +8,7 @@ export const PaymentSuccess = ({ status }) => {
       <div className={styles.container}>
         <h1 className={styles.h1}>
           {status === "Success"
-            ? "Платеж был успешно произведен"
+            ? "Платеж был успешно произведен, вам отправлено письмо на почту"
             : "Платеж был отменен по причине: истечения времени на оплату"}
         </h1>
         {status === "Success" ? (

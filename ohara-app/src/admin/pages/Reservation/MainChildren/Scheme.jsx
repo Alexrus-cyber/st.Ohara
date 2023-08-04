@@ -39,7 +39,7 @@ export const Scheme = ({ main, getScheme, img }) => {
   useEffect(() => {
     setTimeout(() => {
       setTime(time + 1);
-    }, 7000);
+    }, 5000);
     dispatch(getScheme());
   }, [time]);
 

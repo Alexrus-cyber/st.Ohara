@@ -2,12 +2,12 @@ import axios from "axios";
 
 export const instance = axios.create({
   withCredentials: true,
-  baseURL: "http://45.87.104.46:7952/api/v1/",
+  baseURL: "https://api.stohara.pub/api/v1/",
 });
 
 export const secondInst = axios.create({
   withCredentials: true,
-  baseURL: "http://185.221.196.50:7952/api/v1/",
+  baseURL: "http://45.87.104.46:7952/api/v1/",
 });
 
 export const setAccessToken = (token) => {
