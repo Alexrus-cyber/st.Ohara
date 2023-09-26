@@ -18,9 +18,9 @@ const GalleryAdmin = lazy(() => import("./admin/pages/Gallery/GalleryAdmin"));
 const LandingAdmin = lazy(() =>
   import("./admin/pages/LandingAdmin/LandingAdmin")
 );
-const ReservationAdmin = lazy(() =>
+/*const ReservationAdmin = lazy(() =>
   import("./admin/pages/Reservation/ReservationAdmin")
-);
+);*/
 const Registration = lazy(() =>
   import("./admin/pages/Registration/Registration")
 );
@@ -60,10 +60,10 @@ function App() {
               <Route path={"/menuAdmin"} element={<MenuAdmin />} />
               <Route path={"/landingAdmin"} element={<LandingAdmin />} />
               <Route path={"/sliderAdmin"} element={<SliderAdmin />} />
-              <Route
+              {/*              <Route
                 path={"/reservationAdmin"}
                 element={<ReservationAdmin user={true} />}
-              />
+              />*/}
               <Route path={"/registration"} element={<Registration />} />
               {user.roleEntity === "Admin" && (
                 <Route path={"/staff"} element={<Staff />} />
@@ -99,10 +99,10 @@ function App() {
             <Route path={"/"} element={<Landing />} />
             <Route path={"/menu"} element={<Menu />} />
             <Route path={"/gallery"} element={<Gallery />} />
-            <Route
+            {/*          <Route
               path={"/reservation"}
               element={<ReservationAdmin user={false} />}
-            />
+            />*/}
             <Route path={"/payment"} element={<Payment />} />
             <Route path={"/payment/:paymentId"} element={<Payment />} />
             <Route path={"/acceptReserve"} element={<AcceptReservation />} />

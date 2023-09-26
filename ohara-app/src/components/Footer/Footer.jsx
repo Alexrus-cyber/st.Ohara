@@ -1,6 +1,5 @@
 import styles from "./Footer.module.scss";
 import logo from "../../assets/logo.png";
-import insta from "../../assets/insta.png";
 import telega from "../../assets/telegram.png";
 import vk from "../../assets/vk.png";
 import { memo } from "react";
@@ -8,12 +7,6 @@ import { NavLink } from "react-router-dom";
 
 const Footer = memo(() => {
   const items = [
-    {
-      id: 1,
-      src: insta,
-      link: "https://www.instagram.com/st.ohara_irishpub/",
-      header: "В инстаграмме",
-    },
     {
       id: 2,
       src: vk,

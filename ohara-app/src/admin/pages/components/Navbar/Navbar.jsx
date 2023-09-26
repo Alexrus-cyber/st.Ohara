@@ -120,7 +120,7 @@ const ContentNavbar = ({ handleDrawerClose, user }) => {
     { id: 7, src: "/sliderAdmin", text: "Слайдер" },
     { id: 1, src: "/", text: "Меню" },
     { id: 3, src: "/galleryAdmin", text: "Галерея" },
-    { id: 4, src: "/reservationAdmin", text: "Бронирование" },
+    /*    { id: 4, src: "/reservationAdmin", text: "Бронирование" },*/
   ];
 
   return (

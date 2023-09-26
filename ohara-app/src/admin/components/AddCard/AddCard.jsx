@@ -5,7 +5,7 @@ import { CloudUpload } from "@mui/icons-material";
 
 export const AddCard = ({ upload, addHandler }) => {
   const [isFileTooLarge, setIsFileTooLarge] = useState(false);
-  const maxSize = 1048576;
+  const maxSize = 1548576;
 
   const onDrop = useCallback((acceptedFiles) => {
     if (!acceptedFiles.length) {

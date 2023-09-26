@@ -71,6 +71,7 @@ export const InputUI = memo(
           )}
           {typeInput === "text" && (
             <textarea
+              required={true}
               placeholder={title}
               className={cl(styles.textArea, {
                 [styles.textAreaError]: showError,
@@ -91,6 +92,7 @@ export const InputUI = memo(
           )}
           {typeInput === "material" && (
             <TextField
+              required={true}
               style={{ width: "220px" }}
               variant={"standard"}
               label={placeholder}
@@ -101,6 +103,7 @@ export const InputUI = memo(
           )}
           {typeInput === "materialPhone" && (
             <TextField
+              required={true}
               style={{ width: "220px" }}
               variant={"standard"}
               placeholder={placeholder}
@@ -135,6 +138,7 @@ export const InputUI = memo(
           )}
           {typeInput === "materialPicker" && (
             <TextField
+              required={true}
               style={{ width: "220px", zIndex: 20000000 }}
               variant={"standard"}
               select
@@ -165,6 +169,7 @@ export const InputUI = memo(
           )}
           {typeInput === "materialDate" && (
             <input
+              required={true}
               type={"datetime-local"}
               className={cl(styles.datePicker, {
                 [styles.datePickerError]: showError,
@@ -175,6 +180,7 @@ export const InputUI = memo(
           )}
           {typeInput === "materialTime" && (
             <input
+              required={true}
               type={"time"}
               step={3600000}
               className={cl(styles.datePicker, {
@@ -187,6 +193,7 @@ export const InputUI = memo(
           {typeInput === "reg" && (
             <div className={styles.passwordBox}>
               <input
+                required={true}
                 className={cl(styles.input, {
                   [styles.inputError]: showError,
                 })}
@@ -233,7 +240,7 @@ export const FilesInput = memo(({ name, id, section, getFile, circle }) => {
   const fileReader = new FileReader();
   const dispatch = useDispatch();
   const [isFileTooLarge, setIsFileTooLarge] = useState(false);
-  const maxSize = 1048576;
+  const maxSize = 1548576;
 
   const onDrop = useCallback((acceptedFiles) => {
     if (!acceptedFiles.length) {
