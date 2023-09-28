@@ -62,7 +62,7 @@ export const InputUI = memo(
     return (
       <div
         className={cl({
-          [styles.text]: typeInput !== "reg",
+          [styles.text]: typeInput !== "reg" && typeInput !== "regPhone",
         })}
       >
         <div className={styles.containerInput}>
@@ -109,6 +109,33 @@ export const InputUI = memo(
               placeholder={placeholder}
               type={"tel"}
               label={placeholder}
+              onClick={() => {
+                if (value.length < 2) {
+                  onChange((value = "+7"));
+                }
+              }}
+              onMouseLeave={() => {
+                if (value.length < 2) {
+                  onChange((value = "+7"));
+                }
+              }}
+              onMouseOver={() => {
+                if (value.length < 2) {
+                  onChange((value = "+7"));
+                }
+              }}
+              {...input}
+              {...props}
+            />
+          )}
+          {typeInput === "regPhone" && (
+            <input
+              style={{ width: "220px" }}
+              required={true}
+              className={cl(styles.input, {
+                [styles.inputError]: showError,
+              })}
+              type={"tel"}
               onClick={() => {
                 if (value.length < 2) {
                   onChange((value = "+7"));

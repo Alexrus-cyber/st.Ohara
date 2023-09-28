@@ -76,7 +76,14 @@ export const inputsRegister = [
     placeholder: "Номер",
     validators: [Required, maxLength20],
     typeButton: InputUI,
-    typeInput: "reg",
+    typeInput: "regPhone",
+    normalize: (value) => {
+      if (value.length < 2 || !value.startsWith("+7")) {
+        return "+7";
+      }
+      value = value.replace(/[A-Za-zА-Яа-яЁё,=,;,/,-]/, "");
+      return value.substring(0, 12);
+    },
   },
   {
     id: 7,

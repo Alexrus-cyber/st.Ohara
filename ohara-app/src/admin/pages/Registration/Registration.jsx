@@ -44,7 +44,8 @@ const RegisterForm = ({ handleSubmit }) => {
             e.typeButton,
             e.style,
             e.type,
-            e.typeInput
+            e.typeInput,
+            e.normalize
           )}
         </div>
       ))}
